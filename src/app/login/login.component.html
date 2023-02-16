@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div id="wrapper">
+  <top-nav-login></top-nav-login>
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="logBg">
+      <div>
+        <span class="logo-name logo-style">
+          <fa-icon [icon]="faShare"></fa-icon>
+          Neo
+        </span>
+      </div>
+      <h3 class="text-up">Bienvenido</h3>
+      <p class="text">Description</p>
+      <p class="text">Entrada</p>
+
+      <form class="m-t" role="form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Nombre Usuario" required="">
+        </div>
+        <div>
+          <input type="password" class="form-control" placeholder="Password" required="">
+        </div>
+        <button type="submit" class="btn btn-primary vertical-timeline-block full-width m-b">Login</button>
+      </form>
+      <p class="m-t text"><small>sub text</small></p>
+      <a class="sign-in">Solicitar alta</a>
+    </div>
+  </div>
+</div>

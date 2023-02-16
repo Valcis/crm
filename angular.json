@@ -93,9 +93,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "../node_modules/bootstrap/dist/css/bootstrap.css",
+              "../src/assets/styles/css/bootstrap.css",
+              "../node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": [
+              "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "../node_modules/angular-fontawesome/dist/angular-fontawesome.js"
+            ]
           }
         }
       }

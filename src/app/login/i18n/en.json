@@ -1,0 +1,14 @@
+{
+  "LOGIN.BIENVENIDO": "Welcome to CRM from Hotusa Group",
+  "LOGIN.DESCRIPCION": "Clients relations administrator.",
+  "LOGIN.ENTRADA": "Log in to see it in action.",
+  "LOGIN.RECORDAR": "Did you forget your password? ",
+  "LOGIN.SUB_TEXT": "For any question, please contact Hotusa Group’s IT team.",
+  "LOGIN.NOMBRE_USER": "User’s name",
+  "LOGIN.PASS": "Password",
+  "LOGIN.INCORRECTO": "Incorrect user data.",
+  "LOGIN.SOLICITAR_ALTA":"Request for a new user",
+  "LOGIN.MODAL_ALTA_TITULO":"User input request",
+  "LOGIN.MODAL_ALTA_BODY":"Contact your manager to request the creation of a new user.",
+  "COMMON.LOGIN": "Log in"
+}

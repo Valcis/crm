@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {NgModule} from "@angular/core";
+import {TranslateModule} from "@ngx-translate/core";
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), TranslateModule],
   exports: [RouterModule]
 })
 export class MainRoutingModule {

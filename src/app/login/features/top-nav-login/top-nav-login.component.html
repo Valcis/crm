@@ -1,0 +1,46 @@
+<div class="container-fluid white-bg">
+  <div class="row row-cols-2">
+    <div class="col-sm-10">
+      <span>
+        <img alt="Hotusa" class="navbar-minimalize" style="max-height: 40px;margin-left: 15px;padding:5px;" src="../../../../assets/images/profile/grupoHotusa.png">
+      </span>
+    </div>
+    <div class="col-1 col-xs-1 d-flex justify-content-end" align="center">
+      <div class="dropdown nav"  ngbDropdown>
+        <a class="dropdown-toggle dd" style="color: darkgray" ngbDropdownToggle>
+          <fa-icon [icon]="faImage" ></fa-icon>
+        </a>
+        <ul role="menu" class="dropdown-menu ddMenu" ngbDropdownMenu>
+          <li>Test01</li>
+          <li>Test01</li>
+          <li>Test01</li>
+          <li>Test01</li>
+          <li>Test01</li>
+          <li>Test01</li>
+          <!-- <li *ngFor="image in main.backgroundImage.list">-->
+          <!--            <a href="" (click)="setCookieImage(image)">-->
+          <!--              <img src="{{image}}" class="ddImage">-->
+          <!--            </a>-->
+          <!--          </li>-->
+        </ul>
+      </div>
+    </div>
+    <div class="col-1 col-lg-1">
+      <div class="dropdown nav"  ngbDropdown>
+        <a class="dropdown-toggle count-info dd" style="color: darkgray" ngbDropdownToggle>
+          {{'COMMON.LANGUAGE'|translate}}
+        </a>
+        <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
+          <ng-container *ngFor="let loc of langList">
+            <li role="menuitem">
+              <a class="dropdown-item"  (click)="changeLang(loc.code)">
+                <img src="{{loc.flag}}">
+                {{ loc.lang }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

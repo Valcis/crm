@@ -1,0 +1,14 @@
+{
+  "LOGIN.BIENVENIDO": "Bienvenido al CRM del Grupo Hotusa",
+  "LOGIN.DESCRIPCION": "Administrador de las relaciones con los clientes.",
+  "LOGIN.ENTRADA": "Entra para verlo en acción.",
+  "LOGIN.RECORDAR": "¿Se te olvidó tu contraseña?",
+  "LOGIN.SUB_TEXT": "Para cualquier consulta póngase en contacto con incidencias del Grupo Hotusa.",
+  "LOGIN.NOMBRE_USER": "Nombre usuario",
+  "LOGIN.PASS": "Contraseña",
+  "LOGIN.INCORRECTO": "Datos de usuario incorrectos.",
+  "LOGIN.SOLICITAR_ALTA":"Solicitar alta de nuevo usuario",
+  "LOGIN.MODAL_ALTA_TITULO":"Petición alta usuario",
+  "LOGIN.MODAL_ALTA_BODY":"Póngase en contacto con su responsable para que solicite la creación de un nuevo usuario.",
+  "COMMON.LOGIN": "Entrar"
+}

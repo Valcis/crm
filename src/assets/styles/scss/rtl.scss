@@ -31,7 +31,8 @@ body.rtls {
   }
 
   .navbar-right {
-    float: left !important;
+    float: right !important;
+    margin-right: -15px;
   }
 
   .navbar-top-links li:last-child {

@@ -8,21 +8,22 @@
           Neo
         </span>
       </div>
-      <h3 class="text-up">Bienvenido</h3>
-      <p class="text">Description</p>
-      <p class="text">Entrada</p>
+      <h3 class="text-up">{{'LOGIN.BIENVENIDO'|translate}}</h3>
+      <p class="text">{{'LOGIN.DESCRIPCION'|translate}}</p>
+      <p class="text">{{'LOGIN.ENTRADA'|translate}}</p>
 
       <form class="m-t" role="form">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Nombre Usuario" required="">
+          <input type="text" class="form-control" placeholder="{{'LOGIN.NOMBRE_USER'|translate}}" required="">
         </div>
+        <br>
         <div>
-          <input type="password" class="form-control" placeholder="Password" required="">
+          <input type="password" class="form-control" placeholder="{{'LOGIN.PASS'|translate}}" required="">
         </div>
-        <button type="submit" class="btn btn-primary vertical-timeline-block full-width m-b">Login</button>
+        <button type="submit" class="btn btn-primary vertical-timeline-block full-width m-b" (click)="navigate()">{{'COMMON.LOGIN'|translate}}</button>
       </form>
-      <p class="m-t text"><small>sub text</small></p>
-      <a class="sign-in">Solicitar alta</a>
+      <p class="m-t text"><small>{{'LOGIN.SUB_TEXT'|translate}}</small></p>
+      <a class="sign-in">{{'LOGIN.SOLICITAR_ALTA'|translate}}</a>
     </div>
   </div>
 </div>

@@ -1,1 +1,10 @@
-<p>main works!</p>
+<div class="row">
+  <side-nav [expanded]="isExpanded">
+  </side-nav>
+  <top-nav (expander)="onExpand($event)" >
+  </top-nav>
+  <content-frame>
+  </content-frame>
+  <div>
+  </div>
+</div>

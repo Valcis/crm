@@ -1,12 +1,25 @@
-
 <div class="row">
-  <side-nav [expanded]="isExpanded">
-  </side-nav>
-  <top-nav (expander)="onExpand($event)" >
-  </top-nav>
-  <content-frame>
-  </content-frame>
+
+  <div class="col-sm-{{isExpanded?4:1}}">
+    NEO
+    <side-nav [expanded]="isExpanded">
+    </side-nav>
+  </div>
+
+
+  <div class="col-sm-{{isExpanded?8:11}} bg-light animated fadeInRight">
+    <top-nav (expander)="onExpand($event)">
+
+    </top-nav>
+
+
+    <content-frame>
+
+    </content-frame>
+  </div>
+
+
   <div>
   </div>
 </div>
-<p>{{ 'MAIN.WORKS' | translate}}</p>
+<!--<p>{{ 'MAIN.WORKS' | translate}}</p>-->

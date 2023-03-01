@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {CookieService} from "ngx-cookie-service";
 
 const routes: Routes = [
   { path: 'login', canActivate: [], loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
@@ -13,6 +14,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     RouterModule.forChild(routes),
   ],
+  providers:[CookieService],
   exports: [RouterModule],
+
 })
 export class AppRoutingModule { }

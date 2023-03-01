@@ -7,6 +7,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {TranslateLoaderService} from "./shared/services/translate/translate-load
       extend: true
     }),
   ],
-  providers: [TranslateModule],
+  providers: [TranslateModule, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

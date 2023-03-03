@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
     }
   };
 
-  users: Observable<Users[]> = new Observable<Users[]>();
-
   constructor(
     private translate: TranslateService,
     private route: Router,
@@ -43,8 +41,12 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private _user: UserService
   ) {
-    this.currentLang = cookie.getLanguage();
-    this.translate.use(cookie.getLanguage())
+    if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
+      this.translate.use('es')
+    } else {
+      this.currentLang = cookie.getLanguage();
+      this.translate.use(cookie.getLanguage())
+    }
   }
 
   ngOnInit(): void {

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {CookiesService} from "../shared/services/cookies/cookies.service";
 
 @Component({
   selector: 'app-main',
@@ -7,28 +8,17 @@ import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
-
-  lang: string = '';
+  public isExpanded: boolean = true;
+  onExpand = (currentValue: boolean) => this.isExpanded = !currentValue;
   currentLang: string = '';
 
-  constructor(private translate: TranslateService) {
-    if (this.currentLang !== (undefined || '')){
-      this.changeLang(this.translate.currentLang);
-      this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-        this.changeLang(event.lang);
-      })
-    } else {
-      this.lang = translate.getBrowserLang() as string;
-      translate.use(this.lang)
-    }
+  constructor(
+    private translate: TranslateService,
+    private cookie: CookiesService,
+  ) {
+    this.currentLang = this.cookie.getLanguage();
+    this.translate.setDefaultLang(this.currentLang);
+    this.translate.use(this.currentLang);
   }
 
-  changeLang(lang: string) {
-    if(this.currentLang === lang) {
-      return;
-    }
-    this.currentLang = lang;
-    this.translate.currentLang = '';
-    this.translate.use(lang);
-  }
 }

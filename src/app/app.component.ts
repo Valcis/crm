@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
+import {CookiesService} from "./shared/services/cookies/cookies.service";
+
 
 @Component({
   selector: 'app-root',
@@ -8,19 +10,15 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class AppComponent implements OnInit {
   title = 'crm2';
-  lang: string = '';
   currentLang: string = '';
 
-  constructor(
-    private translate: TranslateService
-  ) {
+  constructor(private translate: TranslateService, private cookie: CookiesService) {
+    this.currentLang = cookie.getLanguage();
   }
 
   ngOnInit() {
-    if (this.currentLang === (undefined || '')) {
+    if (!this.currentLang || this.currentLang === '')
       this.setBrowLang();
-    } else {
-    }
   }
 
   async setBrowLang() {

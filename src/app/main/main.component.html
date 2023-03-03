@@ -1,1 +1,26 @@
+<div class="row">
+
+  <div class="col-sm-{{isExpanded?4:1}}">
+    NEO
+    <side-nav [expanded]="isExpanded">
+    </side-nav>
+  </div>
+
+
+  <div class="col-sm-{{isExpanded?8:11}} bg-light animated fadeInRight">
+    <top-nav (expander)="onExpand($event)">
+
+    </top-nav>
+
+
+    <content-frame>
+
+    </content-frame>
+  </div>
+
+</div>
+
+<p> IDIOMA de la COOKIE: '{{currentLang}}'</p>
+
+
 <p>{{ 'MAIN.WORKS' | translate}}</p>

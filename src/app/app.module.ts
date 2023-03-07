@@ -27,6 +27,7 @@ import {TranslateLoaderService} from "./shared/services/translate/translate-load
       isolate: false,
       extend: true
     }),
+    // NgbModule.forRoot(),
   ],
   providers: [TranslateModule],
   bootstrap: [AppComponent]

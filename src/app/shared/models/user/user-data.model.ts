@@ -1,21 +1,10 @@
 export interface UserData {
-  user_id: string,
-  user_name: string,
-  user_password: string,
-  empl_code: number,
-  emp_nombre: string,
-  empl_ape1: string,
-  empl_ape2: string,
-  empl_dpto: string,
-  empl_empresa: string,
-  user_afil: string,
-  user_perfil: string,
-  aplicaciones: Array<string>,
-  rol: Array<string>,
-  permisos: "00000",
-  // config_state: self.paginaPermiso,
-  config_state: Array<string>,
-  orden: number,
-  pagina: number,
-  num_resultados: number
+  Metodo: 'GetLoginCRM',
+  Servicio: "usuarios",
+  Entrada: {
+    username: 'aprieto',
+    password: 'prieto',
+    user_session_id: '',
+    recordarUsuario: false
+  }
 }

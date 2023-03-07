@@ -20,6 +20,9 @@ export class TopNavLoginComponent {
   constructor(
     private translate: TranslateService,
     private cookie: CookiesService) {
+    if (!this.cookie.getLanguage() || this.cookie.getLanguage() === '') {
+      this.translate.use('es');
+    }
   }
 
   async changeLang(localeCode: string) {

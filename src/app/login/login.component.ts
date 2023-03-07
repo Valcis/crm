@@ -3,8 +3,7 @@ import {faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
-import {UserService} from "../shared/services/user.service";
-import {Observable} from "rxjs";
+import {UserService} from "../shared/services/user/user.service";
 import {HttpClient} from "@angular/common/http";
 
 interface Users {
@@ -34,8 +33,6 @@ export class LoginComponent implements OnInit {
     }
   };
 
-  users: Observable<Users[]> = new Observable<Users[]>();
-
   constructor(
     private translate: TranslateService,
     private route: Router,
@@ -43,12 +40,17 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private _user: UserService
   ) {
-    this.currentLang = cookie.getLanguage();
-    this.translate.use(cookie.getLanguage())
+    if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
+      this.translate.use('es')
+    } else {
+      this.currentLang = cookie.getLanguage();
+      this.translate.use(cookie.getLanguage())
+    }
   }
 
-  ngOnInit(): void {
-    this._user.requestUserService(this.test);
+  async ngOnInit(): Promise<void> {
+    await this._user.requestUserService(this.test);
+    return;
   }
 
   navigate() {

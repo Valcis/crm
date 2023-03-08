@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
+
 @Component({
   selector: 'top-nav',
   templateUrl: './top-nav.component.html',
@@ -8,8 +9,12 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class TopNavComponent {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+
   constructor() {
+    console.log("constructor TOPNAV", this)
   }
 
-  onExpander = (currentValue:boolean) => this.expander.emit(!currentValue);
+  onExpander = () => this.expander.emit();
+
+
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
 
@@ -11,6 +11,7 @@ export class MainComponent {
   public isExpanded: boolean = true;
   onExpand = (currentValue: boolean) => this.isExpanded = !currentValue;
   currentLang: string = '';
+  @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private translate: TranslateService,
@@ -20,5 +21,8 @@ export class MainComponent {
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
   }
+
+  onToggle = () => this.isExpanded = !this.isExpanded;
+
 
 }

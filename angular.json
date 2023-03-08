@@ -34,9 +34,9 @@
                 "output": "assets/i18n/login"
               },
               {
-              "glob": "**/*.*",
-              "input": "src/assets/i18n",
-              "output": "assets/i18n/common"
+                "glob": "**/*.*",
+                "input": "src/assets/i18n",
+                "output": "assets/i18n/common"
               },
               {
                 "glob": "**/*.*",
@@ -45,7 +45,10 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
+              }
             ],
             "scripts": []
           },
@@ -110,8 +113,7 @@
             "styles": [
               "src/styles.scss",
               "../node_modules/bootstrap/dist/css/bootstrap.css",
-              "../src/assets/styles/css/bootstrap.css",
-              "../node_modules/font-awesome/css/font-awesome.css"
+              "../node_modules/font-awesome/css/font-awesome.css",
             ],
             "scripts": [
               "../node_modules/bootstrap/dist/js/bootstrap.min.js",

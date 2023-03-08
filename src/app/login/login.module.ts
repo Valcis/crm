@@ -13,14 +13,15 @@ import {TranslateModule} from "@ngx-translate/core";
     LoginComponent,
     TopNavLoginComponent,
   ],
-  imports: [
-    CommonModule,
-    LoginRoutingModule,
-    FontAwesomeModule,
-    NgbModule,
-    FormsModule,
-    TranslateModule,
-  ],
+    imports: [
+        CommonModule,
+        LoginRoutingModule,
+        FontAwesomeModule,
+        NgbModule,
+        FormsModule,
+        TranslateModule,
+        FormsModule,
+    ],
   exports: [LoginComponent],
   providers: [TranslateModule]
 })

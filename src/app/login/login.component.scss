@@ -1,9 +1,14 @@
-.loginscreen.middle-box {
-  width: 400px;
+@import '../../styles.scss';
+
+#wrapper {
+  width: 100%;
+  overflow-x: hidden;
 }
 
-.logBg {
-  background: rgba(47,64,80,.8);
+.middle-box {
+  width: 400px;
+  margin-top: 8%;
+  background: $background-opacity;
   padding: 13px;
 }
 
@@ -12,14 +17,26 @@
 }
 
 .text-up {
-  //font-size: 16px;
-  color: #ffffff;
+  color: $white;
 }
 .text {
   font-size: 13px;
-  color: #ffffff;
+  color: $white;
 }
 
-.sign-in {
-  color: #21c6a9;
+.sign-in,
+.sign-in:hover {
+  color: $primary;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
 }
+
+.logo-name {
+  color: $white;
+  font-size: 107px;
+  font-weight: 800;
+  letter-spacing: -10px;
+  margin-bottom: 0;
+}
+

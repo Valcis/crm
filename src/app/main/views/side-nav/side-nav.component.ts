@@ -1,4 +1,5 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import {NavTogglerService} from "../../../shared/services/navToggler/nav-toggler.service";
 
 @Component({
   selector: 'side-nav',
@@ -6,10 +7,11 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent {
-  @Input() expanded: boolean = false; // inicializo el side-bar contraido por defecto
-
+  @Input() public isExpandedFlag: boolean = true;
 
   constructor() {
+
+    console.log('Constructor de SIDENAV', this)
   }
 
 

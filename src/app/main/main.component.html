@@ -2,16 +2,14 @@
 
   <div class="col-sm-{{isExpanded?4:1}}">
     NEO
-    <side-nav [expanded]="isExpanded">
-    </side-nav>
+
+    <side-nav [isExpandedFlag]="isExpanded"></side-nav>
   </div>
 
 
   <div class="col-sm-{{isExpanded?8:11}} bg-light animated fadeInRight">
-    <top-nav (expander)="onExpand($event)">
 
-    </top-nav>
-
+    <top-nav (expander)="onToggle()"></top-nav>
 
     <content-frame>
 
@@ -24,3 +22,10 @@
 
 
 <p>{{ 'MAIN.WORKS' | translate}}</p>
+
+<!--<nav class="navbar navbar-dark bg-dark">
+  &lt;!&ndash;<top-nav (expander)="onToggle"></top-nav>&ndash;&gt;
+  <top-nav (expander)="onToggle()"></top-nav>
+  <side-nav [isExpandedFlag]="isExpanded"></side-nav>
+  {{isExpanded}}
+</nav>-->

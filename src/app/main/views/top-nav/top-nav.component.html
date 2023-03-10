@@ -1,25 +1,58 @@
-<!--<nav class="navbar bg-white">
-  <form class="container-fluid justify-content-start">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon" (click)="onExpander(false)"></span>
-    </button>
+<div class="row d-flex align-items-center mx-2">
 
-    <div class="form-group bg-info">
-      <input class="form-control me-2" type="search" placeholder="Buscar algo..." aria-label="Search">
+  <div class="col-1">
+    <div class="btn btn-primary" (click)="onExpander()">
+      <fa-icon [icon]="faBars"></fa-icon>
+
     </div>
+  </div>
+
+  <div class="col-7">
+    <div class="form-group">
+      <input class="form-control" style="border:none" type="search" placeholder="Buscar algo..." aria-label="Search">
+    </div>
+  </div>
+
+  <div class="col-4 ">
+    <div class="nav justify-content-between d-flex align-items-center">
+      <li class="nav-item">
+        <fa-icon style="color : #337ab7" [icon]="faUser"></fa-icon>
+      </li>
+      <li class="nav-item">
+        <fa-icon style="color : #337ab7" [icon]="faUsers"></fa-icon>
+      </li>
+      <li class="nav-item">
+        <fa-icon style="color : #337ab7" [icon]="faBullhorn"></fa-icon>
+      </li>
+      <li class="nav-item">
+        <fa-icon style="color : #337ab7" [icon]="faClock"></fa-icon>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown nav" ngbDropdown>
+          <a class="dropdown-toggle" style="text-decoration: none; content: none" ngbDropdownToggle>
+            <img [hidden]="lang!=='es'" class="m-1" src="../../../../assets/images/flags/16/Spain.png" alt="Es"/>
+            <img [hidden]="lang!=='en'" class="m-1" src="../../../../assets/images/flags/16/United-States.png"
+                 alt="US"/>
+          </a>
+          <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
+            <ng-container *ngFor=" let item of langList">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="changeLang(item.code)">
+                  <img src="{{item.flag}}">
+                  {{ item.lang }}
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#/login">
+          <fa-icon style="color : #337ab7" [icon]="faRightFromBracket"></fa-icon>
+        </a>
+      </li>
+    </div>
+  </div>
 
 
-    <img class="m-1" src="../../../../assets/images/flags/16/United-States.png" alt="US"/>
-    <img class="m-1" src="../../../../assets/images/flags/16/China.png" alt="Ch"/>
-    <img class="m-1" src="../../../../assets/images/flags/16/Spain.png" alt="Es"/>
-    <img class="m-1" src="../../../../assets/images/flags/16/Catalonia.png" alt="Ca"/>
-    <img class="m-1" src="../../../../assets/images/flags/16/France.png" alt="Fr"/>
-
-  </form>
-</nav>-->
-
-<!--<button  type="button" class="navbar-toggler" (click)="sideNavService.toggleSideNav()">-->
-<input  type="button" value="Test-toggler" class="" (click)="onExpander()">
-<!--  <span class="navbar-toggler-icon"></span>-->
-<!--</input>-->
+</div>

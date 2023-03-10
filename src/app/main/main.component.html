@@ -1,31 +1,18 @@
-<div class="row">
+<div class="row m-0 p-0">
 
-  <div class="col-sm-{{isExpanded?4:1}}">
-    NEO
+  <div class="col-sm-{{isExpanded?4:1}} m-0 p-0">
 
-    <side-nav [isExpandedFlag]="isExpanded"></side-nav>
+    <side-nav [isExpandedFlag]="isExpanded">
+    </side-nav>
   </div>
 
 
-  <div class="col-sm-{{isExpanded?8:11}} bg-light animated fadeInRight">
+  <div class="col-sm-{{isExpanded?8:11}} m-0 p-0 ">
 
     <top-nav (expander)="onToggle()"></top-nav>
 
     <content-frame>
-
     </content-frame>
   </div>
 
 </div>
-
-<p> IDIOMA de la COOKIE: '{{currentLang}}'</p>
-
-
-<p>{{ 'MAIN.WORKS' | translate}}</p>
-
-<!--<nav class="navbar navbar-dark bg-dark">
-  &lt;!&ndash;<top-nav (expander)="onToggle"></top-nav>&ndash;&gt;
-  <top-nav (expander)="onToggle()"></top-nav>
-  <side-nav [isExpandedFlag]="isExpanded"></side-nav>
-  {{isExpanded}}
-</nav>-->

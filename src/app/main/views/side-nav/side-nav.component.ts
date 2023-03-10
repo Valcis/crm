@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
-import {NavTogglerService} from "../../../shared/services/navToggler/nav-toggler.service";
 
 @Component({
   selector: 'side-nav',

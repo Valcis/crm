@@ -1,4 +1,4 @@
-@import '../../styles.scss';
+//@import '../../styles.scss';
 
 #wrapper {
   width: 100%;
@@ -17,23 +17,23 @@
 }
 
 .text-up {
-  color: $white;
+  color: white;
 }
 .text {
   font-size: 13px;
-  color: $white;
+  color: white;
 }
 
 .sign-in,
 .sign-in:hover {
-  color: $primary;
+  color: #0D6EFD;
   cursor: pointer;
   font-size: 14px;
   text-decoration: none;
 }
 
 .logo-name {
-  color: $white;
+  color: white;
   font-size: 107px;
   font-weight: 800;
   letter-spacing: -10px;

@@ -13,6 +13,9 @@ export class MainComponent {
   currentLang: string = '';
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public isCollapsed = false;
+
+
   constructor(
     private translate: TranslateService,
     private cookie: CookiesService,

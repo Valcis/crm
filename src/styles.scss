@@ -1,21 +1,21 @@
 // Basic Colors
-$primary: #1ab394;       // Primary color
-$secondary: #c2c2c2;  // Default color
-$blue: #1c84c6;       // Success color
-$lazur: #23c6c8;      // Info color
-$yellow: #f8ac59;     // Warrning color
-$red: #ED5565;        // Danger color
-$background: #2F4050;
-$background-opacity: rgba(47,64,80,.8);
-
-// Various colors
-$text-color: #676a6c;   // Body text
-$gray: #f3f3f4;         // Background wrapper color
-$light-gray: #D1DADE;   // Default label, badget
-$label-badget-color: #5E5E5E;
-$light-blue:#f3f6fb;
-$white: #ffff;
-$max-width: 100%;
+//$primary: #1ab394;       // Primary color
+//$secondary: #c2c2c2;  // Default color
+//$blue: #1c84c6;       // Success color
+//$lazur: #23c6c8;      // Info color
+//$yellow: #f8ac59;     // Warrning color
+//$red: #ED5565;        // Danger color
+//$background: #2F4050;
+//$background-opacity: rgba(47,64,80,.8);
+//
+//// Various colors
+//$text-color: #676a6c;   // Body text
+//$gray: #f3f3f4;         // Background wrapper color
+//$light-gray: #D1DADE;   // Default label, badget
+//$label-badget-color: #5E5E5E;
+//$light-blue:#f3f6fb;
+//$white: #ffff;
+//$max-width: 100%;
 
 
 /* Importing Bootstrap SCSS file. */
@@ -87,3 +87,6 @@ $max-width: 100%;
 //    transform: translateX(0%);
 //  }
 //}
+
+/* Importing Bootstrap SCSS file. */
+//@import 'bootstrap/scss/bootstrap';

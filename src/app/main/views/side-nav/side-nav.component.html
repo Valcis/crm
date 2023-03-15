@@ -1,20 +1,24 @@
 <div class="container">
-<ul>
-  <li>
-    <span><i class="fa fa-folder"></i> Inicio</span>
-  </li>
-  <li>
-    <span><i class="fa fa-folder"></i> Test Graficos</span>
-  </li>
-  <li>
-    <span><i class="fa fa-folder"></i> Desarrollo</span>
-  </li>
-  <li>
-    <span><i class="fa fa-folder"></i> Hotel</span>
-  </li>
-  <li>
-    <span><i class="fa fa-folder"></i> Compras</span>
-  </li>
-</ul>
+
+  <span>
+    <fa-icon style="color : #337ab7" [icon]="crmIcon"></fa-icon>
+    Neo </span>
+  <hr class="bg-white text-white">
+  <span>Keytel</span>
+
+  <span>Pedro Valverde</span>
+  <span>IT</span>
+
+
+  <ng-container *ngFor=" let item of  sections">
+    <li class="list-unstyled">
+      <a class="" (click)="getSectionInfo(item)">
+        <fa-icon style="color : #337ab7" [icon]="item.icon"></fa-icon>
+        <span>
+        {{item.title}}
+      </span>
+      </a>
+    </li>
+  </ng-container>
 
 </div>

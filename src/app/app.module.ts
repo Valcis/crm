@@ -8,6 +8,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,6 @@ import {TranslateLoaderService} from "./shared/services/translate/translate-load
       isolate: false,
       extend: true
     }),
-    // NgbModule.forRoot(),
   ],
   providers: [TranslateModule],
   bootstrap: [AppComponent]

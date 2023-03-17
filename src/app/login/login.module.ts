@@ -5,7 +5,7 @@ import {CommonModule} from "@angular/common";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {LoginRoutingModule} from "./login-routing.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
@@ -21,6 +21,8 @@ import {TranslateModule} from "@ngx-translate/core";
         FormsModule,
         TranslateModule,
         FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
     ],
   exports: [LoginComponent],
   providers: [TranslateModule]

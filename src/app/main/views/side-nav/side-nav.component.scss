@@ -1,0 +1,16 @@
+@import '../../../../styles.scss';
+
+.header-profile{
+  background: url("../../../../assets/images/profile/header-profile.png");
+}
+
+.container {
+  min-height: 550px;
+  background-color: #2f4050;
+  color: white;
+}
+
+li:hover {
+  color:white;
+  background-color: #293846;
+}

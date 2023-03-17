@@ -1,4 +1,4 @@
-@import '../../styles.scss';
+//@import '../../styles.scss';
 
 #wrapper {
   width: 100%;
@@ -8,7 +8,7 @@
 .middle-box {
   width: 400px;
   margin-top: 8%;
-  background: $background-opacity;
+  background: rgba(47,64,80,.8);
   padding: 13px;
 }
 
@@ -17,26 +17,77 @@
 }
 
 .text-up {
-  color: $white;
+  color: white;
 }
 .text {
   font-size: 13px;
-  color: $white;
+  color: white;
 }
 
 .sign-in,
 .sign-in:hover {
-  color: $primary;
+  color: #1ab394;
   cursor: pointer;
   font-size: 14px;
   text-decoration: none;
 }
 
 .logo-name {
-  color: $white;
+  color: white;
   font-size: 107px;
   font-weight: 800;
   letter-spacing: -10px;
   margin-bottom: 0;
 }
 
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary.active:focus {
+  color: white !important;
+}
+
+.btn,
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:active:focus,
+.btn:active:hover,
+.btn.active:hover,
+.btn.active:focus {
+  color: white !important;
+}
+
+//.input-button {
+//  border-radius: 3px;
+//  height: 34px;
+//  font-size: 14px;
+//}
+//
+//#button {
+//  height: 80px;
+//  box-sizing: content-box;
+//  width: 120px;
+//}
+//
+//.input-text {
+//  border-radius: 0%;
+//  height: 34px;
+//  font-size: 14px;
+//  margin-bottom: 3%;
+//}
+//
+//.full-width {
+//  width: 100%;
+//}
+//
+//.vertical-timeline-block {
+//  position: relative;
+//  margin: 1em 0;
+//}

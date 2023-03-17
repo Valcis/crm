@@ -45,12 +45,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              }
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -111,12 +111,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "../node_modules/bootstrap/dist/css/bootstrap.css",
+              "../node_modules/bootstrap/scss/bootstrap.scss",
               "../node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "../node_modules/bootstrap/dist/js/bootstrap.js",
               "../node_modules/angular-fontawesome/dist/angular-fontawesome.js"
             ]
           }

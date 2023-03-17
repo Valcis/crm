@@ -41,7 +41,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     FontAwesomeModule,
     FormsModule,
     NgbModule,
-
   ],
   providers: []
 })

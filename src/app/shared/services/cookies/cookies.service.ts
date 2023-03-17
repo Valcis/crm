@@ -27,4 +27,12 @@ export class CookiesService {
     return this._cookieService.get("language")
   }
 
+  setSessionId(crmSessionId: string) {
+    this._cookieService.set('crm_session_id', crmSessionId);
+  }
+
+  getSessionId(): string {
+    return this._cookieService.get('crm_session_id');
+  }
+
 }

@@ -10,16 +10,30 @@
       <p class="text">{{'LOGIN.DESCRIPCION'|translate}}</p>
       <p class="text">{{'LOGIN.ENTRADA'|translate}}</p>
 
-<!--      <form ngForm class="m-t" role="form" (submit)="submit">-->
-      <form #user="ngForm" class="m-t" role="form">
-        <div class="form-group">
-          <input type="text" class="form-control input-text" placeholder="{{'LOGIN.NOMBRE_USER'|translate}}" required="true">
-          <input type="password" class="form-control input-text" placeholder="{{'LOGIN.PASS'|translate}}" required="true">
-        </div>
-        <input type="submit" class="btn btn-primary input-button vertical-timeline-block full-width mb-1"
-               value="{{'COMMON.LOGIN'|translate}}" (click)="navigate()">
+      <form [formGroup]="loginForm" (submit)="login()">
+<!--      <form [formGroup]="loginForm" (submit)="login2()">-->
+          <input
+            type="text"
+            class="form-control input-text"
+            placeholder="{{'LOGIN.NOMBRE_USER'|translate}}"
+            formControlName="username"
+            required
+          >
+          <input
+            type="password"
+            class="form-control input-text"
+            placeholder="{{'LOGIN.PASS'|translate}}"
+            formControlName="password"
+            required
+          >
+          <input type="submit"
+           class="btn btn-primary input-button vertical-timeline-block full-width mb-1"
+           value="{{'COMMON.LOGIN'|translate}}"
+          >
       </form>
       <p class="m-t text"><small>{{'LOGIN.SUB_TEXT'|translate}}</small></p>
+      <div *ngIf="user">{{user.nombre}} {{user.apellido1}}</div>
+<!--      <p class="m-t text"><small>{{test}}</small></p>-->
       <a class="sign-in">{{'LOGIN.SOLICITAR_ALTA'|translate}}</a>
     </div>
   </div>

@@ -1,24 +1,106 @@
 <div class="container">
+  <div class="header-profile">
 
-  <span>
-    <fa-icon style="color : #337ab7" [icon]="crmIcon"></fa-icon>
-    Neo </span>
-  <hr class="bg-white text-white">
-  <span>Keytel</span>
+    <h5 class="border-bottom pt-4">
+      <fa-icon class="text-white" [icon]="crmIcon"></fa-icon>
+      Neo
+    </h5>
 
-  <span>Pedro Valverde</span>
-  <span>IT</span>
+    <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
+         alt="logo keytel" style="width: 3rem">
+
+    <p>Pedro Valverde <br>Informática</p> <!-- // TODO : extraer info de peti ususario-->
+
+  </div>
+
+  <br>
+
+  <!--<div class="list-group">
+    <ng-container *ngFor=" let item of sections">
+      <button *ngIf="item.isContent" type="button" class="btn btn-dark text-start">
+        <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
+        {{item.title}}</button>
 
 
-  <ng-container *ngFor=" let item of  sections">
-    <li class="list-unstyled">
-      <a class="" (click)="getSectionInfo(item)">
-        <fa-icon style="color : #337ab7" [icon]="item.icon"></fa-icon>
-        <span>
+      <div *ngIf="!item.isContent" class="list-group dropdown">
+        <button  type="button" class="btn btn-dark dropdown-toggle text-start" role="button"
+                 id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
+          {{item.title}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+          <li><a class="dropdown-item active" href="#">asdasd</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+    </ng-container>
+  </div>-->
+
+  <br>
+
+  <div class="list-group" role="tablist">
+    <ng-container *ngFor=" let item of  sections">
+      <a *ngIf="item.isContent" class="list-group-item list-group-item-action {{item.id===1?'active':''}}"
+         data-bs-toggle="list" href="{{'#'+item.url}}">
+        <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
         {{item.title}}
-      </span>
       </a>
-    </li>
-  </ng-container>
+
+      <div *ngIf="!item.isContent" class="dropdown">
+        <button type="button" class="list-group-item list-group-item-action dropdown-toggle" role="button"
+                id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+          <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
+          {{item.title}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+          <li><a class="dropdown-item" href="#">asdasdas</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <br>
+
+  <div class="navbar bg-body-tertiary" >
+    <div class="container-fluid">
+      <div class="body">
+        <ul class="navbar-nav justify-content-end">
+          <ng-container *ngFor=" let item of sections">
+            <li *ngIf="item.isContent" class="nav-item">
+              <a class="nav-link {{item.id===1?'active':''}}" data-bs-toggle="list" href="#">
+                <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
+                {{item.title}}</a>
+            </li>
+
+
+            <li *ngIf="!item.isContent" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
+                {{item.title}}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider"/>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+
+
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </div>

@@ -1,12 +1,12 @@
 <div class="row m-0 p-0">
 
-  <div class="col-sm-{{isExpanded?4:1}} m-0 p-0">
+  <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
     <side-nav [isExpandedFlag]="isExpanded"></side-nav>
   </div>
 
-  <div class="col-sm-{{isExpanded?8:11}} m-0 p-0 ">
+  <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">
     <top-nav (expander)="onToggle()"></top-nav>
-    <content-frame></content-frame>
+    <content-frame class=""></content-frame>
   </div>
 
 </div>

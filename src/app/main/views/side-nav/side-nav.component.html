@@ -7,9 +7,13 @@
     </h5>
 
     <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
-         alt="logo keytel" style="width: 3rem">
+         alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag">
 
-    <p>Pedro Valverde <br>Informática</p> <!-- // TODO : extraer info de peti ususario-->
+    <div  *ngIf="isExpandedFlag">
+      <p>Pedro Valverde <br>Informática</p> <!-- // TODO : extraer info de peti ususario-->
+    </div>
+
+
 
   </div>
 
@@ -45,14 +49,14 @@
       <a *ngIf="item.isContent" class="list-group-item list-group-item-action {{item.id===1?'active':''}}"
          data-bs-toggle="list" href="{{'#'+item.url}}">
         <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-        {{item.title}}
+        <span *ngIf="isExpandedFlag">{{item.title}}</span>
       </a>
 
       <div *ngIf="!item.isContent" class="dropdown">
         <button type="button" class="list-group-item list-group-item-action dropdown-toggle" role="button"
                 id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
           <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-          {{item.title}}
+          <span *ngIf="isExpandedFlag">{{item.title}}</span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
           <li><a class="dropdown-item" href="#">asdasdas</a></li>
@@ -74,7 +78,8 @@
             <li *ngIf="item.isContent" class="nav-item">
               <a class="nav-link {{item.id===1?'active':''}}" data-bs-toggle="list" href="#">
                 <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-                {{item.title}}</a>
+                <span *ngIf="isExpandedFlag">{{item.title}}</span>
+              </a>
             </li>
 
 
@@ -82,7 +87,7 @@
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                  aria-expanded="false">
                 <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-                {{item.title}}
+                <span *ngIf="isExpandedFlag">{{item.title}}</span>
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -102,5 +107,8 @@
       </div>
     </div>
   </div>
+
+
+
 
 </div>

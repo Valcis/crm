@@ -35,6 +35,7 @@ import {ContentComponent} from './views/content/content.component';
       isolate: false,
       extend: true
     }),
+
   ],
   providers: []
 })

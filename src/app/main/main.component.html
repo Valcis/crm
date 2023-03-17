@@ -19,7 +19,10 @@
 </div>
 
 <p> IDIOMA de la COOKIE: '{{currentLang}}'</p>
+<p *ngIf="!user">No hi ha</p>
+<p *ngIf="user">{{user.nombre}} {{user.apellido1}}</p>
 
+<input type="button" class="btn btn-primary" value="< Back" (click)="back()">
 
 <p>{{ 'MAIN.WORKS' | translate}}</p>
 

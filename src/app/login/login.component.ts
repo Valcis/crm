@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   private sendLogin: boolean = false;
   public loginUser: any;
   public user: any;
+  bImage: string = '../../assets/images/login/barcelona.jpg';
 
 
   constructor(
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
     private _userConfig: UserConfigService
   ) {
     if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
-      this.translate.use('es')
+      this.translate.use('es');
+      this.cookie.setLanguage(this.translate.currentLang);
     } else {
       this.currentLang = cookie.getLanguage();
       this.translate.use(cookie.getLanguage())
@@ -113,5 +115,9 @@ export class LoginComponent implements OnInit {
     } else {
       console.log('Credenciales incorrectos');
     }
+  }
+
+  test(backItem: string) {
+    this.bImage = backItem;
   }
 }

@@ -7,21 +7,17 @@
     </div>
     <div class="col-1 col-xs-1 d-flex justify-content-end" align="center">
       <div class="dropdown nav"  ngbDropdown>
-        <a class="dropdown-toggle dd" style="color: darkgray" ngbDropdownToggle>
+        <a class="dropdown-toggle dd" style="color: darkgray; cursor: pointer" ngbDropdownToggle>
           <fa-icon [icon]="faImage" ></fa-icon>
         </a>
         <ul role="menu" class="dropdown-menu ddMenu" ngbDropdownMenu>
-          <li>Test01</li>
-          <li>Test01</li>
-          <li>Test01</li>
-          <li>Test01</li>
-          <li>Test01</li>
-          <li>Test01</li>
-<!--           <li *ngFor="image in main.backgroundImage.list">-->
-<!--                      <a href="" (click)="setCookieImage(image)">-->
-<!--                        <img src="{{image}}" class="ddImage">-->
-<!--                      </a>-->
-<!--                    </li>-->
+          <ng-container *ngFor="let i of backgroundImage">
+           <li role="menuitem">
+              <a class="dropdown-item" (click)="setBackgroundImage(i)">
+                <img src="{{i}}" class="ddImage">
+              </a>
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>

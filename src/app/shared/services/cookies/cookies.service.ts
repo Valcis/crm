@@ -24,7 +24,7 @@ export class CookiesService {
   }
 
   getLanguage(): string {
-    return this._cookieService.get("language")
+    return this._cookieService.get("language");
   }
 
   setSessionId(crmSessionId: string) {
@@ -33,6 +33,10 @@ export class CookiesService {
 
   getSessionId(): string {
     return this._cookieService.get('crm_session_id');
+  }
+
+  deleteSessionId() {
+    return this._cookieService.delete('crm_session_id');
   }
 
 }

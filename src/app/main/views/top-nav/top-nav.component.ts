@@ -10,6 +10,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 import {TranslateService} from "@ngx-translate/core";
+import {UserConfigService} from "../../../shared/services/user/user-config.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -27,6 +29,7 @@ export class TopNavComponent {
   faRightFromBracket = faRightFromBracket;
   faImage = faImage;
   lang = '';
+  private user: any;
 
   langList = [
     {code: 'en', lang: 'English', flag: "../../../../assets/images/flags/16/United-States.png"},
@@ -36,10 +39,15 @@ export class TopNavComponent {
 
   constructor(
     private translate: TranslateService,
-    private cookie: CookiesService
+    private cookie: CookiesService,
+    private _userConfig: UserConfigService,
+    private router: Router
   ) {
     this.lang = cookie.getLanguage();
     console.log("constructor TOPNAV", this.lang)
+    this._userConfig.configuredUser.subscribe(a => a.map(user => {
+      this.user = user.Salida.datos_user;
+    }));
   }
 
   onExpander = () => this.expander.emit();
@@ -50,5 +58,17 @@ export class TopNavComponent {
     this.cookie.setLanguage(localeCode)
   }
 
+  logOut() {
+    if (this.user) {
+      // console.log('logOut user', this.user);
+      // this._userConfig.configuredUser.unsubscribe();
+      // this.user.unsubscribe();
+      // console.log('logOut unsub', this.user);
+      console.log(this.cookie.getSessionId());
+      this.cookie.deleteSessionId();
+      console.log(this.cookie.getSessionId());
+    }
+    this.router.navigate(['/login'])
+  }
 
 }

@@ -1,6 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {
-  faFolder,
   faShareNodes,
   faHome,
   faGamepad,

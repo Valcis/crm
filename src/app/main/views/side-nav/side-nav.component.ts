@@ -18,7 +18,7 @@ import {
 export class SideNavComponent {
   @Input() public isExpandedFlag: boolean = true;
   crmIcon = faShareNodes;
-
+  public isCollapsed = false;
   subsections =[
     {description: "", isContent: true, id: 5, title: "Opotunidades", url: "opotunidades"},
     {description: "", isContent: true, id: 6, title: "Agencias latentes", url: "agencias_latentes"},

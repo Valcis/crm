@@ -68,7 +68,42 @@
     </ng-container>
   </div>
 
+
+
+  <p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Link with href
+    </a>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Button with data-bs-target
+    </button>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    </div>
+  </div>
+
+
   <br>
+
+  <div class="dropdown nav"  ngbDropdown>
+    <a class="dropdown-toggle count-info dd " style="color: darkgray; cursor: pointer; text-decoration: none;" ngbDropdownToggle>
+      {{'COMMON.LANGUAGE'|translate}}
+    </a>
+    <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
+      <ng-container *ngFor="let loc of sections">
+        <li role="menuitem">
+          <a class="dropdown-item">
+<!--            <img src="{{loc}}">-->
+            {{ loc.id }}
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <hr>
 
   <div class="navbar bg-body-tertiary" >
     <div class="container-fluid">
@@ -90,17 +125,14 @@
                 <span *ngIf="isExpandedFlag">{{item.title}}</span>
               </a>
               <ul class="dropdown-menu">
+
                 <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider"/>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+                <li> <hr class="dropdown-divider"/> </li>
+                <li> <a class="dropdown-item" href="#">Something else here</a> </li>
+
               </ul>
             </li>
-
 
           </ng-container>
         </ul>
@@ -109,6 +141,15 @@
   </div>
 
 
-
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown button
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
 
 </div>

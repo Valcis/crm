@@ -26,6 +26,13 @@ export class UserService extends CrmService {
     return this.sendPost(environment.servers.urlByPass);
   }
 
+  send2(request: any,): Observable<any> {
+    this.generateBody2(request);
+    return this.sendPost(environment.servers.urlByPass);
+  }
+
+
+
   load(request: any, method: string) {
     this.methodRequest = method;
     this.generateBody(request);

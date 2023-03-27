@@ -10,6 +10,7 @@ import {LoginRs} from "../shared/models/user/login.model";
 import {UserConfigService} from "../shared/services/user/user-config.service";
 import {UserConfig} from "../shared/models/user/user-config.model";
 import {LoginService} from "../shared/services/user/login.service";
+import {UserMenuService} from "../shared/services/user/user-menu.service";
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   private sendLogin: boolean = false;
   public loginUser: any;
   public user: any;
+  public userMen: any;
   bImage: string = '../../assets/images/login/barcelona.jpg';
 
 
@@ -36,7 +38,8 @@ export class LoginComponent implements OnInit {
     private cookie: CookiesService,
     private http: HttpClient,
     private _login: LoginService,
-    private _userConfig: UserConfigService
+    private _userConfig: UserConfigService,
+    private _userMenu: UserMenuService
   ) {
     if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
       this.translate.use('es');
@@ -52,8 +55,9 @@ export class LoginComponent implements OnInit {
     this.loadForm();
     if (this.loginUser) {
       this._login.loginSubject.subscribe(a => a.map(loginUser => {
-      this.loginUser = loginUser.Salida
-    }))}
+        this.loginUser = loginUser.Salida
+      }))
+    }
 
     this.validateUser();
   }
@@ -82,13 +86,14 @@ export class LoginComponent implements OnInit {
 
   // Subject validation
   private validateUser(): void {
-    this.sub.add((this._login.user.subscribe( (response) => {
-      response.map( user => this.loginUser = user);
-        return this.loginUser;
+    this.sub.add((this._login.user.subscribe((response) => {
+      response.map(user => this.loginUser = user);
+      return this.loginUser;
     })));
   }
 
-  private processLogin(): void {
+  // private async processLogin(): void {
+  private async processLogin() {
     this.cookie.setSessionId(this.loginUser.Id);
     if (this.loginUser.Status === 'OK') {
       let now = new Date();
@@ -103,13 +108,23 @@ export class LoginComponent implements OnInit {
         id: +userResp.Salida.empl_code
       };
 
-      this._userConfig.loadUserConfig(userConfigParams);
-      this.sub.add((this._userConfig.configUser.subscribe((response) => {
-        response.map( user => this.user = user);
+      await this._userConfig.loadUserConfig(userConfigParams);
+      await this.sub.add((this._userConfig.configUser.subscribe((response) => {
+        response.map(async user => {
+          this.user = user;
+          //console.log('this', this.user.Id, 'us', user);
+          await this._userMenu.loadMenu({app: "C2RM"});
+        });
         return this.user;
       })));
 
-      this.sendLogin =  true;
+      await this.sub.add((this._userMenu.userMenuCRM.subscribe((res: any) => {
+        res.map((menu: any) => this.userMen = menu);
+        console.log("maldito", this.userMen, "response de Menu", res);
+        return this.userMen;
+      })))
+
+      this.sendLogin = true;
 
       this.route.navigate(['/main']);
     } else {

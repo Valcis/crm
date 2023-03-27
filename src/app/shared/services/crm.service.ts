@@ -33,6 +33,7 @@ export abstract class CrmService {
   protected abstract onError(error: any): void;
 
   protected generateBody(inRQ: any) {
+
     this.body.ByPass = 'usuario';
     this.body.Servicio = this.serviceRequest;
     this.body.Metodo = this.methodRequest;
@@ -42,7 +43,27 @@ export abstract class CrmService {
     this.body.recuerdame_id = '';
     this.body.URL = '';
     this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
+    console.log("en generateBodyReq", this.body)
   }
+
+
+  protected generateBody2(inRQ: any) {
+
+    this.body.ByPass = 'usuario';
+    this.body.Servicio = "menu";
+    this.body.Metodo = "GetMenu";
+    this.body.Tipo = '';
+    this.body.Entrada = {
+      "app": "CRM"
+    };
+    this.body.setHistorial_cambios = undefined;
+    this.body.recuerdame_id = '';
+    this.body.URL = '';
+    this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
+    console.log("en generateBodyReq", this.body)
+  }
+
+
 
   private initDefaultParameters() {
     this.httpOptions = {

@@ -11,10 +11,9 @@ import {UserConfigService} from "../shared/services/user/user-config.service";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
+  @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   public isExpanded: boolean = true;
   currentLang: string = '';
-  @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   public user: any;
 
   constructor(
@@ -32,6 +31,7 @@ export class MainComponent implements OnInit {
    ngOnInit() {
      this._userConfig.configuredUser.subscribe(a => a.map(user => {
        this.user = user.Salida.datos_user;
+
      }));
    }
 

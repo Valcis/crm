@@ -32,7 +32,7 @@ export class UserConfigService {
     return this.userService.send(userConfig, this.getUserConfig).pipe(map(r => (<UserRs><unknown>r)));
   }
 
-  loadUserConfig(userConfig: UserConfig) {
+  async loadUserConfig(userConfig: UserConfig) {
     this.sendGet(userConfig).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
   }
 

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Subject} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 import {CookiesService} from "./cookies/cookies.service";
+import {GenericRequest} from "../models/petition/petition.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export abstract class CrmService {
   protected body: CrmBody;
   protected httpOptions: any;
   protected observable: any;
+  protected bodyRequest : GenericRequest | undefined;
 
   protected crmSubject: Subject<CrmResponse> = new Subject<CrmResponse>();
   protected postSubject: Subject<any> = new Subject();
@@ -43,25 +45,13 @@ export abstract class CrmService {
     this.body.recuerdame_id = '';
     this.body.URL = '';
     this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
-    console.log("en generateBodyReq", this.body)
+    //console.log("en generateBody", this.body)
   }
 
 
-  protected generateBody2(inRQ: any) {
-
-    this.body.ByPass = 'usuario';
-    this.body.Servicio = "menu";
-    this.body.Metodo = "GetMenu";
-    this.body.Tipo = '';
-    this.body.Entrada = {
-      "app": "CRM"
-    };
-    this.body.setHistorial_cambios = undefined;
-    this.body.recuerdame_id = '';
-    this.body.URL = '';
-    this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
-    console.log("en generateBodyReq", this.body)
-  }
+  /*protected generateBody2(req: GenericRequest) {
+    this.bodyRequest = req;
+  }*/
 
 
 

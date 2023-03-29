@@ -11,8 +11,17 @@ export interface UserPermissions { //TODO: exportar a un fichero mas generico???
   lectura: boolean
 }
 
-export interface UserMenusRq {
+
+export interface UserMenuEntrada {
   app: string;
+}
+
+export interface UserMenuBodyRq {
+  ByPass: string,
+  Servicio: string,
+  Metodo: string,
+  Entrada: UserMenuEntrada,
+
 }
 
 export interface UserMenusRs {

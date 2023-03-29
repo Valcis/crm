@@ -26,11 +26,17 @@ export class UserService extends CrmService {
     return this.sendPost(environment.servers.urlByPass);
   }
 
-  send2(request: any,): Observable<any> {
-    this.generateBody2(request);
+
+  /** FUNCION QUE ESPERARA LOS DATOS ESPECIFICOS DE LA PETICION, LOS AÑADIRA A LA GENERICA
+   ** PARA FINALMENTE LANZARA AL BACK
+   *  requestData -> los datos especificos de la peticion
+   * */
+
+  send2Back(requestData: any): Observable<any> {
+//  console.log("que viene????", requestData)
+    this.bodyRequest = requestData
     return this.sendPost(environment.servers.urlByPass);
   }
-
 
 
   load(request: any, method: string) {

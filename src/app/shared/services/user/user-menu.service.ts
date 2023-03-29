@@ -1,29 +1,38 @@
 import {Injectable} from '@angular/core';
-import {UserMenusRq, UserMenusRs} from "../../models/user/user-menu.model";
+import {UserMenuBodyRq, UserMenuEntrada, UserMenusRs} from "../../models/user/user-menu.model";
 import {BehaviorSubject} from "rxjs";
 import {UserService} from "./user.service";
-import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
-import {UserConfig, UserRs} from "../../models/user/user-config.model";
 import {map, take} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserMenuService {
-  private readonly getUserMenu = "GetMenu";
-  public userMenuRs: BehaviorSubject<UserMenusRs[]> = new BehaviorSubject<UserMenusRs[]>([]);
+  //declaro una request y una response generica para luego personalizarla
+  private userMenuBodyRq: UserMenuBodyRq; //TODO : implementar modelo generico
+  //private userMenuRs: GenericResponse; //TODO : implementar modelo generico
+
+  public dataObservable: BehaviorSubject<UserMenusRs[]> = new BehaviorSubject<UserMenusRs[]>([]);
+
   private userMenuDataResponse: any;
-  //private getMenuRequest : genericRequest; TODO : implementar modelo generico
-  private menuBodyReq;
+
 
   constructor(
     private userService: UserService,
     private _userConfig: UserConfigService,
   ) {
-    this.menuBodyReq = {
+    this.userMenuBodyRq = {
+      ByPass: "usuario",
+      Servicio: "menu",
+      Metodo: "GetMenu",
+      Entrada: {app: "CRM"},
+    };
+
+    /*this.menuBodyReq = {
       "ByPass": "usuario",
       "Servicio": "menu",
       "Metodo": "GetMenu",
@@ -34,24 +43,25 @@ export class UserMenuService {
       "Id": "D8iisq1jS6vf4Ibfo3NOiszn5WoVBSDMejzwb2Qm",
       "URL": "",
       "recuerdame_id": ""
-    }
-
+    };*/
 
     this._userConfig.configuredUser.subscribe(item => item.map(resp => this.userMenuDataResponse = resp.Salida))
-
   }
 
 
-  public sendGet(userMenu: UserMenusRq): Observable<UserMenusRs> {
-    return this.userService.send2(this.menuBodyReq).pipe(map(r => (<UserMenusRs><unknown>r)));
+  // Este loadMenu debe esperar los datos del usuario (login) para unirlo con los datos de la
+  // userMenuBodyRequest en un GenericRequest
+  async loadMenu(id: string) {
+    let request: GenericRequest = {...this.userMenuBodyRq, Id: id};
+    //console.log("request ----------->", request)
+    this.sendGet(request).pipe(take(1)).subscribe((r => this.dataObservable.next([r])));
   }
 
-  async loadMenu(menusRq: UserMenusRq) {
-    this.sendGet(menusRq).pipe(take(1)).subscribe((r => this.userMenuRs.next([r])));
+  private sendGet(request: GenericRequest): Observable<UserMenusRs> {
+    return this.userService.send2Back(request).pipe(map(r => (<UserMenusRs><unknown>r)));
   }
-
 
   public get userMenuCRM() {
-    return this.userMenuRs.asObservable();
+    return this.dataObservable.asObservable();
   }
 }

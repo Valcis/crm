@@ -42,47 +42,6 @@
     </ng-container>
   </div>-->
 
-  <br>
-
-  <div class="list-group" role="tablist">
-    <ng-container *ngFor=" let item of  sections">
-      <a *ngIf="item.isContent" class="list-group-item list-group-item-action {{item.id===1?'active':''}}"
-         data-bs-toggle="list" href="{{'#'+item.url}}">
-        <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-        <span *ngIf="isExpandedFlag">{{item.title}}</span>
-      </a>
-
-      <div *ngIf="!item.isContent" class="dropdown">
-        <button type="button" class="list-group-item list-group-item-action dropdown-toggle" role="button"
-                id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-          <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-          <span *ngIf="isExpandedFlag">{{item.title}}</span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-          <li><a class="dropdown-item" href="#">asdasdas</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-
-    </ng-container>
-  </div>
-
-
-
-  <p>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Button with data-bs-target
-    </button>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-    </div>
-  </div>
 
 
   <br>

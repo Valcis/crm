@@ -113,14 +113,14 @@ export class LoginComponent implements OnInit {
         response.map(async user => {
           this.user = user;
           //console.log('this', this.user.Id, 'us', user);
-          await this._userMenu.loadMenu({app: "C2RM"});
+          await this._userMenu.loadMenu(this.user.Id);
         });
         return this.user;
       })));
 
       await this.sub.add((this._userMenu.userMenuCRM.subscribe((res: any) => {
         res.map((menu: any) => this.userMen = menu);
-        console.log("maldito", this.userMen, "response de Menu", res);
+        console.log("respuesta de menu", this.userMen, "response de Menu", res);
         return this.userMen;
       })))
 

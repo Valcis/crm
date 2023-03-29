@@ -92,14 +92,13 @@ export class LoginComponent implements OnInit {
     })));
   }
 
-  // private async processLogin(): void {
   private async processLogin() {
     this.cookie.setSessionId(this.loginUser.Id);
     if (this.loginUser.Status === 'OK') {
       let now = new Date();
       let minutes = this.loginUser.Salida.tiempo_sesion;
 
-      //Hacer código de duración de sesión
+      // TODO : Hacer código de duración de sesión
       const userResp: LoginRs = {
         Salida: this.loginUser.Salida
       };
@@ -112,7 +111,6 @@ export class LoginComponent implements OnInit {
       await this.sub.add((this._userConfig.configUser.subscribe((response) => {
         response.map(async user => {
           this.user = user;
-          //console.log('this', this.user.Id, 'us', user);
           await this._userMenu.loadMenu(this.user.Id);
         });
         return this.user;

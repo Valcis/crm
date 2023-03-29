@@ -13,7 +13,8 @@ export abstract class CrmService {
 
   protected serviceRequest = 'servicios';
   protected methodRequest: string = "";
-  protected body: CrmBody;
+  //protected body: CrmBody;
+  protected body: { setHistorial_cambios: undefined; Tipo: string; Metodo: string; ByPass?: string; recuerdame_id: string; Servicio: string; Id: string; setHistorialCambios?: string | undefined; Entrada?: any; URL: string };
   protected httpOptions: any;
   protected observable: any;
   protected bodyRequest : GenericRequest | undefined;
@@ -36,6 +37,8 @@ export abstract class CrmService {
 
   protected generateBody(inRQ: any) {
 
+
+
     this.body.ByPass = 'usuario';
     this.body.Servicio = this.serviceRequest;
     this.body.Metodo = this.methodRequest;
@@ -44,14 +47,19 @@ export abstract class CrmService {
     this.body.setHistorial_cambios = undefined;
     this.body.recuerdame_id = '';
     this.body.URL = '';
+    //this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
     this.body.Id = this.cookies.getSessionId() !== undefined ? this.cookies.getSessionId() : '';
-    //console.log("en generateBody", this.body)
+    console.log("en generateBodyReq", this.body)
   }
 
 
-  /*protected generateBody2(req: GenericRequest) {
+
+  //TODO : el id deberia extraerse desde la cookie??? no seria mejor propagarlo desde el "controlador" usuario
+  protected generateBody2(req: GenericRequest) {
     this.bodyRequest = req;
-  }*/
+    this.body ={...req, Tipo:"", URL:"", recuerdame_id:"", setHistorial_cambios:undefined}
+
+  }
 
 
 

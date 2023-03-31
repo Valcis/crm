@@ -7,12 +7,12 @@ export interface GenericRequest {
   ByPass?: string, //cuando es al back crm, se omite este aributo
   Servicio: string,
   Metodo: string,
-  Tipo?: string | undefined,
+  Tipo?: string,
   Entrada?: any, //TODO : ¿se puede definir tipo o tipos especificos?
-  Id: string,
+  Id: string | undefined,
   URL?: string,
   recuerdame_id?: string,
-  setHistorialCambios?: string | undefined
+  setHistorial_cambios?: string
 }
 
 

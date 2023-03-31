@@ -4,7 +4,6 @@ import {environment} from "../../../../environments/environment.local";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {CrmService} from "../crm.service";
-import {CookiesService} from "../cookies/cookies.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,38 +13,29 @@ export class UserService extends CrmService {
   constructor(
     private router: Router,
     private _http: HttpClient,
-    private _cookies: CookiesService
   ) {
-    super(_http, _cookies);
-    this.serviceRequest = 'usuarios';
+    super(_http);
   }
 
-  send(request: any, method: string): Observable<any> {
-    this.methodRequest = method;
-    this.generateBody(request);
-    return this.sendPost(environment.servers.urlByPass);
-  }
+  // TODO -> migra a send2Back...
+  /*send(request: any): Observable<any> {  }*/
 
 
-/** FUNCION QUE ESPERARA LOS DATOS ESPECIFICOS DE LA PETICION, LOS AÑADIRA A LA GENERICA
- ** PARA FINALMENTE LANZARA AL BACK
- *  requestData -> los datos especificos de la peticion
- * */
-
+  /** FUNCION QUE ESPERARA LOS DATOS ESPECIFICOS DE LA PETICION, LOS AÑADIRA A LA GENERICA
+   ** PARA FINALMENTE LANZARA AL BACK
+   *  @requestData -> los datos especificos de la peticion
+   */
   send2Back(requestData: any): Observable<any> {
-  console.log("que viene????", requestData)
-
-    this.generateBody2(requestData);
+    this.generateBody(requestData);
+    console.log("igualando->", this.bodyRequest)
     return this.sendPost(environment.servers.urlByPass);
   }
 
 
-
-  load(request: any, method: string) {
-    this.methodRequest = method;
+  /*load(request: any) {
     this.generateBody(request);
     this.postSubject.next(environment.servers.urlByPass);
-  }
+  }*/
 
   onError(error: any) {
     this.crmSubject.error(error);

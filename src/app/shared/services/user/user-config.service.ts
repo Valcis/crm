@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {UserService} from "./user.service";
 import {UserConfig, UserOracle, UserRs} from "../../models/user/user-config.model";
 import {Observable} from "rxjs";
-import {LoginRq, LoginRs} from "../../models/user/login.model";
+import {LoginEntrada, LoginRs} from "../../models/user/login.model";
 import {LoginService} from "./login.service";
 import {map, take} from "rxjs/operators";
 import {BehaviorSubject} from "rxjs";
@@ -29,7 +29,7 @@ export class UserConfigService {
   }
 
   public sendGet(userConfig: UserConfig): Observable<UserRs> {
-    return this.userService.send(userConfig, this.getUserConfig).pipe(map(r => (<UserRs><unknown>r)));
+    return this.userService.send2Back(userConfig).pipe(map(r => (<UserRs><unknown>r)));
   }
 
   async loadUserConfig(userConfig: UserConfig) {

@@ -1,10 +1,14 @@
 
-export interface LoginRq {
+export interface LoginEntrada {
   username: string;
   password: string;
   user_session_id?: string;
   recordarUsuario?: false;
 }
+
+
+
+
 
 export interface LoginRs {
   Salida: UserCRM;

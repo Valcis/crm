@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
   bImage: string = '../../assets/images/login/barcelona.jpg';
 
 
+
   constructor(
     private translate: TranslateService,
     private route: Router,
     private cookie: CookiesService,
     private http: HttpClient,
-    private _login: LoginService,
+    private _login = new LoginService({username: "string",password: "string"}),
     private _userConfig: UserConfigService,
     private _userMenu: UserMenuService
   ) {
@@ -77,7 +78,15 @@ export class LoginComponent implements OnInit {
 
   public login(): void {
     if (this.loginForm.valid) {
-      this._login.loadGetLogin(this.loginForm.value);
+      console.log("usuario validado")
+
+      // todo -> configurar esto dinamicamente
+      this._login.loadGetLogin({
+        username: "pvalverde",
+      password: "valverde",
+      user_session_id: undefined,
+      recordarUsuario: false
+      });
       if (this.loginUser) {
         this.processLogin();
       }
@@ -94,6 +103,9 @@ export class LoginComponent implements OnInit {
 
   private async processLogin() {
     this.cookie.setSessionId(this.loginUser.Id);
+
+    console.log("mira \t \t", this.loginUser)
+
     if (this.loginUser.Status === 'OK') {
       let now = new Date();
       let minutes = this.loginUser.Salida.tiempo_sesion;

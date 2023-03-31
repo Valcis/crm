@@ -12,8 +12,7 @@ import {GenericRequest, GenericResponse} from "../../models/petition/petition.mo
   providedIn: 'root'
 })
 export class UserMenuService {
-  //declaro una request y una response generica para luego personalizarla
-  private userMenuBodyRq: UserMenuBodyRq;
+  private readonly userMenuBodyRq: UserMenuBodyRq;
   //private userMenuRs: GenericResponse; //TODO : implementar modelo generico
   public dataObservable: BehaviorSubject<UserMenusRs[]> = new BehaviorSubject<UserMenusRs[]>([]); // todo, cambiar
   private userMenuDataResponse: any;

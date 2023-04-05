@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../environments/environment.local";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {CrmService} from "../crm.service";
@@ -25,11 +24,11 @@ export class UserService extends CrmService {
    ** PARA FINALMENTE LANZARA AL BACK
    *  @requestData -> los datos especificos de la peticion
    */
-  send2Back(requestData: any): Observable<any> {
-    this.generateBody(requestData);
+  /*send2Back(requestData: any): Observable<any> {
+    //this.generateBody(requestData);
     console.log("igualando->", this.bodyRequest)
-    return this.sendPost(environment.servers.urlByPass);
-  }
+    return this.sendPost();
+  }*/
 
 
   /*load(request: any) {
@@ -37,11 +36,11 @@ export class UserService extends CrmService {
     this.postSubject.next(environment.servers.urlByPass);
   }*/
 
-  onError(error: any) {
+ /* onError(error: any) {
     this.crmSubject.error(error);
   }
 
   onSuccess(response: any) {
     this.crmSubject.next(response);
-  }
+  }*/
 }

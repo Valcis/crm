@@ -6,12 +6,14 @@ import {UserConfigService} from "./user-config.service";
 import {map, take} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
+import {CrmService} from "../crm.service";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserMenuService {
+export class UserMenuService extends CrmService {
   private readonly userMenuBodyRq: UserMenuBodyRq;
   //private userMenuRs: GenericResponse; //TODO : implementar modelo generico
   public dataObservable: BehaviorSubject<UserMenusRs[]> = new BehaviorSubject<UserMenusRs[]>([]); // todo, cambiar
@@ -19,10 +21,11 @@ export class UserMenuService {
 
 
   constructor(
+    private _http: HttpClient,
     private userService: UserService,
     private _userConfig: UserConfigService,
   ) {
-
+    super(_http);
     this.userMenuBodyRq = {
       ByPass: "usuario",
       Servicio: "menu",
@@ -41,8 +44,7 @@ export class UserMenuService {
   }
 
   private sendGet(request: GenericRequest): Observable<UserMenusRs> {
-
-    return this.userService.send2Back(request).pipe(map(r => (<UserMenusRs><unknown>r)));
+    return this.sendPost(request).pipe(map(r => (<UserMenusRs><unknown>r)));
   }
 
   public get userMenuCRM() {

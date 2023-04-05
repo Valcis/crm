@@ -1,39 +1,45 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UserService} from "./user.service";
-import {UserConfig, UserOracle, UserRs} from "../../models/user/user-config.model";
+import {UserConfigEntrada, UserOracle, UserRs} from "../../models/user/user-config.model";
 import {Observable} from "rxjs";
-import {LoginEntrada, LoginRs} from "../../models/user/login.model";
 import {LoginService} from "./login.service";
 import {map, take} from "rxjs/operators";
 import {BehaviorSubject} from "rxjs";
+import {CrmService} from "../crm.service";
+import {HttpClient} from "@angular/common/http";
+import {GenericRequest} from "../../models/petition/petition.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserConfigService {
-
-  private readonly getUserConfig = 'GetConfiguracionUsuario';
+export class UserConfigService extends CrmService {
+  private readonly userConfigBodyRq: GenericRequest;
   public configuredUser: BehaviorSubject<UserRs[]> = new BehaviorSubject<UserRs[]>([]);
-  private user: any;
-
 
   constructor(
+    private _http: HttpClient,
     private userService: UserService,
     private _login: LoginService
   ) {
-    if (this.user) {
-      this._login.loginSubject.subscribe(a => a.map(user => {
-        this.user = user.Salida
-      }))
-    }
+    super(_http);
+    this.userConfigBodyRq = {
+      ByPass: "usuario",
+      Servicio: "usuarios",
+      Metodo: "GetConfiguracionUsuario",
+      Tipo: "",
+      Entrada: {}, //ya rellenaremos la entrada con los datos especificos mas adelante
+      Id: "", // idem, luego rellenamos
+      URL: "",
+      recuerdame_id: ""
+    };
   }
 
-  public sendGet(userConfig: UserConfig): Observable<UserRs> {
-    return this.userService.send2Back(userConfig).pipe(map(r => (<UserRs><unknown>r)));
+  async loadUserConfig(user: UserConfigEntrada, id: string) {
+    this.sendGet(user, id).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
   }
 
-  async loadUserConfig(userConfig: UserConfig) {
-    this.sendGet(userConfig).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
+  public sendGet(user: UserConfigEntrada, id: string): Observable<UserRs> {
+    return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id}).pipe(map(r => (<UserRs><unknown>r)));
   }
 
   public get configUser() {

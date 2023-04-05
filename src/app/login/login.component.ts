@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {LoginRs} from "../shared/models/user/login.model";
 import {UserConfigService} from "../shared/services/user/user-config.service";
-import {UserConfig} from "../shared/models/user/user-config.model";
+import {UserConfigEntrada} from "../shared/models/user/user-config.model";
 import {LoginService} from "../shared/services/user/login.service";
 import {UserMenuService} from "../shared/services/user/user-menu.service";
 
@@ -32,13 +32,12 @@ export class LoginComponent implements OnInit {
   bImage: string = '../../assets/images/login/barcelona.jpg';
 
 
-
   constructor(
     private translate: TranslateService,
     private route: Router,
     private cookie: CookiesService,
     private http: HttpClient,
-    private _login = new LoginService({username: "string",password: "string"}),
+    private _login: LoginService,
     private _userConfig: UserConfigService,
     private _userMenu: UserMenuService
   ) {
@@ -54,8 +53,11 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loadForm();
+
     if (this.loginUser) {
+      console.log("NOOOOOO entra!!")
       this._login.loginSubject.subscribe(a => a.map(loginUser => {
+        console.log("loginUser", loginUser)
         this.loginUser = loginUser.Salida
       }))
     }
@@ -76,20 +78,15 @@ export class LoginComponent implements OnInit {
 
   // Effect
 
-  public login(): void {
+  public login() {
     if (this.loginForm.valid) {
-      console.log("usuario validado")
-
-      // todo -> configurar esto dinamicamente
-      this._login.loadGetLogin({
-        username: "pvalverde",
-      password: "valverde",
-      user_session_id: undefined,
-      recordarUsuario: false
-      });
+      this._login.logIn(this.loginForm.value);
+      console.log("pase la peti LOG IN ????");
       if (this.loginUser) {
+        console.log("Si, usamos datos y continuamos proceso...")
         this.processLogin();
-      }
+      } else
+        console.log("No")
     }
   }
 
@@ -102,9 +99,8 @@ export class LoginComponent implements OnInit {
   }
 
   private async processLogin() {
+    console.log("this.loginUser", this.loginUser)
     this.cookie.setSessionId(this.loginUser.Id);
-
-    console.log("mira \t \t", this.loginUser)
 
     if (this.loginUser.Status === 'OK') {
       let now = new Date();
@@ -115,11 +111,12 @@ export class LoginComponent implements OnInit {
         Salida: this.loginUser.Salida
       };
 
-      const userConfigParams: UserConfig = {
+      const userConfigParams: UserConfigEntrada = {
         id: +userResp.Salida.empl_code
       };
 
-      await this._userConfig.loadUserConfig(userConfigParams);
+
+      await this._userConfig.loadUserConfig(userConfigParams, this.loginUser.Id);
       await this.sub.add((this._userConfig.configUser.subscribe((response) => {
         response.map(async user => {
           this.user = user;

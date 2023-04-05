@@ -1,5 +1,5 @@
 
-export interface UserConfig {
+export interface UserConfigEntrada {
   id: number
 }
 export interface UserRs {

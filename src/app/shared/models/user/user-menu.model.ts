@@ -16,13 +16,6 @@ export interface UserMenuEntrada {
   app: string;
 }
 
-export interface UserMenuBodyRq {
-  ByPass: string,
-  Servicio: string,
-  Metodo: string,
-  Entrada: UserMenuEntrada,
-
-}
 
 export interface UserMenusRs {
   Salida: {

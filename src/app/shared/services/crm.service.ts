@@ -12,8 +12,6 @@ export abstract class CrmService {
   private httpOptions: any;
   private observable: any;
   private bodyRequest: GenericRequest | undefined;
-  private crmSubject: Subject<CrmResponse> = new Subject<CrmResponse>();
-  private postSubject: Subject<any> = new Subject();
 
   protected constructor(
     private http: HttpClient,

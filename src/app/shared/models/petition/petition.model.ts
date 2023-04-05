@@ -9,7 +9,7 @@ export interface GenericRequest {
   Metodo: string,
   Tipo?: string,
   Entrada?: any, //TODO : ¿se puede definir tipo o tipos especificos?
-  Id: string | undefined,
+  Id: string,
   URL?: string,
   recuerdame_id?: string,
   setHistorial_cambios?: string

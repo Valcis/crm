@@ -7,9 +7,6 @@ export interface LoginEntrada {
 }
 
 
-
-
-
 export interface LoginRs {
   Salida: UserCRM;
 }

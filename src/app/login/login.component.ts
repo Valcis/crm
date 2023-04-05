@@ -19,7 +19,7 @@ import {UserMenuService} from "../shared/services/user/user-menu.service";
 })
 export class LoginComponent implements OnInit {
   faShare = faShareAlt;
-  currentLang: string = '';
+  currentLang: string = 'es';
   public loginForm!: FormGroup;
   public submitted: boolean = false;
   public username: string = '';
@@ -28,9 +28,8 @@ export class LoginComponent implements OnInit {
   private sendLogin: boolean = false;
   public loginUser: any;
   public user: any;
-  public userMen: any;
-  bImage: string = '../../assets/images/login/barcelona.jpg';
-
+  public userMenu: any;
+  public bImage: string = '../../assets/images/login/barcelona.jpg';
 
   constructor(
     private translate: TranslateService,
@@ -54,13 +53,14 @@ export class LoginComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.loadForm();
 
+    /*  NO SE EJECUTA NUNCA
     if (this.loginUser) {
       console.log("NOOOOOO entra!!")
       this._login.loginSubject.subscribe(a => a.map(loginUser => {
         console.log("loginUser", loginUser)
         this.loginUser = loginUser.Salida
       }))
-    }
+    }*/
 
     this.validateUser();
   }
@@ -92,14 +92,19 @@ export class LoginComponent implements OnInit {
 
   // Subject validation
   private validateUser(): void {
-    this.sub.add((this._login.user.subscribe((response) => {
+    this.sub.add((this._login.user.subscribe(response => {
       response.map(user => this.loginUser = user);
+       console.log("entonces", this.loginUser)
       return this.loginUser;
     })));
+    if(this.loginUser){
+      console.log("iniciando proceso loggin automatico")
+      this.processLogin()
+    }
   }
 
   private async processLogin() {
-    console.log("this.loginUser", this.loginUser)
+    console.log("this.loginUser", this.loginUser);
     this.cookie.setSessionId(this.loginUser.Id);
 
     if (this.loginUser.Status === 'OK') {
@@ -110,6 +115,8 @@ export class LoginComponent implements OnInit {
       const userResp: LoginRs = {
         Salida: this.loginUser.Salida
       };
+
+      console.log("----->", userResp)
 
       const userConfigParams: UserConfigEntrada = {
         id: +userResp.Salida.empl_code
@@ -126,9 +133,9 @@ export class LoginComponent implements OnInit {
       })));
 
       await this.sub.add((this._userMenu.userMenuCRM.subscribe((res: any) => {
-        res.map((menu: any) => this.userMen = menu);
-        console.log("respuesta de menu", this.userMen, "response de Menu", res);
-        return this.userMen;
+        res.map((menu: any) => this.userMenu = menu);
+        console.log("respuesta de menu", this.userMenu, "response de Menu", res);
+        return this.userMenu;
       })))
 
       this.sendLogin = true;

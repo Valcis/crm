@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {UserService} from "./user.service";
 import {UserConfigEntrada, UserOracle, UserRs} from "../../models/user/user-config.model";
 import {Observable} from "rxjs";
 import {LoginService} from "./login.service";
@@ -18,7 +17,6 @@ export class UserConfigService extends CrmService {
 
   constructor(
     private _http: HttpClient,
-    private userService: UserService,
     private _login: LoginService
   ) {
     super(_http);

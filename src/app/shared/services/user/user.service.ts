@@ -7,7 +7,7 @@ import {CrmService} from "../crm.service";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends CrmService {
+export class UserService2 extends CrmService {
 
   constructor(
     private router: Router,
@@ -15,32 +15,4 @@ export class UserService extends CrmService {
   ) {
     super(_http);
   }
-
-  // TODO -> migra a send2Back...
-  /*send(request: any): Observable<any> {  }*/
-
-
-  /** FUNCION QUE ESPERARA LOS DATOS ESPECIFICOS DE LA PETICION, LOS AÑADIRA A LA GENERICA
-   ** PARA FINALMENTE LANZARA AL BACK
-   *  @requestData -> los datos especificos de la peticion
-   */
-  /*send2Back(requestData: any): Observable<any> {
-    //this.generateBody(requestData);
-    console.log("igualando->", this.bodyRequest)
-    return this.sendPost();
-  }*/
-
-
-  /*load(request: any) {
-    this.generateBody(request);
-    this.postSubject.next(environment.servers.urlByPass);
-  }*/
-
- /* onError(error: any) {
-    this.crmSubject.error(error);
-  }
-
-  onSuccess(response: any) {
-    this.crmSubject.next(response);
-  }*/
 }

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {UserMenuEntrada, UserMenusRs} from "../../models/user/user-menu.model";
 import {BehaviorSubject} from "rxjs";
-import {UserService} from "./user.service";
 import {UserConfigService} from "./user-config.service";
 import {map, take} from "rxjs/operators";
 import {Observable} from "rxjs";
@@ -19,7 +18,6 @@ export class UserMenuService extends CrmService {
 
   constructor(
     private _http: HttpClient,
-    private userService: UserService,
     private _userConfig: UserConfigService,
   ) {
     super(_http);

@@ -48,6 +48,7 @@ export abstract class CrmService {
   }
 
   protected sendPost(request: GenericRequest) {
+    //TODO -> comprobar segun docu tanto para observable como promise
     this.generateBody(request);
     return this.http.post<CrmResponse>(environment.servers.urlByPass, this.bodyRequest, this.httpOptions)
   }

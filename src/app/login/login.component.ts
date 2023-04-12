@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loadForm();
-
     /*  NO SE EJECUTA NUNCA
     if (this.loginUser) {
       console.log("NOOOOOO entra!!")
@@ -61,12 +60,10 @@ export class LoginComponent implements OnInit {
         this.loginUser = loginUser.Salida
       }))
     }*/
-
     this.validateUser();
   }
 
   // Angular Forms
-
   private loadForm(): void {
     this.loginForm = new FormGroup({
       username: new FormControl<string>('', Validators.required),
@@ -76,8 +73,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Effect
+  // Subject validation
+  private validateUser(): void {
+    this.sub.add((this._login.user.subscribe(response => {
+      response.map(user => this.loginUser = user);
+      console.log("entonces", this.loginUser)
+      return this.loginUser;
+    })));
+    /*if(this.loginUser){
+      console.log("iniciando proceso loggin automatico")
+      this.processLogin()
+    }*/
+  }
 
+
+  // Effect
   public login() {
     if (this.loginForm.valid) {
       this._login.logIn(this.loginForm.value);
@@ -90,18 +100,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // Subject validation
-  private validateUser(): void {
-    this.sub.add((this._login.user.subscribe(response => {
-      response.map(user => this.loginUser = user);
-       console.log("entonces", this.loginUser)
-      return this.loginUser;
-    })));
-    if(this.loginUser){
-      console.log("iniciando proceso loggin automatico")
-      this.processLogin()
-    }
-  }
 
   private async processLogin() {
     console.log("this.loginUser", this.loginUser);

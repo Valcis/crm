@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {CrmBody, CrmResponse} from "../models/crm.model";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Subject} from "rxjs";
-import {GenericRequest} from "../models/petition/petition.model";
+import {GenericRequest, GenericResponse} from "../models/petition/petition.model";
 import {environment} from "../../../environments/environment.local";
 
 @Injectable({
@@ -10,8 +8,7 @@ import {environment} from "../../../environments/environment.local";
 })
 export abstract class CrmService {
   private httpOptions: any;
-  private observable: any;
-  private bodyRequest: GenericRequest | undefined;
+  private bodyRequest: GenericRequest | undefined ;
 
   protected constructor(
     private http: HttpClient,
@@ -37,19 +34,18 @@ export abstract class CrmService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    this.observable = {
-      /*next: (response: any) => this.onSuccess(response),
-      error: (error: any) => this.onError(error)*/
+
+    /*this.observable = {
+      /!*next: (response: any) => this.onSuccess(response),
+      error: (error: any) => this.onError(error)*!/
       next: (response: any) => console.log("ON-NEXT", response),
       error: (error: any) => console.log("ON-ERROR", error),
-
-
-    };
+    };*/
   }
 
   protected sendPost(request: GenericRequest) {
     //TODO -> comprobar segun docu tanto para observable como promise
     this.generateBody(request);
-    return this.http.post<CrmResponse>(environment.servers.urlByPass, this.bodyRequest, this.httpOptions)
+    return this.http.post<GenericResponse>(environment.servers.urlByPass, this.bodyRequest, this.httpOptions)
   }
 }

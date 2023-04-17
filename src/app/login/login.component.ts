@@ -51,15 +51,9 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    console.log("login cargado")
     this.loadForm();
-    /*  NO SE EJECUTA NUNCA
-    if (this.loginUser) {
-      console.log("NOOOOOO entra!!")
-      this._login.loginSubject.subscribe(a => a.map(loginUser => {
-        console.log("loginUser", loginUser)
-        this.loginUser = loginUser.Salida
-      }))
-    }*/
+    console.log("form cargado", this.loginForm.value)
     this.validateUser();
   }
 
@@ -74,23 +68,29 @@ export class LoginComponent implements OnInit {
   }
 
   // Subject validation
-  private validateUser(): void {
-    this.sub.add((this._login.user.subscribe(response => {
-      response.map(user => this.loginUser = user);
-      console.log("entonces", this.loginUser)
-      return this.loginUser;
-    })));
-    /*if(this.loginUser){
-      console.log("iniciando proceso loggin automatico")
-      this.processLogin()
-    }*/
+  private async validateUser() {
+    // que usuario validamos???
+
+
+    this.sub.add(
+      this._login.user.subscribe(response => {
+        console.log("On init, validating user", response);
+        this.loginUser = response
+        console.log(new Date().toLocaleTimeString(), "entonces", this.loginUser);
+        return this.loginUser;
+      })
+    );
+
   }
 
 
   // Effect
-  public login() {
+    public async login() {
+    console.log("boton pressed");
+
     if (this.loginForm.valid) {
-      this._login.logIn(this.loginForm.value);
+      await this._login.sendGetLogin(this.loginForm.value);
+      console.log("LoginService", this._login)
       console.log("pase la peti LOG IN ????");
       if (this.loginUser) {
         console.log("Si, usamos datos y continuamos proceso...")
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
 
 
   private async processLogin() {
-    console.log("this.loginUser", this.loginUser);
+    console.log("this.loginUser", new Date().toLocaleTimeString(), this.loginUser);
     this.cookie.setSessionId(this.loginUser.Id);
 
     if (this.loginUser.Status === 'OK') {
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
 
       await this.sub.add((this._userMenu.userMenuCRM.subscribe((res: any) => {
         res.map((menu: any) => this.userMenu = menu);
-        console.log("respuesta de menu", this.userMenu, "response de Menu", res);
+        console.log(new Date().toLocaleTimeString(), "respuesta de menu", this.userMenu, "response de Menu", res);
         return this.userMenu;
       })))
 

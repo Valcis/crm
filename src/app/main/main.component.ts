@@ -30,8 +30,8 @@ export class MainComponent implements OnInit {
 
    ngOnInit() {
      this._userConfig.configuredUser.subscribe(a => a.map(user => {
+       console.log("main component ", user.Salida);
        this.user = user.Salida.datos_user;
-
      }));
    }
 

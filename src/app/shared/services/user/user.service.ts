@@ -4,12 +4,15 @@ import {CrmService} from "../crm.service";
 import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
 import {UserMenuService} from "./user-menu.service";
+import {LoginEntrada} from "../../models/user/login.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends CrmService {
-  private userData: any;
+  public userData: any;
+  private localdata: any;
+
 
   constructor(
     private _http: HttpClient,
@@ -18,6 +21,39 @@ export class UserService extends CrmService {
     private _userMenu: UserMenuService
   ) {
     super(_http);
+
+    this.userData = {
+      details: {},
+      config: {},
+      menu: {}
+    }
+  }
+
+  public retrieveUser(credenciales: LoginEntrada) {
+    this._login.sendGetLogin(credenciales).subscribe(response => {
+      console.log("retrieveUser", response);
+      this.localdata = response;
+
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.details = this.localdata.Salida;
+        console.log("@@@@@@@@@--->", this.userData)
+      } else {
+        // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+      }
+    });
+  }
+
+
+  public getConfig(emp_code: string, id: string) {
+    this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, id).subscribe(response => {
+      console.log("getConfig", response);
+    })
+  }
+
+  private getMenu(id: string) {
+    this._userMenu.sendGetMenu(id).subscribe(response => {
+      console.log("getMenu", response);
+    })
   }
 
 

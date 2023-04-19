@@ -8,6 +8,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserConfigService} from "../shared/services/user/user-config.service";
 import {LoginService} from "../shared/services/user/login.service";
 import {UserMenuService} from "../shared/services/user/user-menu.service";
+import {UserService} from "../shared/services/user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   public username: string = '';
   public password: string = '';
   public bImage: string = '../../assets/images/login/barcelona.jpg';
-  private valcisData: any;
+
 
   constructor(
     private translate: TranslateService,
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     private cookie: CookiesService,
     private http: HttpClient,
     private _login: LoginService,
+    private _user: UserService,
     private _userConfig: UserConfigService,
     private _userMenu: UserMenuService
   ) {
@@ -40,8 +42,6 @@ export class LoginComponent implements OnInit {
       this.currentLang = cookie.getLanguage();
       this.translate.use(cookie.getLanguage())
     }
-
-    //this.sub = new Subscription();
   }
 
   async ngOnInit(): Promise<void> {
@@ -79,16 +79,23 @@ export class LoginComponent implements OnInit {
   public async login() {
     console.log("boton pressed 'login()'");
 
-    if (this.loginForm.valid) {
+    this._user.retrieveUser(this.loginForm.value);
+
+    if (this._user.userData.details.hasOwnProperty("empl_code")) {
+      this.route.navigate(['/main']);
+    } else console.error("credenciales erroneas")
+
+
+    /*if (this.loginForm.valid) {
       this._login.sendGetLogin(this.loginForm.value).subscribe(response => {
         this.valcisData = response;
-        console.log(response, this.valcisData);
+        //console.log(response, this.valcisData);
 
         if (this.valcisData.Status && this.valcisData.Status === "OK") {
           const emp_code = this.valcisData.Salida.empl_code;
           const id = this.valcisData.Id;
 
-          console.log("estraemos el empl_code y el Id y lo pasamos al userConfig");
+          console.log("extraemos el empl_code y el Id y lo pasamos al userConfig");
           this._userConfig.sendGetConfig({id: emp_code}, id).subscribe(response => {
             console.log("---------->", response);
             this.valcisData = response;
@@ -109,15 +116,15 @@ export class LoginComponent implements OnInit {
       })
 
 
-      /*console.log("pase la peti LOG IN ????");
+      /!*console.log("pase la peti LOG IN ????");
       if (this.loginUser) {
         console.log("Si, usamos datos y continuamos proceso...")
         this.processLogin();
       } else
-        console.log("No")*/
+        console.log("No")*!/
     } else {
       console.log("this.loginForm.valid es false, no entra a hacer petis...")
-    }
+    }*/
   }
 
   /*private async processLogin() {

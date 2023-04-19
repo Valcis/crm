@@ -38,7 +38,8 @@ export class LoginService extends CrmService {
 
   public sendGetLogin(credenciales: LoginEntrada) {
     return this.sendPost({...this.loginBodyRq, Entrada: credenciales})
-      .subscribe(resp => this.loginSubject.next(<GenericResponse><unknown>resp))
+      //.subscribe()
+      //.subscribe(resp => this.loginSubject.next(<GenericResponse><unknown>resp))
   }
 
   public get user() {

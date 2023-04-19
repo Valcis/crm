@@ -32,12 +32,13 @@ export class UserConfigService extends CrmService {
     };
   }
 
-  async loadUserConfig(user: UserConfigEntrada, id: string) {
+  /*async loadUserConfig(user: UserConfigEntrada, id: string) {
     this.sendGet(user, id).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
-  }
+  }*/
 
-  public sendGet(user: UserConfigEntrada, id: string): Observable<UserRs> {
-    return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id}).pipe(map(r => (<UserRs><unknown>r)));
+  public sendGetConfig(user: UserConfigEntrada, id: string) {
+    return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id})
+      //.pipe(map(r => (<UserRs><unknown>r)));
   }
 
   public get configUser() {

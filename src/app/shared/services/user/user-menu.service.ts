@@ -1,13 +1,9 @@
 import {Injectable} from '@angular/core';
-import {UserMenuEntrada, UserMenusRs} from "../../models/user/user-menu.model";
+import {UserMenusRs} from "../../models/user/user-menu.model";
 import {BehaviorSubject} from "rxjs";
-import {UserConfigService} from "./user-config.service";
-import {map, take} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
+import {GenericRequest} from "../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
-
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +14,6 @@ export class UserMenuService extends CrmService {
 
   constructor(
     private _http: HttpClient,
-    private _userConfig: UserConfigService,
   ) {
     super(_http);
     this.userMenuBodyRq = {
@@ -43,8 +38,8 @@ export class UserMenuService extends CrmService {
       take(1)).subscribe(r => this.dataObservable.next([r]));
   }*/
 
-  public sendGetMenu(id:string) {
-    return this.sendPost({...this.userMenuBodyRq, Id:id})
+  public sendGetMenu(id: string) {
+    return this.sendPost({...this.userMenuBodyRq, Id: id})
     //.pipe(map(r => (<UserMenusRs><unknown>r)));
   }
 

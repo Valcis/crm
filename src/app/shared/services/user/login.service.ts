@@ -1,8 +1,6 @@
-import {Inject, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {LoginRs, LoginEntrada} from "../../models/user/login.model";
-import {map, take} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
+import {GenericRequest} from "../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs";
@@ -11,9 +9,7 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class LoginService extends CrmService {
-
   private readonly loginBodyRq: GenericRequest;
-  //private readonly loginResponse: Subject<GenericResponse>;
   public loginSubject: Subject<LoginRs> = new Subject<LoginRs>();
 
   constructor(
@@ -38,8 +34,8 @@ export class LoginService extends CrmService {
 
   public sendGetLogin(credenciales: LoginEntrada) {
     return this.sendPost({...this.loginBodyRq, Entrada: credenciales})
-      //.subscribe()
-      //.subscribe(resp => this.loginSubject.next(<GenericResponse><unknown>resp))
+    //.subscribe()
+    //.subscribe(resp => this.loginSubject.next(<GenericResponse><unknown>resp))
   }
 
   public get user() {

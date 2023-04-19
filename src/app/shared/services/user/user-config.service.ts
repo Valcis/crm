@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserConfigEntrada, UserOracle, UserRs} from "../../models/user/user-config.model";
-import {Observable} from "rxjs";
-import {LoginService} from "./login.service";
-import {map, take} from "rxjs/operators";
+import {UserConfigEntrada, UserRs} from "../../models/user/user-config.model";
 import {BehaviorSubject} from "rxjs";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
@@ -17,7 +14,6 @@ export class UserConfigService extends CrmService {
 
   constructor(
     private _http: HttpClient,
-    private _login: LoginService
   ) {
     super(_http);
     this.userConfigBodyRq = {
@@ -38,7 +34,7 @@ export class UserConfigService extends CrmService {
 
   public sendGetConfig(user: UserConfigEntrada, id: string) {
     return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id})
-      //.pipe(map(r => (<UserRs><unknown>r)));
+    //.pipe(map(r => (<UserRs><unknown>r)));
   }
 
   public get configUser() {

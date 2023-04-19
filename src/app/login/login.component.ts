@@ -21,14 +21,7 @@ export class LoginComponent implements OnInit {
   public submitted: boolean = false;
   public username: string = '';
   public password: string = '';
-
-  //public sub: Subscription;
-  //private sendLogin: boolean = false;
-  //public loginUser: any;
-  public user={nombre:"asd", apellido1:"vasd"};
-  //public userMenu: any;
   public bImage: string = '../../assets/images/login/barcelona.jpg';
-
   private valcisData: any;
 
   constructor(

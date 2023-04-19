@@ -29,7 +29,8 @@ export class MainComponent implements OnInit {
   }
 
    ngOnInit() {
-    //TODO : extraer datos de loginService????? console.log("----MAIN-------->", this._login.user)
+    //TODO : extraer datos de loginService?????
+     console.log("----MAIN-------->", this._login)
      this._userConfig.configuredUser.subscribe(a => a.map(user => {
        console.log("main component ", user.Salida);
        this.user = user.Salida.datos_user;

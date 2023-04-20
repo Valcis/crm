@@ -30,19 +30,10 @@ export class UserMenuService extends CrmService {
     //this._userConfig.configuredUser.subscribe(item => item.map(resp => this.userMenuDataResponse = resp.Salida))
   }
 
-  /*async loadMenu(Id: string) {
-    let request: GenericRequest = {...this.userMenuBodyRq, Id};
-    //this.sendGet(request).pipe(take(1)).subscribe((r => this.dataObservable.next([r])));
-    return this.sendPost(request).pipe(
-      map(r => (<UserMenusRs><unknown>r)),
-      take(1)).subscribe(r => this.dataObservable.next([r]));
-  }*/
-
   public sendGetMenu(id: string) {
     return this.sendPost({...this.userMenuBodyRq, Id: id})
     //.pipe(map(r => (<UserMenusRs><unknown>r)));
   }
-
 
   public get userMenuCRM() {
     return this.dataObservable.asObservable();

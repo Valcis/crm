@@ -1,9 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserService} from "./user.service";
-import {UserConfigEntrada, UserOracle, UserRs} from "../../models/user/user-config.model";
-import {Observable} from "rxjs";
-import {LoginService} from "./login.service";
-import {map, take} from "rxjs/operators";
+import {UserConfigEntrada, UserRs} from "../../models/user/user-config.model";
 import {BehaviorSubject} from "rxjs";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
@@ -18,8 +14,6 @@ export class UserConfigService extends CrmService {
 
   constructor(
     private _http: HttpClient,
-    private userService: UserService,
-    private _login: LoginService
   ) {
     super(_http);
     this.userConfigBodyRq = {
@@ -34,12 +28,13 @@ export class UserConfigService extends CrmService {
     };
   }
 
-  async loadUserConfig(user: UserConfigEntrada, id: string) {
+  /*async loadUserConfig(user: UserConfigEntrada, id: string) {
     this.sendGet(user, id).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
-  }
+  }*/
 
-  public sendGet(user: UserConfigEntrada, id: string): Observable<UserRs> {
-    return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id}).pipe(map(r => (<UserRs><unknown>r)));
+  public sendGetConfig(user: UserConfigEntrada, id: string) {
+    return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id})
+    //.pipe(map(r => (<UserRs><unknown>r)));
   }
 
   public get configUser() {

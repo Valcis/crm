@@ -22,5 +22,6 @@ export interface GenericResponse {
   Salida: any, //TODO : ¿se puede definir tipo o tipos especificos?
   Servicio: string
   Status?: StatusType,
+  StatusMsg?: string; //en caso de Status 'KO'
   URL: string
 }

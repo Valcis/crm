@@ -7,10 +7,10 @@
   <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">
     <top-nav (expander)="onToggle()"></top-nav>
 
-    <content-frame class="" ></content-frame>
+    <content-frame class=""></content-frame>
   </div>
 
 </div>
 
-<p *ngIf="!user">No hi ha</p>
-<p *ngIf="user">{{user.nombre}} {{user.apellido1}}</p>
+<p *ngIf="!userDetails">No hi ha {{this.userDetails}}</p>
+<p *ngIf="userDetails"> {{this.userDetails.nombre}} {{this.userDetails.apellido1}}</p>

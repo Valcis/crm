@@ -1,6 +1,6 @@
 
 export interface UserConfigEntrada {
-  id: number
+  id: string
 }
 export interface UserRs {
   Salida: UserOracle,

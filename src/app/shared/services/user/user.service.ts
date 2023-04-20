@@ -1,46 +1,74 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
 import {CrmService} from "../crm.service";
+import {LoginService} from "./login.service";
+import {UserConfigService} from "./user-config.service";
+import {UserMenuService} from "./user-menu.service";
+import {LoginEntrada} from "../../models/user/login.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends CrmService {
+  public userData: any;
+  private localdata: any;
+  public userId: string | undefined;
+
 
   constructor(
-    private router: Router,
     private _http: HttpClient,
+    private _login: LoginService,
+    private _userConfig: UserConfigService,
+    private _userMenu: UserMenuService
   ) {
     super(_http);
+
+    this.userData = {
+      details: {},
+      config: {},
+      menu: {}
+    }
   }
 
-  // TODO -> migra a send2Back...
-  /*send(request: any): Observable<any> {  }*/
+  public retrieveUser(credenciales: LoginEntrada) {
+    this._login.sendGetLogin(credenciales).subscribe(response => {
+      console.log("retrieveUser", response);
+      this.localdata = response;
 
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.details = this.localdata.Salida;
+        this.userId = this.localdata.Salida.Id  // TODO comprobar que se propaga....
 
-  /** FUNCION QUE ESPERARA LOS DATOS ESPECIFICOS DE LA PETICION, LOS AÑADIRA A LA GENERICA
-   ** PARA FINALMENTE LANZARA AL BACK
-   *  @requestData -> los datos especificos de la peticion
-   */
-  /*send2Back(requestData: any): Observable<any> {
-    //this.generateBody(requestData);
-    console.log("igualando->", this.bodyRequest)
-    return this.sendPost();
-  }*/
-
-
-  /*load(request: any) {
-    this.generateBody(request);
-    this.postSubject.next(environment.servers.urlByPass);
-  }*/
-
- /* onError(error: any) {
-    this.crmSubject.error(error);
+      } else {
+        // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+      }
+    });
   }
 
-  onSuccess(response: any) {
-    this.crmSubject.next(response);
-  }*/
+
+  public getConfig(emp_code: string, id: string) {
+    this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, id).subscribe(response => {
+      console.log("getConfig", response);
+      this.localdata = response;
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.config = this.localdata.Salida;
+      } else {
+        // TODO : lanzar toast con mensaje de "XXXX???"
+      }
+    })
+  }
+
+  public getMenu(id: string) {
+    this._userMenu.sendGetMenu(id).subscribe(response => {
+      console.log("getMenu", response);
+      this.localdata = response;
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.menu = this.localdata.Salida;
+      } else {
+        // TODO : lanzar toast con mensaje de "XXXX???"
+      }
+    })
+  }
+
+
 }

@@ -32,10 +32,6 @@ export class UserMenuService extends CrmService {
 
   public sendGetMenu(id: string) {
     return this.sendPost({...this.userMenuBodyRq, Id: id})
-    //.pipe(map(r => (<UserMenusRs><unknown>r)));
   }
 
-  public get userMenuCRM() {
-    return this.dataObservable.asObservable();
-  }
 }

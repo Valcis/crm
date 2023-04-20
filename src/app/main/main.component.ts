@@ -1,9 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
-import {LoginService} from "../shared/services/user/login.service";
 import {Router} from "@angular/router";
-import {UserConfigService} from "../shared/services/user/user-config.service";
 import {UserService} from "../shared/services/user/user.service";
 
 @Component({
@@ -15,7 +13,7 @@ export class MainComponent implements OnInit {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   public isExpanded: boolean = true;
   currentLang: string = '';
-  public userDetails: any;
+  public userData: any;
 
   constructor(
     private translate: TranslateService,
@@ -29,11 +27,17 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("----MAIN-------->", this.userDetails)
-    this.userDetails = this._user.userData.details
-    //console.log("----trae--->", this._user.userData.details)
+    this._user.getConfig();
+    this._user.getMenu();
+    this._user.getActivitiesAlert();
+    this._user.getNotifications();
 
-    this._user.getConfig( this.userDetails.details.empl_code, this.userDetails.details.id)
+    /* TODO : implementar ->
+    this._user.getUsuarioCrmByEmplCode(); ??????????????????
+    this._user.getBajaTemporalUsuario();  ?????????????????? */
+
+    console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
+    this.userData = this._user.userData
 
 
     /*this._userConfig.configuredUser.subscribe(a => a.map(user => {

@@ -8,7 +8,7 @@ import {environment} from "../../../environments/environment.local";
 })
 export abstract class CrmService {
   private httpOptions: any;
-  private bodyRequest: GenericRequest | undefined ;
+  private bodyRequest: GenericRequest | undefined;
 
   protected constructor(
     private http: HttpClient,
@@ -44,8 +44,14 @@ export abstract class CrmService {
   }
 
   protected sendPost(request: GenericRequest) {
+    let url = environment.servers.urlCRMServlet;
+
+    if (request.ByPass)
+      url = environment.servers.urlByPass;
+
     //TODO -> comprobar segun docu tanto para observable como promise
     this.generateBody(request);
-    return this.http.post<GenericResponse>(environment.servers.urlByPass, this.bodyRequest, this.httpOptions)
+
+    return this.http.post<GenericResponse>(url, this.bodyRequest, this.httpOptions)
   }
 }

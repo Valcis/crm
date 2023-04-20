@@ -12,5 +12,5 @@
 
 </div>
 
-<p *ngIf="!userDetails">No hi ha {{this.userDetails}}</p>
-<p *ngIf="userDetails"> {{this.userDetails.nombre}} {{this.userDetails.apellido1}}</p>
+<p *ngIf="!this.userData">No hi ha {{this.userData}}</p>
+<p *ngIf="this.userData"> {{this.userData.details.nombre}} {{this.userData.details.apellido1}}</p>

@@ -5,8 +5,8 @@ import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
 import {UserMenuService} from "./user-menu.service";
 import {LoginEntrada} from "../../models/user/login.model";
-import {ActivitiesAlertService} from "./actividades-alertas.service";
-import {NotificationsService} from "./notificaciones.service";
+import {ActivitiesAlertService} from "./activities-alerts.service";
+import {NotificationsService} from "./notifications.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class UserService extends CrmService {
   public userData: any = {};
   private localdata: any;
   public userId: string = "";
-
 
   constructor(
     private _http: HttpClient,

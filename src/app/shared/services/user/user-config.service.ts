@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserConfigEntrada, UserRs} from "../../models/user/user-config.model";
-import {BehaviorSubject} from "rxjs";
+import {UserConfigEntrada} from "../../models/user/user-config.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {GenericRequest} from "../../models/petition/petition.model";
@@ -10,7 +9,6 @@ import {GenericRequest} from "../../models/petition/petition.model";
 })
 export class UserConfigService extends CrmService {
   private readonly userConfigBodyRq: GenericRequest;
-  public configuredUser: BehaviorSubject<UserRs[]> = new BehaviorSubject<UserRs[]>([]);
 
   constructor(
     private _http: HttpClient,
@@ -28,16 +26,7 @@ export class UserConfigService extends CrmService {
     };
   }
 
-  /*async loadUserConfig(user: UserConfigEntrada, id: string) {
-    this.sendGet(user, id).pipe(take(1)).subscribe((r => this.configuredUser.next([r])));
-  }*/
-
   public sendGetConfig(user: UserConfigEntrada, id: string) {
     return this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id})
-    //.pipe(map(r => (<UserRs><unknown>r)));
-  }
-
-  public get configUser() {
-    return this.configuredUser.asObservable();
   }
 }

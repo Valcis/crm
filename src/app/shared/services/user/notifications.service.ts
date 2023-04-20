@@ -28,5 +28,4 @@ export class NotificationsService extends CrmService {
     return this.sendPost({...this.bodyRq, Entrada: entrada, Id: id})
   }
 
-
 }

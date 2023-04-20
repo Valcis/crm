@@ -5,9 +5,6 @@ import {Router} from "@angular/router";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserConfigService} from "../shared/services/user/user-config.service";
-import {LoginService} from "../shared/services/user/login.service";
-import {UserMenuService} from "../shared/services/user/user-menu.service";
 import {UserService} from "../shared/services/user/user.service";
 
 @Component({
@@ -30,10 +27,7 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private cookie: CookiesService,
     private http: HttpClient,
-    private _login: LoginService,
     private _user: UserService,
-    private _userConfig: UserConfigService,
-    private _userMenu: UserMenuService
   ) {
     if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
       this.translate.use('es');
@@ -48,7 +42,6 @@ export class LoginComponent implements OnInit {
     console.log("login component, onInit...")
     this.loadForm();
     console.log("form cargado", this.loginForm.value)
-    //console.log("entering to validateUser()...")
     //this.validateUser();
   }
 
@@ -81,7 +74,7 @@ export class LoginComponent implements OnInit {
 
     this._user.retrieveUser(this.loginForm.value);
 
-    if (this._user.userData.details.hasOwnProperty("empl_code")) {
+    if (this._user.userId) {
       this.route.navigate(['/main']);
     } else console.error("credenciales erroneas")
 

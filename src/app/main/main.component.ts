@@ -4,6 +4,7 @@ import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {LoginService} from "../shared/services/user/login.service";
 import {Router} from "@angular/router";
 import {UserConfigService} from "../shared/services/user/user-config.service";
+import {UserService} from "../shared/services/user/user.service";
 
 @Component({
   selector: 'app-main',
@@ -14,13 +15,12 @@ export class MainComponent implements OnInit {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   public isExpanded: boolean = true;
   currentLang: string = '';
-  public user: any;
+  public userDetails: any;
 
   constructor(
     private translate: TranslateService,
     private cookie: CookiesService,
-    private _login: LoginService,
-    private _userConfig: UserConfigService,
+    private _user: UserService,
     private router: Router
   ) {
     this.currentLang = this.cookie.getLanguage();
@@ -28,16 +28,21 @@ export class MainComponent implements OnInit {
     this.translate.use(this.currentLang);
   }
 
-   ngOnInit() {
-    //TODO : extraer datos de loginService?????
-     console.log("----MAIN-------->", this._login)
-     this._userConfig.configuredUser.subscribe(a => a.map(user => {
-       console.log("main component ", user.Salida);
-       this.user = user.Salida.datos_user;
-     }));
-   }
+  ngOnInit() {
+    //console.log("----MAIN-------->", this.userDetails)
+    this.userDetails = this._user.userData.details
+    //console.log("----trae--->", this._user.userData.details)
 
-   onToggle = () => this.isExpanded = !this.isExpanded;
+    this._user.getConfig( this.userDetails.details.empl_code, this.userDetails.details.id)
+
+
+    /*this._userConfig.configuredUser.subscribe(a => a.map(user => {
+      console.log("main component ", user.Salida);
+      this.user = user.Salida.datos_user;
+    }));*/
+  }
+
+  onToggle = () => this.isExpanded = !this.isExpanded;
 
   back() {
     this.router.navigate(['/login'])

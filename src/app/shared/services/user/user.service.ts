@@ -12,6 +12,7 @@ import {LoginEntrada} from "../../models/user/login.model";
 export class UserService extends CrmService {
   public userData: any;
   private localdata: any;
+  public userId: string | undefined;
 
 
   constructor(
@@ -36,7 +37,8 @@ export class UserService extends CrmService {
 
       if (this.localdata.Status && this.localdata.Status === "OK") {
         this.userData.details = this.localdata.Salida;
-        console.log("@@@@@@@@@--->", this.userData)
+        this.userId = this.localdata.Salida.Id  // TODO comprobar que se propaga....
+
       } else {
         // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
       }
@@ -47,12 +49,24 @@ export class UserService extends CrmService {
   public getConfig(emp_code: string, id: string) {
     this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, id).subscribe(response => {
       console.log("getConfig", response);
+      this.localdata = response;
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.config = this.localdata.Salida;
+      } else {
+        // TODO : lanzar toast con mensaje de "XXXX???"
+      }
     })
   }
 
-  private getMenu(id: string) {
+  public getMenu(id: string) {
     this._userMenu.sendGetMenu(id).subscribe(response => {
       console.log("getMenu", response);
+      this.localdata = response;
+      if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.userData.menu = this.localdata.Salida;
+      } else {
+        // TODO : lanzar toast con mensaje de "XXXX???"
+      }
     })
   }
 

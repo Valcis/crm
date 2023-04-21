@@ -10,7 +10,8 @@ import {
 })
 export class SideNavComponent {
   @Input() public isExpandedFlag: boolean = true;
-  @Input() public userMenuuu: any;
+  @Input() userData: any;
+  @Input() item = '';
   crmIcon = faShareNodes;
   public isCollapsed = false;
 
@@ -1151,7 +1152,8 @@ export class SideNavComponent {
 
   constructor() {
 
-    console.log('Constructor de SIDENAV, hay menu??', this.userMenuuu)
+    console.log('Constructor de SIDENAV, hay menu??', this.userData)
+    console.log("-------------",this.item);
   }
 
   getSectionInfo = (sectionData: any) => "hola";

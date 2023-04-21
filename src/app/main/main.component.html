@@ -1,7 +1,8 @@
 <div *ngIf="this.userData" class="row m-0 p-0">
 
   <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
-    <side-nav [isExpandedFlag]="isExpanded" [userMenuuu]="this.userData"></side-nav>
+    <!--<side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>-->
+    <side-nav [isExpandedFlag]="isExpanded" [item]="currentItem"></side-nav>
   </div>
 
   <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">

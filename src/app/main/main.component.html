@@ -1,7 +1,7 @@
-<div class="row m-0 p-0">
+<div *ngIf="this.userData" class="row m-0 p-0">
 
   <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
-    <side-nav [isExpandedFlag]="isExpanded"></side-nav>
+    <side-nav [isExpandedFlag]="isExpanded" [userMenuuu]="this.userData"></side-nav>
   </div>
 
   <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">
@@ -12,5 +12,12 @@
 
 </div>
 
-<p *ngIf="!this.userData">No hi ha {{this.userData}}</p>
+<p class="text-center" *ngIf="!this.userData"> No hay datos de usuario <br>
+  {{this.userData}}<br>
+  <input type="button" (click)="logOut()" value="a login"/>
+  <br>
+  <span>a corregir!!!!</span>
+
+</p>
+
 <p *ngIf="this.userData"> {{this.userData.details.nombre}} {{this.userData.details.apellido1}}</p>

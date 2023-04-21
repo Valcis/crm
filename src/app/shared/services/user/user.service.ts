@@ -5,7 +5,7 @@ import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
 import {UserMenuService} from "./user-menu.service";
 import {LoginEntrada} from "../../models/user/login.model";
-import {ActivitiesAlertService} from "./activities-alerts.service";
+import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
 
 @Injectable({
@@ -21,7 +21,7 @@ export class UserService extends CrmService {
     private _login: LoginService,
     private _userConfig: UserConfigService,
     private _userMenu: UserMenuService,
-    private _activitiesAlert: ActivitiesAlertService,
+    private _activitiesAlert: ActivitiesAlertsService,
     private _notifications: NotificationsService
   ) {
     super(_http);
@@ -44,29 +44,31 @@ export class UserService extends CrmService {
   }
 
   public getConfig() {
-    this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.userId).subscribe(response => {
-      //console.log("getConfig", response);
-      this.localdata = response;
-      if (this.localdata.Status && this.localdata.Status === "OK") {
-        this.userData.config = this.localdata.Salida;
-        //console.log("NUEVOS DATOS USUARIO", this.userData)
-      } else {
-        // TODO : lanzar toast con mensaje like "error al cargar la configuracion del usuario"
-      }
-    })
+    if (this.userId)
+      this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.userId).subscribe(response => {
+        //console.log("getConfig", response);
+        this.localdata = response;
+        if (this.localdata.Status && this.localdata.Status === "OK") {
+          this.userData.config = this.localdata.Salida;
+          //console.log("NUEVOS DATOS USUARIO", this.userData)
+        } else {
+          // TODO : lanzar toast con mensaje like "error al cargar la configuracion del usuario"
+        }
+      })
   }
 
   public getMenu() {
-    this._userMenu.sendGetMenu(this.userId).subscribe(response => {
-      //console.log("getMenu", response);
-      this.localdata = response;
-      if (this.localdata.Salida) {
-        this.userData.menu = this.localdata.Salida;
-        //console.log("NUEVOS DATOS USUARIO", this.userData)
-      } else {
-        // TODO : lanzar toast con mensaje de "XXXX???"
-      }
-    })
+    if (this.userId)
+      this._userMenu.sendGetMenu(this.userId).subscribe(response => {
+        //console.log("getMenu", response);
+        this.localdata = response;
+        if (this.localdata.Salida) {
+          this.userData.menu = this.localdata.Salida;
+          //console.log("NUEVOS DATOS USUARIO", this.userData)
+        } else {
+          // TODO : lanzar toast con mensaje de "XXXX???"
+        }
+      })
   }
 
   public getActivitiesAlert() {
@@ -95,16 +97,17 @@ export class UserService extends CrmService {
       "tipo_orden": "ASC",
       "tipoActividad": "MIAS"
     }
-    this._activitiesAlert.sendGetActAlert(entrada, this.userId).subscribe(response => {
-      //console.log("getActividadesAlertas", response);
-      this.localdata = response;
-      if (this.localdata.Salida) {
-        this.userData.activities = this.localdata.Salida;
-        //console.log("NUEVOS DATOS USUARIO", this.userData)
-      } else {
-        // TODO : lanzar toast con mensaje de "XXXX???"
-      }
-    })
+    if (this.userId)
+      this._activitiesAlert.sendGetActAlert(entrada, this.userId).subscribe(response => {
+        //console.log("getActividadesAlertas", response);
+        this.localdata = response;
+        if (this.localdata.Salida) {
+          this.userData.activities = this.localdata.Salida;
+          //console.log("NUEVOS DATOS USUARIO", this.userData)
+        } else {
+          // TODO : lanzar toast con mensaje de "XXXX???"
+        }
+      })
   }
 
   public getNotifications() {
@@ -120,16 +123,17 @@ export class UserService extends CrmService {
       "orden": "fecha_creacion_ts",
       "tipo_orden": "DESC"
     };
-    this._notifications.sendGetNotifications(entrada, this.userId).subscribe(response => {
-      //console.log("getNotifications", response);
-      this.localdata = response;
-      if (this.localdata.Salida) {
-        this.userData.notifications = this.localdata.Salida;
-        //console.log("NUEVOS DATOS USUARIO", this.userData)
-      } else {
-        // TODO : lanzar toast con mensaje de "XXXX???"
-      }
-    })
+    if (this.userId)
+      this._notifications.sendGetNotifications(entrada, this.userId).subscribe(response => {
+        //console.log("getNotifications", response);
+        this.localdata = response;
+        if (this.localdata.Salida) {
+          this.userData.notifications = this.localdata.Salida;
+          //console.log("NUEVOS DATOS USUARIO", this.userData)
+        } else {
+          // TODO : lanzar toast con mensaje de "XXXX???"
+        }
+      })
   }
 
 

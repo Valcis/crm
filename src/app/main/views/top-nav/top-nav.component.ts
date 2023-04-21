@@ -1,17 +1,11 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {
-  faBars,
-  faUser,
-  faUsers,
-  faBullhorn,
-  faClock,
-  faRightFromBracket,
-  faImage
+  faBars, faUser, faUsers, faBullhorn, faClock, faRightFromBracket, faImage
 } from "@fortawesome/free-solid-svg-icons";
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 import {TranslateService} from "@ngx-translate/core";
-import {UserConfigService} from "../../../shared/services/user/user-config.service";
 import {Router} from "@angular/router";
+import {UserService} from "../../../shared/services/user/user.service";
 
 
 @Component({
@@ -40,14 +34,12 @@ export class TopNavComponent {
   constructor(
     private translate: TranslateService,
     private cookie: CookiesService,
-    private _userConfig: UserConfigService,
+    private _user: UserService,
     private router: Router
   ) {
     this.lang = cookie.getLanguage();
-    console.log("constructor TOPNAV", this.lang)
-    this._userConfig.configuredUser.subscribe(a => a.map(user => {
-      this.user = user.Salida.datos_user;
-    }));
+    //console.log("constructor TOPNAV", this.lang, this._user.userData);
+    this.user = this._user.userData;
   }
 
   onExpander = () => this.expander.emit();

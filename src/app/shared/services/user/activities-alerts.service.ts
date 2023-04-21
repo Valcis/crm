@@ -6,7 +6,7 @@ import {GenericRequest} from "../../models/petition/petition.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ActivitiesAlertService extends CrmService {
+export class ActivitiesAlertsService extends CrmService {
   private readonly bodyRq: GenericRequest;
 
   constructor(

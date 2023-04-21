@@ -11,9 +11,13 @@ import {UserService} from "../shared/services/user/user.service";
 })
 export class MainComponent implements OnInit {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() menu: EventEmitter<any> = new EventEmitter<any>();
+
   public isExpanded: boolean = true;
   currentLang: string = '';
-  public userData: any;
+  public userData: any = "puto";
+
+  //public userData: Subject<any> = new Subject<any>();
 
   constructor(
     private translate: TranslateService,
@@ -37,16 +41,17 @@ export class MainComponent implements OnInit {
     this._user.getBajaTemporalUsuario();  ?????????????????? */
 
     console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
-    this.userData = this._user.userData
+    if (this._user.userData.hasOwnProperty("details")) this.userData = this._user.userData;
 
-
-    /*this._userConfig.configuredUser.subscribe(a => a.map(user => {
-      console.log("main component ", user.Salida);
-      this.user = user.Salida.datos_user;
-    }));*/
   }
 
   onToggle = () => this.isExpanded = !this.isExpanded;
+
+
+  //lo dejo aqui solo para poder tirar al login cuando falla persistencia de datos
+  logOut() {
+    this.router.navigate(['/login'])
+  }
 
   back() {
     this.router.navigate(['/login'])

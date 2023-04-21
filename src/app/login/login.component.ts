@@ -39,10 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log("login component, onInit...")
     this.loadForm();
-    console.log("form cargado", this.loginForm.value)
-    //this.validateUser();
   }
 
   // Angular Forms
@@ -70,8 +67,7 @@ export class LoginComponent implements OnInit {
 
   // Effect
   public async login() {
-    console.log("boton pressed 'login()'");
-
+    //console.log("boton pressed 'login()'");
     this._user.retrieveUser(this.loginForm.value);
 
     if (this._user.userId) {

@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
 
   public isExpanded: boolean = true;
   currentLang: string = '';
-  userData: any = "a propagar";
+  userData: any = undefined;
   currentItem = 'Television';
 
 
@@ -42,8 +42,8 @@ export class MainComponent implements OnInit {
     this._user.getUsuarioCrmByEmplCode(); ??????????????????
     this._user.getBajaTemporalUsuario();  ?????????????????? */
 
-   /* console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
-    if (this._user.userData.hasOwnProperty("details")) this.userData = this._user.userData;*/
+    console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
+    if (this._user.userData.hasOwnProperty("details")) this.userData = this._user.userData;
 
   }
 

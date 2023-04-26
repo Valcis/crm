@@ -52,13 +52,7 @@ export class TopNavComponent {
 
   logOut() {
     if (this.user) {
-      // console.log('logOut user', this.user);
-      // this._userConfig.configuredUser.unsubscribe();
-      // this.user.unsubscribe();
-      // console.log('logOut unsub', this.user);
-      console.log(this.cookie.getSessionId());
       this.cookie.deleteSessionId();
-      console.log(this.cookie.getSessionId());
     }
     this.router.navigate(['/login'])
   }

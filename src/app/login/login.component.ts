@@ -52,68 +52,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Subject validation
-  /*private async validateUser() {
-    // que usuario validamos???
-    this.sub.add(
-      this._login.user.subscribe(response => {
-        console.log("On validateUser", response);
-        this.loginUser = response;
-        console.log(new Date().toLocaleTimeString(), "entonces", this.loginUser);
-        return this.loginUser;
-      })
-    );
-  }*/
-
   // Effect
   public async login() {
     //console.log("boton pressed 'login()'");
-    this._user.retrieveUser(this.loginForm.value);
-
-    if (this._user.userId) {
-      this.route.navigate(['/main']);
-    } else console.error("credenciales erroneas")
-
-
-    /*if (this.loginForm.valid) {
-      this._login.sendGetLogin(this.loginForm.value).subscribe(response => {
-        this.valcisData = response;
-        //console.log(response, this.valcisData);
-
-        if (this.valcisData.Status && this.valcisData.Status === "OK") {
-          const emp_code = this.valcisData.Salida.empl_code;
-          const id = this.valcisData.Id;
-
-          console.log("extraemos el empl_code y el Id y lo pasamos al userConfig");
-          this._userConfig.sendGetConfig({id: emp_code}, id).subscribe(response => {
-            console.log("---------->", response);
-            this.valcisData = response;
-            if (this.valcisData.Status && this.valcisData.Status === "OK") {
-              console.log("dentro de userConfig, ahora valcisData", this.valcisData)
-            }
-          });
-
-          console.log("lanzamos peti para extraer menu");
-          this._userMenu.sendGetMenu(id).subscribe(response => {
-            console.log("tenemos MENU", response)
-          })
-
-          this.route.navigate(['/main']);
-        } else {
-          console.log('Credenciales incorrectos');
+    this._user.retrieveUser(this.loginForm.value)
+      .then(hasId => {
+          if (hasId) this.route.navigate(['/main'])
+          // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+          else console.error("usuario no valido")
         }
-      })
-
-
-      /!*console.log("pase la peti LOG IN ????");
-      if (this.loginUser) {
-        console.log("Si, usamos datos y continuamos proceso...")
-        this.processLogin();
-      } else
-        console.log("No")*!/
-    } else {
-      console.log("this.loginForm.valid es false, no entra a hacer petis...")
-    }*/
+      ).catch(error => {
+      // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+      console.error("login error", error)
+    });
   }
 
   /*private async processLogin() {

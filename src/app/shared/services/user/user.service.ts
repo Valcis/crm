@@ -7,6 +7,7 @@ import {UserMenuService} from "./user-menu.service";
 import {LoginEntrada} from "../../models/user/login.model";
 import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
+import {CookiesService} from "../cookies/cookies.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ import {NotificationsService} from "./notifications.service";
 export class UserService extends CrmService {
   public userData: any = {};
   private localdata: any;
-  public userId: string = "";
 
   constructor(
+    private cookie: CookiesService,
     private _http: HttpClient,
     private _login: LoginService,
     private _userConfig: UserConfigService,
@@ -25,27 +26,26 @@ export class UserService extends CrmService {
     private _notifications: NotificationsService
   ) {
     super(_http);
-
   }
 
-  public retrieveUser(credenciales: LoginEntrada) {
+  public retrieveUser = (credenciales: LoginEntrada) => new Promise((resolve, reject) => {
+    //console.log("credenciales ", credenciales);
     this._login.sendGetLogin(credenciales).subscribe(response => {
-      //console.log("retrieveUser", response);
       this.localdata = response;
-
+      console.log("retrieveUser", this.localdata.Id);
       if (this.localdata.Status && this.localdata.Status === "OK") {
+        this.cookie.setSessionId(this.localdata.Id);
         this.userData.details = this.localdata.Salida;
-        this.userId = this.localdata.Id;
         //console.log("NUEVOS DATOS USUARIO", this.userData)
-      } else {
-        // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
-      }
+        resolve(this.cookie.getSessionId().length > 0)
+      } else reject("no user id");
     });
-  }
+
+  });
 
   public getConfig() {
-    if (this.userId)
-      this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.userId).subscribe(response => {
+    if (this.cookie.getSessionId().length)
+      this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.cookie.getSessionId()).subscribe(response => {
         //console.log("getConfig", response);
         this.localdata = response;
         if (this.localdata.Status && this.localdata.Status === "OK") {
@@ -53,13 +53,14 @@ export class UserService extends CrmService {
           //console.log("NUEVOS DATOS USUARIO", this.userData)
         } else {
           // TODO : lanzar toast con mensaje like "error al cargar la configuracion del usuario"
+          console.error("credenciales erroneas")
         }
       })
   }
 
   public getMenu() {
-    if (this.userId)
-      this._userMenu.sendGetMenu(this.userId).subscribe(response => {
+    if (this.cookie.getSessionId().length)
+      this._userMenu.sendGetMenu(this.cookie.getSessionId()).subscribe(response => {
         //console.log("getMenu", response);
         this.localdata = response;
         if (this.localdata.Salida) {
@@ -72,7 +73,7 @@ export class UserService extends CrmService {
   }
 
   public getActivitiesAlert() {
-    // TODO :> generar dinamicamente, de momento harcode:
+    // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tiposActividad": [
         "Llamada",
@@ -97,8 +98,8 @@ export class UserService extends CrmService {
       "tipo_orden": "ASC",
       "tipoActividad": "MIAS"
     }
-    if (this.userId)
-      this._activitiesAlert.sendGetActAlert(entrada, this.userId).subscribe(response => {
+    if (this.cookie.getSessionId().length)
+      this._activitiesAlert.sendGetActAlert(entrada, this.cookie.getSessionId()).subscribe(response => {
         //console.log("getActividadesAlertas", response);
         this.localdata = response;
         if (this.localdata.Salida) {
@@ -111,7 +112,7 @@ export class UserService extends CrmService {
   }
 
   public getNotifications() {
-    // TODO :> generar dinamicamente, de momento harcode:
+    // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tipo_modulo": "",
       "nombre": "",
@@ -123,8 +124,8 @@ export class UserService extends CrmService {
       "orden": "fecha_creacion_ts",
       "tipo_orden": "DESC"
     };
-    if (this.userId)
-      this._notifications.sendGetNotifications(entrada, this.userId).subscribe(response => {
+    if (this.cookie.getSessionId().length)
+      this._notifications.sendGetNotifications(entrada, this.cookie.getSessionId()).subscribe(response => {
         //console.log("getNotifications", response);
         this.localdata = response;
         if (this.localdata.Salida) {

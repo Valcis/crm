@@ -1,7 +1,10 @@
 import {Component, Input, Output} from '@angular/core';
 import {
-  faShareNodes, faHome, faGamepad, faHospital, faShoppingCart, faGlobe, faCalendar
+  faShareNodes, faHome, faGamepad, faHospital, faShoppingCart, faGlobe, faCalendar,
+  faChartBar, faHospitalAlt, faBriefcase, faHandshake, faTags, faBullhorn, faUsers, faBarChart, faFile, faLifeRing
 } from "@fortawesome/free-solid-svg-icons";
+
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 @Component({
   selector: 'side-nav',
@@ -14,12 +17,10 @@ export class SideNavComponent {
   @Input() item = '';
   crmIcon = faShareNodes;
   public isCollapsed = false;
+  private menuIconMap: Map<string, IconProp>;
 
 
   /** EJEMPLO de GETMENU :**/
-
-
-
   getMenuResponseExample = {
     Salida: {
       menuList: [
@@ -1128,34 +1129,39 @@ export class SideNavComponent {
         }
       ]
     },
-    "Metodo": "GetMenu",
-    "Servicio": "menu",
-    "Id": "Z7I9L6IIOvUCQ7Cb1Yig6OJyEp4wQoLDe2NZC3fl",
-    "URL": ""
-  }
+  };
 
 
-  subsections = [
-    {description: "", isContent: true, id: 5, title: "Opotunidades", url: "opotunidades"},
-    {description: "", isContent: true, id: 6, title: "Agencias latentes", url: "agencias_latentes"},
-    {description: "", isContent: true, id: 7, title: "Agencias", url: "agencias"},
-  ];
 
-  sections = [
-    {description: "", isContent: true, icon: faHome, id: 1, title: "Inicio", url: "inicio"},
-    {description: "", isContent: true, icon: faGamepad, id: 2, title: "Developper Test", url: "desarrollo"},
-    {description: "", isContent: false, icon: faHospital, id: 4, title: "Hotel", url: "hotel"},
-    {description: "", isContent: true, icon: faShoppingCart, id: 9, title: "Compras", url: "compras"},
-    {description: "", isContent: true, icon: faGlobe, id: 11, title: "Agencias", url: "agencias"},
-    {description: "", isContent: true, icon: faCalendar, id: 12, title: "Calendario", url: "calendario"}
-  ];
 
   constructor() {
 
+    this.menuIconMap = new Map();
+    this.menuIconMap.set("fa-share-nodes",faShareNodes)
+    this.menuIconMap.set("fa-home",faHome)
+    this.menuIconMap.set("fa-gamepad",faGamepad)
+    this.menuIconMap.set("fa-hospital",faHospital)
+    this.menuIconMap.set("fa-shopping-cart",faShoppingCart)
+    this.menuIconMap.set("fa-globe",faGlobe)
+    this.menuIconMap.set("fa-calendar",faCalendar)
+    this.menuIconMap.set("fa-chart-bar",faChartBar)
+    this.menuIconMap.set("fa-calendar",faHospitalAlt)
+    this.menuIconMap.set("fa-hospital-o",faBriefcase)
+    this.menuIconMap.set("fa-handshake",faHandshake)
+    this.menuIconMap.set("fa-tags",faTags)
+    this.menuIconMap.set("fa-bullhorn",faBullhorn)
+    this.menuIconMap.set("fa-users",faUsers)
+    this.menuIconMap.set("fa-bar-chart",faBarChart)
+    this.menuIconMap.set("fa-file",faFile)
+    this.menuIconMap.set("fa-life-ring",faLifeRing)
+
+
     console.log('Constructor de SIDENAV, hay menu??', this.userData)
-    console.log("-------------",this.item);
+    console.log("-------------", this.item);
   }
 
   getSectionInfo = (sectionData: any) => "hola";
+
+  getIcon = (icon: string) => this.menuIconMap.get(icon) || this.crmIcon
 
 }

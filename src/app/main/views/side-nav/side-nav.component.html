@@ -9,106 +9,42 @@
     <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
          alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag">
 
-    <div  *ngIf="isExpandedFlag">
-      <p>Pedro Valverde <br>Informática</p> <!-- // TODO : extraer info de peti ususario-->
-    </div>
+    <div *ngIf="isExpandedFlag">
+      Pedro Valverde <br>
+      <div class="dropdown nav" ngbDropdown>
+        <a class="dropdown-toggle count-info dd " style="color: darkgray; cursor: pointer; text-decoration: none;"
+           ngbDropdownToggle>
+          Informática
+        </a>
+        <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
+          <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
+          <li class="dropdown-divider"></li>
+          <li><a class="dropdown-item"> Cerrar sesión </a></li>
+        </ul>
+      </div>
 
+
+    </div>
 
 
   </div>
 
   <br>
 
-  <!--<div class="list-group">
-    <ng-container *ngFor=" let item of sections">
-      <button *ngIf="item.isContent" type="button" class="btn btn-dark text-start">
-        <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-        {{item.title}}</button>
 
-
-      <div *ngIf="!item.isContent" class="list-group dropdown">
-        <button  type="button" class="btn btn-dark dropdown-toggle text-start" role="button"
-                 id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-          <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-          {{item.title}}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-          <li><a class="dropdown-item active" href="#">asdasd</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-
-    </ng-container>
-  </div>-->
-
-
-
-  <br>
-
-  <div class="dropdown nav"  ngbDropdown>
-    <a class="dropdown-toggle count-info dd " style="color: darkgray; cursor: pointer; text-decoration: none;" ngbDropdownToggle>
-      {{'COMMON.LANGUAGE'|translate}}
-    </a>
-    <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
-      <ng-container *ngFor="let loc of sections">
-        <li role="menuitem">
-          <a class="dropdown-item">
-<!--            <img src="{{loc}}">-->
-            {{ loc.id }}
-          </a>
-        </li>
-      </ng-container>
-    </ul>
-  </div>
-
-  <hr>
-
-  <div class="navbar bg-body-tertiary" >
-    <div class="container-fluid">
-      <div class="body">
-        <ul class="navbar-nav justify-content-end">
-          <ng-container *ngFor=" let item of sections">
-            <li *ngIf="item.isContent" class="nav-item">
-              <a class="nav-link {{item.id===1?'active':''}}" data-bs-toggle="list" href="#">
-                <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-                <span *ngIf="isExpandedFlag">{{item.title}}</span>
-              </a>
-            </li>
-
-
-            <li *ngIf="!item.isContent" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
-                <fa-icon class="small me-2" [icon]="item.icon"></fa-icon>
-                <span *ngIf="isExpandedFlag">{{item.title}}</span>
-              </a>
-              <ul class="dropdown-menu">
-
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li> <hr class="dropdown-divider"/> </li>
-                <li> <a class="dropdown-item" href="#">Something else here</a> </li>
-
-              </ul>
-            </li>
-
-          </ng-container>
-        </ul>
+  <ng-container *ngFor="let item of getMenuResponseExample.Salida.menuList">
+    <div style="margin: 10%; font-size: small">
+      <a data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion">
+        <!--<fa-icon [icon]=item.icono></fa-icon>-->
+        <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
+        <i class="fa-brands fa-angular"></i>
+        {{item.descripcion.replaceAll("_", ".")|translate}}
+      </a>
+      <div *ngFor="let cosa of item.subMenu" [id]="item.id" class="collapse">
+        {{cosa.descripcion}}
       </div>
     </div>
-  </div>
+  </ng-container>
 
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
-  </div>
 
 </div>

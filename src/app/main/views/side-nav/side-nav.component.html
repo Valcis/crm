@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="userData.hasOwnProperty('menu')" class="container">
   <div class="header-profile">
 
     <h5 class="border-bottom pt-4">
@@ -10,11 +10,11 @@
          alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag">
 
     <div *ngIf="isExpandedFlag">
-      Pedro Valverde <br>
+      <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
       <div class="dropdown nav" ngbDropdown>
         <a class="dropdown-toggle count-info dd " style="color: darkgray; cursor: pointer; text-decoration: none;"
            ngbDropdownToggle>
-          Informática
+          {{"PERFIL.USER." + userData.details.perfil | translate}}
         </a>
         <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
           <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
@@ -22,29 +22,26 @@
           <li><a class="dropdown-item"> Cerrar sesión </a></li>
         </ul>
       </div>
-
-
     </div>
-
-
   </div>
 
   <br>
-
-
-  <ng-container *ngFor="let item of getMenuResponseExample.Salida.menuList">
+  <div style="margin: 10%; font-size: small">
+    <a data-bs-toggle="collapse" href="crm_inicio" aria-expanded="false">
+      <fa-icon [icon]="getIcon('fa-home')"></fa-icon>
+      <span *ngIf="isExpandedFlag">{{ "MENU.INICIO" | translate}}</span>
+    </a>
+  </div>
+  <ng-container *ngFor="let item of userData.menu.menuList">
     <div style="margin: 10%; font-size: small">
       <a data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion">
-        <!--<fa-icon [icon]=item.icono></fa-icon>-->
         <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
-        <i class="fa-brands fa-angular"></i>
-        {{item.descripcion.replaceAll("_", ".")|translate}}
+        <span *ngIf="isExpandedFlag">
+        {{item.descripcion.replaceAll("_", ".")|translate}} </span>
       </a>
-      <div *ngFor="let cosa of item.subMenu" [id]="item.id" class="collapse">
-        {{cosa.descripcion}}
+      <div *ngFor="let sub of item.subMenu" [id]="item.id" class="collapse">
+        {{sub.descripcion}}
       </div>
     </div>
   </ng-container>
-
-
 </div>

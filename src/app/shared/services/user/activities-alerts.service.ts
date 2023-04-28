@@ -28,4 +28,9 @@ export class ActivitiesAlertsService extends CrmService {
     return this.sendPost({...this.bodyRq, Entrada: entrada, Id: id})
   }
 
+  // TODO: exeplo de sendSetActivityAlert() ->
+  public sendSetActAlert(entrada: any, id: string) {
+    return this.sendPost({...this.bodyRq, Entrada: entrada, Id: id})
+  }
+
 }

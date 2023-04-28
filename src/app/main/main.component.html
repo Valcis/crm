@@ -1,24 +1,18 @@
 <div *ngIf="this.userData" class="row m-0 p-0">
 
   <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
-    <!--<side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>-->
-    <side-nav [isExpandedFlag]="isExpanded" [item]="currentItem"></side-nav>
+    <side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
   </div>
 
   <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">
-    <top-nav (expander)="onToggle()"></top-nav>
+    <top-nav (expander)="onToggle()" [mydata]=userData></top-nav>
 
     <content-frame class=""></content-frame>
   </div>
 
 </div>
 
-<p class="text-center" *ngIf="!this.userData"> No hay datos de usuario <br>
+<h3 class="text-center text-danger" *ngIf="!this.userData"> No hay datos de usuario <br>
   {{this.userData}}<br>
-  <input type="button" (click)="logOut()" value="a login"/>
-  <br>
-  <span>a corregir!!!!</span>
-
-</p>
-
-<p *ngIf="this.userData"> {{this.userData.details.nombre}} {{this.userData.details.apellido1}}</p>
+  <input type="button" (click)="logOut()" value="login"/>
+</h3>

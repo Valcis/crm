@@ -23,7 +23,7 @@ export class UserService extends CrmService {
     private _userConfig: UserConfigService,
     private _userMenu: UserMenuService,
     private _activitiesAlert: ActivitiesAlertsService,
-    private _notifications: NotificationsService
+    private _notifications: NotificationsService,
   ) {
     super(_http);
   }
@@ -40,13 +40,12 @@ export class UserService extends CrmService {
         resolve(this.cookie.getSessionId().length > 0)
       } else reject("no user id");
     });
-
   });
 
-  public getConfig() {
-    if (this.cookie.getSessionId().length)
+  public getConfig = () => {
+    if (this.cookie.getSessionId().length && this.userData.length)
       this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.cookie.getSessionId()).subscribe(response => {
-        //console.log("getConfig", response);
+        console.log("getConfig", response);
         this.localdata = response;
         if (this.localdata.Status && this.localdata.Status === "OK") {
           this.userData.config = this.localdata.Salida;
@@ -58,7 +57,7 @@ export class UserService extends CrmService {
       })
   }
 
-  public getMenu() {
+  public getMenu = () => {
     if (this.cookie.getSessionId().length)
       this._userMenu.sendGetMenu(this.cookie.getSessionId()).subscribe(response => {
         //console.log("getMenu", response);
@@ -72,7 +71,7 @@ export class UserService extends CrmService {
       })
   }
 
-  public getActivitiesAlert() {
+  public getActivitiesAlert = () => {
     // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tiposActividad": [
@@ -111,7 +110,7 @@ export class UserService extends CrmService {
       })
   }
 
-  public getNotifications() {
+  public getNotifications = () => {
     // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tipo_modulo": "",

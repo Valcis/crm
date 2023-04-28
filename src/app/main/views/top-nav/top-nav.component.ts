@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   faBars, faUser, faUsers, faBullhorn, faClock, faRightFromBracket, faImage
 } from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +13,9 @@ import {UserService} from "../../../shared/services/user/user.service";
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss']
 })
-export class TopNavComponent {
+export class TopNavComponent implements OnInit{
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() mydata:any;
   faBars = faBars;
   faUser = faUser;
   faUsers = faUsers;
@@ -38,9 +39,12 @@ export class TopNavComponent {
     private router: Router
   ) {
     this.lang = cookie.getLanguage();
-    //console.log("constructor TOPNAV", this.lang, this._user.userData);
     this.user = this._user.userData;
   }
+
+  ngOnInit(): void {
+    console.log("--- TOP NAV COMPONENT DATA---", this.mydata);
+    }
 
   onExpander = () => this.expander.emit();
 

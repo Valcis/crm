@@ -15,11 +15,7 @@ export class MainComponent implements OnInit {
 
   public isExpanded: boolean = true;
   currentLang: string = '';
-  userData: any = undefined;
-  currentItem = 'Television';
-
-
-  //public userData: Subject<any> = new Subject<any>();
+  userData: any;
 
   constructor(
     private translate: TranslateService,
@@ -27,12 +23,13 @@ export class MainComponent implements OnInit {
     private _user: UserService,
     private router: Router
   ) {
+    console.log("aqui si entra MAIN")
     this.currentLang = this.cookie.getLanguage();
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
   }
 
-  ngOnInit() {
+  ngOnInit () {
     this._user.getConfig();
     this._user.getMenu();
     this._user.getActivitiesAlert();
@@ -51,11 +48,9 @@ export class MainComponent implements OnInit {
 
 
   //lo dejo aqui solo para poder tirar al login cuando falla persistencia de datos
-  logOut() {
-    this.router.navigate(['/login'])
-  }
+  logOut = () => this.router.navigate(['/login']);
 
-  back() {
-    this.router.navigate(['/login'])
-  }
+
+  back = () => this.router.navigate(['/login']);
+
 }

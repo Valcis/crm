@@ -15,7 +15,7 @@ export class NotificationsService extends CrmService {
     super(_http);
     this.bodyRq = {
       Servicio: "notificaciones",
-      Metodo: "GetNotificaciones",
+      Metodo: "GetNotificaciones",// se rellena al llamarlo
       Tipo: "",
       Entrada: {},// se rellena al llamarlo
       Id: "",// se rellena al llamarlo
@@ -24,8 +24,14 @@ export class NotificationsService extends CrmService {
     };
   }
 
-  public sendGetNotifications(entrada: any, id: string) {
-    return this.sendPost({...this.bodyRq, Entrada: entrada, Id: id})
-  }
+
+  public sendGetNotifications = (entrada: any, id: string) =>
+    this.sendPost({...this.bodyRq, Entrada: entrada, Id: id})
+
+
+  // TODO: EJEMPLO de 'addNewNotificacion()' ->
+  public addNewNotificacion = (entrada: any, metodo: string, id: string) =>
+    this.sendPost({...this.bodyRq, Metodo: metodo, Entrada: entrada, Id: id})
+
 
 }

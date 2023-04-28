@@ -57,12 +57,12 @@ export class LoginComponent implements OnInit {
     //console.log("boton pressed 'login()'");
     this._user.retrieveUser(this.loginForm.value)
       .then(hasId => {
-          if (hasId) this.route.navigate(['/main'])
+          if (hasId) this.route.navigate(['/main']);
           // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
           else console.error("usuario no valido")
         }
       ).catch(error => {
-      // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+      // TODO : lanzar toast con mensaje de "Error al intentar hacer login "
       console.error("login error", error)
     });
   }

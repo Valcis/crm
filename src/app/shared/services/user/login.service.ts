@@ -1,16 +1,15 @@
 import {Injectable} from "@angular/core";
-import {LoginRs, LoginEntrada} from "../../models/user/login.model";
+import {LoginEntrada} from "../../models/user/login.model";
 import {GenericRequest} from "../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
-import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends CrmService {
   private readonly loginBodyRq: GenericRequest;
-  public loginSubject: Subject<LoginRs> = new Subject<LoginRs>();
+
 
   constructor(
     private _http: HttpClient,
@@ -28,16 +27,8 @@ export class LoginService extends CrmService {
     };
   }
 
-  //protected onSuccess = (response: any) => new Error("Method not implemented.");
-  /*protected onSuccess(response: any): void { throw new Error("Method not implemented."); }
-  protected onError(error: any): void { throw new Error("Method not implemented."); }*/
 
-  public sendGetLogin(credenciales: LoginEntrada) {
-    return this.sendPost({...this.loginBodyRq, Entrada: credenciales})
-    //.subscribe(resp => this.loginSubject.next(<GenericResponse><unknown>resp))
-  }
+  public sendGetLogin = (credenciales: LoginEntrada) =>
+    this.sendPost({...this.loginBodyRq, Entrada: credenciales})
 
-  public get user() {
-    return this.loginSubject.asObservable();
-  }
 }

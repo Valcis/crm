@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {UserMenusRs} from "../../models/user/user-menu.model";
-import {BehaviorSubject} from "rxjs";
 import {GenericRequest} from "../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
@@ -10,7 +8,6 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UserMenuService extends CrmService {
   private readonly userMenuBodyRq: GenericRequest;
-  public dataObservable: BehaviorSubject<UserMenusRs[]> = new BehaviorSubject<UserMenusRs[]>([]); // todo, cambiar
 
   constructor(
     private _http: HttpClient,
@@ -27,15 +24,14 @@ export class UserMenuService extends CrmService {
       recuerdame_id: ""
     };
 
-    //this._userConfig.configuredUser.subscribe(item => item.map(resp => this.userMenuDataResponse = resp.Salida))
   }
 
-  public sendGetMenu(id: string) {
-    return this.sendPost({...this.userMenuBodyRq, Id: id})
-    //.pipe(map(r => (<UserMenusRs><unknown>r)));
-  }
+  public sendGetMenu = (id: string) =>
+    this.sendPost({...this.userMenuBodyRq, Id: id});
 
-  public get userMenuCRM() {
-    return this.dataObservable.asObservable();
-  }
+
+  public sendDeleteMenu = (metodo: string, entrada: any, id: string) =>
+    this.sendPost({...this.userMenuBodyRq, Metodo: metodo, Entrada: entrada, Id: id});
+
+
 }

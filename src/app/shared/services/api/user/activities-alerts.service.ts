@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
-import {GenericRequest} from "../../models/petition/petition.model";
+import {GenericRequest} from "../../../models/petition/petition.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ActivitiesAlertsService extends CrmService {
     super(_http);
     this.bodyRq = {
       Servicio: "actividades",
-      Metodo: "GetActividadesAlertas",
+      Metodo: "",
       Tipo: "",
       Entrada: {},// se rellena al llamarlo
       Id: "",// se rellena al llamarlo

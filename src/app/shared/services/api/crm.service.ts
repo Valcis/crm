@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {GenericRequest, GenericResponse} from "../models/petition/petition.model";
-import {environment} from "../../../environments/environment.local";
+import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
+import {environment} from "../../../../environments/environment.local";
 
 @Injectable({
   providedIn: 'root'

@@ -4,10 +4,10 @@ import {CrmService} from "../crm.service";
 import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
 import {UserMenuService} from "./user-menu.service";
-import {LoginEntrada} from "../../models/user/login.model";
+import {LoginEntrada} from "../../../models/user/login.model";
 import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
-import {CookiesService} from "../cookies/cookies.service";
+import {CookiesService} from "../../cookies/cookies.service";
 
 @Injectable({
   providedIn: 'root'

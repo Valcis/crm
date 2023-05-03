@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {Router} from "@angular/router";
-import {UserService} from "../shared/services/user/user.service";
+import {UserService} from "../shared/services/api/user/user.service";
 
 @Component({
   selector: 'app-main',
@@ -23,7 +23,6 @@ export class MainComponent implements OnInit {
     private _user: UserService,
     private router: Router
   ) {
-    console.log("aqui si entra MAIN")
     this.currentLang = this.cookie.getLanguage();
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);

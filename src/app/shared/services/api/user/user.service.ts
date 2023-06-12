@@ -55,10 +55,10 @@ export class UserService extends CrmService {
           console.error("credenciales erroneas")
         }
       })
-  }
+  };
 
   public getMenu = () => {
-    if (this.cookie.getSessionId().length)
+    if (this.cookie.getSessionId().length) {
       this._userMenu.sendGetMenu(this.cookie.getSessionId()).subscribe(response => {
         //console.log("getMenu", response);
         this.localdata = response;
@@ -69,7 +69,8 @@ export class UserService extends CrmService {
           // TODO : lanzar toast con mensaje de "XXXX???"
         }
       })
-  }
+    }
+  };
 
   public getActivitiesAlert = () => {
     // TODO :> generar dinamicamente, de momento harcoded:
@@ -96,7 +97,7 @@ export class UserService extends CrmService {
       "orden": "fecha",
       "tipo_orden": "ASC",
       "tipoActividad": "MIAS"
-    }
+    };
     if (this.cookie.getSessionId().length)
       this._activitiesAlert.sendGetActAlert(entrada, this.cookie.getSessionId()).subscribe(response => {
         //console.log("getActividadesAlertas", response);
@@ -108,7 +109,7 @@ export class UserService extends CrmService {
           // TODO : lanzar toast con mensaje de "XXXX???"
         }
       })
-  }
+  };
 
   public getNotifications = () => {
     // TODO :> generar dinamicamente, de momento harcoded:

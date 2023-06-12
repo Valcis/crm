@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, Output} from '@angular/core';
 import {
   faShareNodes, faHome, faGamepad, faHospital, faShoppingCart, faGlobe, faCalendar,
   faChartBar, faHospitalAlt, faBriefcase, faHandshake, faTags, faBullhorn, faUsers, faBarChart, faFile, faLifeRing
 } from "@fortawesome/free-solid-svg-icons";
+import { NgbAccordionModule} from "@ng-bootstrap/ng-bootstrap";
 
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
@@ -11,7 +12,7 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, AfterViewInit {
   @Input() public isExpandedFlag: boolean = true;
   @Input() userData: any;
 
@@ -20,6 +21,9 @@ export class SideNavComponent implements OnInit {
   private menuIconMap: Map<string, IconProp>;
 
 
+  menuList: Array<any> = [];
+
+// TODO: MOVER LOS ICONOS A UNA SOLA CARPETA
   constructor() {
     this.menuIconMap = new Map();
     this.menuIconMap.set("fa-share-nodes", faShareNodes)
@@ -43,9 +47,26 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit = () => {
     console.log("-- SIDE NAV COMPONENT DATA---", this.userData);
+    if (this.userData) {
+      console.log(' this.menuList', this.menuList)
+    } else {
+    }
   };
 
-  getSectionInfo = (sectionData: any) => "hola";
+  ngAfterViewInit = () => {
+    this.getList();
+  };
+
+  getList = () => {
+    if (this.userData) {
+      this.userData.menu.menuList.forEach((item:any) => {
+        this.menuList.push(item);
+      });
+    } else {
+    }
+  };
+
+  // getSectionInfo = (sectionData: any) => "hola";
 
   getIcon = (icon: string) => this.menuIconMap.get(icon) || this.crmIcon
 

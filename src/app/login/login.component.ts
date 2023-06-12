@@ -25,16 +25,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private route: Router,
-    private cookie: CookiesService,
+    private _cookie: CookiesService,
     private http: HttpClient,
     private _user: UserService,
   ) {
-    if (cookie.getLanguage() === '' || !cookie.getLanguage()) {
+    if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this.translate.use('es');
-      this.cookie.setLanguage(this.translate.currentLang);
+      this._cookie.setLanguage(this.translate.currentLang);
     } else {
-      this.currentLang = cookie.getLanguage();
-      this.translate.use(cookie.getLanguage())
+      this.currentLang = _cookie.getLanguage();
+      this.translate.use(_cookie.getLanguage())
     }
   }
 

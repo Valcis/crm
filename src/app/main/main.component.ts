@@ -33,6 +33,9 @@ export class MainComponent implements OnInit {
     this._user.getMenu();
     this._user.getActivitiesAlert();
     this._user.getNotifications();
+    if (this.cookie.getSessionId()) {
+      // this.login
+    }
 
     /* TODO : implementar ->
     this._user.getUsuarioCrmByEmplCode(); ??????????????????

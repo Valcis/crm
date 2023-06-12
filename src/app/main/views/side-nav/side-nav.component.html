@@ -27,21 +27,130 @@
 
   <br>
   <div style="margin: 10%; font-size: small">
-    <a data-bs-toggle="collapse" href="crm_inicio" aria-expanded="false">
+    <a data-bs-toggle="collapse" href="crm_inicio" aria-expanded="false" style="color: white">
       <fa-icon [icon]="getIcon('fa-home')"></fa-icon>
       <span *ngIf="isExpandedFlag">{{ "MENU.INICIO" | translate}}</span>
     </a>
   </div>
+<!--  <app-menu-list></app-menu-list>-->
+
+
+<!--  <ng-container *ngFor="let item of userData.menu.menuList">-->
+<!--    <div ngbAccordionButtonItem [collapsed]="true" style="margin: 10%; font-size: small;">-->
+<!--      <dic></dic>-->
+<!--      <a ngbAccordionHeader data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion" style="color: white">-->
+<!--        <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
+<!--        <span *ngIf="isExpandedFlag">-->
+<!--        {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
+<!--      </a>-->
+<!--&lt;!&ndash;      menu items -> {{item.descripcion}}&ndash;&gt;-->
+<!--      <div ngbAccordionCollapse *ngIf="item.subMenu.length > 0">-->
+<!--        <div ngbAccordionBody *ngFor="let sub of item.subMenu" [id]="item.id">-->
+<!--          {{sub.descripcion.replaceAll("_", ".")|translate}}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+
+
+<!--  WORSK-->
+<!--  <ng-container *ngFor="let item of userData.menu.menuList">-->
+<!--    <div *ngIf="item.subMenu.length<=0">-->
+<!--      <div style="margin: 10%; font-size: small;">-->
+<!--        <a data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion" style="color: white">-->
+<!--          <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
+<!--          <span *ngIf="isExpandedFlag">-->
+<!--          {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="item.subMenu.length>0" class="accordion">-->
+<!--      <div style="margin: 10%; font-size: small;" >-->
+
+
+
+<!--        <a class="accordion-header" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion"-->
+<!--           style="color: white" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true" aria-controls="">-->
+<!--          <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
+<!--          <span *ngIf="isExpandedFlag">-->
+<!--          {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
+<!--        </a>-->
+<!--        <div *ngFor="let sub of item.subMenu" [id]="sub.descripcion">-->
+<!--          {{sub.descripcion.replaceAll("_", ".")|translate}}-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+
   <ng-container *ngFor="let item of userData.menu.menuList">
-    <div style="margin: 10%; font-size: small">
-      <a data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion">
-        <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
-        <span *ngIf="isExpandedFlag">
-        {{item.descripcion.replaceAll("_", ".")|translate}} </span>
-      </a>
-      <div *ngFor="let sub of item.subMenu" [id]="item.id" class="collapse">
-        {{sub.descripcion}}
+    <div *ngIf="item.subMenu.length<=0">
+      <div class="accordion" [id]="item.description">
+        <div class="accordion-item">
+          <a class="accordion-header">
+            <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
+            <span *ngIf="isExpandedFlag">
+              {{item.descripcion.replaceAll("_", ".")|translate}}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="item.subMenu.length>0">
+      <div class="accordion" [id]="item.description">
+        <div class="accordion-item">
+          <a class="accordion-header">
+            <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
+            <span *ngIf="isExpandedFlag">
+              {{item.descripcion.replaceAll("_", ".")|translate}}
+            </span>
+          </a>
+          <div *ngFor="let sub of item.subMenu" [id]="sub.descripcion">
+            <div class="accordion-collapse collapse show" aria-labelledby=""></div>
+            {{sub.descripcion.replaceAll("_", ".")|translate}}
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
+
+                        <!--  <app-menu-list [menuList]="menuList"></app-menu-list>-->
+
+<!--  <div class="accordion" id="accordionExample">-->
+<!--    <div class="accordion-item">-->
+<!--      <h2 class="accordion-header" id="headingOne">-->
+<!--        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+<!--          Accordion Item #1-->
+<!--        </button>-->
+<!--      </h2>-->
+<!--      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">-->
+<!--        <div class="accordion-body">-->
+<!--          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="accordion-item">-->
+<!--      <h2 class="accordion-header" id="headingTwo">-->
+<!--        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+<!--          Accordion Item #2-->
+<!--        </button>-->
+<!--      </h2>-->
+<!--      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">-->
+<!--        <div class="accordion-body">-->
+<!--          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="accordion-item">-->
+<!--      <h2 class="accordion-header" id="headingThree">-->
+<!--        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+<!--          Accordion Item #3-->
+<!--        </button>-->
+<!--      </h2>-->
+<!--      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">-->
+<!--        <div class="accordion-body">-->
+<!--          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>

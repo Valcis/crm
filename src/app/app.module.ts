@@ -22,7 +22,9 @@ import {TranslateLoaderService} from "./shared/services/translate/translate-load
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: ((_http: HttpClient) => {return new TranslateLoaderService(_http, 'login' )}),
+        useFactory: ((_http: HttpClient) => {
+          return new TranslateLoaderService(_http, 'login')
+        }),
         deps: [HttpClient]
       },
       isolate: false,

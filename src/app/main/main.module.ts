@@ -14,6 +14,8 @@ import {ContentComponent} from './views/content/content.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {AppModule} from "../app.module";
+import {MenuListComponent} from "../shared/components/menu-list/menu-list.component";
 
 
 @NgModule({
@@ -23,25 +25,28 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     TopNavComponent,
     SideNavComponent,
     ContentComponent,
+    MenuListComponent
   ],
-  imports: [
-    CommonModule,
-    MainRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: ((_http: HttpClient) => {
-          return new TranslateLoaderService(_http, 'main')
+    imports: [
+        CommonModule,
+        MainRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: ((_http: HttpClient) => {
+                    return new TranslateLoaderService(_http, 'main')
+                }),
+                deps: [HttpClient]
+            },
+            isolate: false,
+            extend: true
         }),
-        deps: [HttpClient]
-      },
-      isolate: false,
-      extend: true
-    }),
-    FontAwesomeModule,
-    FormsModule,
-    NgbModule,
-  ],
+        FontAwesomeModule,
+        FormsModule,
+        NgbModule,
+        CommonModule,
+        // AppModule,
+    ],
   providers: []
 })
 export class MainModule {

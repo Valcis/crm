@@ -29,10 +29,11 @@ export class UserService extends CrmService {
   }
 
   public retrieveUser = (credenciales: LoginEntrada) => new Promise((resolve, reject) => {
-    //console.log("credenciales ", credenciales);
     this._login.sendGetLogin(credenciales).subscribe(response => {
+      /*console.log("credenciales", credenciales);
+      console.log("response", response);*/
+
       this.localdata = response;
-      console.log("retrieveUser", this.localdata.Id);
       if (this.localdata.Status && this.localdata.Status === "OK") {
         this.cookie.setSessionId(this.localdata.Id);
         this.userData.details = this.localdata.Salida;
@@ -45,7 +46,7 @@ export class UserService extends CrmService {
   public getConfig = () => {
     if (this.cookie.getSessionId().length && this.userData.length)
       this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.cookie.getSessionId()).subscribe(response => {
-        console.log("getConfig", response);
+        /*console.log("getConfig", response);*/
         this.localdata = response;
         if (this.localdata.Status && this.localdata.Status === "OK") {
           this.userData.config = this.localdata.Salida;
@@ -130,12 +131,13 @@ export class UserService extends CrmService {
         this.localdata = response;
         if (this.localdata.Salida) {
           this.userData.notifications = this.localdata.Salida;
-          //console.log("NUEVOS DATOS USUARIO", this.userData)
+          console.log("NUEVOS DATOS USUARIO", this.userData)
         } else {
           // TODO : lanzar toast con mensaje de "XXXX???"
         }
       })
   }
+
 
 
 }

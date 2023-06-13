@@ -28,21 +28,20 @@ export class MainComponent implements OnInit {
     this.translate.use(this.currentLang);
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this._user.getConfig();
     this._user.getMenu();
     this._user.getActivitiesAlert();
     this._user.getNotifications();
-    if (this.cookie.getSessionId()) {
-      // this.login
-    }
+    this.userData = this._user.userData.hasOwnProperty("details") ? this._user.userData : this.router.navigate(['/login']);
+
 
     /* TODO : implementar ->
     this._user.getUsuarioCrmByEmplCode(); ??????????????????
     this._user.getBajaTemporalUsuario();  ?????????????????? */
 
-    console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
-    if (this._user.userData.hasOwnProperty("details")) this.userData = this._user.userData;
+    /*console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);*/
+
 
   }
 

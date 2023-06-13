@@ -28,7 +28,16 @@ export class LoginService extends CrmService {
   }
 
 
-  public sendGetLogin = (credenciales: LoginEntrada) =>
-    this.sendPost({...this.loginBodyRq, Entrada: credenciales})
+  public sendGetLogin = (credenciales: LoginEntrada) => {
+    console.log("sendGetLogin", credenciales )
+    const modifiedLoginBodyRq = {
+      ...this.loginBodyRq,
+      Entrada: credenciales,
+      Id: credenciales.user_session_id || this.loginBodyRq.Id
+    };
 
+    return this.sendPost(modifiedLoginBodyRq);
+  };
 }
+
+

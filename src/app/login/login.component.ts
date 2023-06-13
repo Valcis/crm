@@ -7,6 +7,9 @@ import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
 
+import {Injectable} from '@angular/core';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loadForm();
+    await this.autoLogin();
   }
 
   // Angular Forms
@@ -54,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   // Effect
   public async login() {
-    //console.log("boton pressed 'login()'");
+    /*console.log("boton pressed 'login()'");*/
     this._user.retrieveUser(this.loginForm.value)
       .then(hasId => {
           if (hasId) this.route.navigate(['/main']);
@@ -65,6 +69,23 @@ export class LoginComponent implements OnInit {
       // TODO : lanzar toast con mensaje de "Error al intentar hacer login "
       console.error("login error", error)
     });
+  }
+
+  // -----------------------
+  // Auto Login
+  public async autoLogin(): Promise<void> {
+    const sessionId = this._cookie.getSessionId(); // Retrieve the session ID from the cookie
+    if (sessionId) {
+      const autoLogForm: FormGroup = new FormGroup({
+        user_session_id: new FormControl(sessionId),
+      });
+      const hasId = await this._user.retrieveUser(autoLogForm.value); // Call the retrieveUser method with the session ID
+      if (hasId) {
+        this.route.navigate(['/main']); // Navigate to the main page if the user is authenticated
+      } else {
+        console.error('Invalid user'); // TODO: Display an error message or handle the case of an invalid user
+      }
+    }
   }
 
   /*private async processLogin() {

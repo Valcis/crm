@@ -1,4 +1,4 @@
-<div *ngIf="this.userData" class="row m-0 p-0">
+<div class="row m-0 p-0">
 
   <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
     <side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
@@ -12,7 +12,3 @@
 
 </div>
 
-<h3 class="text-center text-danger" *ngIf="!this.userData"> No hay datos de usuario <br>
-  {{this.userData}}<br>
-  <input type="button" (click)="logOut()" value="login"/>
-</h3>

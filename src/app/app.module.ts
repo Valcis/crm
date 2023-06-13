@@ -7,11 +7,13 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
+import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    CrmLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,9 @@ import {TranslateLoaderService} from "./shared/services/translate/translate-load
       isolate: false,
       extend: true
     }),
+  ],
+  exports: [
+    CrmLoaderComponent,
   ],
   providers: [TranslateModule],
   bootstrap: [AppComponent]

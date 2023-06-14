@@ -6,6 +6,8 @@ import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
+import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
+
 
 import {Injectable} from '@angular/core';
 
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
     private _cookie: CookiesService,
     private http: HttpClient,
     private _user: UserService,
+    private loader: CrmLoaderService,
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this.translate.use('es');
@@ -74,18 +77,22 @@ export class LoginComponent implements OnInit {
   // -----------------------
   // Auto Login
   public async autoLogin(): Promise<void> {
-    const sessionId = this._cookie.getSessionId(); // Retrieve the session ID from the cookie
+    this.loader.setLoading(true); // Set the loader to true at the start
+
+    const sessionId = this._cookie.getSessionId();
     if (sessionId) {
       const autoLogForm: FormGroup = new FormGroup({
         user_session_id: new FormControl(sessionId),
       });
-      const hasId = await this._user.retrieveUser(autoLogForm.value); // Call the retrieveUser method with the session ID
+      const hasId = await this._user.retrieveUser(autoLogForm.value);
       if (hasId) {
-        this.route.navigate(['/main']); // Navigate to the main page if the user is authenticated
+        this.route.navigate(['/main']);
       } else {
         console.error('Invalid user'); // TODO: Display an error message or handle the case of an invalid user
       }
     }
+    this.loader.setLoading(false); // Set the loader to true at the start
+
   }
 
   /*private async processLogin() {

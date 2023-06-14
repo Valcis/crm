@@ -11,11 +11,38 @@
   padding: 0%
 }
 
+.crm-ul {
+  background-color: #2f4050;
+}
+
+li{
+  color: #a7b1c2;
+}
+
+li.sub {
+  color: #2f4050
+}
+
 li:hover {
   color:white;
   background-color: #293846;
 }
 
+.submenu-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #a7b1c2; /* Arrow color */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-icon {
+  margin-right: 10px; /* Adjust the value as needed */
+}
 
 /*@media (min-width: 770px) {
   .container{

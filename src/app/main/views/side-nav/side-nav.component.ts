@@ -66,8 +66,15 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     }
   };
 
-  // getSectionInfo = (sectionData: any) => "hola";
+    // getSectionInfo = (sectionData: any) => "hola";
 
   getIcon = (icon: string) => this.menuIconMap.get(icon) || this.crmIcon
 
+  itemAction = (argument:string) => {
+    console.log(argument)
+  }
+
+  formatName = (menuName:string) => {
+    return menuName.replaceAll('_', '.');
+  }
 }

@@ -82,6 +82,24 @@
 <!--    </div>-->
 <!--  </ng-container>-->
 
+ <ul class="list-group">
+   <li
+     routerLink="component-uno"
+     routerLinkActive="active"
+     class="list-group-item "
+   >
+     Componente uno
+   </li>
+   <li
+     routerLink="component-dos"
+     routerLinkActive="active"
+     class="list-group-item "
+   >
+     Componente dos
+   </li>
+
+ </ul>
+
   <ng-container *ngFor="let item of userData.menu.menuList">
     <div *ngIf="item.subMenu.length<=0">
       <div class="accordion" [id]="item.description">

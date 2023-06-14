@@ -16,6 +16,9 @@ import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {AppModule} from "../app.module";
 import {MenuListComponent} from "../shared/components/menu-list/menu-list.component";
+import { ComponenteUnoComponent } from './views/content/componente-uno/componente-uno.component';
+import { ComponenteDosComponent } from './views/content/componente-dos/componente-dos.component';
+
 
 
 @NgModule({
@@ -25,8 +28,10 @@ import {MenuListComponent} from "../shared/components/menu-list/menu-list.compon
     TopNavComponent,
     SideNavComponent,
     ContentComponent,
-    MenuListComponent
-  ],
+    MenuListComponent,
+    ComponenteUnoComponent,
+    ComponenteDosComponent,
+    ],
     imports: [
         CommonModule,
         MainRoutingModule,

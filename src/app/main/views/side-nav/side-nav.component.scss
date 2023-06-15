@@ -11,11 +11,67 @@
   padding: 0%
 }
 
+// SIDENAV
+
+.crm-ul {
+  background-color: #2f4050;
+}
+.crm-ul-sub {
+  background-color: #2f4050;
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right; /* Align text to the right */
+}
+
+li {
+  color: #a7b1c2;
+}
+
+li.sub {
+  color: #2f4050
+}
+
 li:hover {
   color:white;
   background-color: #293846;
 }
 
+.submenu-arrow {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #a7b1c2; /* Arrow color */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-180deg); /* Rotate arrow counter-clockwise */
+}
+
+.submenu-arrow.selected {
+  border-right: 5px solid #ff0000; /* Change arrow color when selected */
+  /* Add any additional styling for the selected state */
+}
+
+
+.menu-icon {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+
+.sidenav-item {
+  color: #a7b1c2;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.sidenav-item-sub {
+  color: #a7b1c2;
+  font-weight: 300;
+  font-size: 13px;
+  align-items: end;
+}
 
 /*@media (min-width: 770px) {
   .container{

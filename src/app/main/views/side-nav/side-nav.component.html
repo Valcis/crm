@@ -155,7 +155,7 @@
 
               <fa-icon [icon]="getIcon(item.icono)" class="menu-icon"></fa-icon>
 
-              <span *ngIf="isExpandedFlag"
+              <span *ngIf="isExpandedFlag" class="sidenav-item"
                     (click)="itemAction(item.descripcion + ' - id padre -> ' + i)">
                 {{ formatName(item.descripcion) | translate }}
               </span>
@@ -179,7 +179,7 @@
 
                 <fa-icon [icon]="getIcon(item.icono)" class="menu-icon"></fa-icon>
 
-                <span *ngIf="isExpandedFlag">
+                <span *ngIf="isExpandedFlag" class="sidenav-item">
                 {{ formatName(item.descripcion) | translate }}
               </span>
                 <span class="submenu-arrow"></span>
@@ -193,7 +193,7 @@
 
                 <ul class="list-group crm-ul">
 
-                  <li class="list-group-item crm-ul mt-2" *ngFor="let sub of item.subMenu"
+                  <li class="list-group-item crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
                       [id]="sub.descripcion"
                       (click)="itemAction(sub.descripcion + ' - id padre -> ' + i)"
                   >

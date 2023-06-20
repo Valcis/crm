@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   faShareNodes, faHome, faGamepad, faHospital, faShoppingCart, faGlobe, faCalendar,
   faChartBar, faHospitalAlt, faBriefcase, faHandshake, faTags, faBullhorn, faUsers, faBarChart, faFile, faLifeRing
 } from "@fortawesome/free-solid-svg-icons";
-import { NgbAccordionModule} from "@ng-bootstrap/ng-bootstrap";
 
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
@@ -12,16 +11,28 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent implements OnInit, AfterViewInit {
+export class SideNavComponent implements OnInit {
   @Input() public isExpandedFlag: boolean = true;
-  @Input() userData: any;
+  @Input() public userData: any;
 
   crmIcon = faShareNodes;
   public isCollapsed = false;
   private menuIconMap: Map<string, IconProp>;
 
 
-  menuList: Array<any> = [];
+  public menuList: Array<any> = [
+    {
+      descripcion: 'MENU_INICIO',
+      config_link_pag: '/main',
+      contenido: [],
+      icono: 'fa-home',
+      link_pag: '#/main',
+      tipo: 'MENU',
+      id_menu_padre: '0',
+      nivel: '1',
+      subMenu: []
+    }
+  ];
 
 // TODO: MOVER LOS ICONOS A UNA SOLA CARPETA
   constructor() {
@@ -45,36 +56,28 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     this.menuIconMap.set("fa-life-ring", faLifeRing)
   }
 
-  ngOnInit = () => {
-    console.log("-- SIDE NAV COMPONENT DATA---", this.userData);
-    if (this.userData) {
-      console.log(' this.menuList', this.menuList)
-    } else {
+  async ngOnInit () {
+    await this.getList();
+    console.log('menu list', this.menuList);
+  };
+
+  public async getList() {
+    if (this.userData.menu) {
+      this.userData.menu.menuList.forEach((item: any) => { //TODO: Cambiar por modelo
+        this.menuList.push(item)
+      })
     }
   };
 
-  ngAfterViewInit = () => {
-    this.getList();
+  getIcon = (icon: string) => {
+    return this.menuIconMap.get(icon) || this.crmIcon;
   };
-
-  getList = () => {
-    if (this.userData) {
-      this.userData.menu.menuList.forEach((item:any) => {
-        this.menuList.push(item);
-      });
-    } else {
-    }
-  };
-
-    // getSectionInfo = (sectionData: any) => "hola";
-
-  getIcon = (icon: string) => this.menuIconMap.get(icon) || this.crmIcon
 
   itemAction = (argument:string) => {
     console.log(argument)
-  }
+  };
 
   formatName = (menuName:string) => {
     return menuName.replaceAll('_', '.');
-  }
+  };
 }

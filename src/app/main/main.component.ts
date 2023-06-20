@@ -33,8 +33,7 @@ export class MainComponent implements OnInit {
     this._user.getMenu();
     this._user.getActivitiesAlert();
     this._user.getNotifications();
-    this.userData = this._user.userData.hasOwnProperty("details") ? this._user.userData : this.router.navigate(['/login']);
-
+    this.userData = this._user.userData.hasOwnProperty("details" && "menu") ? this._user.userData : this.router.navigate(['/login']);
 
     /* TODO : implementar ->
     this._user.getUsuarioCrmByEmplCode(); ??????????????????

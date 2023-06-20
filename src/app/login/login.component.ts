@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     private _cookie: CookiesService,
     private http: HttpClient,
     private _user: UserService,
-    private loader: CrmLoaderService,
+    private _loader: CrmLoaderService,
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this.translate.use('es');
@@ -77,22 +77,22 @@ export class LoginComponent implements OnInit {
   // -----------------------
   // Auto Login
   public async autoLogin(): Promise<void> {
-    this.loader.setLoading(true); // Set the loader to true at the start
-
+    this._loader.setLoading(true); // Set the loader to true at the start
     const sessionId = this._cookie.getSessionId();
     if (sessionId) {
       const autoLogForm: FormGroup = new FormGroup({
+        // id: new FormControl(''),
+        // password: new FormControl(''),
         user_session_id: new FormControl(sessionId),
       });
       const hasId = await this._user.retrieveUser(autoLogForm.value);
       if (hasId) {
-        this.route.navigate(['/main']);
+        await this.route.navigate(['/main']);
       } else {
         console.error('Invalid user'); // TODO: Display an error message or handle the case of an invalid user
       }
     }
-    this.loader.setLoading(false); // Set the loader to true at the start
-
+    this._loader.setLoading(false); // Set the loader to true at the start
   }
 
   /*private async processLogin() {

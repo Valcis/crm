@@ -1,5 +1,5 @@
-<div *ngIf="userData.hasOwnProperty('menu')" class="container">
-  <div class="header-profile">
+<div *ngIf="userData.hasOwnProperty('menu')" class="container"  style="height: 100%;">
+  <div class="header-profile" style="height: 18%;">
 
     <h5 class="border-bottom pt-4">
       <fa-icon class="text-white" [icon]="crmIcon"></fa-icon>
@@ -7,7 +7,8 @@
     </h5>
 
     <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
-         alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag">
+         alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag"
+    >
 
     <div *ngIf="isExpandedFlag">
       <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
@@ -26,190 +27,77 @@
   </div>
 
   <br>
-  <div style="margin: 10%; font-size: small">
-    <a data-bs-toggle="collapse" href="crm_inicio" aria-expanded="false" style="color: white">
-      <fa-icon [icon]="getIcon('fa-home')"></fa-icon>
-      <span *ngIf="isExpandedFlag">{{ "MENU.INICIO" | translate}}</span>
-    </a>
-  </div>
-  <!--  <app-menu-list></app-menu-list>-->
-
-
-  <!--  <ng-container *ngFor="let item of userData.menu.menuList">-->
-  <!--    <div ngbAccordionButtonItem [collapsed]="true" style="margin: 10%; font-size: small;">-->
-  <!--      <dic></dic>-->
-  <!--      <a ngbAccordionHeader data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion" style="color: white">-->
-  <!--        <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
-  <!--        <span *ngIf="isExpandedFlag">-->
-  <!--        {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
-  <!--      </a>-->
-  <!--&lt;!&ndash;      menu items -> {{item.descripcion}}&ndash;&gt;-->
-  <!--      <div ngbAccordionCollapse *ngIf="item.subMenu.length > 0">-->
-  <!--        <div ngbAccordionBody *ngFor="let sub of item.subMenu" [id]="item.id">-->
-  <!--          {{sub.descripcion.replaceAll("_", ".")|translate}}-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </ng-container>-->
-
-
-  <!--  WORSK-->
-  <!--  <ng-container *ngFor="let item of userData.menu.menuList">-->
-  <!--    <div *ngIf="item.subMenu.length<=0">-->
-  <!--      <div style="margin: 10%; font-size: small;">-->
-  <!--        <a data-bs-toggle="collapse" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion" style="color: white">-->
-  <!--          <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
-  <!--          <span *ngIf="isExpandedFlag">-->
-  <!--          {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
-  <!--        </a>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div *ngIf="item.subMenu.length>0" class="accordion">-->
-  <!--      <div style="margin: 10%; font-size: small;" >-->
-
-
-  <!--        <a class="accordion-header" [href]="item.link_pag" aria-expanded="false" [attr.aria-controls]="item.descripcion"-->
-  <!--           style="color: white" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true" aria-controls="">-->
-  <!--          <fa-icon [icon]="getIcon(item.icono)"></fa-icon>-->
-  <!--          <span *ngIf="isExpandedFlag">-->
-  <!--          {{item.descripcion.replaceAll("_", ".")|translate}} </span>-->
-  <!--        </a>-->
-  <!--        <div *ngFor="let sub of item.subMenu" [id]="sub.descripcion">-->
-  <!--          {{sub.descripcion.replaceAll("_", ".")|translate}}-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </ng-container>-->
 
 
   <!--COMPONENTES-->
 
- <!-- <ul class="list-group">
-    <li
-      routerLink="component-uno"
-      routerLinkActive="active"
-      class="list-group-item "
-    >
-      Componente uno
-    </li>
-    <li
-      routerLink="component-dos"
-      routerLinkActive="active"
-      class="list-group-item "
-    >
-      Componente dos
-    </li>
+  <!-- <ul class="list-group">
+     <li
+       routerLink="component-uno"
+       routerLinkActive="active"
+       class="list-group-item "
+     >
+       Componente uno
+     </li>
+     <li
+       routerLink="component-dos"
+       routerLinkActive="active"
+       class="list-group-item "
+     >
+       Componente dos
+     </li>
 
-  </ul>
--->
-
-
-  <!--ANTIGUO MENU-->
-
-  <!--<ng-container *ngFor="let item of userData.menu.menuList">
-    <div *ngIf="item.subMenu.length<=0">
-      <div class="accordion" [id]="item.description">
-        <div class="accordion-item">
-          <a class="accordion-header">
-            <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
-            <span *ngIf="isExpandedFlag">
-              {{item.descripcion.replaceAll("_", ".")|translate}}
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="item.subMenu.length>0">
-      <div class="accordion" [id]="item.description">
-        <div class="accordion-item">
-          <a class="accordion-header">
-            <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
-            <span *ngIf="isExpandedFlag">
-              {{item.descripcion.replaceAll("_", ".")|translate}}
-            </span>
-          </a>
-          <div *ngFor="let sub of item.subMenu" [id]="sub.descripcion">
-            <div class="accordion-collapse collapse show" aria-labelledby=""></div>
-            {{sub.descripcion.replaceAll("_", ".")|translate}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
--->
-
-  <!--ANTIGUO MENU-->
+   </ul>
+ -->
 
 
-  <!--MIO-->
+  <ng-container  style="height: 82%;">
+    <div *ngFor="let item of menuList; let i = index">
 
-  <ng-container *ngFor="let item of userData.menu.menuList; let i = index">
     <!--DIVS para menus SIN submenu-->
-    <ul class="list-group crm-ul">
-
-      <div *ngIf="item.subMenu.length <= 0">
-        <li class="list-group-item crm-ul">
-          <div [id]="'accordion-' + i">
-
-            <button class="accordion-button" type="button">
-
-              <fa-icon [icon]="getIcon(item.icono)" class="menu-icon"></fa-icon>
-
-              <span *ngIf="isExpandedFlag" class="sidenav-item"
-                    (click)="itemAction(item.descripcion + ' - id padre -> ' + i)">
-                {{ formatName(item.descripcion) | translate }}
-              </span>
-
-            </button>
-          </div>
-        </li>
-      </div>
-
-      <!--DIVS para menus CON submenu-->
-
-      <div *ngIf="item.subMenu.length > 0">
-        <li class="list-group-item crm-ul">
-
-          <div class="mb-1" [id]="'accordion-' + i">
-
-            <h3 class="accordion-header">
-
-              <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                      [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
-
-                <fa-icon [icon]="getIcon(item.icono)" class="menu-icon"></fa-icon>
-
+      <ul class="list-group crm-ul">
+        <div *ngIf="item.subMenu.length <= 0">
+          <li class="list-group-item crm-ul">
+            <div [id]="'accordion-' + i"  (click)="itemAction(item.descripcion + ' - id padre -> ' + i)">
+              <span class="" type="button">
+                <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
                 <span *ngIf="isExpandedFlag" class="sidenav-item">
-                {{ formatName(item.descripcion) | translate }}
+                  {{ formatName(item.descripcion) | translate }}
+                </span>
               </span>
+            </div>
+          </li>
+        </div>
+
+        <!--DIVS para menus CON submenu-->
+        <div *ngIf="item.subMenu.length > 0">
+          <li class="list-group-item crm-ul">
+            <div class="mb-1" [id]="'accordion-' + i">
+              <span data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
+                <fa-icon [icon]="getIcon(item.icono)"></fa-icon>
+                <span *ngIf="isExpandedFlag" class="sidenav-item">
+                  {{ formatName(item.descripcion) | translate }}
+                </span>
                 <span class="submenu-arrow"></span>
-              </button>
-            </h3>
-
-            <div [id]="'accordion-' + i + '-collapse'" class="accordion-collapse collapse"
-                 [attr.aria-labelledby]="'accordion-' + i + '-header'">
-
-              <div class="accordion-body">
-
-                <ul class="list-group crm-ul">
-
-                  <li class="list-group-item crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
-                      [id]="sub.descripcion"
-                      (click)="itemAction(sub.descripcion + ' - id padre -> ' + i)"
-                  >
-                    {{ formatName(sub.descripcion) | translate }}
-
-                  </li>
-                </ul>
+              </span>
+              <div [id]="'accordion-' + i + '-collapse'" class=" collapse"
+                   [attr.aria-labelledby]="'accordion-' + i + '-header'">
+                <div class="">
+                  <ul class="list-group crm-ul">
+                    <li class=" crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
+                        [id]="sub.descripcion"
+                        (click)="itemAction(sub.descripcion + ' - id padre -> ' + i)"
+                    >
+                      {{ formatName(sub.descripcion) | translate }}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-
-        </li>
-
-      </div>
-
-    </ul>
+          </li>
+        </div>
+      </ul>
+    </div>
   </ng-container>
 
 

@@ -43,8 +43,8 @@ export class TopNavComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("--- TOP NAV COMPONENT DATA---", this.mydata);
-    }
+    // console.log("--- TOP NAV COMPONENT DATA---", this.mydata);
+  }
 
   onExpander = () => this.expander.emit();
 

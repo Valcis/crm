@@ -8,6 +8,8 @@ import {LoginEntrada} from "../../../models/user/login.model";
 import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
 import {CookiesService} from "../../cookies/cookies.service";
+import {Router} from "@angular/router";
+import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,7 @@ export class UserService extends CrmService {
     private _userMenu: UserMenuService,
     private _activitiesAlert: ActivitiesAlertsService,
     private _notifications: NotificationsService,
+    private _loader: CrmLoaderService
   ) {
     super(_http);
   }
@@ -39,7 +42,10 @@ export class UserService extends CrmService {
         this.userData.details = this.localdata.Salida;
         //console.log("NUEVOS DATOS USUARIO", this.userData)
         resolve(this.cookie.getSessionId().length > 0)
-      } else reject("no user id");
+      } else {
+        reject('no user id'); //TODO: cambiar por alert service
+        this._loader.setLoading(false);
+      }
     });
   });
 
@@ -131,7 +137,7 @@ export class UserService extends CrmService {
         this.localdata = response;
         if (this.localdata.Salida) {
           this.userData.notifications = this.localdata.Salida;
-          console.log("NUEVOS DATOS USUARIO", this.userData)
+          // console.log("NUEVOS DATOS USUARIO", this.userData)
         } else {
           // TODO : lanzar toast con mensaje de "XXXX???"
         }

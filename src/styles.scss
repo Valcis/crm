@@ -78,6 +78,14 @@ $max-width: 100%;
   margin: 1em 0;
 }
 
+.side-container {
+  min-height: calc(100% - 46px);
+  height: 100%;
+  width: 0;
+  margin: 0;
+  overflow: inherit !important;
+}
+
 // Animations
 
 //.dropdown-menu {

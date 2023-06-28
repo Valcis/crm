@@ -1,7 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {
-  faBars, faUser, faUsers, faBullhorn, faClock, faRightFromBracket, faImage
-} from "@fortawesome/free-solid-svg-icons";
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
@@ -16,13 +13,6 @@ import {UserService} from "../../../shared/services/api/user/user.service";
 export class TopNavComponent implements OnInit{
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() mydata:any;
-  faBars = faBars;
-  faUser = faUser;
-  faUsers = faUsers;
-  faBullhorn = faBullhorn;
-  faClock = faClock;
-  faRightFromBracket = faRightFromBracket;
-  faImage = faImage;
   lang = '';
   private user: any;
 

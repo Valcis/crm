@@ -9,7 +9,6 @@ import {TranslateLoaderService} from "../shared/services/translate/translate-loa
 import {TopNavComponent} from './views/top-nav/top-nav.component';
 import {SideNavComponent} from './views/side-nav/side-nav.component';
 import {ContentComponent} from './views/content/content.component';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { ComponenteUnoComponent } from './views/content/componente-uno/componente-uno.component';
@@ -41,7 +40,6 @@ import { ComponenteDosComponent } from './views/content/componente-dos/component
       isolate: false,
       extend: true
     }),
-    FontAwesomeModule,
     FormsModule,
     NgbModule,
   ],

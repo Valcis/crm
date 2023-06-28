@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
@@ -9,16 +8,12 @@ import {UserService} from "../shared/services/api/user/user.service";
 import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
 
 
-import {Injectable} from '@angular/core';
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  faShare = faShareAlt;
   currentLang: string = 'es';
   public loginForm!: FormGroup;
   public submitted: boolean = false;
@@ -59,7 +54,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Effect
   public async login() {
     /*console.log("boton pressed 'login()'");*/
     this._user.retrieveUser(this.loginForm.value)
@@ -74,7 +68,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // -----------------------
   // Auto Login
   public async autoLogin(): Promise<void> {
     this._loader.setLoading(true); // Set the loader to true at the start
@@ -94,49 +87,6 @@ export class LoginComponent implements OnInit {
     }
     this._loader.setLoading(false); // Set the loader to true at the start
   }
-
-  /*private async processLogin() {
-    console.log("this.loginUser", new Date().toLocaleTimeString(), this.loginUser);
-    this.cookie.setSessionId(this.loginUser.Id);
-
-    if (this.loginUser.Status === 'OK') {
-      let now = new Date();
-      let minutes = this.loginUser.Salida.tiempo_sesion;
-
-      // TODO : Hacer código de duración de sesión
-      const userResp: LoginRs = {
-        Salida: this.loginUser.Salida
-      };
-
-      console.log("----->", userResp)
-
-      const userConfigParams: UserConfigEntrada = {
-        id: +userResp.Salida.empl_code
-      };
-
-
-      await this._userConfig.sendGetConfig(userConfigParams, this.loginUser.Id);
-      await this.sub.add((this._userConfig.configUser.subscribe((response) => {
-        response.map(async user => {
-          this.user = user;
-          await this._userMenu.sendGetMenu(this.user.Id);
-        });
-        return this.user;
-      })));
-
-      await this.sub.add((this._userMenu.userMenuCRM.subscribe((res: any) => {
-        res.map((menu: any) => this.userMenu = menu);
-        console.log(new Date().toLocaleTimeString(), "respuesta de menu", this.userMenu, "response de Menu", res);
-        return this.userMenu;
-      })))
-
-      this.sendLogin = true;
-
-      this.route.navigate(['/main']);
-    } else {
-      console.log('Credenciales incorrectos');
-    }
-  }*/
 
   test(backItem: string) {
     this.bImage = backItem;

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {faImage} from '@fortawesome/free-solid-svg-icons';
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 
@@ -9,8 +8,7 @@ import {CookiesService} from "../../../shared/services/cookies/cookies.service";
   styleUrls: ['./top-nav-login.component.scss']
 })
 export class TopNavLoginComponent {
-  public faImage = faImage;
-  public lang = '';
+  public lang: string = '';
   public langList = [
     {code: 'en', lang: 'English', flag: "../../../assets/images/flags/16/United-States.png"},
     {code: 'es', lang: 'Español', flag: "../../../assets/images/flags/16/Spain.png"},

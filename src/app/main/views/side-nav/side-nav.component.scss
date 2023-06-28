@@ -4,8 +4,17 @@
   background: url("../../../../assets/images/profile/header-profile.png");
 }
 
+
+//.navbar-static-side {
+//  position: fixed;
+//  width: 220px;
+//  z-index: 2001;
+//  height: 100%;
+//}
+
 .container {
-  min-height: 550px;
+  height: 100%;
+  width: 220px;
   background-color: #2f4050;
   color: white;
   padding: 0%

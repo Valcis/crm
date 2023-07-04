@@ -1,4 +1,4 @@
-<div class="container-fluid" style="height: 100vh; overflow: hidden; padding: 0px;">
+<div class="container-fluid h-100 no-overflow no-m-p">
   <top-nav-login (backImgEvent)="test($event)" ></top-nav-login>
   <div [ngStyle]="{'background': 'url(' + bImage + ')', 'height': '100%'}" class="img-fluid">
     <div class="d-flex justify-content-center text-center">
@@ -27,7 +27,7 @@
             required
           >
           <input type="submit"
-           class="btn btn-primary input-button vertical-timeline-block full-width mb-1 login"
+           class="btn btn-primary input-button vertical-timeline-block w-100 mb-1 login"
 
            value="{{'COMMON.LOGIN'|translate}}"
           >

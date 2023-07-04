@@ -1,10 +1,51 @@
-@import '../../../../styles.scss';
-
 .dropdown-toggle:after {
   border: none;
 }
 
-.btn-primary{
+.btn-primary {
   background-color: #1ab394;
   border-color: #1ab394;
+}
+
+.btn-primary:active {
+  background-color: #18a689;
+  border-color: #18a689;
+}
+.btn-primary:hover {
+  background-color: #18a689;
+  border-color: #18a689;
+}
+
+.bars {
+  display: inline-block;
+  position: relative;
+  left: 2%;
+  top: 19%;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+}
+
+.top-nav-item {
+  display: inline;
+  margin: 5%;
+  cursor: pointer;
+}
+
+.side-nav-item > li.active {
+  border-left: 4px solid #19aa8d;
+  background: #293846;
+}
+
+.custom-in {
+  position: relative;
+  display: inline-block;
+  left: 3%;
+  top: 22%;
+}
+
+.top-r-ic {
+  top: 22%;
+  position: relative;
+  width: 40%;
+  float: right;
 }

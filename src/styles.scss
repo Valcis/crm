@@ -1,5 +1,6 @@
 html, body {
   height: 100vh;
+  font-size: 14px
 }
 
 // Basic Colors
@@ -69,8 +70,13 @@ $max-width: 100%;
   margin-bottom: 3%;
 }
 
-.full-width {
-  width: 100%;
+.no-overflow {
+  overflow:hidden;
+}
+
+.no-m-p {
+  margin: 0%;
+  padding: 0%;
 }
 
 .vertical-timeline-block {
@@ -78,27 +84,91 @@ $max-width: 100%;
   margin: 1em 0;
 }
 
-.side-container {
-  min-height: calc(100% - 46px);
-  height: 100%;
-  width: 0;
-  margin: 0;
-  overflow: inherit !important;
+.dark-bg {
+  background-color: $background;
 }
 
-// Animations
+.side-container {
+  display: inline-block;
+  width: 12%;
+  height: 100%;
+}
 
-//.dropdown-menu {
-//  animation: .5s slideright;
-//}
-//@keyframes slideright {
-//  from {
-//    transform: translateX(10%);
-//  }
-//  to {
-//    transform: translateX(0%);
-//  }
-//}
+.top-container {
+  display: inline-block;
+  width: 88%;
+  height: 6%;
+  top: 0%;
+  vertical-align: top;
+}
 
-/* Importing Bootstrap SCSS file. */
-//@import 'bootstrap/scss/bootstrap';
+.dark-bg-container {
+  background-color: $background;
+  color: white;
+  padding: 0%;
+  margin: 0%;
+}
+
+.blue {
+  color: $blue;
+}
+
+.grey {
+  color: $text-color;
+}
+
+hr.divider {
+  margin: 0%;
+  color: $secondary;
+}
+
+.custom-list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.sidenav-list-item {
+  font-family: sans-serif;
+  padding:(5% 10% 5% 10%);
+  //font-weight: bold;
+  color: $text-color;
+  cursor: pointer;
+}
+
+.sidenav-list-item:hover {
+  //border-left: 4px solid #19aa8d;
+  border-left: 4px solid $primary;
+  background: #293846;
+  color: $white
+}
+
+.sidenav-list-item:not(.collapsed) {
+  //border-left: 4px solid #19aa8d;
+  border-left: 4px solid $primary;
+  background: #293846;
+  color: $white
+}
+
+.basic-dropdown {
+  color: darkgray;
+  cursor: pointer;
+  text-decoration: none;
+  padding-bottom: 10px;
+  padding-top:10px;
+  min-height: 30px;
+}
+
+.no-b-input {
+  border:none;
+  border-radius: 0px;
+}
+
+.v-top {
+  vertical-align: top;
+}
+
+.l-grey {
+  color: $light-gray
+}

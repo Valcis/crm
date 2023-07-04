@@ -1,32 +1,19 @@
-@import '../../../../styles.scss';
-
 .header-profile{
   background: url("../../../../assets/images/profile/header-profile.png");
+  height: 18%;
 }
 
-
-//.navbar-static-side {
-//  position: fixed;
-//  width: 220px;
-//  z-index: 2001;
-//  height: 100%;
-//}
-
-.container {
-  height: 100%;
-  width: 220px;
-  background-color: #2f4050;
-  color: white;
-  padding: 0%
+.header-content {
+  padding-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 // SIDENAV
 
-.crm-ul {
-  background-color: #2f4050;
-}
 .crm-ul-sub {
-  background-color: #2f4050;
+  margin-left: 7%;
+  background-color: #293846;
   font-size: 13px;
   display: flex;
   justify-content: flex-start;
@@ -47,32 +34,21 @@ li:hover {
   background-color: #293846;
 }
 
-.submenu-arrow {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #a7b1c2; /* Arrow color */
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-180deg); /* Rotate arrow counter-clockwise */
-}
-
-.submenu-arrow.selected {
-  border-right: 5px solid #ff0000; /* Change arrow color when selected */
-  /* Add any additional styling for the selected state */
-}
-
+//.submenu-arrow {
+//  margin-left: 1%;
+//  width: 0;
+//  height: 0;
+//  border-top: 5px solid transparent;
+//  border-bottom: 5px solid transparent;
+//  border-left: 5px solid #a7b1c2; /* Arrow color */
+//  //position: absolute;
+//  ////right: 10px;
+//  top: 50%;
+//  //transform: translateY(-50%) rotate(-180deg); /* Rotate arrow counter-clockwise */
+//}
 
 .menu-icon {
   margin-right: 10px; /* Adjust the value as needed */
-}
-
-.sidenav-item {
-  color: #a7b1c2;
-  font-weight: 300;
-  font-size: 13px;
 }
 
 .sidenav-item-sub {
@@ -82,9 +58,11 @@ li:hover {
   align-items: end;
 }
 
-/*@media (min-width: 770px) {
-  .container{
-    width: 220px;
-  }
+.head-logo {
+  width: 3rem;
+}
 
-}*/
+.us-dd {
+  cursor: pointer;
+  text-decoration: none;
+}

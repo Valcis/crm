@@ -1,47 +1,45 @@
-<div *ngIf="userData.hasOwnProperty('menu')" class="container"  style="height: 100%;">
-  <div class="header-profile" style="height: 18%;">
+<!--<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100" appSideClosed>-->
+<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100">
+  <div class="header-profile">
+    <div class="header-content">
+      <h5 class="border-bottom pt-4">
+        <i class="text-white fa fa-share-alt"></i>
+        Neo
+      </h5>
 
-    <h5 class="border-bottom pt-4">
-      <i class="text-white fa fa-share-alt"></i>
-      Neo
-    </h5>
+      <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
+           alt="logo keytel" class="head-logo" *ngIf="isExpandedFlag"
+      >
 
-    <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
-         alt="logo keytel" style="width: 3rem" *ngIf="isExpandedFlag"
-    >
-
-    <div *ngIf="isExpandedFlag">
-      <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
-      <div class="dropdown nav" ngbDropdown>
-        <a class="dropdown-toggle count-info dd " style="color: darkgray; cursor: pointer; text-decoration: none;"
-           ngbDropdownToggle>
-          {{"PERFIL.USER." + userData.details.perfil | translate}}
-        </a>
-        <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
-          <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
-          <li class="dropdown-divider"></li>
-          <li><a class="dropdown-item"> Cerrar sesión </a></li>
-        </ul>
+      <div *ngIf="isExpandedFlag">
+        <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
+        <div class="dropdown nav" ngbDropdown>
+          <a class="dropdown-toggle count-info dd l-grey us-dd" ngbDropdownToggle>
+            {{"PERFIL.USER." + userData.details.perfil | translate}}
+          </a>
+          <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
+            <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
+<!--            <li class="dropdown-divider disabled"></li>-->
+            <li><a class="dropdown-item"> Cerrar sesión </a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <br>
-
-
   <!--COMPONENTES-->
 
-  <ng-container  style="height: 82%;">
+  <ng-container >
     <div *ngFor="let item of menuList; let i = index">
 
     <!--DIVS para menus SIN submenu-->
-      <ul class="list-group crm-ul">
+      <ul class="dark-bg-container">
         <div *ngIf="item.subMenu.length <= 0">
-          <li class="list-group-item crm-ul">
+          <li class="sidenav-list-item collapsed">
             <div [id]="'accordion-' + i"  (click)="itemAction(item.descripcion + ' - id padre -> ' + i)">
-              <span class="" type="button" [routerLink]="item.link_pag">
+              <span type="button" [routerLink]="item.link_pag">
                 <i [class]="item.icono"></i>
-                <span *ngIf="isExpandedFlag" class="sidenav-item">
+                <span *ngIf="isExpandedFlag">
                   {{ formatName(item.descripcion) | translate }}
                 </span>
               </span>
@@ -51,20 +49,22 @@
 
         <!--DIVS para menus CON submenu-->
         <div *ngIf="item.subMenu.length > 0">
-          <li class="list-group-item crm-ul">
-            <div class="mb-1" [id]="'accordion-' + i">
-              <span data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
+          <li class="sidenav-list-item collapsed"  data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
+            <div [id]="'accordion-' + i">
+              <span class="sidenav-item">
                 <i [class]="item.icono"></i>
-                <span *ngIf="isExpandedFlag" class="sidenav-item">
+                <span *ngIf="isExpandedFlag" >
                   {{ formatName(item.descripcion) | translate }}
                 </span>
-                <span class="submenu-arrow"></span>
+                <i class="fa fa-angle-left" style="margin-left: 10%"></i>
+<!--                <span class="submenu-arrow"></span>-->
+
               </span>
               <div [id]="'accordion-' + i + '-collapse'" class=" collapse"
                    [attr.aria-labelledby]="'accordion-' + i + '-header'">
-                <div class="">
+                <div>
                   <ul class="list-group crm-ul">
-                    <li class=" crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
+                    <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
                         [id]="sub.descripcion"
                         (click)="itemAction(sub.descripcion + ' - id padre -> ' + i)"
                     >

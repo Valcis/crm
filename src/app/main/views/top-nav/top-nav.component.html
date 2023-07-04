@@ -1,37 +1,23 @@
-<!--<div class="row d-flex align-items-center mx-0 p-2">-->
-<div>
-
-  <div class="col-1">
-    <div class="btn btn-sm btn-primary" (click)="onExpander()">
+<div class="w-100 h-100">
+  <div class="v-top w-50 h-100 d-inline-block">
+    <div class="bars btn btn-sm btn-primary" (click)="onExpander()">
       <i class="fa fa-bars"></i>
     </div>
-  </div>
-
-  <div class="col-8">
-    <div class="form-group">
-      <input class="form-control" style="border:none" type="search" placeholder="Buscar algo..." aria-label="Search">
+    <div class="form-group d-inline-block custom-in">
+      <input class="form-control no-b-input" type="text" placeholder="Buscar algo..." aria-label="Search">
     </div>
   </div>
-
-  <div class="col-3 ">
-    <div class="nav justify-content-between d-flex align-items-center">
-      <li class="nav-item small">
-        <i class="fa fa-user"></i>
-      </li>
-      <li class="nav-item small">
-        <i class="fa fa-users"></i>
-      </li>
-      <li class="nav-item small">
-        <i class="fa fa-users"></i>
-      </li>
-      <li class="nav-item small">
-        <i class="fa fa-clock-o"></i>
-      </li>
-      <li class="nav-item small">
-        <div class="dropdown nav" ngbDropdown>
-          <a class="dropdown-toggle" style="text-decoration: none; content: none" ngbDropdownToggle>
-            <img [hidden]="lang!=='es'" class="m-1" src="../../../../assets/images/flags/16/Spain.png" alt="Es"/>
-            <img [hidden]="lang!=='en'" class="m-1" src="../../../../assets/images/flags/16/United-States.png"
+  <div class="v-top d-inline-block w-50 h-100">
+    <ul class="no-m-p top-r-ic">
+      <li class="top-nav-item blue"><i class="fa fa-user"></i></li>
+      <li class="top-nav-item blue"><i class="fa fa-users"></i></li>
+      <li class="top-nav-item blue"><i class="fa fa-bullhorn"></i></li>
+      <li class="top-nav-item blue"><i class="fa fa-clock-o"></i></li>
+      <li class="top-nav-item">
+        <div class="dropdown nav d-inline" ngbDropdown>
+          <a class="dropdown-toggle text-decoration-none" ngbDropdownToggle>
+            <img [hidden]="lang!=='es'" src="../../../../assets/images/flags/16/Spain.png" alt="Es"/>
+            <img [hidden]="lang!=='en'" src="../../../../assets/images/flags/16/United-States.png"
                  alt="US"/>
           </a>
           <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
@@ -46,11 +32,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item small" (click)="logOut()">
-        <i class="fa fa-sign-out"></i>
-      </li>
-    </div>
+      <li class="top-nav-item grey" (click)="logOut()"><i class="fa fa-sign-out"></i></li>
+    </ul>
   </div>
-
-
 </div>

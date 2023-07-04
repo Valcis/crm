@@ -1,35 +1,10 @@
-<div class="row m-0 p-0" style="height: 100%">
-
-  <div class="col-sm-{{isExpanded?2:1}} m-0 p-0">
+<div class="h-100">
+  <div class="side-container">
     <side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
   </div>
-
-  <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 ">
+  <div class="top-container">
     <top-nav (expander)="onToggle()" [mydata]=userData></top-nav>
-
-    <content-frame class=""></content-frame>
-
+    <hr class="divider">
     <app-router-outlet></app-router-outlet>
-
   </div>
-
 </div>
-
-<!--&lt;!&ndash;<div class="row m-0 p-0" style="height: 100%">&ndash;&gt;-->
-<!--<div style="height: 100%">-->
-
-<!--  &lt;!&ndash;  <div class="col-sm-{{isExpanded?2:1}} m-0 p-0" style="display: inline-block">&ndash;&gt;-->
-<!--  <div class="side-container" style="display: inline-block">-->
-<!--    <side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>-->
-<!--  </div>-->
-<!--  <div style="position:relative; display: inline-block; top:0%; width: 80%">-->
-<!--    <top-nav (expander)="onToggle()" [mydata]=userData></top-nav>-->
-<!--    <app-router-outlet></app-router-outlet>-->
-<!--  </div>-->
-<!--  &lt;!&ndash;  <div class="col-sm-{{isExpanded?10:11}} m-0 p-0 " style="display: inline-block">&ndash;&gt;-->
-<!--  &lt;!&ndash;  <div style="height: 100%">&ndash;&gt;-->
-<!--  &lt;!&ndash;    <top-nav (expander)="onToggle()" [mydata]=userData></top-nav>&ndash;&gt;-->
-<!--  &lt;!&ndash;    <content-frame class=""></content-frame>&ndash;&gt;-->
-<!--  &lt;!&ndash;  </div>&ndash;&gt;-->
-
-<!--</div>-->

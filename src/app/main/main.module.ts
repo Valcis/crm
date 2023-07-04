@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { ComponenteUnoComponent } from './views/content/componente-uno/componente-uno.component';
 import { ComponenteDosComponent } from './views/content/componente-dos/componente-dos.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -42,6 +43,7 @@ import { ComponenteDosComponent } from './views/content/componente-dos/component
     }),
     FormsModule,
     NgbModule,
+    SharedModule,
   ],
   providers: []
 })

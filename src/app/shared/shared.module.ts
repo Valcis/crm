@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SideClosedDirective } from './directives/side-closed.directive';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SideClosedDirective
+  ],
   imports: [
     CommonModule,
   ],
-  exports: [
-  ]
+    exports: [
+        SideClosedDirective
+    ]
 })
 export class SharedModule {
 }

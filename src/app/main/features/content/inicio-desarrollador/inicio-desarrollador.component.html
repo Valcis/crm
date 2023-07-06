@@ -1,0 +1,70 @@
+<div class="container-flex w-100 m-0 p-0">
+  <div class="m-0">
+    <div class="wrapper border-bottom white-bg page-heading">
+      <h3 class="p-3" style="font-weight:lighter;">Aquí iría el Toast. Título</h3>
+    </div>
+  </div>
+<!--BUTTONS CODE-->
+  <div class="row m-0">
+    <div class="col-sm m-0 p-0">
+      <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
+      <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
+    </div>
+  </div>
+<!--TIME ZONE CODE-->
+  <div class="row m-0 p-0">
+    <div class="col-sm-1">
+      <div class="m-2">
+        <p>Fecha:
+          <!-- para poner el tooltip en la posición que se quiera se debe hacer con un placement="top/bottom/left/right"-->
+          <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="m-2">
+        <p>DateTime:
+          {{ts}}
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="m-2">
+        <p>ts-Original:
+          {{utc}}
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="m-2">
+        <p>ts-parsed:
+          {{formatedTime}}
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="m-2">
+        <p>timezone:
+          {{tz}}
+        </p>
+      </div>
+    </div>
+  </div>
+<!--DATEPICKER-->
+  <div class="row m-0 p-0 text-black">
+    <form class="">
+      <div class="col-3">
+        <div class="input-group m-l-2">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button class="btn btn-outline-secondary fa fa-calendar text-black" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

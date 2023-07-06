@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
       const hasId = await this._user.retrieveUser(autoLogForm.value);
       if (hasId) {
         await this.route.navigate(['/main']);
+        // await this.route.navigate(['/main/crm_inicio']);
       } else {
         console.error('Invalid user'); // TODO: Display an error message or handle the case of an invalid user
       }

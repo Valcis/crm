@@ -19,7 +19,7 @@ export class SideNavComponent implements OnInit {
       config_link_pag: '/main',
       contenido: [],
       icono: 'fa fa-home',
-      link_pag: '#/main',
+      link_pag: '/main',
       tipo: 'MENU',
       id_menu_padre: '0',
       nivel: '1',
@@ -34,8 +34,9 @@ export class SideNavComponent implements OnInit {
   }
 
   async ngOnInit () {
+    console.log('userData', this.userData);
     await this.getList();
-    console.log('menu list', this.menuList);
+    // console.log('menu list', this.menuList);
   };
 
   // public async modifyName(item: any) {
@@ -56,6 +57,7 @@ export class SideNavComponent implements OnInit {
 
   public async getList() {
     if (this.userData.menu) {
+      console.log('userData', this.userData);
       this.userData.menu.menuList.forEach((item: any) => { //TODO: Cambiar por modelo
         item.icono = 'fa ' + item.icono;
         this.menuList.push(item);

@@ -6,14 +6,18 @@ import {MainRoutingModule} from "./main-routing.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {TranslateLoaderService} from "../shared/services/translate/translate-loader.service";
-import {TopNavComponent} from './views/top-nav/top-nav.component';
-import {SideNavComponent} from './views/side-nav/side-nav.component';
-import {ContentComponent} from './views/content/content.component';
+import {TopNavComponent} from './features/top-nav/top-nav.component';
+import {SideNavComponent} from './features/side-nav/side-nav.component';
+import {ContentComponent} from './features/content/content.component';
 import {FormsModule} from "@angular/forms";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import { ComponenteUnoComponent } from './views/content/componente-uno/componente-uno.component';
-import { ComponenteDosComponent } from './views/content/componente-dos/componente-dos.component';
+import {NgbModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
+import { GraficosComponent } from './features/content/graficos/graficos.component';
+import { InicioDesarrolladorComponent } from './features/content/inicio-desarrollador/inicio-desarrollador.component';
+import { ProveedoresProductoComponent } from './features/content/proveedores-producto/proveedores-producto.component';
+import { CalendarioComponent } from './features/content/calendario/calendario.component';
+import { ActividadesComponent } from './features/content/actividades/actividades.component';
+import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 
 
 
@@ -24,8 +28,12 @@ import {SharedModule} from "../shared/shared.module";
     TopNavComponent,
     SideNavComponent,
     ContentComponent,
-    ComponenteUnoComponent,
-    ComponenteDosComponent,
+    GraficosComponent,
+    InicioDesarrolladorComponent,
+    ProveedoresProductoComponent,
+    CalendarioComponent,
+    ActividadesComponent,
+    NotificacionesComponent,
     ],
   imports: [
     CommonModule,

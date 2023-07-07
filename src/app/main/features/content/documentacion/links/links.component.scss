@@ -1,7 +1,7 @@
 table,
 tr, th, td {
   border: 1px solid #333;
-  border-color: lightgrey;
+  border-color: #e7e7e7;
 }
 .table-title{
   display: flex;
@@ -18,8 +18,8 @@ tr, th, td {
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
 }
-.margin-5{
-  margin-left: 1.5%;
+.margin-top{
+  margin-top: 1.5%;
 }
 .btn-add{
   border-color: lightgrey;
@@ -28,7 +28,26 @@ tr, th, td {
   border-color: #5E5E5E;
   background-color: lightgrey;
 }
-.btn-light:hover{
+.btn-search:hover{
   background-color: lightgrey;
+  border-color: grey;
+}
+.btn-search{
+  border-color: lightgrey;
 }
 
+.btn-danger{
+  color: white !important;
+}
+.fa-trash{
+  color: white;
+  background: #dc3545;
+}
+.fa-trash:hover{
+
+  background: #bb2d3b;
+}
+
+.btn-danger:hover #fa-trash{
+  background: #bb2d3b;
+}

@@ -4,13 +4,13 @@
       <h5>{{ 'LINKS.FORM-TITLE' | translate}}</h5>
     </div>
     <div >
-      <div class="card rounded-0 mx-1 my-2" style="width: 99%">
+      <div class="card rounded-0 mx-4 my-4" style="width: 99%">
         <div class="card-content">
-          <div class="card rounded-0 mx-2 mt-3">
+          <div class="card rounded-0 mx-4 mt-3">
             <div class="card-title mt-1 border-bottom">
-              <div class="margin-5">{{ 'LINKS.CRITERIA' | translate}}</div>
+              <div class="mx-3 my-3">{{ 'LINKS.CRITERIA' | translate}}</div>
             </div>
-            <div class="card-content  mx-2 my-3">
+            <div class="card-content  mx-3 my-3">
               <form [formGroup]="linkForm" (submit)="getLinks()">
                 <div class="row">
                   <div class="col-sm-3">
@@ -32,33 +32,33 @@
 
                   <div class="">
                     <div>&nbsp;</div>
-                    <button type="submit" class="btn btn-light btn-sm" style="float: right;" ><i class="fa fa-search"></i> {{'LINKS.BUSCAR'|translate}} </button>
+                    <button type="submit" class="btn btn-search" style="float: right;" ><i class="fa fa-search"></i> {{'LINKS.BUSCAR'|translate}} </button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div class="card rounded-0 mx-2 mb-3 mt-2">
+          <div class="card rounded-0 mx-4 mt-4 mb-5">
             <div class="card-title border-bottom">
-              <div class="table-title " >
-                <div class="margin-5" >{{counter}} {{'LINKS.RESULTS'|translate}}</div>
+              <div class="table-title mx-3 my4" >
+                <div class=" my-3" >{{counter}} {{'LINKS.RESULTS'|translate}}</div>
                   <div class="justify-content-md-end-me-2 me-2 my-1" style="margin-left: auto">
-                    <button type="button" class="btn btn-add btn-sm" (click)="modalService.open('new')"><i class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-add btn-sm mt-1" (click)="modalService.open('new')"><i class="fa fa-plus"></i></button>
                   </div>
               </div>
 
             </div>
-            <div class="card-content mx-2 my-3">
-              <div (show)="counter<=0">
+            <div class="card-content mx-3 my-2 mb-5">
+              <div (show)="counter=0">
 
               </div>
               <div (show)="counter>0">
-                <table class="table table-bordered">
-                  <tr style="background-color: #e7e7e7">
-                    <th>{{'LINKS.TYPE'|translate}}</th>
-                    <th>{{'LINKS.DESCRIPTION'|translate}}</th>
-                    <th>{{'LINKS.USER'|translate}}</th>
-                    <th style="width:100px;"></th>
+                <table class="mx-2 table table-bordered" >
+                  <tr style="background-color: #f4f4f5">
+                    <th> {{'LINKS.TYPE'|translate}}</th>
+                    <th> {{'LINKS.DESCRIPTION'|translate}}</th>
+                    <th> {{'LINKS.USER'|translate}}</th>
+                    <th style="width:100px; "></th>
                   </tr>
                   <tr *ngFor="let element of rowData" >
                     <td><span [innerHTML]="element[0]"></span></td>
@@ -79,7 +79,7 @@
           <div class="row">
             <div class="col">
               <label>{{ 'LINKS.TYPE' | translate}}</label>
-              <select class="form-control" formControlName="categoria" >
+              <select class="form-control" [value]="" formControlName="categoria" >
                 <option *ngFor="let element of types" [value]="element.k" [selected]="element.k==='Otros'">{{element.v | translate}}</option>
               </select>
             </div>

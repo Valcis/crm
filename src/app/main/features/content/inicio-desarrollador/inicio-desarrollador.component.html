@@ -57,14 +57,23 @@
         <div class="input-group m-l-2">
           <input
             class="form-control"
-            placeholder="yyyy-mm-dd"
-            name="dp"
+            placeholder="dd/mm/yyyy"
+            name="d2"
+            #c2="ngModel"
+            [(ngModel)]="model2"
             ngbDatepicker
-            #d="ngbDatepicker"
+            #d2="ngbDatepicker"
           />
-          <button class="btn btn-outline-secondary fa fa-calendar text-black" (click)="d.toggle()" type="button"></button>
+          <button class="btn btn-outline-secondary fa fa-calendar text-black" (click)="d2.toggle()" type="button"></button>
         </div>
       </div>
     </form>
   </div>
+
+  <hr />
+  <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button>
+  <hr />
+  <pre>Model: {{ model2 | json }}</pre>
+  <pre>State: {{ c2.status }}</pre>
+
 </div>

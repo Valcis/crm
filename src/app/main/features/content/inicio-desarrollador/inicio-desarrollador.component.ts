@@ -3,6 +3,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
 import {DateTime} from 'luxon';
+import {NgbCalendar, NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
+import {DateAdapterService} from "../../../../shared/services/datepicker/date-adapter.service";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -10,6 +12,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   selector: 'app-inicio-desarrollador',
   templateUrl: './inicio-desarrollador.component.html',
   styleUrls: ['./inicio-desarrollador.component.scss'],
+  providers: [
+    { provide: NgbDateAdapter, useClass: DateAdapterService }
+  ]
 
 })
 export class InicioDesarrolladorComponent implements OnInit{
@@ -20,7 +25,12 @@ export class InicioDesarrolladorComponent implements OnInit{
   public utc: any;
   public formatedTime: any;
 
-  constructor(private _title: Title) {
+  model2: string = '';
+
+  constructor(
+    private _title: Title,
+    private _dAdapt: NgbDateAdapter<string>,
+    private _calendar: NgbCalendar) {
   }
 
   ngOnInit(): void {
@@ -52,5 +62,9 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+  }
+
+  get today() {
+    return this._dAdapt.toModel(this._calendar.getToday())!;
   }
 }

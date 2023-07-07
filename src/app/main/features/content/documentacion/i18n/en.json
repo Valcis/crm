@@ -1,0 +1,13 @@
+{
+  "PAG_LINKS": "LINKS",
+  "PAG_LINKS_HEAD_LISTADO": "Links’ list",
+  "PAG_LINKS_CRITERIOS_BUSQUEDA": "Links searching criteria",
+  "PAG_LINKS_LINK": "Link",
+  "PAG_LINKS_CREAR_LINK": "Create a new link",
+
+  "PAG_LINKS_SWEET_ALERT_NO_PODRAS_RECUPERAR": "You will not be able to recover the link",
+  "PAG_LINKS_SWEET_ALERT_LINK_BORRADO": "The link has been correctly deleted",
+
+  "PAG_LINKS_NOTIFY_ANADIDO_OK": "Correctly added",
+  "PAG_LINKS_NOTIFY_NECESARIO_LINK": "A description and a link are required"
+}

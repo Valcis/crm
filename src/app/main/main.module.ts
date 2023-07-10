@@ -20,6 +20,8 @@ import { ActividadesComponent } from './features/content/actividades/actividades
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import {ModalComponent} from "./features/content/documentacion/links/partials/modal.component";
+import { NgxPaginationModule } from 'ngx-pagination';
+//import {PaginationComponent} from "./features/content/documentacion/links/partials/paginator.component";
 
 @NgModule({
   declarations: [
@@ -36,8 +38,10 @@ import {ModalComponent} from "./features/content/documentacion/links/partials/mo
     NotificacionesComponent,
     LinksComponent,
     ModalComponent,
+    //PaginationComponent
     ],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     MainRoutingModule,
     TranslateModule.forRoot({

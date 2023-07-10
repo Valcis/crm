@@ -67,12 +67,43 @@
                     <button class="btn btn-danger btn-sm btn-sm btn-sm mx-1 my-2" [value]="element[4]" (click)="openDelete(element[4])"><i class="fa fa-trash"></i> Delete</button>
                   </tr>
                 </table>
+                <div [ngIf]="numPages > 1"
+                                class="pagination-sm" >
+                  <ul class="pagination m-n" [ngIf]="numPaginasArray.length>1">
+
+                  <li >
+                    <a href="" (click)="this.pagSeleccionada <= '1' || buscarPrevious()">{{symbolPrevious}}</a>
+                  </li>
+
+                  <li [ngIf]="showUserRangPrevious">
+                    <a href="" (click)="nextRang('DOWN')">...</a>
+                  </li>
+
+                  <li *ngFor="let n in numPaginasArray "
+                      >
+                    <a href="" (click)="buscar(n)">{{n}}<span class="sr-only"></span></a>
+                  </li>
+
+                  <li [ngIf]="showUserRangNext">
+                    <a href="" (click)="nextRang('UP')">...</a>
+                  </li>
+
+                  <li [class]="{'disabled':pagSeleccionada*numElementosPorPagina >= numResultados }">
+                    <a href="" (click)="pagSeleccionada*numElementosPorPagina >= numResultados || buscarNext()">{{symbolNext}}</a>
+                  </li>
+
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+
+
     <jw-modal id="new">
       <div>
         <form [formGroup]="newForm" (submit)="createLink()">
@@ -95,7 +126,7 @@
             </div>
           </div>
           <div class="row">
-            <button type="submit" class="col" (click)="createLink()" >LINK.CREATE</button>
+            <button type="submit" class="col" >LINK.CREATE</button>
             <button class="col" (click)="modalService.close();">LINK.CLOSE</button>
           </div>
         </form>

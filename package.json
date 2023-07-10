@@ -33,6 +33,7 @@
     "luxon": "^3.3.0",
     "moment": "^2.29.4",
     "ngx-cookie-service": "^15.0.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-socket-io": "^4.4.0",
     "postcss-import": "^15.1.0",
     "rxjs": "~7.8.0",

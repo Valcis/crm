@@ -1,0 +1,24 @@
+<ul class="pagination m-n" [ngIf]="numPaginasArray.length>1">
+
+  <li [class]="{'disabled':pagSeleccionada <= '1' }">
+    <a href="" (click)="pagSeleccionada <= '1' || buscarPrevious()">{{symbolPrevious}}</a>
+  </li>
+
+  <li [ngIf]="showUserRangPrevious">
+    <a href="" (click)="nextRang('DOWN')">...</a>
+  </li>
+
+  <li *ngFor="let n in numPaginasArray "
+      [class]="{'active': n === pagSeleccionada}">
+    <a href="" (click)="buscar(n)">{{n}}<span class="sr-only"></span></a>
+  </li>
+
+  <li [ngIf]="showUserRangNext">
+    <a href="" (click)="nextRang('UP')">...</a>
+  </li>
+
+  <li [class]="{'disabled':pagSeleccionada*numElementosPorPagina >= numResultados }">
+    <a href="" (click)="pagSeleccionada*numElementosPorPagina >= numResultados || buscarNext()">{{symbolNext}}</a>
+  </li>
+
+</ul>

@@ -1,15 +1,19 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component} from '@angular/core';
 
 
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {LinkService} from "src/app/shared/services/api/Documentatnion/Link.service"
 import {TranslateService} from "@ngx-translate/core";
-import { ModalService } from './_services/popUp.services';
+import Swal from 'sweetalert2'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
+
 
 @Component({
   selector: 'document-links',
   templateUrl: './links.component.html',
-  styleUrls: ['./links.component.scss',]
+  styleUrls: ['./links.component.scss',],
+
 })
 export class LinksComponent {
 
@@ -24,11 +28,13 @@ export class LinksComponent {
 
 
   public counter: number = 0;
-  public page: number = 1;
-  public numPages: number = 1;
   public fechResult: any[]=[];
-  public table:any[] = []
+  public currentPage = 1;
+  public pageSize =10;
   public rowData: any[]= [];
+  public table:any[] = this.rowData.slice((this.currentPage-1)*10,((this.currentPage)*10));
+
+
   public delObj: any;
 
   public columnDefs: string[] = ['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.USER',' '];
@@ -37,119 +43,128 @@ export class LinksComponent {
   constructor(
     private _translate: TranslateService,
     private _linkS: LinkService,
-    protected modalService: ModalService,
+    private _modalService: NgbModal,
+    private _cookie: CookiesService,
   ) {
-
-
-    //numResultados
-    //numPaginasArray = [];
-
-    //rango
-    this.numElementosPorPagina = 5;
-    this.pagSeleccionada = 1;
-    this.maxPag = 5;
-
-
+    if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
+      this._translate.use('es');
+      this._cookie.setLanguage(this._translate.currentLang);
+    } else {
+      this._translate.use(_cookie.getLanguage())
+    }
 
 
   }
+
+  private modalRef :any;
 
 
 
   async ngOnInit(): Promise<void> {
+    this.loadForms()
+    this.getLinks()
+  }
+
+  private loadForms(){
+    //getLnks() form
     this.linkForm = new FormGroup({
-      categoria: new FormControl<string>(""),
+      categoria: new FormControl<string>("Otros"),
       neo_id: new FormControl<number>(0),
       descripcion: new FormControl<string>(""),
       link: new FormControl<string>("")
-    })
+    });
+    //newLink() form
     this.newForm = new FormGroup({
-      categoria: new FormControl<string>(""),
+      categoria: new FormControl<string>("Otros"),
       descripcion: new FormControl<string>(""),
       link: new FormControl<string>("")
-    })
+    });
   }
 
+
   public async getLinks(){
-    var elements=this.linkForm.value
+    var elements=this.linkForm.value;
     let env =
       {"categoria" : elements.categoria,
       "neo_id":0,
       "descripcion": elements.descripcion,
-      "link": elements.link}
-
-    console.log('getLINKS', env)
+      "link": elements.link};
 
     this._linkS.fetchLinks(env).subscribe(response =>{
-      console.log(response)
-      var localData:any = response
-      this.fechResult=[]
+      var localData:any = response;
+      this.fechResult=[];
       this.fechResult = localData.Salida.lineas;
-      this.rowData = []
-      var info: any[][] = []
-
+      this.rowData = [];
+      var info: any[] = [];
+      this.table=[];
       this.fechResult.forEach((value) => {
-
-        var it = [value.data.categoria,value.data.link,value.data.descripcion, value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1, value]
+        var it = {
+          c:value.data.categoria,
+          link:value.data.link,
+          description:value.data.descripcion,
+          name:value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1,
+          value:value
+        };
         info.push(it)
-
-      })
-      this.rowData = info
-      this.counter = this.rowData.length
-
-
-
-      //this.pages = Array.from(Array(this.counter/10).keys())
-
-
-      //this.pageChange(1)
-
+      });
+      this.counter = info.length;
+      info.sort((a,b) => b.value.data.creacion_ts - a.value.data.creacion_ts);
+      this.rowData = info;
     });
-
   }
-  /*public pageChange(value:number){
-
-    this.table = this.rowData.slice((10*(value-1)), ((10*(value-1)+10)));
-  }*/
 
 
-  public async openDelete(item : any){
-    this.modalService.open('trash')
+  public async deleteLinks(item: any){
     this.delObj = item;
-  }
-
-  public async deleteLinks(){
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
-      /*
-      SweetAlert.swal({
-          title: $translate.instant('SWEET_ALERT_TITLE_DELETE'),
-          text: $translate.instant($translate.instant("PAG_LINKS_SWEET_ALERT_NO_PODRAS_RECUPERAR")+':' + elemento.data.descripcion),
-          type: "warning",
+
+      Swal.fire({
+          scrollbarPadding: false,
+          heightAuto: false,
+          title: this._translate.instant('LINKS.ALERT_TITLE_DELETE'),
+          text: this._translate.instant(this._translate.instant("LINKS.ALERT_TEXT")+':' + item.data.descripcion),
+          icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: $translate.instant('SWEET_ALERT_CONFIRM_DELETE'),
-          cancelButtonText: $translate.instant('SWEET_ALERT_CANCEL_DELETE'),
-          closeOnConfirm: false,
-          closeOnCancel: true
-        }*/
+          confirmButtonText: this._translate.instant('LINKS.ALERT_CONFIRM'),
+          cancelButtonColor: "#D0D0D0",
+          cancelButtonText: this._translate.instant('LINKS.ALERT_CANCEL'),
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed){
+            this._linkS.rmLink(this.delObj).subscribe(response=>{
+              //crmLoadingPage(false);
+              if (response !== undefined) {
+                //crmLoadingPage(true);
+                Swal.fire({
+                  scrollbarPadding: false,
+                  showDenyButton: true,
+                  heightAuto: false,
+                  title:this._translate.instant('LINKS.ALERT_RESPONSE1'),
+                  text:this._translate.instant('LINKS.ALERT_LINK_BORRADO'),
+                  icon:"success",
+                  denyButtonColor: "rgb(174, 222, 244)",
+                  denyButtonText:"OK",
+                  showConfirmButton:false,
+                  showCancelButton:false,
+                });
 
-        //crmLoadingPage(true);
-
-      this._linkS.rmLink(this.delObj).subscribe(response=>{
-          //crmLoadingPage(false);
-          if (response !== undefined) {
-            this.modalService.close();
-            //crmLoadingPage(true);
-            /*vm.getLinks();
-            SweetAlert.swal($translate.instant('SWEET_ALERT_RESPONSE1_EVENTO_DELETE'), $translate.instant('PAG_LINKS_SWEET_ALERT_LINK_BORRADO'), "success");
-            */
-            this.getLinks();
+                this.getLinks();
+              }
+            })
           }
-        })
-
+        });
+        //crmLoadingPage(true);
     }
   }
 
+  //open the modal with the form to cteate a link
+  open(content : any) {
+    this.modalRef = this._modalService.open(content, {
+      windowClass: 'modal-element',
+      size: "lg"});
+
+  }
 
   public createLink() {
     if (this.newForm.value.link.length > 0 && (this.newForm.value.descripcion.length > 0)) {
@@ -168,10 +183,9 @@ export class LinksComponent {
       };
       //crmLoadingPage(true);
       this._linkS.newLink(request).subscribe(response =>{
-        console.log(response)
         //crmLoadingPage(false);
         if (response !== undefined) {
-          this.modalService.close();
+          this.modalRef.close();
           /*
           notify({
             message: $translate.instant("PAG_LINKS_NOTIFY_ANADIDO_OK"),//Texto plano
@@ -180,8 +194,9 @@ export class LinksComponent {
             templateUrl: 'general/common/notify.html'
           });
           */
-          this.getLinks()
+          this.getLinks();
         }
+        return response
     });
 
     } else {
@@ -195,175 +210,4 @@ export class LinksComponent {
        */
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public numResultados: any;
-  public numPaginasArray = [];
-
-  public rango : number[] = []
-  public numElementosPorPagina: any;
-  public pagSeleccionada: number| string | undefined = 1;
-  public maxPag: number = 5;
-  //private functionModificarPagina
-
-  public symbolNext = ">>";
-  public symbolPrevious = "<<";
-  public showUserRangNext = this.showNextRang('UP')
-  public showUserRangPrevious = this.showNextRang('DOWN')
-
-
-  //TODO: revise any and undefined
-
-  getNumeroPagina() {
-
-    var arr:string[] = [];
-    if (this.rango !== undefined && this.rango.length === 2) {
-      var numPag = Math.ceil(this.numResultados / this.numElementosPorPagina);
-      for (var i = this.rango[0]; i <= this.rango[1]; i++) {
-        if (i <= numPag) {
-          arr.push(i.toString());
-        }
-      }
-    }
-    return arr;
-
-  };
-
-
-  toInteger(value :any) {
-
-    if (typeof value === "string") {
-      return parseInt(value, 10);
-    } else {
-      return value;
-    }
-
-  };
-
-  buscar(pag: any) {
-    this.pagSeleccionada = pag.toString();
-    //this.functionModificarPagina({pagina: pag.toString()});
-  };
-
-  buscarPrevious() {
-    var actualPag = 1;
-    if (typeof this.pagSeleccionada === "string") {
-      actualPag = parseInt(this.pagSeleccionada, 10) - actualPag;
-    }
-    if (actualPag >= 1 && actualPag <= this.numResultados) {
-      //this.functionModificarPagina({pagina: actualPag.toString()});
-    }
-  };
-  buscarNext() {
-    var actualPag = 1;
-    if (typeof this.pagSeleccionada === "string") {
-      actualPag = parseInt(this.pagSeleccionada, 10) + actualPag;
-    }
-    if (actualPag >= 1 && actualPag <= this.numResultados) {
-      this.pagSeleccionada = actualPag.toString();
-      //this.functionModificarPagina({pagina: actualPag.toString()});
-    }
-
-  };
-
-  //---- Modificacion de los rangos para el boton ...
-  showNextRang (UpDown : any) {
-    if (this.pagSeleccionada === undefined) return false;
-    if (this.maxPag === undefined) return false;
-    if (this.numResultados === undefined) return false;
-    if (this.numElementosPorPagina === undefined) return false;
-
-    var actualPag = this.toInteger(this.pagSeleccionada);
-    var maxPag = this.toInteger(this.maxPag);
-    var numResultados = this.toInteger(this.numResultados);
-    var numElementosPorPagina = this.toInteger(this.numElementosPorPagina);
-
-    var numeroRangos = 0;
-
-    if (Math.ceil(numResultados / numElementosPorPagina) <= maxPag) {
-      numeroRangos = 0;
-    } else {
-      numeroRangos = Math.ceil(( numResultados / numElementosPorPagina) / maxPag);
-    }
-    var rangoActual = 0;
-    var rangoActual = Math.ceil(actualPag / maxPag);
-
-    var rangoSuperior = rangoActual * maxPag;
-
-    var rangoInferior = rangoSuperior - (maxPag - 1);
-
-    if (actualPag >= rangoInferior && actualPag <= rangoSuperior) {
-
-      this.rango = [rangoInferior, rangoSuperior]; // Asignamos el rango actual
-
-    }
-
-    if (UpDown === 'UP' && numeroRangos >= 1 && rangoActual < numeroRangos) {
-
-      return true;
-    } else {
-      if (UpDown === 'DOWN' && numeroRangos >= 1 && rangoActual > 1) {
-        return true;
-      }
-    }
-    return false;
-
-  };
-
-//    Buscar siguiente pagina utilizando el boton ...
-  nextRang(UpDown: any) {
-    var actualPag = this.toInteger(this.pagSeleccionada);
-    var maxPag = this.toInteger(this.maxPag);
-    var numResultados = this.toInteger(this.numResultados);
-    var numElementosPorPagina = this.toInteger(this.numElementosPorPagina);
-
-    var numeroRangos = 0;
-    //if (( numResultados / numElementosPorPagina).toFixed() <= maxPag) {
-    //    numeroRangos = 0;
-    //} else {
-    //    numeroRangos = ((( numResultados / numElementosPorPagina).toFixed()) / maxPag).toFixed();
-    //}
-    if (Math.ceil(numResultados / numElementosPorPagina) <= maxPag) {
-      numeroRangos = 0;
-    } else {
-      numeroRangos = Math.ceil(( numResultados / numElementosPorPagina) / maxPag);
-    }
-    var rangoActual = 0;
-
-    //Buscamos el rango activo de la actualPag
-    var rangoActual = Math.ceil(actualPag / maxPag) - 1;
-
-    if (UpDown === 'UP') {
-      rangoActual = rangoActual + 1;
-      this.pagSeleccionada = (rangoActual * maxPag) + 1;
-      //this.functionModificarPagina({pagina: this.pagSeleccionada.toString()});
-
-    } else {
-      if (UpDown === 'DOWN') {
-        rangoActual = rangoActual - 1;
-        this.pagSeleccionada = (rangoActual + 1) * maxPag;
-       // this.functionModificarPagina({pagina: this.pagSeleccionada.toString()});
-
-      }
-    }
-
-  };
-
-
 }

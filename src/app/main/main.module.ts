@@ -10,7 +10,7 @@ import {TopNavComponent} from './features/top-nav/top-nav.component';
 import {SideNavComponent} from './features/side-nav/side-nav.component';
 import {ContentComponent} from './features/content/content.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {NgbModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule, NgbPaginationModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import { GraficosComponent } from './features/content/graficos/graficos.component';
 import { InicioDesarrolladorComponent } from './features/content/inicio-desarrollador/inicio-desarrollador.component';
@@ -19,9 +19,8 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
-import {ModalComponent} from "./features/content/documentacion/links/partials/modal.component";
-import { NgxPaginationModule } from 'ngx-pagination';
-//import {PaginationComponent} from "./features/content/documentacion/links/partials/paginator.component";
+
+
 
 @NgModule({
   declarations: [
@@ -37,11 +36,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
-    ModalComponent,
-    //PaginationComponent
     ],
   imports: [
-    NgxPaginationModule,
+    NgbPaginationModule,
     CommonModule,
     MainRoutingModule,
     TranslateModule.forRoot({

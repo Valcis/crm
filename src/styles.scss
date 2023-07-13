@@ -172,3 +172,10 @@ hr.divider {
 .l-grey {
   color: $light-gray
 }
+
+.swal2-deny {
+  width:70px;
+}
+.swal2-popup .swal2-styled:focus {
+  box-shadow: none !important;
+}

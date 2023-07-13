@@ -1,13 +1,18 @@
 {
-  "PAG_LINKS": "LINKS",
-  "PAG_LINKS_HEAD_LISTADO": "Links’ list",
-  "PAG_LINKS_CRITERIOS_BUSQUEDA": "Links searching criteria",
-  "PAG_LINKS_LINK": "Link",
-  "PAG_LINKS_CREAR_LINK": "Create a new link",
-
-  "PAG_LINKS_SWEET_ALERT_NO_PODRAS_RECUPERAR": "You will not be able to recover the link",
-  "PAG_LINKS_SWEET_ALERT_LINK_BORRADO": "The link has been correctly deleted",
-
-  "PAG_LINKS_NOTIFY_ANADIDO_OK": "Correctly added",
-  "PAG_LINKS_NOTIFY_NECESARIO_LINK": "A description and a link are required"
+  "LINKS.CRITERIA": "Main funciona",
+  "LINKS.TYPE": "Contenido funciona",
+  "LINKS.HOTEL": "Contenido funciona",
+  "LINKS.AGENCY": "Contenido funciona",
+  "LINKS.OTHER": "Contenido funciona",
+  "LINKS.TYPE": "Contenido funciona",
+  "LINKS.DESCRIPTION": "Contenido funciona",
+  "LINKS.USER": "Contenido funciona",
+  "LINKS.ALERT_TITLE_DELETE": "Contenido funciona",
+  "LINKS.ALERT_TEXT": "Main funciona",
+  "LINKS.ALERT_CONFIRM": "Contenido funciona",
+  "LINKS.ALERT_CANCEL": "Contenido funciona",
+  "LINKS.FORM_TITLE": "Contenido funciona",
+  "LINKS.SEARCH": "Contenido funciona",
+  "LINKS.RESULTS": "Contenido funciona",
+  "LINKS.NEW": "Contenido funciona"
 }

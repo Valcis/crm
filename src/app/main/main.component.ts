@@ -17,6 +17,8 @@ export class MainComponent implements OnInit {
   currentLang: string = '';
   userData: any;
 
+
+
   constructor(
     private translate: TranslateService,
     private cookie: CookiesService,

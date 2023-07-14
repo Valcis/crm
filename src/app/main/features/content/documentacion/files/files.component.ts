@@ -52,24 +52,24 @@ export class FilesComponent {
       Entrada: this.filesForm.value
     };
     //crmLoadingPage(true);
-    let response: any;
     console.log(request)
     this.rowData = []
     var list: any=[];
-    response = this._fileService.getFiles(request);
-
     //crmLoadingPage(false);
+    this._fileService.getFiles(request).subscribe(response=>{
+      if (response !== undefined) {
+        response.response.forEach(function(value :any){
+          //{"Status":"OK","Salida":{"lineas":[{"metadata":{"neo_id":653767,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Events Calendar 2022 EN","creacion_ts":1650605523000,"size":161661,"original_name":"Events Calendar 2022 EN.pdf","categoria":"Otros","name":"1650612723321.pdf","modificacion_ts":1650605523000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3380917,"type":"_CREA"},"data":{"descripcion":["","Events Calendar 2022 EN"],"creacion_ts":1650605523000,"size":["","161661"],"categoria":["","Otros"],"original_name":["","Events Calendar 2022 EN.pdf"],"name":["","1650612723321.pdf"]}}]},{"metadata":{"neo_id":654147,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario Eventos 2022 ES","creacion_ts":1650605505000,"size":162814,"original_name":"Calendario Eventos 2022 ES.pdf","categoria":"Otros","name":"1650612705311.pdf","modificacion_ts":1650605505000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3375943,"type":"_CREA"},"data":{"descripcion":["","Calendario Eventos 2022 ES"],"creacion_ts":1650605505000,"size":["","162814"],"categoria":["","Otros"],"original_name":["","Calendario Eventos 2022 ES.pdf"],"name":["","1650612705311.pdf"]}}]},{"metadata":{"neo_id":364477,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario eventos 2020 FR","creacion_ts":1577432068000,"size":129868,"original_name":"Events 2020 FR.pdf","categoria":"Otros","name":"1577435668163.pdf","modificacion_ts":1577432068000},"relations":[{"node":{"metadata":{"neo_id":170560,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"Andrea","mail":"andrea.navarro@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5608,"user_name":"andrean","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"MARKETING","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4639,"empl_ape2":"","empl_ape1":"Navarro","user_perfil":"COMERCIAL_MARKETING_EVENTOS"}},"metadata":{"neo_id":1998852,"type":"_CREA"},"data":{"descripcion":["","Calendario eventos 2020 FR"],"creacion_ts":1577432068000,"size":["","129868"],"categoria":["","Otros"],"original_name":["","Events 2020 FR.pdf"],"name":["","1577435668163.pdf"]}}]}],"datos":{"num_elementos":3}},"Metodo":"GetFicheros","Servicio":"ficheros","Id":"NzB8O0pqx13WBjK2Ug8m9xWMm3Akkl8VVI4VqFgI","URL":""}
+          console.log(value)
+          var it={cog: {linked: "",im: "" },fileNames:"",des:"",siz:"",categor:"",userName:"",dateCreation:"" }
+          list.push(it)
+        });
+        this.rowData = list;
+        console.log(response);
+      }
 
-    if (response !== undefined) {
-      response.forEach(function(value :any){
-        //{"Status":"OK","Salida":{"lineas":[{"metadata":{"neo_id":653767,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Events Calendar 2022 EN","creacion_ts":1650605523000,"size":161661,"original_name":"Events Calendar 2022 EN.pdf","categoria":"Otros","name":"1650612723321.pdf","modificacion_ts":1650605523000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3380917,"type":"_CREA"},"data":{"descripcion":["","Events Calendar 2022 EN"],"creacion_ts":1650605523000,"size":["","161661"],"categoria":["","Otros"],"original_name":["","Events Calendar 2022 EN.pdf"],"name":["","1650612723321.pdf"]}}]},{"metadata":{"neo_id":654147,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario Eventos 2022 ES","creacion_ts":1650605505000,"size":162814,"original_name":"Calendario Eventos 2022 ES.pdf","categoria":"Otros","name":"1650612705311.pdf","modificacion_ts":1650605505000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3375943,"type":"_CREA"},"data":{"descripcion":["","Calendario Eventos 2022 ES"],"creacion_ts":1650605505000,"size":["","162814"],"categoria":["","Otros"],"original_name":["","Calendario Eventos 2022 ES.pdf"],"name":["","1650612705311.pdf"]}}]},{"metadata":{"neo_id":364477,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario eventos 2020 FR","creacion_ts":1577432068000,"size":129868,"original_name":"Events 2020 FR.pdf","categoria":"Otros","name":"1577435668163.pdf","modificacion_ts":1577432068000},"relations":[{"node":{"metadata":{"neo_id":170560,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"Andrea","mail":"andrea.navarro@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5608,"user_name":"andrean","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"MARKETING","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4639,"empl_ape2":"","empl_ape1":"Navarro","user_perfil":"COMERCIAL_MARKETING_EVENTOS"}},"metadata":{"neo_id":1998852,"type":"_CREA"},"data":{"descripcion":["","Calendario eventos 2020 FR"],"creacion_ts":1577432068000,"size":["","129868"],"categoria":["","Otros"],"original_name":["","Events 2020 FR.pdf"],"name":["","1577435668163.pdf"]}}]}],"datos":{"num_elementos":3}},"Metodo":"GetFicheros","Servicio":"ficheros","Id":"NzB8O0pqx13WBjK2Ug8m9xWMm3Akkl8VVI4VqFgI","URL":""}
-        console.log(value)
-        var it={cog: {linked: "",im: "" },fileNames:"",des:"",siz:"",categor:"",userName:"",dateCreation:"" }
-        list.push(it)
-      });
-      this.rowData = list;
-      console.log(this.rowData);
-    }
+    });
+
 
   };
 
@@ -95,15 +95,16 @@ export class FilesComponent {
           }
         }
         //crmLoadingPage(true);
-        var response: any;
-        response = this._fileService.deleteFile(request)
-        //crmLoadingPage(false);
-        if (response !== undefined && response.Salida !== undefined && response.Status === 'OK') {
-          Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE'), "success");
-        } else {
-          Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE_ERROR'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE_ERROR'), "error");
-        }
-        this.getFiles();
+        this._fileService.deleteFile(request).subscribe(response=>{
+          //crmLoadingPage(false);
+          if (response !== undefined && response.Salida !== undefined && response.Status === 'OK') {
+            Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE'), "success");
+          } else {
+            Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE_ERROR'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE_ERROR'), "error");
+          }
+          this.getFiles();
+        })
+
       }
     });
   };

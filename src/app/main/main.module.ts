@@ -9,7 +9,7 @@ import {TranslateLoaderService} from "../shared/services/translate/translate-loa
 import {TopNavComponent} from './features/top-nav/top-nav.component';
 import {SideNavComponent} from './features/side-nav/side-nav.component';
 import {ContentComponent} from './features/content/content.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {NgbModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import { GraficosComponent } from './features/content/graficos/graficos.component';
@@ -18,11 +18,12 @@ import { ProveedoresProductoComponent } from './features/content/proveedores-pro
 import { CalendarioComponent } from './features/content/calendario/calendario.component';
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
-
+import {FilesComponent} from "./features/content/documentacion/files/files.component";
 
 
 @NgModule({
   declarations: [
+    FilesComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -50,6 +51,7 @@ import { NotificacionesComponent } from './features/content/notificaciones/notif
       extend: true
     }),
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     SharedModule,
   ],

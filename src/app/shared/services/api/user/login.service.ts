@@ -3,6 +3,7 @@ import {LoginEntrada} from "../../../models/user/login.model";
 import {GenericRequest} from "../../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'

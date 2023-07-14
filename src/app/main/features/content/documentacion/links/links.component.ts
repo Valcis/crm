@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
-import {TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {translateType, TypeModel} from "../../../../../shared/models/documentation/type.model";
 
 
 @Component({
@@ -82,28 +82,13 @@ export class LinksComponent {
       this.rowData = [];
       var info: any[] = [];
       this.fechResult.forEach((value) => {
+        var a:string = value.data.categoria
         var it = {
-          c:value.data.categoria,
+          c:translateType[a],
           link:value.data.link,
           description:value.data.descripcion,
           name:value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1,
           value:value};
-        //TODO: Probar de hacerlo sim un switch/case
-
-        switch (it.c) {
-          case "Otros":{
-            it.c = 'LINKS.OTHER';
-            break;
-          }
-          case "Agencia":{
-            it.c = "LINKS.AGENCY";
-            break;
-          }
-          case "Hotel":{
-            it.c = "LINKS.HOTEL";
-            break;
-          }
-        }
         info.push(it);
       });
       this.counter = info.length;
@@ -115,7 +100,6 @@ export class LinksComponent {
   public async deleteLinks(item: any){
     this.delObj = item;
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
-      //TODO: El código de Sweet alert debería estar a) en un servicio o b) en un componente, dentro del shared.
       this._swal.swalConfirmationRequest('LINKS.ALERT_TITLE_DELETE',"LINKS.ALERT_TEXT",item.data.descripcion)
         .then((result) => {
           if (result.isConfirmed){
@@ -170,7 +154,7 @@ export class LinksComponent {
       });
 
     } else {
-      //TODO: Este else tendría que hacer algo?
+      console.log(this.newForm.value.link)
       /*
       notify({
         message: $translate.instant("PAG_LINKS_NOTIFY_NECESARIO_LINK"),//Texto plano

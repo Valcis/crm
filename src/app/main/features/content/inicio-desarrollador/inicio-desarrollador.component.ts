@@ -3,8 +3,11 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
 import {DateTime} from 'luxon';
-import {NgbCalendar, NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
-import {DateAdapterService} from "../../../../shared/services/datepicker/date-adapter.service";
+import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {
+  CustomDateParserFormatter,
+  DateAdapterService
+} from "../../../../shared/services/datepicker/date-adapter.service";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -13,7 +16,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   templateUrl: './inicio-desarrollador.component.html',
   styleUrls: ['./inicio-desarrollador.component.scss'],
   providers: [
-    { provide: NgbDateAdapter, useClass: DateAdapterService }
+    { provide: NgbDateAdapter, useClass: DateAdapterService },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 
 })
@@ -26,6 +30,7 @@ export class InicioDesarrolladorComponent implements OnInit{
   public formatedTime: any;
 
   model2: string = '';
+  time2: any;
 
   constructor(
     private _title: Title,
@@ -66,5 +71,21 @@ export class InicioDesarrolladorComponent implements OnInit{
 
   get today() {
     return this._dAdapt.toModel(this._calendar.getToday())!;
+  }
+
+  erase() {
+    this.model2 = '';
+  }
+
+  openTime() {
+    console.log(this.utc.toLocaleString(DateTime.TIME_24_SIMPLE));
+    let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
+
+    let testParse3 = test.split(':', 2);
+    console.log(testParse3);
+    this.time2 = {
+      hour: testParse3[0],
+      minute: testParse3[1]
+    }
   }
 }

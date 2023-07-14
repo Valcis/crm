@@ -4,3 +4,4 @@ export interface LinkEntrada {
   user_session_id?: string;
   recordarUsuario?: false;
 }
+//TODO: No se está utilizando y no está en la ubicación correcta

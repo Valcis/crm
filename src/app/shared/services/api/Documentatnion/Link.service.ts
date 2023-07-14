@@ -5,17 +5,20 @@ import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {FormGroup} from "@angular/forms";
 import {CookiesService} from "../../cookies/cookies.service";
+//TODO: Limpiar imports que no se usen
 
 @Injectable({
   providedIn: 'root'
 })
 export class LinkService extends CrmService {
+  //TODO: Vigilar espacios y limpiar logs y comentarios que no sirvan de guía.
+  //TODO: nombres de los ficheros SIEMPRE en minúscula
   private readonly linkBodyRq: GenericRequest;
 
 
   constructor(
     private _http: HttpClient,
-    private _Sesion: CookiesService,
+    private _cookie: CookiesService,
   ) {
     super(_http);
     this.linkBodyRq = {
@@ -23,7 +26,7 @@ export class LinkService extends CrmService {
       Metodo: "",
       Tipo: "",
       Entrada: {}, //ya rellenaremos la entrada con los datos especificos mas adelante
-      Id: this._Sesion.getSessionId(),
+      Id: this._cookie.getSessionId(),
       URL: "",
       recuerdame_id: ""
     };
@@ -39,6 +42,7 @@ export class LinkService extends CrmService {
     return this.sendPost(modifiedLinkBodyRq);
 
   };
+  //TODO: añadir ;
   public newLink = (request:any) =>{
     const modifiedLinkBodyRq = {
       ...this.linkBodyRq,
@@ -48,7 +52,7 @@ export class LinkService extends CrmService {
     console.log(modifiedLinkBodyRq)
     return this.sendPost(modifiedLinkBodyRq);
   }
-
+  //TODO: que el nombre sea un poco más intuitivo
   public rmLink = (item:any) => {
     const modifiedLinkBodyRq = {
       ...this.linkBodyRq,
@@ -60,7 +64,7 @@ export class LinkService extends CrmService {
     //var response = this.sendPost(request)
     return this.sendPost(modifiedLinkBodyRq);
   };
-
+//TODO: espacios en blanco
 
 
 }

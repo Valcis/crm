@@ -1,13 +1,10 @@
 import {Component} from '@angular/core';
-
-
 import {FormControl, FormGroup} from "@angular/forms";
 import {LinkService} from "src/app/shared/services/api/Documentatnion/Link.service"
 import {TranslateService} from "@ngx-translate/core";
 import Swal from 'sweetalert2'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
-
 
 @Component({
   selector: 'document-links',
@@ -16,10 +13,10 @@ import {CookiesService} from "../../../../../shared/services/cookies/cookies.ser
 
 })
 export class LinksComponent {
-
-
+  //TODO: Vigilar con los intros en todo el documento.
   public linkForm!: FormGroup;
   public newForm!: FormGroup;
+  //TODO: estoy seguro que no hace falta que esto esté así.
   public types = [
     {"k": "Hotel", "v": "LINKS.HOTEL"},
     {"k": "Agencia", "v": "LINKS.AGENCY"},
@@ -42,8 +39,8 @@ export class LinksComponent {
 
   constructor(
     private _translate: TranslateService,
-    private _linkS: LinkService,
-    private _modalService: NgbModal,
+    private _link: LinkService,
+    private _modal: NgbModal,
     private _cookie: CookiesService,
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
@@ -55,10 +52,12 @@ export class LinksComponent {
 
 
   }
-
+  // TODO: Esto no tendría que estar aquí
   private modalRef :any;
 
 
+  //TODO: añadir los ; que falten.
+  //TODO: Borrar los comentarios y los logs.
 
   async ngOnInit(): Promise<void> {
     this.loadForms()
@@ -90,7 +89,7 @@ export class LinksComponent {
       "descripcion": elements.descripcion,
       "link": elements.link};
 
-    this._linkS.fetchLinks(env).subscribe(response =>{
+    this._link.fetchLinks(env).subscribe(response =>{
       var localData:any = response;
       this.fechResult=[];
       this.fechResult = localData.Salida.lineas;
@@ -105,6 +104,7 @@ export class LinksComponent {
           name:value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1,
           value:value
         };
+        //TODO: Probar de hacerlo som un switch/case
         switch (it.c) {
           case "Otros":{
             it.c = 'LINKS.OTHER';
@@ -131,7 +131,7 @@ export class LinksComponent {
   public async deleteLinks(item: any){
     this.delObj = item;
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
-
+      //TODO: El código de Sweet alert debería estar a) en un servicio o b) en un componente, dentro del shared.
       Swal.fire({
           scrollbarPadding: false,
           heightAuto: false,
@@ -146,7 +146,7 @@ export class LinksComponent {
           reverseButtons: true,
         }).then((result) => {
           if (result.isConfirmed){
-            this._linkS.rmLink(this.delObj).subscribe(response=>{
+            this._link.rmLink(this.delObj).subscribe(response=>{
               //crmLoadingPage(false);
               if (response !== undefined) {
                 //crmLoadingPage(true);
@@ -174,7 +174,7 @@ export class LinksComponent {
 
   //open the modal with the form to cteate a link
   open(content : any) {
-    this.modalRef = this._modalService.open(content, {
+    this.modalRef = this._modal.open(content, {
       windowClass: 'modal-element',
       size: "lg"});
 
@@ -196,7 +196,7 @@ export class LinksComponent {
         }
       };
       //crmLoadingPage(true);
-      this._linkS.newLink(request).subscribe(response =>{
+      this._link.newLink(request).subscribe(response =>{
         //crmLoadingPage(false);
         if (response !== undefined) {
           this.modalRef.close();
@@ -211,9 +211,10 @@ export class LinksComponent {
           this.getLinks();
         }
         return response
-    });
+      });
 
     } else {
+      //TODO: Este else tendría que hacer algo?
       /*
       notify({
         message: $translate.instant("PAG_LINKS_NOTIFY_NECESARIO_LINK"),//Texto plano

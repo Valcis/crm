@@ -17,9 +17,7 @@
                   <div class="col-sm-3">
                     <label>{{ 'LINKS.TYPE' | translate}}</label>
                     <select class="form-select rounded-0" formControlName="categoria" >
-                      <option [value]="types[0].k" >{{types[0].v | translate}}</option>
-                      <option [value]="types[1].k">{{types[1].v | translate}}</option>
-                      <option [value]="types[2].k" >{{types[2].v | translate}}</option>
+                      <option [value]="type.k" *ngFor="let type of types">{{type.v | translate}}</option>
                     </select>
                   </div>
                   <div class="col-sm-3">
@@ -55,13 +53,11 @@
               <div>
                 <table class="mx-2 table table-bordered" >
                   <tr style="background-color: #f4f4f5">
-                    <th> {{'LINKS.TYPE'|translate}}</th>
-                    <th> {{'LINKS.DESCRIPTION'|translate}}</th>
-                    <th> {{'LINKS.LINK'|translate}}</th>
+                    <th *ngFor="let type of columnDefs">{{type | translate}}</th>
                     <th style="width:100px; "></th>
                   </tr>
                   <tr *ngFor="let element of rowData  | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
-                    <td><span [innerHTML]="element.c"></span></td>
+                    <td>{{element.c | translate}}</td>
                     <td><a style="text-decoration:none"  href="{{element.link}}" [innerHTML]="element.description"></a></td>
                     <td><span [innerHTML]="element.name"></span></td>
                     <div class="btn-group dropdown">
@@ -82,7 +78,7 @@
     </div>
 
     <ng-template #newLink let-modal style="border-radius: 1px;" class="modal-lg">
-      <div class="modal-header rounded-0">
+      <div class="modal-header rounded-1">
         <button type="button" class="close row" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
           <span aria-hidden="true">×</span>
           <span class="sr-only ">Close</span></button>
@@ -95,9 +91,7 @@
             <div class="col-sm-3">
               <small>{{ 'LINKS.TYPE' | translate}}</small>
               <select class="form-select rounded-0" formControlName="categoria"  >
-                <option [value]="types[0].k" >{{types[0].v | translate}}</option>
-                <option [value]="types[1].k">{{types[1].v | translate}}</option>
-                <option [value]="types[2].k" >{{types[2].v | translate}}</option>
+                <option [value]="type.k" *ngFor="let type of types">{{type.v | translate}}</option>
               </select>
             </div>
             <div class="col-sm-9">

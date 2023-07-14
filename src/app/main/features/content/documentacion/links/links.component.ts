@@ -37,7 +37,7 @@ export class LinksComponent {
 
   public delObj: any;
 
-  public columnDefs: string[] = ['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.USER',' '];
+  public columnDefs: string[] = ['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.LINK'];
 
 
   constructor(
@@ -105,6 +105,20 @@ export class LinksComponent {
           name:value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1,
           value:value
         };
+        switch (it.c) {
+          case "Otros":{
+            it.c = 'LINKS.OTHER';
+            break;
+          }
+          case "Agencia":{
+            it.c = "LINKS.AGENCY";
+            break;
+          }
+          case "Hotel":{
+            it.c = "LINKS.HOTEL";
+            break;
+          }
+        }
         info.push(it)
       });
       this.counter = info.length;

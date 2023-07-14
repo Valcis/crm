@@ -31,6 +31,9 @@ tr, th, td {
 .margin-top{
   margin-top: 1.5%;
 }
+.btn{
+  border-radius: 3px;
+}
 .btn-add{
   border-color: lightgrey;
 }
@@ -58,6 +61,7 @@ tr, th, td {
 
 .btn-danger{
   background-color: #ED5565;
+  border-color: #ed5565;
   width: 90px;;
 }
 

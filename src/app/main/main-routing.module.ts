@@ -8,6 +8,7 @@ import {ProveedoresProductoComponent} from "./features/content/proveedores-produ
 import {CalendarioComponent} from "./features/content/calendario/calendario.component";
 import {ActividadesComponent} from "./features/content/actividades/actividades.component";
 import {NotificacionesComponent} from "./features/content/notificaciones/notificaciones.component";
+import {LinksComponent} from "./features/content/documentacion/links/links.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
       {path: '#/crm_calendario', component: CalendarioComponent},
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
+      {path: '#/index/crm_lista_links', component: LinksComponent},
+
     ]
   }
 ];

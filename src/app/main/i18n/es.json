@@ -1,4 +1,25 @@
 {
   "MAIN.WORKS": "Main funciona",
-  "CONTENT.WORKS": "Contenido funciona"
+  "CONTENT.WORKS": "Contenido funciona",
+
+  "LINKS.CRITERIA": "Criterios para buscar links",
+  "LINKS.TYPE": "Tipo",
+  "LINKS.HOTEL": "Hotel",
+  "LINKS.AGENCY": "Agencia",
+  "LINKS.OTHER": "Otros",
+  "LINKS.DESCRIPTION": "Descripción",
+  "LINKS.LINK": "Link",
+  "LINKS.ALERT_TITLE_DELETE": "¿Estás seguro?",
+  "LINKS.ALERT_TEXT": "No podrás recuperar el link",
+  "LINKS.ALERT_CONFIRM": "Sí, Borrar!",
+  "LINKS.ALERT_CANCEL": "No, Cancelar!",
+  "LINKS.SEARCH": "Buscar",
+  "LINKS.RESULTS": "Resultado/s",
+  "LINKS.NEW": "Crear un nuevo link",
+  "LINKS.CLOSE": "Cancelar",
+  "LINKS.CREATE": "Añadir",
+  "LINKS.ALERT_RESPONSE1": "Borrado!",
+  "LINKS.ALERT_LINK_BORRADO": "El link ha sido borrado correctamente",
+  "LINKS.DELETE": "Eliminar"
+
 }

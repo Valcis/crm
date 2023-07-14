@@ -67,6 +67,7 @@
                     <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
                         [id]="sub.descripcion"
                         (click)="itemAction(sub.descripcion + ' - id padre -> ' + i)"
+                        [routerLink]="sub.link_pag"
                     >
                       {{ formatName(sub.descripcion) | translate }}
                     </li>

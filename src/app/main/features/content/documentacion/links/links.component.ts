@@ -1,85 +1,71 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {LinkService} from "src/app/shared/services/api/Documentatnion/Link.service"
+import {LinkService} from "src/app/shared/services/api/documentatnion/link.service"
 import {TranslateService} from "@ngx-translate/core";
 import Swal from 'sweetalert2'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
+import {SwalService} from "../../../../../shared/services/swal/swal.service";
+import {TypeModel} from "../../../../../shared/models/documentation/type.model";
+
 
 @Component({
   selector: 'document-links',
   templateUrl: './links.component.html',
   styleUrls: ['./links.component.scss',],
-
 })
 export class LinksComponent {
-  //TODO: Vigilar con los intros en todo el documento.
+
   public linkForm!: FormGroup;
   public newForm!: FormGroup;
-  //TODO: estoy seguro que no hace falta que esto esté así.
-  public types = [
-    {"k": "Hotel", "v": "LINKS.HOTEL"},
-    {"k": "Agencia", "v": "LINKS.AGENCY"},
-    {"k": "Otros", "v": "LINKS.OTHER"}
-  ];
-
-
+  public types!: TypeModel[];
   public counter: number = 0;
   public fechResult: any[]=[];
   public currentPage = 1;
   public pageSize =10;
   public rowData: any[]= [];
-  public table:any[] = this.rowData.slice((this.currentPage-1)*10,((this.currentPage)*10));
-
-
+  private modalRef :any;
   public delObj: any;
-
-  public columnDefs: string[] = ['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.LINK'];
-
+  public columnDefs: string[] = [];
 
   constructor(
     private _translate: TranslateService,
     private _link: LinkService,
     private _modal: NgbModal,
     private _cookie: CookiesService,
+    private _swal: SwalService,
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this._translate.use('es');
       this._cookie.setLanguage(this._translate.currentLang);
     } else {
-      this._translate.use(_cookie.getLanguage())
+      this._translate.use(_cookie.getLanguage());
     }
-
-
+    this.columnDefs=['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.LINK'];
+    this.types =[
+      {k: "Hotel", v: "LINKS.HOTEL"},
+      {k: "Agencia", v: "LINKS.AGENCY"},
+      {k: "Otros", v: "LINKS.OTHER"}]
   }
-  // TODO: Esto no tendría que estar aquí
-  private modalRef :any;
-
-
-  //TODO: añadir los ; que falten.
-  //TODO: Borrar los comentarios y los logs.
 
   async ngOnInit(): Promise<void> {
-    this.loadForms()
-    this.getLinks()
+    this.loadForms();
+    this.getLinks();
   }
 
   private loadForms(){
-    //getLnks() form
     this.linkForm = new FormGroup({
       categoria: new FormControl<string>("Otros"),
       neo_id: new FormControl<number>(0),
       descripcion: new FormControl<string>(""),
-      link: new FormControl<string>("")
+      link: new FormControl<string>(""),
     });
-    //newLink() form
     this.newForm = new FormGroup({
       categoria: new FormControl<string>("Otros"),
       descripcion: new FormControl<string>(""),
-      link: new FormControl<string>("")
+      link: new FormControl<string>(""),
     });
   }
-
 
   public async getLinks(){
     var elements=this.linkForm.value;
@@ -95,16 +81,15 @@ export class LinksComponent {
       this.fechResult = localData.Salida.lineas;
       this.rowData = [];
       var info: any[] = [];
-      this.table=[];
       this.fechResult.forEach((value) => {
         var it = {
           c:value.data.categoria,
           link:value.data.link,
           description:value.data.descripcion,
           name:value.relations[0].node.data.empl_nomb+" "+value.relations[0].node.data.empl_ape1,
-          value:value
-        };
-        //TODO: Probar de hacerlo som un switch/case
+          value:value};
+        //TODO: Probar de hacerlo sim un switch/case
+
         switch (it.c) {
           case "Otros":{
             it.c = 'LINKS.OTHER';
@@ -119,7 +104,7 @@ export class LinksComponent {
             break;
           }
         }
-        info.push(it)
+        info.push(it);
       });
       this.counter = info.length;
       info.sort((a,b) => b.value.data.creacion_ts - a.value.data.creacion_ts);
@@ -127,57 +112,31 @@ export class LinksComponent {
     });
   }
 
-
   public async deleteLinks(item: any){
     this.delObj = item;
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
       //TODO: El código de Sweet alert debería estar a) en un servicio o b) en un componente, dentro del shared.
-      Swal.fire({
-          scrollbarPadding: false,
-          heightAuto: false,
-          title: this._translate.instant('LINKS.ALERT_TITLE_DELETE'),
-          text: this._translate.instant(this._translate.instant("LINKS.ALERT_TEXT")+':' + item.data.descripcion),
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55",
-          confirmButtonText: this._translate.instant('LINKS.ALERT_CONFIRM'),
-          cancelButtonColor: "#D0D0D0",
-          cancelButtonText: this._translate.instant('LINKS.ALERT_CANCEL'),
-          reverseButtons: true,
-        }).then((result) => {
+      this._swal.swalConfirmationRequest('LINKS.ALERT_TITLE_DELETE',"LINKS.ALERT_TEXT",item.data.descripcion)
+        .then((result) => {
           if (result.isConfirmed){
-            this._link.rmLink(this.delObj).subscribe(response=>{
+            this._link.eliminateLink(this.delObj).subscribe(response=>{
               //crmLoadingPage(false);
               if (response !== undefined) {
                 //crmLoadingPage(true);
-                Swal.fire({
-                  scrollbarPadding: false,
-                  showDenyButton: true,
-                  heightAuto: false,
-                  title:this._translate.instant('LINKS.ALERT_RESPONSE1'),
-                  text:this._translate.instant('LINKS.ALERT_LINK_BORRADO'),
-                  icon:"success",
-                  denyButtonColor: "rgb(174, 222, 244)",
-                  denyButtonText:"OK",
-                  showConfirmButton:false,
-                  showCancelButton:false,
-                });
-
+                this._swal.swalSucces('LINKS.ALERT_RESPONSE1','LINKS.ALERT_LINK_BORRADO')
                 this.getLinks();
               }
             })
           }
         });
-        //crmLoadingPage(true);
+      //crmLoadingPage(true);
     }
   }
 
-  //open the modal with the form to cteate a link
   open(content : any) {
     this.modalRef = this._modal.open(content, {
       windowClass: 'modal-element',
       size: "lg"});
-
   }
 
   public createLink() {
@@ -187,14 +146,11 @@ export class LinksComponent {
       } else {
         this.newForm.value.link = 'http://'+ this.newForm.value.link;
       }
-
       let request = {
         "datos_peticion":{
           "categoria":this.newForm.value.categoria,
           "descripcion":this.newForm.value.descripcion,
-          "link":this.newForm.value.link
-        }
-      };
+          "link":this.newForm.value.link}};
       //crmLoadingPage(true);
       this._link.newLink(request).subscribe(response =>{
         //crmLoadingPage(false);
@@ -210,7 +166,7 @@ export class LinksComponent {
           */
           this.getLinks();
         }
-        return response
+        return response;
       });
 
     } else {

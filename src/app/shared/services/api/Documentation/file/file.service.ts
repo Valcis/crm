@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {GenericRequest} from "../../../models/petition/petition.model";
-import {CrmService} from "../crm.service";
+import {GenericRequest} from "../../../../models/petition/petition.model";
+import {CrmService} from "../../crm.service";
 import {HttpClient} from "@angular/common/http";
+import {CookiesService} from "../../../cookies/cookies.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class FileService extends CrmService{
 
   constructor(
     private _http: HttpClient,
+    private _Session: CookiesService
   ){
     super(_http);
     this.fileBodyRq = {
@@ -18,27 +20,25 @@ export class FileService extends CrmService{
       Metodo: "",
       Tipo: "",
       Entrada: {}, //ya rellenaremos la entrada con los datos especificos mas adelante
-      Id: "",
+      Id: this._Session.getSessionId(),
       URL: "",
-      recuerdame_id: "FALTA"
+      recuerdame_id: ""
     };
   }
 
-  public getFiles(request:any) {
+  public getFiles = (request:any) => {
 
     const modifiedFilesBodyRq = {
       ...this.fileBodyRq,
       Metodo: "GetFicheros",
       Entrada: request.Entrada
     };
+    console.log(modifiedFilesBodyRq);
     return this.sendPost(modifiedFilesBodyRq);
   };
 
-
-
-  public deleteFile(request: any){
-
-    const modifiedFilesBodyRq = {
+  public deleteFile(request:any) {
+      const modifiedFilesBodyRq = {
       ...this.fileBodyRq,
       Metodo: "DeleteFichero",
       Entrada: request.Entrada

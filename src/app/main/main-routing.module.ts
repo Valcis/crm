@@ -20,7 +20,7 @@ const routes: Routes = [
     },
     children: [
       {path: '#/crm_graficos', component: GraficosComponent},
-      {path: '#/crm_inicio_desarrollador', component: /*InicioDesarrolladorComponent*/ FilesComponent},
+      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent},
       {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent}, //TODO: cambiar a lista
       {path: '#/crm_calendario', component: CalendarioComponent},
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent},

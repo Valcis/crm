@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {translateType, TypeModel} from "../../../../../shared/models/documentation/type.model";
-
+//TODO: Limpiar imports que no se utilicen
 
 @Component({
   selector: 'document-links',
@@ -41,6 +41,8 @@ export class LinksComponent {
     } else {
       this._translate.use(_cookie.getLanguage());
     }
+    //TODO: Estos datos deberían venir de un modelo o un objeto a parte, no estar hardcodeados aquí.
+    //TODO: Acabo de ver que tienes el modelo creado, intenta pillarlo de ahí
     this.columnDefs=['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.LINK'];
     this.types =[
       {k: "Hotel", v: "LINKS.HOTEL"},
@@ -69,6 +71,7 @@ export class LinksComponent {
 
   public async getLinks(){
     var elements=this.linkForm.value;
+    // TODO: intentar no hardcodear
     let env =
       {"categoria" : elements.categoria,
       "neo_id":0,
@@ -122,7 +125,8 @@ export class LinksComponent {
       windowClass: 'modal-element',
       size: "lg"});
   }
-
+  //TODO: La request no tiene que estar aquí, se tienen que pasar los datos de la petición en un modelo y enviarlos al servicio
+  //TODO: Seguramente esto tendría que estar en un servicio a parte, guíate por como está montado el login, no la página de CRM1
   public createLink() {
     if (this.newForm.value.link.length > 0 && (this.newForm.value.descripcion.length > 0)) {
       if(this.newForm.value.link.indexOf('http://')>-1 || (this.newForm.value.link.indexOf('https://')>-1)){

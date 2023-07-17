@@ -25,6 +25,8 @@ export class LinkService extends CrmService {
       recuerdame_id: ""};
   }
 
+  //TODO: Recuerda eliminar los logs una vez hayas acabado el códifo.
+
   public fetchLinks = (linkForm: any) => {
     const modifiedLinkBodyRq = {
       ...this.linkBodyRq,

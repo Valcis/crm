@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {TranslateService} from "@ngx-translate/core";
-import Swal from 'sweetalert2'
+//import Swal from 'sweetalert2'
 import { NgbPaginationModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {forEach} from "@angular-devkit/schematics";
@@ -24,7 +24,7 @@ export class FilesComponent {
   protected counter: number = 0;
   protected currentPage: number = 1;
   protected pageSize: number = 5;
-  protected columns: string[] = ["FILES.NAME", "FILES.DESCRIPTION", "FILES.SIZE", "FILES.CATEGORIA","FILES.USER","FILES.CREATION"];
+  protected columns: string[] = [" ","FILES.NAME", "FILES.DESCRIPTION", "FILES.SIZE", "FILES.CATEGORIA","FILES.USER","FILES.CREATION"];
   protected types: any[] = [{k:"Hotel", v:"FILES.HOTEL"},{k:"Agencia", v:"FILES.AGENCY"}, {k:"Otros", v:"FILES.OTHER"}];
   constructor(
     private _translate: TranslateService,
@@ -52,20 +52,32 @@ export class FilesComponent {
       Entrada: this.filesForm.value
     };
     //crmLoadingPage(true);
-    console.log(request)
-    this.rowData = []
+    this.rowData = [];
     var list: any=[];
     //crmLoadingPage(false);
     this._fileService.getFiles(request).subscribe(response=>{
       if (response !== undefined) {
-        response.response.forEach(function(value :any){
-          //{"Status":"OK","Salida":{"lineas":[{"metadata":{"neo_id":653767,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Events Calendar 2022 EN","creacion_ts":1650605523000,"size":161661,"original_name":"Events Calendar 2022 EN.pdf","categoria":"Otros","name":"1650612723321.pdf","modificacion_ts":1650605523000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3380917,"type":"_CREA"},"data":{"descripcion":["","Events Calendar 2022 EN"],"creacion_ts":1650605523000,"size":["","161661"],"categoria":["","Otros"],"original_name":["","Events Calendar 2022 EN.pdf"],"name":["","1650612723321.pdf"]}}]},{"metadata":{"neo_id":654147,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario Eventos 2022 ES","creacion_ts":1650605505000,"size":162814,"original_name":"Calendario Eventos 2022 ES.pdf","categoria":"Otros","name":"1650612705311.pdf","modificacion_ts":1650605505000},"relations":[{"node":{"metadata":{"neo_id":56678,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"María","mail":"marketingplan@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5163,"user_name":"mvazquez","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"CONTRATACION_NACIONAL_BARCELONA","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4177,"empl_ape2":"","empl_ape1":"Vázquez","user_perfil":"GESTOR_HOTEL"}},"metadata":{"neo_id":3375943,"type":"_CREA"},"data":{"descripcion":["","Calendario Eventos 2022 ES"],"creacion_ts":1650605505000,"size":["","162814"],"categoria":["","Otros"],"original_name":["","Calendario Eventos 2022 ES.pdf"],"name":["","1650612705311.pdf"]}}]},{"metadata":{"neo_id":364477,"labels":["Activo","_Fichero"]},"data":{"descripcion":"Calendario eventos 2020 FR","creacion_ts":1577432068000,"size":129868,"original_name":"Events 2020 FR.pdf","categoria":"Otros","name":"1577435668163.pdf","modificacion_ts":1577432068000},"relations":[{"node":{"metadata":{"neo_id":170560,"labels":["_UsuarioCrm","Activo"]},"data":{"empl_nomb":"Andrea","mail":"andrea.navarro@grupohotusa.com","tipo_aviso_compras":true,"timezone":"Europe/Madrid","taviso_antes":5,"empl_code":5608,"user_name":"andrean","taviso_posponer":2,"user_afil":"HA","tipo_aviso_evento":true,"idioma_cliente":"es","user_activo":"S","empl_dpto":"MARKETING","tipo_aviso_tarea":true,"id_sesion":"","baja_temporal":false,"tipo_aviso_llamada":true,"user_id":4639,"empl_ape2":"","empl_ape1":"Navarro","user_perfil":"COMERCIAL_MARKETING_EVENTOS"}},"metadata":{"neo_id":1998852,"type":"_CREA"},"data":{"descripcion":["","Calendario eventos 2020 FR"],"creacion_ts":1577432068000,"size":["","129868"],"categoria":["","Otros"],"original_name":["","Events 2020 FR.pdf"],"name":["","1577435668163.pdf"]}}]}],"datos":{"num_elementos":3}},"Metodo":"GetFicheros","Servicio":"ficheros","Id":"NzB8O0pqx13WBjK2Ug8m9xWMm3Akkl8VVI4VqFgI","URL":""}
-          console.log(value)
-          var it={cog: {linked: "",im: "" },fileNames:"",des:"",siz:"",categor:"",userName:"",dateCreation:"" }
-          list.push(it)
+        var localData:any = response;
+        var fechResult=[];
+        fechResult = localData.Salida.lineas;
+        this.rowData = [];
+        fechResult.forEach((value :any) =>{
+          var completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
+          //TODO: correct gmt
+          var it={
+            cog: {
+              linked: "/CRMServlet/neo/files/private/Ficheros/" + value.data.name ,
+              id: value.metadata.neo_id, name:value.data.name},
+            fileName: value.data.original_name, des:value.data.descripcion,
+            siz: value.data.size,
+            categor:value.data.categoria,
+            userName: completeName,
+            dateCreation:value.data.creacion_ts };
+          this.rowData.push(it)
         });
-        this.rowData = list;
-        console.log(response);
+        console.log("rowData", this.rowData);
+        this.counter = fechResult.length;
+
       }
 
     });
@@ -73,10 +85,10 @@ export class FilesComponent {
 
   };
 
-  public deleteFiles(item:any) {
-    Swal.fire({
+  public deleteFile(name:string, id:string, original_n:string) {
+    /*Swal.fire({
       title: this._translate.instant('SWEET_ALERT_TITLE_DELETE'),
-      text: this._translate.instant('SWEET_ALERT_TEXT_ADJUNTO_DELETE') + " " + item.data.original_name + "!",
+      text: this._translate.instant('SWEET_ALERT_TEXT_ADJUNTO_DELETE') + " " + original_n + "!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
@@ -90,12 +102,12 @@ export class FilesComponent {
         var request = {
           Entrada: {
             "type_file": "Ficheros",
-            "file_name": item.data.name,
-            "neo_id": item.metadata.neo_id
+            "file_name": name,
+            "neo_id": id
           }
-        }
+        }*/
         //crmLoadingPage(true);
-        this._fileService.deleteFile(request).subscribe(response=>{
+        /*this._fileService.deleteFile(request).subscribe(response=>{
           //crmLoadingPage(false);
           if (response !== undefined && response.Salida !== undefined && response.Status === 'OK') {
             Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE'), "success");
@@ -107,5 +119,6 @@ export class FilesComponent {
 
       }
     });
+    */
   };
 }

@@ -1,94 +1,140 @@
 <div>
   <div>
+
     <div style="font-family: 'Open Sans'">
       <h5>{{ 'FILES.FORM-TITLE' | translate}}</h5>
+
     </div>
-    <div >
-      <div class="card rounded-0 mx-4 my-4" style="width: 99%">
+    <div>
+      <div class="card rounded-0 mx-4 my-4 " style="width: 97%">
         <div class="card-content">
-          <div class="card rounded-0 mx-4 mt-3">
-            <div class="card-title mt-1 border-bottom">
-              <div class="mx-3 my-3">{{ 'FILES.CRITERIA' | translate}}</div>
-            </div>
-            <div class="card-content  mx-3 my-3">
-              <form [formGroup]="filesForm" (submit)="getFiles()">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <label>{{ 'FILES.TYPE' | translate}}</label>
-                    <select class="form-select" formControlName="categoria" >
-                      <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
-                      <option [value]="types[1].k">{{types[1].v | translate}}</option>
-                      <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
-                    </select>
+          <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
+            <li ngbNavItem>
+              <button ngbNavLink>First</button>
+              <ng-template ngbNavContent>
+                <div class="card rounded-0 mx-4 mt-3">
+                  <div class="card-title mt-1 border-bottom">
+                    <div class="mx-3 my-3">{{ 'FILES.CRITERIA' | translate}}</div>
                   </div>
-                  <div class="col-sm-3">
-                    <label>{{ 'FILES.FILE' | translate}}</label>
-                    <input type="text" class="form-control" formControlName="descripcion">
-                  </div>
-                  <div class="col-sm-6">
-                    <label>{{ 'FILES.FORM-TITLE' | translate}}</label>
-                    <input type="text" class="form-control" formControlName="link">
-                  </div>
-                </div>
-                <div class ="row">
-                  <div class="">
-                    <div>&nbsp;</div>
-                    <button type="submit" class="btn btn-search" style="float: right;" ><i class="fa fa-search"></i> {{'LINKS.BUSCAR'|translate}} </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="card rounded-0 mx-4 mt-4 mb-5">
-            <div class="card-title border-bottom">
-              <div class="table-title mx-3 my4" >
-                <div class=" my-3" >{{counter}} {{'FILES.RESULTS'|translate}}</div>
-              </div>
-            </div>
-            <div class="card-content mx-3 my-2 mb-5">
-              <div (show)="counter>0">
-                <table class="mx-2 table table-bordered" >
-                  <tr style="background-color: #f4f4f5" >
-                    <th *ngFor="let column of columns" > {{column | translate}}</th>
-
-                    <th style="width:100px; "></th>
-                  </tr>
-                  <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
-                    <td>
-                      <div class="btn-group dropdown">
-                        <button class="btn btn-default btn-xs dropdown-toggle">
-                          <i class="fa fa-cog"></i>
-                        </button>
-                        <ul class="dropdown-menu" *ngFor="let item of element.cog">
-                          <li>
-                            <a href="{{item.linked}}">
-                              <i class="{{item.im}}"></i>
-                            </a>
-                          </li>
-                        </ul>
-                        <ul>{{element.fileNames}}</ul>
-                        <ul>{{element.des}}</ul>
-                        <ul>{{element.siz}}</ul>
-                        <ul>{{element.categor}}</ul>
-                        <ul>{{element.userName}}</ul>
-                        <ul>{{element.dateCreation}}</ul>
+                  <div class="card-content  mx-3 my-3">
+                    <form [formGroup]="filesForm" (submit)="getFiles()">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <label>{{ 'FILES.TYPE' | translate}}</label>
+                          <select class="form-select" formControlName="type_file" >
+                            <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
+                            <option [value]="types[1].k">{{types[1].v | translate}}</option>
+                            <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-3">
+                          <label>{{ 'FILES.FILE' | translate}}</label>
+                          <input type="text" class="form-control" formControlName="descripcion">
+                        </div>
+                        <div class="col-sm-6">
+                          <label>{{ 'FILES.FORM-TITLE' | translate}}</label>
+                          <input type="text" class="form-control" formControlName="original_name">
+                        </div>
                       </div>
-                    </td>
-                    <td><a style="text-decoration:none"  href="{{element[1]}}" [innerHTML]="element[2]"></a></td>
-                    <td><span [innerHTML]="element[3]"></span></td>
-                    <div class="btn-group dropdown">
-                      <button class="btn btn-danger btn-sm mx-1 my-2"  [value]="element[4]" (click)="deleteFiles(element[4])"><i class="fa fa-trash-o"></i> Delete</button>
+                      <div class ="row">
+                        <div class="">
+                          <div>&nbsp;</div>
+                          <button type="submit" class="btn btn-search" style="float: right;" ><i class="fa fa-search"></i> {{'LINKS.BUSCAR'|translate}} </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="card rounded-0 mx-4 mt-4 mb-5">
+                  <div class="card-title border-bottom">
+                    <div class="table-title mx-3 my4" >
+                      <div class=" my-3" >{{counter}} {{'FILES.RESULTS'|translate}}</div>
                     </div>
-                  </tr>
-                </table>
+                  </div>
+                  <div class="card-content mx-3 my-2 mb-5">
+                    <div (show)="counter>0">
+                      <table class="mx-2 table table-bordered" >
+                        <tr style="background-color: #f4f4f5" >
+                          <th *ngFor="let column of columns" > {{column | translate}}</th>
+                          <th style="width:100px; "></th>
+                        </tr>
+                        <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
+                          <td>
+                            <div class="dropdown nav" ngbDropdown>
+                              <button class="btn btn-default btn-xs dropdown-toggle" ngbDropdownToggle>
+                                <i class="fa fa-cog"></i>
+                              </button>
+                              <ul class="dropdown-menu" ngbDropdownMenu>
+                                <li><a class="dropdown-item" href="{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="{{element.cog.linked}}" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName)"> <i class="fa fa-trash"></i> {{"FILES.DELETE" | translate}}</a> </li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td>{{element.fileName}}</td>
+                          <td>{{element.des}}</td>
+                          <td *ngIf="element.siz / 1000000 >= 1">
+                            {{element.siz
+                          / 1000000 | number:"1.2-2"}} MB
+                          </td>
+                          <td *ngIf="element.siz / 1000000 < 1">
+                            {{element.siz
+                          / 1000 | number:"1.2-2"}} KB
+                          </td>
+                          <td>{{element.categor}}</td>
+                          <td>{{element.userName}}</td>
+                          <td>{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0100'}}</td>
+                        </tr>
+                      </table>
 
-                <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
-                  <ng-template ngbPaginationPrevious><</ng-template>
-                  <ng-template ngbPaginationNext>></ng-template>
-                </ngb-pagination>
-              </div>
-            </div>
-          </div>
+                      <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
+                        <ng-template ngbPaginationPrevious><</ng-template>
+                        <ng-template ngbPaginationNext>></ng-template>
+                      </ngb-pagination>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem>
+              <button ngbNavLink><i class="fa fa-upload"></i></button>
+              <ng-template ngbNavContent>
+
+                <div class=" mx-4 mt-3">
+                  <div class="  mx-3 my-3">
+                    <form [formGroup]="filesForm" (submit)="getFiles()">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <label>{{ 'FILES.TYPE' | translate}}</label>
+                          <select class="form-select" formControlName="type_file" >
+                            <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
+                            <option [value]="types[1].k">{{types[1].v | translate}}</option>
+                            <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-8">
+                          <label>{{ 'FILES.FORM-TITLE' | translate}}</label>
+                          <input type="text" class="form-control" formControlName="original_name">
+                        </div>
+                        <div class="well">
+                          <form action="" class="dropzone ng-pristine ng-valid dz-clickable" id="dropzone">
+                            <button *ngIf="!dropCtrl.subidaAutomatica &amp;&amp; dropCtrl.fileAdded === true" style="margin-left: 5px;" type="button" class="btn btn-primary btn-sm pull-right  ng-binding ng-hide" (click)="dropCtrl.processDropzone()">Confirmar
+                            </button>
+                            <button *ngIf="!dropCtrl.subidaAutomatica &amp;&amp; dropCtrl.fileAdded === true" type="button" class="btn btn-danger btn-sm pull-right ng-binding ng-hide" (click)="dropCtrl.reset()" style="">Cancelar
+                            </button>
+                            <div class="dz-default dz-message">
+                              <strong class="ng-binding">Sube ficheros arrastrándolos aquí (o haz click)</strong>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav"></div>
         </div>
       </div>
     </div>

@@ -2,12 +2,10 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {LinkService} from "src/app/shared/services/api/documentatnion/link.service"
 import {TranslateService} from "@ngx-translate/core";
-import Swal from 'sweetalert2'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {translateType, TypeModel} from "../../../../../shared/models/documentation/type.model";
-//TODO: Limpiar imports que no se utilicen
 
 @Component({
   selector: 'document-links',
@@ -70,22 +68,14 @@ export class LinksComponent {
   }
 
   public async getLinks(){
-    var elements=this.linkForm.value;
-    // TODO: intentar no hardcodear
-    let env =
-      {"categoria" : elements.categoria,
-      "neo_id":0,
-      "descripcion": elements.descripcion,
-      "link": elements.link};
-
-    this._link.fetchLinks(env).subscribe(response =>{
+    this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
       var localData:any = response;
       this.fechResult=[];
       this.fechResult = localData.Salida.lineas;
       this.rowData = [];
       var info: any[] = [];
       this.fechResult.forEach((value) => {
-        var a:string = value.data.categoria
+        var a:string = value.data.categoria;
         var it = {
           c:translateType[a],
           link:value.data.link,
@@ -103,14 +93,14 @@ export class LinksComponent {
   public async deleteLinks(item: any){
     this.delObj = item;
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
-      this._swal.swalConfirmationRequest('LINKS.ALERT_TITLE_DELETE',"LINKS.ALERT_TEXT",item.data.descripcion)
-        .then((result) => {
+      this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"),item.data.descripcion)
+        .then((result:any) => {
           if (result.isConfirmed){
             this._link.eliminateLink(this.delObj).subscribe(response=>{
               //crmLoadingPage(false);
               if (response !== undefined) {
                 //crmLoadingPage(true);
-                this._swal.swalSucces('LINKS.ALERT_RESPONSE1','LINKS.ALERT_LINK_BORRADO')
+                this._swal.swalSucces(this._translate.instant('LINKS.ALERT_RESPONSE1'),this._translate.instant('LINKS.ALERT_LINK_BORRADO'));
                 this.getLinks();
               }
             })
@@ -134,13 +124,9 @@ export class LinksComponent {
       } else {
         this.newForm.value.link = 'http://'+ this.newForm.value.link;
       }
-      let request = {
-        "datos_peticion":{
-          "categoria":this.newForm.value.categoria,
-          "descripcion":this.newForm.value.descripcion,
-          "link":this.newForm.value.link}};
+
       //crmLoadingPage(true);
-      this._link.newLink(request).subscribe(response =>{
+      this._link.newLink(this.newForm.value).subscribe(response =>{
         //crmLoadingPage(false);
         if (response !== undefined) {
           this.modalRef.close();

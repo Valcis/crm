@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,14 @@ export class SwalService {
     return Swal.fire({
       scrollbarPadding: false,
       heightAuto: false,
-      title: this._translate.instant(title),
-      text: this._translate.instant(this._translate.instant(text)+':' + variable),
+      title:title,
+      text: text+':' + variable,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      confirmButtonText: this._translate.instant('LINKS.ALERT_CONFIRM'),
+      confirmButtonText: this._translate.instant('SWAL.ALERT_CONFIRM'),
       cancelButtonColor: "#D0D0D0",
-      cancelButtonText: this._translate.instant('LINKS.ALERT_CANCEL'),
+      cancelButtonText: this._translate.instant('SWAL.ALERT_CANCEL'),
       reverseButtons: true,
     })
   };

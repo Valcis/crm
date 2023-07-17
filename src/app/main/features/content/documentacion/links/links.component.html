@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <ng-template #newLink let-modal style="border-radius: 1px;" class="modal-lg">
+    <ng-template #newLink let-modal  class="modal-lg rounded-0">
       <div class="modal-header rounded-1">
         <button type="button" class="close row" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
           <span aria-hidden="true">×</span>
@@ -86,7 +86,7 @@
         <h4 class="modal-title " style="text-align: center">{{'LINKS.NEW' | translate }}</h4>
       </div>
 
-      <div class="modal-body" style="border-radius: 0px;">
+      <div class="modal-body rounded-0" >
         <form class="mt-2 mb-3 mx-3" [formGroup]="newForm">
           <div class="row">
             <div class="col-sm-3">
@@ -104,7 +104,7 @@
             <div class="col-sm-12">
               <small>{{ 'LINKS.LINK' | translate}}</small>
               <div class="input-group flex-nowrap">
-                <span class="input-group-text " style="border-radius: 1px;">http://</span>
+                <span class="input-group-text rounded-0" >http://</span>
                 <input type="text" class="form-control" formControlName="link">
               </div>
 

@@ -25,23 +25,25 @@ export class LinkService extends CrmService {
       recuerdame_id: ""};
   }
 
-  //TODO: Recuerda eliminar los logs una vez hayas acabado el códifo.
 
   public fetchLinks = (linkForm: any) => {
     const modifiedLinkBodyRq = {
       ...this.linkBodyRq,
       Metodo:"GetLinks",
       Entrada: linkForm};
-    console.log("sendLink", modifiedLinkBodyRq);
     return this.sendPost(modifiedLinkBodyRq);
   };
 
-  public newLink = (request:any) =>{
+  public newLink = (data:any) =>{
+    let request = {
+      "datos_peticion":{
+        "categoria":data.categoria,
+        "descripcion":data.descripcion,
+        "link":data.link}};
     const modifiedLinkBodyRq = {
       ...this.linkBodyRq,
       Metodo: "NewLink",
       Entrada: request};
-    console.log(modifiedLinkBodyRq);
     return this.sendPost(modifiedLinkBodyRq);
   };
 

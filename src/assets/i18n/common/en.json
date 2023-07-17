@@ -1374,5 +1374,8 @@
   "OBJETIVO.PRINCIPAL": "Main goal",
   "OBJETIVO.SECUNDARIO": "Secondary goal",
   "OBJETIVO.CONSEGUIDO": "Goal achieved",
-  "VOLVER.VISITAR": "Visit again"
+  "VOLVER.VISITAR": "Visit again",
+
+  "SWAL.ALERT_CONFIRM": "Yes, Delete!",
+  "SWAL.ALERT_CANCEL": "No, Cancel!"
 }

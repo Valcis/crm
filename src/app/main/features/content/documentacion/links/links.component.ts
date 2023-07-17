@@ -5,7 +5,7 @@ import {TranslateService} from "@ngx-translate/core";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
-import {translateType, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 
 @Component({
   selector: 'document-links',
@@ -16,7 +16,7 @@ export class LinksComponent {
 
   public linkForm!: FormGroup;
   public newForm!: FormGroup;
-  public types!: TypeModel[];
+  public types: TypeModel[]=TypeArray;
   public counter: number = 0;
   public fechResult: any[]=[];
   public currentPage = 1;
@@ -24,7 +24,7 @@ export class LinksComponent {
   public rowData: any[]= [];
   private modalRef :any;
   public delObj: any;
-  public columnDefs: string[] = [];
+
 
   constructor(
     private _translate: TranslateService,
@@ -39,13 +39,6 @@ export class LinksComponent {
     } else {
       this._translate.use(_cookie.getLanguage());
     }
-    //TODO: Estos datos deberían venir de un modelo o un objeto a parte, no estar hardcodeados aquí.
-    //TODO: Acabo de ver que tienes el modelo creado, intenta pillarlo de ahí
-    this.columnDefs=['LINKS.TYPE','LINKS.DESCRIPTION', 'LINKS.LINK'];
-    this.types =[
-      {k: "Hotel", v: "LINKS.HOTEL"},
-      {k: "Agencia", v: "LINKS.AGENCY"},
-      {k: "Otros", v: "LINKS.OTHER"}]
   }
 
   async ngOnInit(): Promise<void> {
@@ -68,6 +61,9 @@ export class LinksComponent {
   }
 
   public async getLinks(){
+    for(let key in this.types){
+      console.log(key, this.types[key])
+    }
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
       var localData:any = response;
       this.fechResult=[];
@@ -115,8 +111,7 @@ export class LinksComponent {
       windowClass: 'modal-element',
       size: "lg"});
   }
-  //TODO: La request no tiene que estar aquí, se tienen que pasar los datos de la petición en un modelo y enviarlos al servicio
-  //TODO: Seguramente esto tendría que estar en un servicio a parte, guíate por como está montado el login, no la página de CRM1
+
   public createLink() {
     if (this.newForm.value.link.length > 0 && (this.newForm.value.descripcion.length > 0)) {
       if(this.newForm.value.link.indexOf('http://')>-1 || (this.newForm.value.link.indexOf('https://')>-1)){

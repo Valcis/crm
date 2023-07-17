@@ -12,8 +12,27 @@ tr, th, td {
 .table-title{
   display: flex;
 }
-
-
+.body-right{
+  width: 96%
+}
+.float-right{
+  float: right
+}
+.margin-auto{
+  margin: auto
+}
+.background-title{
+  background-color: #f4f4f5
+}
+.white-space{
+  width:100px;
+}
+.no-decoration{
+  text-decoration:none
+}
+.centred{
+  text-align: center
+}
 
 .form-control, .single-line {
   background-color: #FFFFFF;

@@ -53,6 +53,7 @@ import {DateAdapterService} from "../shared/services/datepicker/date-adapter.ser
     FormsModule,
     NgbModule,
     SharedModule,
+    CommonModule,
   ],
   providers: []
 })

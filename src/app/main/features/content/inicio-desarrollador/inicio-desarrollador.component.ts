@@ -23,14 +23,14 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class InicioDesarrolladorComponent implements OnInit{
 
-  aTitle:string = '';
-  public tz: any;
-  public ts: any;
-  public utc: any;
-  public formatedTime: any;
-
-  model2: string = '';
-  time2: any;
+  protected aTitle:string = '';
+  protected tz: any;
+  protected ts: any;
+  protected utc: any;
+  protected formatedTime: any;
+  protected model2: string = '';
+  protected time2: any;
+  protected showTime: boolean = false;
 
   constructor(
     private _title: Title,
@@ -78,14 +78,13 @@ export class InicioDesarrolladorComponent implements OnInit{
   }
 
   openTime() {
-    console.log(this.utc.toLocaleString(DateTime.TIME_24_SIMPLE));
+    this.showTime = !this.showTime;
+    console.log(this.showTime);
     let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-
     let testParse3 = test.split(':', 2);
-    console.log(testParse3);
     this.time2 = {
-      hour: testParse3[0],
-      minute: testParse3[1]
+      hour: +testParse3[0],
+      minute: +testParse3[1]
     }
   }
 }

@@ -48,7 +48,7 @@ $max-width: 100%;
 .btn:active:hover,
 .btn.active:hover,
 .btn.active:focus {
-  color: $secondary !important;
+  color: $white !important;
 }
 
 .input-button {
@@ -171,4 +171,36 @@ hr.divider {
 
 .l-grey {
   color: $light-gray
+}
+
+.chevron,
+.ngb-tp-chevron::before,
+.ngb-tp-chevron,
+.bottom{
+  color: $label-badget-color;
+  font-size: 12px;
+}
+
+.ngb-tp-input,
+.form-control {
+  border-radius: 1px;
+  width: 50px;
+  height: 34px;
+}
+
+.ngb-tp-spacer {
+  width: 3px !important;
+}
+
+.ngb-tp-input-container,
+.ngb-tp-hour {
+  color: #5E5E5E !important;
+  border-radius: 1px;
+}
+
+.form-control,
+.ng-untouched,
+.ng-pristine,
+.ng-invalid {
+  border-radius: 1px;
 }

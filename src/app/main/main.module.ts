@@ -19,6 +19,7 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {FilesComponent} from "./features/content/documentacion/files/files.compo
     NotificacionesComponent,
     ],
   imports: [
+    NgxDropzoneModule,
     CommonModule,
     MainRoutingModule,
     TranslateModule.forRoot({

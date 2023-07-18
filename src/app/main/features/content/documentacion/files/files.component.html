@@ -67,7 +67,7 @@
                               <ul class="dropdown-menu" ngbDropdownMenu>
                                 <li><a class="dropdown-item" href="{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
                                 <li><a class="dropdown-item" href="{{element.cog.linked}}" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
-                                <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName)"> <i class="fa fa-trash"></i> {{"FILES.DELETE" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName, $event)"> <i class="fa fa-trash"></i> {{"FILES.DELETE" | translate}}</a> </li>
                               </ul>
                             </div>
                           </td>
@@ -102,11 +102,11 @@
 
                 <div class=" mx-4 mt-3">
                   <div class="  mx-3 my-3">
-                    <form [formGroup]="filesForm" (submit)="getFiles()">
+                    <form [formGroup]="newForm" (submit)="sendFile()">
                       <div class="row">
                         <div class="col-sm-4">
                           <label>{{ 'FILES.TYPE' | translate}}</label>
-                          <select class="form-select" formControlName="type_file" >
+                          <select class="form-select" formControlName="categoria" >
                             <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
                             <option [value]="types[1].k">{{types[1].v | translate}}</option>
                             <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
@@ -114,18 +114,24 @@
                         </div>
                         <div class="col-sm-8">
                           <label>{{ 'FILES.FORM-TITLE' | translate}}</label>
-                          <input type="text" class="form-control" formControlName="original_name">
+                          <input required type="text" class="form-control" formControlName="descripcion">
                         </div>
-                        <div class="well">
-                          <form action="" class="dropzone ng-pristine ng-valid dz-clickable" id="dropzone">
-                            <button *ngIf="!dropCtrl.subidaAutomatica &amp;&amp; dropCtrl.fileAdded === true" style="margin-left: 5px;" type="button" class="btn btn-primary btn-sm pull-right  ng-binding ng-hide" (click)="dropCtrl.processDropzone()">Confirmar
+                        <div class="well row">
+                          <ngx-dropzone class="dropzone" (change)="onSelect($event)">
+
+                            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+                          <div style="position: absolute;top: 43%; right: 7%; ">
+                            <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
+                            >{{'GENERAL_CONFIRMAR' | translate}}
                             </button>
-                            <button *ngIf="!dropCtrl.subidaAutomatica &amp;&amp; dropCtrl.fileAdded === true" type="button" class="btn btn-danger btn-sm pull-right ng-binding ng-hide" (click)="dropCtrl.reset()" style="">Cancelar
+                            <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
+                            >{{'GENERAL_CANCELAR' | translate}}
                             </button>
-                            <div class="dz-default dz-message">
-                              <strong class="ng-binding">Sube ficheros arrastrándolos aquí (o haz click)</strong>
-                            </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                     </form>

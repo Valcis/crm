@@ -34,6 +34,7 @@
     "luxon": "^3.3.0",
     "moment": "^2.29.4",
     "ngx-cookie-service": "^15.0.0",
+    "ngx-dropzone": "^3.1.0",
     "ngx-socket-io": "^4.4.0",
     "postcss-import": "^15.1.0",
     "rxjs": "~7.8.0",

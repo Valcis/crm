@@ -31,18 +31,23 @@ export class FileService extends CrmService{
     const modifiedFilesBodyRq = {
       ...this.fileBodyRq,
       Metodo: "GetFicheros",
-      Entrada: request.Entrada
+      Entrada: request
     };
-    console.log(modifiedFilesBodyRq);
+
     return this.sendPost(modifiedFilesBodyRq);
   };
 
-  public deleteFile(request:any) {
+  public deleteFile = (name:string, id:number) => {
       const modifiedFilesBodyRq = {
       ...this.fileBodyRq,
       Metodo: "DeleteFichero",
-      Entrada: request.Entrada
+      Entrada: {
+        "type_file": "Ficheros",
+        "file_name": name,
+        "neo_id":id
+    }
     };
+    console.log(modifiedFilesBodyRq);
     return this.sendPost(modifiedFilesBodyRq);
   };
 }

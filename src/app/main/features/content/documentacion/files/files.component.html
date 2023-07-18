@@ -6,11 +6,11 @@
 
     </div>
     <div>
-      <div class="card rounded-0 mx-4 my-4 " style="width: 97%">
+      <div class="card rounded-0 mx-4 my-4 " style="width: 96%">
         <div class="card-content">
           <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
             <li ngbNavItem>
-              <button ngbNavLink>First</button>
+              <button ngbNavLink><i class="fa fa-list"></i></button>
               <ng-template ngbNavContent>
                 <div class="card rounded-0 mx-4 mt-3">
                   <div class="card-title mt-1 border-bottom">
@@ -53,10 +53,9 @@
                   </div>
                   <div class="card-content mx-3 my-2 mb-5">
                     <div (show)="counter>0">
-                      <table class="mx-2 table table-bordered" >
+                      <table class=" table table-bordered " >
                         <tr style="background-color: #f4f4f5" >
                           <th *ngFor="let column of columns" > {{column | translate}}</th>
-                          <th style="width:100px; "></th>
                         </tr>
                         <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                           <td>
@@ -71,19 +70,19 @@
                               </ul>
                             </div>
                           </td>
-                          <td>{{element.fileName}}</td>
-                          <td>{{element.des}}</td>
-                          <td *ngIf="element.siz / 1000000 >= 1">
+                          <td class="text-center">{{element.fileName}}</td>
+                          <td class="text-center">{{element.des}}</td>
+                          <td class="text-center" *ngIf="element.siz / 1000000 >= 1">
                             {{element.siz
                           / 1000000 | number:"1.2-2"}} MB
                           </td>
-                          <td *ngIf="element.siz / 1000000 < 1">
+                          <td class="text-center" *ngIf="element.siz / 1000000 < 1">
                             {{element.siz
                           / 1000 | number:"1.2-2"}} KB
                           </td>
-                          <td>{{element.categor}}</td>
-                          <td>{{element.userName}}</td>
-                          <td>{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0100'}}</td>
+                          <td class="text-center">{{element.categor}}</td>
+                          <td class="text-center">{{element.userName}}</td>
+                          <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
                         </tr>
                       </table>
 
@@ -116,22 +115,17 @@
                           <label>{{ 'FILES.FORM-TITLE' | translate}}</label>
                           <input required type="text" class="form-control" formControlName="descripcion">
                         </div>
-                        <div class="well row">
+                        <div class="well row mt-3">
                           <ngx-dropzone class="dropzone" (change)="onSelect($event)">
 
-                            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-                            <ngx-dropzone-preview *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
-                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            <ngx-dropzone-label>{{"DRAGDROP.FILESDROP" | translate}}</ngx-dropzone-label>
+                            <ngx-dropzone-preview class="rounded-5 cube" *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label class="centred">{{ f.size }}</ngx-dropzone-label>
+                              <ngx-dropzone-label> <!--TODO: process--></ngx-dropzone-label>
+                              <ngx-dropzone-label class="centred card rounded-0" width="100px";heigt="50px"></ngx-dropzone-label>
                             </ngx-dropzone-preview>
                           </ngx-dropzone>
-                          <div style="position: absolute;top: 43%; right: 7%; ">
-                            <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
-                            >{{'GENERAL_CONFIRMAR' | translate}}
-                            </button>
-                            <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
-                            >{{'GENERAL_CANCELAR' | translate}}
-                            </button>
-                          </div>
+
                         </div>
                       </div>
                     </form>
@@ -140,6 +134,14 @@
               </ng-template>
             </li>
           </ul>
+          <div style="position: absolute;top: 43%; right: 7%; ">
+            <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
+            >{{'GENERAL_CONFIRMAR' | translate}}
+            </button>
+            <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
+            >{{'GENERAL_CANCELAR' | translate}}
+            </button>
+          </div>
           <div [ngbNavOutlet]="nav"></div>
         </div>
       </div>

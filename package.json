@@ -30,6 +30,7 @@
     "@types/luxon": "^3.3.0",
     "angular-popper": "^2.0.1",
     "bootstrap": "^5.2.3",
+    "dropzone": "^6.0.0-beta.2",
     "font-awesome": "^4.7.0",
     "luxon": "^3.3.0",
     "moment": "^2.29.4",

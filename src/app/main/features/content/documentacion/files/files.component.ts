@@ -137,7 +137,16 @@ export class FilesComponent {
 
 
 
-  //TODO:revisar drag-and-drop directive
+
+
+
+
+
+
+
+
+
+
   protected file: File[]= [];
   protected filesAdded:boolean = false;
   protected forme!:FormGroup ;
@@ -167,6 +176,7 @@ export class FilesComponent {
     this.removeAllFiles();
     this.filesAdded = false;
   };
+
   private removeAllFiles(){
     this.file = [];
   };
@@ -179,9 +189,19 @@ export class FilesComponent {
     this.file.push(...event.addedFiles);
   }
 
-  onRemove(event:any) {
-    this.filesAdded = false;
-    console.log(event);
-    this.file.splice(this.file.indexOf(event), 1);
+  calcualteSize(size: number){
+    let count: number = 0;
+
+    while (size >= 1000) {
+      count++;
+      size=size/1000
+    }
+    var result:string = (Math.round(size * 100) / 100).toFixed(2);
+    let units =["B","KB","MB","GB"];
+    if (count > 3){
+      count = 3;
+    }
+    var  unit: string  = units[count];
+    return ("<strong> " + result + "</strong>" + unit);
   }
 }

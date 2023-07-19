@@ -118,33 +118,33 @@
                         <div class="well row mt-3">
                           <ngx-dropzone class="dropzone" (change)="onSelect($event)">
 
-                            <ngx-dropzone-preview class="rounded-4 cube" *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-preview class="rounded-4 cube" *ngFor="let f of file">
                               <ngx-dropzone-label class="dz-image">
                                 <div class="dz-details">
-                                  <div class="dz-size test"><span><strong>{{ f.size/1000 }}</strong> MB</span></div>
-                                  <div class="dz-filename test"><span >{{f.name}}</span></div>
+                                  <div class="dz-size test"><span [innerHTML]="calcualteSize(f.size)"></span></div>
+                                  <div class="dz-filename test" placement="bottom" ngbTooltip="{{f.name}}"><span >{{f.name}}</span></div>
                                 </div>
                               </ngx-dropzone-label>
                             </ngx-dropzone-preview>
                             <ngx-dropzone-label>{{"DRAGDROP.FILESDROP" | translate}}</ngx-dropzone-label>
                           </ngx-dropzone>
-
                         </div>
+                      </div>
+                      <div style="position: absolute;top: 43%; right: 7%; ">
+                        <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
+                        >{{'GENERAL_CONFIRMAR' | translate}}
+                        </button>
+                        <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
+                        >{{'GENERAL_CANCELAR' | translate}}
+                        </button>
                       </div>
                     </form>
                   </div>
                 </div>
+
               </ng-template>
             </li>
           </ul>
-          <div style="position: absolute;top: 43%; right: 7%; ">
-            <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
-            >{{'GENERAL_CONFIRMAR' | translate}}
-            </button>
-            <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
-            >{{'GENERAL_CANCELAR' | translate}}
-            </button>
-          </div>
           <div [ngbNavOutlet]="nav"></div>
         </div>
       </div>

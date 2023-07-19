@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEvent} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {CrmService} from "../crm.service";
 import {LoginService} from "./login.service";
 import {UserConfigService} from "./user-config.service";
@@ -16,7 +16,7 @@ import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
 export class UserService extends CrmService {
   public userData: any = {};
   private localdata: any;
-  private existOnNeo = false;
+  private localdata2: any;
 
   constructor(
     private cookie: CookiesService,
@@ -35,34 +35,34 @@ export class UserService extends CrmService {
     this._login.sendGetLogin(credenciales).subscribe(response => {
       this.localdata = response;
 
-      this.getUsuarioByEmplCode(this.localdata.Salida.empl_code, this.localdata.Id)
+      this.getUsuarioByEmplCode2(this.localdata.Salida.empl_code, this.localdata.Id).then(estaEnNeo => {
 
-      if (this.localdata.Status && this.localdata.Status === "OK" && this.existOnNeo) {
-        this.cookie.setSessionId(this.localdata.Id);
-        this.userData.details = this.localdata.Salida;
-        console.log("NUEVOS DATOS USUARIO", this.userData)
-        resolve(this.cookie.getSessionId().length > 0)
+        if (this.localdata.Status && this.localdata.Status === "OK" && estaEnNeo) {
+          this.cookie.setSessionId(this.localdata.Id);
+          this.userData.details = this.localdata.Salida;
+          resolve(this.cookie.getSessionId().length > 0);
+        } else {
+          reject('no hay usuario registrado en intranet con esas credenciales'); //TODO: cambiar por alert service
+          this._loader.setLoading(false);
+        }
+      });
+    });
+  });
+
+  public getUsuarioByEmplCode2 = (empl_code: number, id: string) => new Promise((resolve, reject) => {
+    this._login.getUsuarioByEmplCode(empl_code, id).subscribe(res => {
+      this.localdata2 = res;
+
+      if (this.localdata2.Status && this.localdata2.Status === "OK") {
+        resolve(true);
       } else {
-        reject('no user id'); //TODO: cambiar por alert service
-        this._loader.setLoading(false);
+        // TODO console.log('no tienes usuario en CRM ') // pasarlo a un toast
+        reject(false);
+        // TODO mandalo al login
       }
     });
   });
 
-  public getUsuarioByEmplCode = (empl_code: number, id: string) => {
-
-    this._login.getUsuarioByEmplCode(empl_code, id).subscribe(res => {
-      this.localdata = res;
-
-      if (this.localdata.Status && this.localdata.Status === "OK") {
-        console.log("ein", this.localdata)
-        this.existOnNeo = true
-      } else {
-        // TODO mandalo al login
-      }
-
-    })
-  }
 
   public getConfig = () => {
     if (this.cookie.getSessionId().length && this.userData.length)
@@ -158,6 +158,5 @@ export class UserService extends CrmService {
         }
       })
   }
-
 
 }

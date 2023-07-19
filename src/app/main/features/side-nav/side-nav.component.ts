@@ -34,7 +34,7 @@ export class SideNavComponent implements OnInit {
   }
 
   async ngOnInit () {
-    console.log('userData', this.userData);
+    //console.log('userData', this.userData);
     await this.getList();
     // console.log('menu list', this.menuList);
   };
@@ -57,7 +57,7 @@ export class SideNavComponent implements OnInit {
 
   public async getList() {
     if (this.userData.menu) {
-      console.log('userData', this.userData);
+      //console.log('userData', this.userData);
       this.userData.menu.menuList.forEach((item: any) => { //TODO: Cambiar por modelo
         item.icono = 'fa ' + item.icono;
         this.menuList.push(item);

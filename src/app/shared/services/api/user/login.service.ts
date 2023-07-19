@@ -38,6 +38,19 @@ export class LoginService extends CrmService {
 
     return this.sendPost(modifiedLoginBodyRq);
   };
+
+  public getUsuarioByEmplCode = (empl_code: number, id: string) => {
+    const request = {
+      Servicio: "usuariosCrm",
+      Metodo: "GetUsuarioCrmByEmplCode",
+      Tipo: "",
+      Entrada: {"empl_code": empl_code},
+      Id: id,
+      URL: "",
+      recuerdame_id: ""
+    };
+    return this.sendPost(request);
+  }
 }
 
 

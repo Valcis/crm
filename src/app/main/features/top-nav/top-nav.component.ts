@@ -24,11 +24,11 @@ export class TopNavComponent implements OnInit{
 
   constructor(
     private translate: TranslateService,
-    private cookie: CookiesService,
+    private _cookie: CookiesService,
     private _user: UserService,
-    private router: Router
+    private _router: Router
   ) {
-    this.lang = cookie.getLanguage();
+    this.lang = _cookie.getLanguage();
     this.user = this._user.userData;
   }
 
@@ -41,14 +41,14 @@ export class TopNavComponent implements OnInit{
   changeLang(localeCode: string) {
     this.lang = localeCode;
     this.translate.use(localeCode);
-    this.cookie.setLanguage(localeCode)
+    this._cookie.setLanguage(localeCode)
   }
 
   logOut() {
     if (this.user) {
-      this.cookie.deleteSessionId();
+      this._cookie.deleteSessionId();
     }
-    this.router.navigate(['/login'])
+    this._router.navigate(['/login'])
   }
 
 }

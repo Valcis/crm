@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
@@ -79,7 +79,6 @@ export class InicioDesarrolladorComponent implements OnInit{
 
   openTime() {
     this.showTime = !this.showTime;
-    console.log(this.showTime);
     let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
     let testParse3 = test.split(':', 2);
     this.time2 = {

@@ -88,18 +88,24 @@ $max-width: 100%;
   background-color: $background;
 }
 
+.gray-bg {
+  background-color: $gray;
+}
+
 .side-container {
-  display: inline-block;
+  float: left;
   width: 12%;
   height: 100%;
+  min-width: 220px;
 }
 
 .top-container {
-  display: inline-block;
-  width: 88%;
-  height: 6%;
+  float: top;
+  width: auto;
+  height: 60px;
   top: 0%;
   vertical-align: top;
+  min-height: 60px;
 }
 
 .dark-bg-container {
@@ -181,13 +187,6 @@ hr.divider {
   font-size: 12px;
 }
 
-.ngb-tp-input,
-.form-control {
-  border-radius: 1px;
-  width: 50px;
-  height: 34px;
-}
-
 .ngb-tp-spacer {
   width: 3px !important;
 }
@@ -203,4 +202,11 @@ hr.divider {
 .ng-pristine,
 .ng-invalid {
   border-radius: 1px;
+}
+
+.m-h-100 {
+  min-height: 100%;
+}
+.m-w-100 {
+  min-width: 100%;
 }

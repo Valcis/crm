@@ -1,12 +1,12 @@
 .header-profile{
   background: url("../../../../assets/images/profile/header-profile.png");
-  height: 18%;
+  height: 185px;
 }
 
 .header-content {
-  padding-top: 2%;
-  margin-left: 10%;
-  margin-right: 10%;
+  padding-top: 25px;
+  padding-left: 27px;
+  padding-right: 27px;
 }
 
 // SIDENAV
@@ -59,7 +59,9 @@ li:hover {
 }
 
 .head-logo {
-  width: 3rem;
+  width: 50px;
+  max-width: 48px;
+  max-height: 48px;
 }
 
 .us-dd {

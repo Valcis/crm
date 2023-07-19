@@ -48,7 +48,7 @@ $max-width: 100%;
 .btn:active:hover,
 .btn.active:hover,
 .btn.active:focus {
-  color: $secondary !important;
+  color: $white !important;
 }
 
 .input-button {
@@ -88,18 +88,24 @@ $max-width: 100%;
   background-color: $background;
 }
 
+.gray-bg {
+  background-color: $gray;
+}
+
 .side-container {
-  display: inline-block;
+  float: left;
   width: 12%;
   height: 100%;
+  min-width: 220px;
 }
 
 .top-container {
-  display: inline-block;
-  width: 88%;
-  height: 6%;
+  float: top;
+  width: auto;
+  height: 60px;
   top: 0%;
   vertical-align: top;
+  min-height: 60px;
 }
 
 .dark-bg-container {
@@ -171,4 +177,36 @@ hr.divider {
 
 .l-grey {
   color: $light-gray
+}
+
+.chevron,
+.ngb-tp-chevron::before,
+.ngb-tp-chevron,
+.bottom{
+  color: $label-badget-color;
+  font-size: 12px;
+}
+
+.ngb-tp-spacer {
+  width: 3px !important;
+}
+
+.ngb-tp-input-container,
+.ngb-tp-hour {
+  color: #5E5E5E !important;
+  border-radius: 1px;
+}
+
+.form-control,
+.ng-untouched,
+.ng-pristine,
+.ng-invalid {
+  border-radius: 1px;
+}
+
+.m-h-100 {
+  min-height: 100%;
+}
+.m-w-100 {
+  min-width: 100%;
 }

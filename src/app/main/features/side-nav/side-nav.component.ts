@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {CookiesService} from "../../../shared/services/cookies/cookies.service";
+import {UserService} from "../../../shared/services/api/user/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -12,7 +15,7 @@ export class SideNavComponent implements OnInit {
 
   public isCollapsed = false;
 
-
+  //TODO: Mover a objeto externo
   public menuList: Array<any> = [
     {
       descripcion: 'MENU_INICIO',
@@ -27,33 +30,17 @@ export class SideNavComponent implements OnInit {
     }
   ];
 
-// TODO: MOVER LOS ICONOS A UNA SOLA CARPETA
-  constructor() {
-    // this.menuIconMap = new Map();
+  constructor(private _cookie: CookiesService,
+              private _user: UserService,
+              private _router: Router)
+  {
 
   }
 
   async ngOnInit () {
     //console.log('userData', this.userData);
     await this.getList();
-    // console.log('menu list', this.menuList);
   };
-
-  // public async modifyName(item: any) {
-  //   console.log('first', item.icono);
-  //   if (item.icono='fa-hospital-o') {
-  //     console.log('hosp', item.icono);
-  //     item.icono = 'building';
-  //   }
-  //   if (item.icono.includes('fa-')) {
-  //     item.icono = item.icono.split('fa-');
-  //     item.icono =  item.icono[1];
-  //     console.log('icono',  item.icono);
-  //     return item.icono;
-  //   } else {
-  //     item.icono = 'share';
-  //   }
-  // }
 
   public async getList() {
     if (this.userData.menu) {
@@ -66,15 +53,18 @@ export class SideNavComponent implements OnInit {
     }
   };
 
-  // getIcon = (icon: string) => {
-  //   return this.menuIconMap.get(icon) || this.crmIcon;
+  // itemAction = (argument:string) => {
+  //   console.log(argument)
   // };
-
-  itemAction = (argument:string) => {
-    console.log(argument)
-  };
 
   formatName = (menuName:string) => {
     return menuName.replaceAll('_', '.');
   };
+
+  logOut() {
+    if (this._user) {
+      this._cookie.deleteSessionId();
+    }
+    this._router.navigate(['/login'])
+  }
 }

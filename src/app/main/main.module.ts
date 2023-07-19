@@ -10,7 +10,7 @@ import {TopNavComponent} from './features/top-nav/top-nav.component';
 import {SideNavComponent} from './features/side-nav/side-nav.component';
 import {ContentComponent} from './features/content/content.component';
 import {FormsModule} from "@angular/forms";
-import {NgbModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateParserFormatter, NgbModule, NgbTooltipModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "../shared/shared.module";
 import { GraficosComponent } from './features/content/graficos/graficos.component';
 import { InicioDesarrolladorComponent } from './features/content/inicio-desarrollador/inicio-desarrollador.component';
@@ -18,6 +18,7 @@ import { ProveedoresProductoComponent } from './features/content/proveedores-pro
 import { CalendarioComponent } from './features/content/calendario/calendario.component';
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
+import {DateAdapterService} from "../shared/services/datepicker/date-adapter.service";
 
 
 
@@ -52,6 +53,7 @@ import { NotificacionesComponent } from './features/content/notificaciones/notif
     FormsModule,
     NgbModule,
     SharedModule,
+    CommonModule,
   ],
   providers: []
 })

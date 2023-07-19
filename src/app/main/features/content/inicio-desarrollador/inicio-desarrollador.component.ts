@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
 import {DateTime} from 'luxon';
-import {NgbCalendar, NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
-import {DateAdapterService} from "../../../../shared/services/datepicker/date-adapter.service";
+import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {
+  CustomDateParserFormatter,
+  DateAdapterService
+} from "../../../../shared/services/datepicker/date-adapter.service";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -13,19 +16,21 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   templateUrl: './inicio-desarrollador.component.html',
   styleUrls: ['./inicio-desarrollador.component.scss'],
   providers: [
-    { provide: NgbDateAdapter, useClass: DateAdapterService }
+    { provide: NgbDateAdapter, useClass: DateAdapterService },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
 
 })
 export class InicioDesarrolladorComponent implements OnInit{
 
-  aTitle:string = '';
-  public tz: any;
-  public ts: any;
-  public utc: any;
-  public formatedTime: any;
-
-  model2: string = '';
+  protected aTitle:string = '';
+  protected tz: any;
+  protected ts: any;
+  protected utc: any;
+  protected formatedTime: any;
+  protected model2: string = '';
+  protected time2: any;
+  protected showTime: boolean = false;
 
   constructor(
     private _title: Title,
@@ -66,5 +71,19 @@ export class InicioDesarrolladorComponent implements OnInit{
 
   get today() {
     return this._dAdapt.toModel(this._calendar.getToday())!;
+  }
+
+  erase() {
+    this.model2 = '';
+  }
+
+  openTime() {
+    this.showTime = !this.showTime;
+    let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
+    let testParse3 = test.split(':', 2);
+    this.time2 = {
+      hour: +testParse3[0],
+      minute: +testParse3[1]
+    }
   }
 }

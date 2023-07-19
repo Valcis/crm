@@ -50,30 +50,30 @@
       </div>
     </div>
   </div>
-<!--DATEPICKER-->
-  <div class="row m-0 p-0 text-black">
-    <form class="">
-      <div class="col-3">
+  <div class="row m-0 p-0">
+    <div class="col-sm-3">
+      <div class="m-3">
+        <!-- DATE PICKER -->
         <div class="input-group m-l-2">
           <input
             class="form-control"
             placeholder="dd/mm/yyyy"
             name="d2"
-            #c2="ngModel"
             [(ngModel)]="model2"
             ngbDatepicker
             #d2="ngbDatepicker"
           />
-          <button class="btn btn-outline-secondary fa fa-calendar text-black" (click)="d2.toggle()" type="button"></button>
+          <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+          <button class="btn btn-outline-secondary fa fa-eraser" (click)="erase()" type="button"></button>
+          <button class="btn btn-outline-secondary fa fa-clock-o" (click)="openTime()" type="button"></button>
         </div>
       </div>
-    </form>
+    </div>
+<!--    TIMEPICKER -->
+    <div *ngIf="showTime===true" class="col-sm-3">
+      <div class="m-2">
+        <ngb-timepicker [(ngModel)]="time2"></ngb-timepicker>
+      </div>
+    </div>
   </div>
-
-  <hr />
-  <button class="btn btn-sm btn-outline-primary" (click)="model2 = today">Select Today</button>
-  <hr />
-  <pre>Model: {{ model2 | json }}</pre>
-  <pre>State: {{ c2.status }}</pre>
-
 </div>

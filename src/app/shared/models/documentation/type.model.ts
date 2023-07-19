@@ -3,13 +3,13 @@ export interface TypeModel {
   k:string
 }
 
-
 export const translateType:{ [key: string]: string; }={
   "Otros":"LINKS.OTHER",
   "Agencia":"LINKS.AGENCY",
   "Hotel":"LINKS.HOTEL",
 };
 
+//TODO: El punto y coma
 export const TypeArray:TypeModel[] =[
   {v:"LINKS.OTHER", k:"Otros"},
   {v:"LINKS.AGENCY", k:"Agencia"},

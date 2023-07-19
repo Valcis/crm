@@ -59,8 +59,9 @@ export class LinksComponent {
       link: new FormControl<string>(""),
     });
   }
-
+  //TODO: añadir los loaders
   public async getLinks(){
+    //TODO: este for no está haciendo nada, no?
     for(let key in this.types){
       console.log(key, this.types[key])
     }

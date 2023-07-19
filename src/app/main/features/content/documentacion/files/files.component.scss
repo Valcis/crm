@@ -169,33 +169,7 @@ modal-component{
 }
 
 
-:host ::ng-deep .page-link    {
-  background-color: #FFFFFF;
-  color: #676a6c;
-  border: 1px solid #DDDDDD;
-}
 
-:host ::ng-deep .page-link:hover    {
-  background-color:#eee;
-  border-color: #ddd;
-  color:#23527c
-}
-
-:host ::ng-deep .active .page-link:focus    {
-  background-color:#f4f4f4;
-  border-color: #DDDDDD;
-  color: inherit;
-  box-shadow:unset;
-}
-
-:host ::ng-deep .page-link {
-  &.active,
-  .active > & {
-    background-color:#f4f4f4;
-    border-color: #DDDDDD;
-    color: inherit;
-  }
-}
 
 
 .fa{
@@ -208,4 +182,46 @@ modal-component{
   height: 120px !important;
   min-height: 100px !important;
   min-width: 100px !important;
+  border-radius: 20px;
+  background: #999;
+  background: linear-gradient(to bottom, #eee, #ddd);
+  overflow: hidden;
+  position: relative;
+  display: block;
+  z-index: 10;
+}
+
+
+.dz-details{
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 13px;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 2em 1em;
+  text-align: center;
+  color: rgba(0,0,0,0.9);
+  line-height: 150%;
+}
+.dz-size{
+  margin-bottom: 1em;
+  font-size: 16px;
+}
+.dz-filename{
+  background-color: rgba(255,255,255,0.4);
+  padding: 0 0.4em;
+  border-radius: 3px;
+  white-space: nowrap;
+  width:auto;
+  z-index:50;
+}
+
+.test:not(:hover){
+  z-index:50;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left:auto;
+  margin-right:auto;
 }

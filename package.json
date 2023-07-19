@@ -34,6 +34,7 @@
     "font-awesome": "^4.7.0",
     "luxon": "^3.3.0",
     "moment": "^2.29.4",
+    "ngx-awesome-uploader": "^16.0.0",
     "ngx-cookie-service": "^15.0.0",
     "ngx-dropzone": "^3.1.0",
     "ngx-socket-io": "^4.4.0",

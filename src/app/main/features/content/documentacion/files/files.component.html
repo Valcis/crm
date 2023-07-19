@@ -118,12 +118,15 @@
                         <div class="well row mt-3">
                           <ngx-dropzone class="dropzone" (change)="onSelect($event)">
 
-                            <ngx-dropzone-label>{{"DRAGDROP.FILESDROP" | translate}}</ngx-dropzone-label>
-                            <ngx-dropzone-preview class="rounded-5 cube" *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
-                              <ngx-dropzone-label class="centred">{{ f.size }}</ngx-dropzone-label>
-                              <ngx-dropzone-label> <!--TODO: process--></ngx-dropzone-label>
-                              <ngx-dropzone-label class="centred card rounded-0" width="100px";heigt="50px"></ngx-dropzone-label>
+                            <ngx-dropzone-preview class="rounded-4 cube" *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label class="dz-image">
+                                <div class="dz-details">
+                                  <div class="dz-size test"><span><strong>{{ f.size/1000 }}</strong> MB</span></div>
+                                  <div class="dz-filename test"><span >{{f.name}}</span></div>
+                                </div>
+                              </ngx-dropzone-label>
                             </ngx-dropzone-preview>
+                            <ngx-dropzone-label>{{"DRAGDROP.FILESDROP" | translate}}</ngx-dropzone-label>
                           </ngx-dropzone>
 
                         </div>

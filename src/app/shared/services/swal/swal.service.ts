@@ -39,4 +39,19 @@ export class SwalService {
       showCancelButton:false,
     });
   };
+
+  public swalError = (title:string, text:string) =>{
+    Swal.fire({
+      scrollbarPadding: false,
+      showDenyButton: true,
+      heightAuto: false,
+      title:this._translate.instant(title),
+      text:this._translate.instant(text),
+      icon:"success",
+      denyButtonColor: "rgb(174, 222, 244)",
+      denyButtonText:"OK",
+      showConfirmButton:false,
+      showCancelButton:false,
+    });
+  };
 }

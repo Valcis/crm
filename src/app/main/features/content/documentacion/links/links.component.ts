@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 
 @Component({
   selector: 'document-links',
@@ -32,6 +33,8 @@ export class LinksComponent {
     private _modal: NgbModal,
     private _cookie: CookiesService,
     private _swal: SwalService,
+    private _loader: CrmLoaderService,
+
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this._translate.use('es');
@@ -61,10 +64,7 @@ export class LinksComponent {
   }
   //TODO: añadir los loaders
   public async getLinks(){
-    //TODO: este for no está haciendo nada, no?
-    for(let key in this.types){
-      console.log(key, this.types[key])
-    }
+    this._loader.setLoading(true);
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
       var localData:any = response;
       this.fechResult=[];
@@ -84,6 +84,7 @@ export class LinksComponent {
       this.counter = info.length;
       info.sort((a,b) => b.value.data.creacion_ts - a.value.data.creacion_ts);
       this.rowData = info;
+      this._loader.setLoading(false);
     });
   }
 
@@ -93,17 +94,17 @@ export class LinksComponent {
       this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"),item.data.descripcion)
         .then((result:any) => {
           if (result.isConfirmed){
+            this._loader.setLoading(true);
             this._link.eliminateLink(this.delObj).subscribe(response=>{
-              //crmLoadingPage(false);
+              this._loader.setLoading(false);
               if (response !== undefined) {
-                //crmLoadingPage(true);
+
                 this._swal.swalSucces(this._translate.instant('LINKS.ALERT_RESPONSE1'),this._translate.instant('LINKS.ALERT_LINK_BORRADO'));
                 this.getLinks();
               }
             })
           }
         });
-      //crmLoadingPage(true);
     }
   }
 
@@ -116,14 +117,13 @@ export class LinksComponent {
   public createLink() {
     if (this.newForm.value.link.length > 0 && (this.newForm.value.descripcion.length > 0)) {
       if(this.newForm.value.link.indexOf('http://')>-1 || (this.newForm.value.link.indexOf('https://')>-1)){
-        this.newForm.value.link = this.newForm.value.link;
+
       } else {
         this.newForm.value.link = 'http://'+ this.newForm.value.link;
       }
-
-      //crmLoadingPage(true);
+      this._loader.setLoading(true);
       this._link.newLink(this.newForm.value).subscribe(response =>{
-        //crmLoadingPage(false);
+        this._loader.setLoading(false);
         if (response !== undefined) {
           this.modalRef.close();
           /*

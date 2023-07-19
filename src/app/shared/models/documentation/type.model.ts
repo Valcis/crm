@@ -9,8 +9,8 @@ export const translateType:{ [key: string]: string; }={
   "Hotel":"LINKS.HOTEL",
 };
 
-//TODO: El punto y coma
+
 export const TypeArray:TypeModel[] =[
   {v:"LINKS.OTHER", k:"Otros"},
   {v:"LINKS.AGENCY", k:"Agencia"},
-  {v:"LINKS.HOTEL", k:"Hotel"}]
+  {v:"LINKS.HOTEL", k:"Hotel"}];

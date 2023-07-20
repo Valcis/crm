@@ -18,7 +18,6 @@
                     <label>{{ 'LINKS.TYPE' | translate}}</label>
                     <select class="form-select rounded-0" formControlName="categoria" >
                       <option [value]="type.k" *ngFor="let type of types" >{{type.v | translate}}</option>
-
                     </select>
                   </div>
                   <div class="col-sm-3">
@@ -32,7 +31,7 @@
                 </div>
                 <div class ="row">
                   <div class="">
-                    <div>&nbsp;</div>
+                    <div>&nbsp;</div> <!--TODO Limpiar este div-->
                     <button type="submit" class="btn btn-search float-right"  ><i class="fa fa-search"></i> {{'LINKS.SEARCH'|translate}} </button>
                   </div>
                 </div>
@@ -84,7 +83,7 @@
       <div class="modal-header rounded-1">
         <button type="button" class="close row" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
           <span aria-hidden="true">×</span>
-          <span class="sr-only ">Close</span></button>
+          <span class="sr-only ">Close</span></button> <!--TODO: Translate -->
         <h4 class="modal-title centred" >{{'LINKS.NEW' | translate }}</h4>
       </div>
 
@@ -109,7 +108,6 @@
                 <span class="input-group-text rounded-0" >http://</span>
                 <input type="text" class="form-control" formControlName="link">
               </div>
-
             </div>
           </div>
           <div class="modal-footer">

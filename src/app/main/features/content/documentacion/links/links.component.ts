@@ -62,7 +62,7 @@ export class LinksComponent {
       link: new FormControl<string>(""),
     });
   }
-  //TODO: añadir los loaders
+
   public async getLinks(){
     this._loader.setLoading(true);
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{

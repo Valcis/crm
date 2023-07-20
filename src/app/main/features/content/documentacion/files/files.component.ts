@@ -132,7 +132,7 @@ export class FilesComponent {
   public sendFile(){
   if(this.newForm.value.descripcion !== ""){
     this.send();
-    this.file = [];
+    this.reset();
     this.getFiles()
   }else {
     console.log("falta descripcio")
@@ -144,7 +144,11 @@ export class FilesComponent {
 
 
 
-
+  protected reciveFile(file:any):void{
+    this.file = file;
+    this.filesAdded = true;
+    console.log(file)
+  }
 
 
 
@@ -177,7 +181,6 @@ export class FilesComponent {
   };
 
   public reset() {
-    //TODO: do not do the thing
     this.removeAllFiles();
     this.filesAdded = false;
   };
@@ -185,28 +188,4 @@ export class FilesComponent {
   private removeAllFiles(){
     this.file = [];
   };
-
-
-  onSelect(event:any) {
-    this.filesAdded = true;
-    console.log(event);
-    this.file = [];
-    this.file.push(...event.addedFiles);
-  }
-
-  calcualteSize(size: number){
-    let count: number = 0;
-
-    while (size >= 1000) {
-      count++;
-      size=size/1000
-    }
-    var result:string = (Math.round(size * 100) / 100).toFixed(2);
-    let units =["B","KB","MB","GB"];
-    if (count > 3){
-      count = 3;
-    }
-    var  unit: string  = units[count];
-    return ("<strong> " + result + "</strong>" + unit);
-  }
 }

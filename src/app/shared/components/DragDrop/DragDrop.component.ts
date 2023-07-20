@@ -1,6 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {CrmLoaderService} from "../../services/crmLoader/crm-loader.service";
 import {FormGroup, FormControl} from "@angular/forms";
+@Injectable({
+    providedIn: 'root'
+})
 @Component({
   selector: 'DragDrop.',
   templateUrl: './DragDrop.component.html',
@@ -8,15 +11,16 @@ import {FormGroup, FormControl} from "@angular/forms";
 })
 export class DragDropComponent{
 
-  protected file: File[]= [];
+  @Input() file: File[]= [];
 
   @Output() sendFile = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<any>();
 
 
 
   public reset() {
     this.removeAllFiles();
-    this.sendFile.emit(this.file)
+    this.delete.emit();
   };
 
   private removeAllFiles(){
@@ -33,12 +37,14 @@ export class DragDropComponent{
   public calcualteSize(size: number){
     let count: number = 0;
 
+    size = size*100;
     while (size >= 1000) {
       count++;
       size=size/1000
     }
-    var result:string = (Math.round(size * 100) / 100).toFixed(2);
-    let units =["B","KB","MB","GB"];
+    size = size/100;
+    var result:string = (Math.round(size * 100) / 100).toFixed(1);
+    let units =[" B"," KB"," MB"," GB"];
     if (count > 3){
       count = 3;
     }

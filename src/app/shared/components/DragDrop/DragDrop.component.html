@@ -3,7 +3,7 @@
     <ngx-dropzone-preview class="rounded-4 cube" *ngFor="let f of file">
       <ngx-dropzone-label class="dz-image">
         <div class="dz-details">
-          <div class="dz-size test"><span [innerHTML]="calcualteSize(f.size)"></span></div>
+          <div class="dz-size test"><span class="box" [innerHTML]="calcualteSize(f.size)"></span></div>
           <div class="dz-filename test" placement="bottom" ngbTooltip="{{f.name}}"><span >{{f.name}}</span></div>
         </div>
       </ngx-dropzone-label>

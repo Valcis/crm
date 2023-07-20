@@ -66,7 +66,7 @@
                         <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                           <td>
                             <div class="dropdown nav" ngbDropdown>
-                              <button class="btn btn-search btn-sm " style="font-size: 0.8em;" ngbDropdownToggle>
+                              <button class="btn btn-search btn-sm no-decoration" style="font-size: 0.8em;" ngbDropdownToggle>
                                 <i class="fa fa-cog"></i>
                               </button>
                               <ul class="dropdown-menu" ngbDropdownMenu>
@@ -121,18 +121,18 @@
                           <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}}</label>
                           <input required type="text" class="form-control" formControlName="descripcion">
                         </div>
-                        <DragDrop></DragDrop>
+                        <DragDrop [file]="file" (sendFile)="reciveFile($event)" (reset)="reset()"></DragDrop>
+                      </div>
+                      <div style="position: absolute;top: 43%; right: 7%; ">
+                        <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
+                        >{{'GENERAL.CONFIRM' | translate}}
+                        </button>
+                        <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger .close btn-sm pull-right"
+                        >{{'GENERAL.DENY' | translate}}
+                        </button>
                       </div>
                     </form>
                   </div>
-                </div>
-                <div style="position: absolute;top: 20%; right: 2%; ">
-                  <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
-                  >{{'GENERAL.CONFIRM' | translate}}
-                  </button>
-                  <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger btn-sm pull-right"
-                  >{{'GENERAL.DENY' | translate}}
-                  </button>
                 </div>
               </ng-template>
             </li>

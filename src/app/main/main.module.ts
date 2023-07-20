@@ -59,6 +59,7 @@ import {DragDropComponent} from "../shared/components/DragDrop/DragDrop.componen
     NgbModule,
     SharedModule,
   ],
+  exports: [DragDropComponent],
   providers: []
 })
 export class MainModule {

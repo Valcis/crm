@@ -13,8 +13,8 @@ import {firstValueFrom, isObservable} from "rxjs";
   providedIn: 'root'
 })
 export class SwalService {
-  private text1:any= "SWAL.ALERT_CONFIRM";
-  private text2:any ="SWAL.ALERT_CANCEL";
+  private confirm:any= "SWAL.ALERT_CONFIRM";
+  private deny:any ="SWAL.ALERT_CANCEL";
 
   constructor(private _translate:TranslateService,
               private _cookie: CookiesService,
@@ -29,17 +29,15 @@ export class SwalService {
     // }
   }
 
-  async checkDuplicate(){
+  async translations(){
 
-    var tranlated1 = await this.getTranslation(this.text1, this._cookie.getLanguage()).toPromise();
-    var tranlated2 = await this.getTranslation(this.text2, this._cookie.getLanguage()).toPromise();
-    return [tranlated1,tranlated2]
+    var tranlatedConfirm = await this.getTranslation(this.confirm, this._cookie.getLanguage()).toPromise();
+    var tranlatedDeny = await this.getTranslation(this.deny, this._cookie.getLanguage()).toPromise();
+    return [tranlatedConfirm,tranlatedDeny]
   }
 
-  async proceed(title:string, text:string, variable:string){
-    var translations = await this.checkDuplicate();
-    console.log(this.text1);
-    console.log(this._cookie.getLanguage());
+  async waitTranslations(title:string, text:string, variable:string){
+    var translationsResults = await this.translations();
     return Swal.fire({
       scrollbarPadding: false,
       heightAuto: false,
@@ -48,27 +46,24 @@ export class SwalService {
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",
-      confirmButtonText: translations[0],
+      confirmButtonText: translationsResults[0],
       cancelButtonColor: "#D0D0D0",
-      cancelButtonText: translations[1],
+      cancelButtonText: translationsResults[1],
       reverseButtons: true,
     })
   }
 
 
-  public getTranslation(key: string, language: string, interpolationParams?: Object): Observable<string> {
+  public getTranslation(text: string, language: string): Observable<string> {
     return this._translate.getTranslation(language).pipe(
       map(translations => {
-        return this._translate.getParsedResult(translations, key, interpolationParams);
+        return this._translate.getParsedResult(translations, text);
       })
     );
   }
 
   public swalConfirmationRequest(title:string, text:string, variable:string){
-
-
-
-    return this.proceed(title, text, variable)
+    return this.waitTranslations(title, text, variable)
   };
 
   public swalSucces = (title:string, text:string) =>{

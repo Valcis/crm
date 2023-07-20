@@ -91,9 +91,9 @@ export class LinksComponent {
   public async deleteLinks(item: any){
     this.delObj = item;
     if (this.delObj !== undefined && this.delObj.metadata !== undefined && this.delObj.metadata.neo_id !== undefined) {
-      this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"),item.data.descripcion)
-        .then((result:any) => {
-          if (result.isConfirmed){
+      this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"),item.data.descripcion).then(
+        (res)=>{
+          if (res.isConfirmed){
             this._loader.setLoading(true);
             this._link.eliminateLink(this.delObj).subscribe(response=>{
               this._loader.setLoading(false);
@@ -104,7 +104,10 @@ export class LinksComponent {
               }
             })
           }
-        });
+        }
+      )
+
+
     }
   }
 

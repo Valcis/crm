@@ -1388,6 +1388,6 @@
   "OBJETIVO.CONSEGUIDO": "Objetivo conseguido",
   "VOLVER.VISITAR": "Volver a visitar",
 
-  "LINKS.ALERT_CONFIRM": "Sí, Borrar!",
-  "LINKS.ALERT_CANCEL": "No, Cancelar!"
+  "SWAL.ALERT_CONFIRM": "Sí, Borrar!",
+  "SWAL.ALERT_CANCEL": "No, Cancelar!"
 }

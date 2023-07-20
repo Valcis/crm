@@ -20,10 +20,12 @@ import { ActividadesComponent } from './features/content/actividades/actividades
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {DragDropComponent} from "../shared/components/DragDrop/DragDrop.component";
 
 
 @NgModule({
   declarations: [
+    DragDropComponent,
     FilesComponent,
     MainComponent,
     AppRouterOutletDirective,

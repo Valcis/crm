@@ -7,13 +7,12 @@ import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {FileService} from "../../../../../shared/services/api/documentation/file/file.service";
 import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
-
+import {DragDropComponent} from "../../../../../shared/components/DragDrop/DragDrop.component";
 
 @Component({
   selector: 'document-links',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.scss',],
-
+  styleUrls: ['./files.component.scss',]
 })
 export class FilesComponent {
   protected filesForm!: FormGroup;
@@ -23,17 +22,24 @@ export class FilesComponent {
   protected counter: number = 0;
   protected currentPage: number = 1;
   protected pageSize: number = 5;
-  protected columns: string[] = [" ","FILES.NAME", "FILES.DESCRIPTION", "FILES.SIZE", "FILES.CATEGORIA","FILES.USER","FILES.CREATION"];
-  protected types: any[] = [{k:"Hotel", v:"FILES.HOTEL"},{k:"Agencia", v:"FILES.AGENCY"}, {k:"Otros", v:"FILES.OTHER"}];
+  protected types: any[] = [{k:"Hotel", v:"GENERAL.HOTEL"},{k:"Agencia", v:"GENERAL.AGENCY"}, {k:"Otros", v:"GENERAL.OTHER"}];
   constructor(
     private _dragDrop: DragDropService,
     private _translate: TranslateService,
     private _cookie: CookiesService,
-    private _fileService: FileService
+    private _fileService: FileService,
+    private _Dragdrop: DragDropComponent
   ) {
+      this._translate.use(_cookie.getLanguage())
   }
 
   ngOnInit() {
+    this.initForms()
+    this.getFiles()
+
+  }
+
+  private initForms(){
     this.filesForm = new FormGroup({
       type_file: new FormControl<string>('Otros'),
       neo_id: new FormControl(0),
@@ -47,8 +53,6 @@ export class FilesComponent {
       categoria: new FormControl<string>('Otros'),
       descripcion: new FormControl<string>(""),
     });
-    this.getFiles()
-
   }
 
   public async getFiles() {
@@ -77,6 +81,7 @@ export class FilesComponent {
             dateCreation:value.data.creacion_ts };
           this.rowData.push(it)
         });
+        this.rowData.sort((a,b) => b.dateCreation - a.dateCreation);
         console.log("rowData", this.rowData);
         this.counter = fechResult.length;
 

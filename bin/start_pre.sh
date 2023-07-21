@@ -1,3 +1,3 @@
 #!/bin/sh
 npm install
-npm run build-pre
+ng build --configuration=preproduction

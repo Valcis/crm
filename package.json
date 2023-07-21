@@ -9,7 +9,7 @@
     "test": "ng test",
     "build-pre": "ng build --configuration=preproduction",
     "build-prod": "ng build --configuration=production",
-    "": ""
+    "test-pre": "chmod 755 bin/start_pre.sh; bin/start_pre.sh"
   },
   "private": true,
   "dependencies": {

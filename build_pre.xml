@@ -3,7 +3,7 @@
   <target name="install">
     <echo>=== INSTALL ===</echo>
     <copy todir="/apps/resin4/webapps/crm2/">
-      <fileset dir="workspace/dist/"/>
+      <fileset dir="workspace/dist/crm2/"/>
     </copy>
   </target>
 

@@ -6,7 +6,10 @@
     "start": "ng serve -o --port 8081",
     "build": "ng build",
     "watch": "ng build --watch --configuration local",
-    "test": "ng test"
+    "test": "ng test",
+    "build-pre": "ng build --configuration=preproduction",
+    "build-prod": "ng build --configuration=production",
+    "": ""
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,10 @@
+<project name="crm2" basedir=".." default="install">
+
+  <target name="install">
+    <echo>=== INSTALL ===</echo>
+    <copy todir="/apps/resin4/webapps/crm2/">
+      <fileset dir="workspace/dist/"/>
+    </copy>
+  </target>
+
+</project>

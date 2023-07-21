@@ -1386,5 +1386,8 @@
   "OBJETIVO.PRINCIPAL": "Objetivo principal",
   "OBJETIVO.SECUNDARIO": "Objetivo secundario",
   "OBJETIVO.CONSEGUIDO": "Objetivo conseguido",
-  "VOLVER.VISITAR": "Volver a visitar"
+  "VOLVER.VISITAR": "Volver a visitar",
+
+  "SWAL.ALERT_CONFIRM": "Sí, Borrar!",
+  "SWAL.ALERT_CANCEL": "No, Cancelar!"
 }

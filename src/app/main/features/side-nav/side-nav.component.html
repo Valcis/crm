@@ -68,7 +68,9 @@
                 <div>
                   <ul class="list-group crm-ul">
                     <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
-                        [id]="sub.descripcion">
+                        [id]="sub.descripcion"
+                        [routerLink]="sub.link_pag"
+                    >
                       {{ formatName(sub.descripcion) | translate }}
                     </li>
                   </ul>

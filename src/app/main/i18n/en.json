@@ -1,4 +1,22 @@
 {
   "MAIN.WORKS": "Main works",
-  "CONTENT.WORKS": "Content works"
+  "CONTENT.WORKS": "Content works",
+
+  "LINKS.CRITERIA": "Links searching criteria",
+  "LINKS.TYPE": "Type",
+  "LINKS.HOTEL": "Hotel",
+  "LINKS.AGENCY": "Agency",
+  "LINKS.OTHER": "Other",
+  "LINKS.DESCRIPTION": "Description",
+  "LINKS.LINK": "Link",
+  "LINKS.ALERT_TITLE_DELETE": "¿Are you sure?",
+  "LINKS.ALERT_TEXT": "You will not be able to recover the link",
+  "LINKS.SEARCH": "Search",
+  "LINKS.RESULTS": "Results",
+  "LINKS.NEW": "Create a new link",
+  "LINKS.CLOSE": "Cancel",
+  "LINKS.CREATE": "Add",
+  "LINKS.ALERT_RESPONSE1": "Deleted!",
+  "LINKS.ALERT_LINK_BORRADO": "The link has been correctly deleted",
+  "LINKS.DELETE": "Delete"
 }

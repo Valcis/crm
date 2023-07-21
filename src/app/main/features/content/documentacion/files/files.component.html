@@ -1,14 +1,15 @@
 <div>
   <div>
 
-    <div style="font-family: 'Open Sans'">
+    <div class="fonte" >
       <h5>{{ 'FILES.FORM-TITLE' | translate}}</h5>
 
     </div>
     <div>
-      <div class="card rounded-0 mx-4 my-4 " style="width: 96%">
+      <div class="card rounded-0 mx-4 my-4 width">
         <div class="card-content">
           <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
+            <!--TODO:mirar l'espai entre pestanyes-->
             <li ngbNavItem>
               <button ngbNavLink><i class="fa fa-list"></i></button>
               <ng-template ngbNavContent>
@@ -21,7 +22,8 @@
                       <div class="row">
                         <div class="col-sm-3">
                           <label>{{ 'FILES.CATEGORY' | translate}}</label>
-                          <select class="form-select" formControlName="type_file" >
+                          <!--TODO:ordre del dropdown-->
+                          <select class="form-select rounded-0" formControlName="type_file" >
                             <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
                             <option [value]="types[1].k">{{types[1].v | translate}}</option>
                             <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
@@ -39,7 +41,7 @@
                       <div class ="row">
                         <div class="">
                           <div>&nbsp;</div>
-                          <button type="submit" class="btn btn-search" style="float: right;" ><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
+                          <button type="submit" class="btn btn-search to-the-right" ><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
                         </div>
                       </div>
                     </form>
@@ -54,8 +56,8 @@
                   <div class="card-content mx-3 my-2 mb-5">
                     <div (show)="counter>0">
                       <table class=" table table-bordered " >
-                        <tr style="background-color: #f4f4f5" >
-                          <th style="width: 40px;"></th>
+                        <tr class="background-title" >
+                          <th ></th>
                           <th>{{"FILES.NAME" | translate}}</th>
                           <th>{{"DOCUMENTATION.DESCRIPTION" | translate}}</th>
                           <th class="centred">{{"FILES.SIZE" | translate}}</th>
@@ -66,7 +68,7 @@
                         <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                           <td>
                             <div class="dropdown nav" ngbDropdown>
-                              <button class="btn btn-search btn-sm no-decoration" style="font-size: 0.8em;" ngbDropdownToggle>
+                              <button class="btn btn-search btn-sm no-decoration" ngbDropdownToggle>
                                 <i class="fa fa-cog"></i>
                               </button>
                               <ul class="dropdown-menu" ngbDropdownMenu>
@@ -86,12 +88,13 @@
                             {{element.siz
                           / 1000 | number:"1.2-2"}} KB
                           </td>
-                          <td class="text-center">{{element.categor}}</td>
+                          <!--TODO:traduir-->
+                          <td class="text-center">{{element.categor | translate}}</td>
                           <td class="text-center">{{element.userName}}</td>
                           <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
                         </tr>
                       </table>
-
+                      <!--TODO:mirar l'espai entre páginador i taula-->
                       <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
                         <ng-template ngbPaginationPrevious><</ng-template>
                         <ng-template ngbPaginationNext>></ng-template>
@@ -118,13 +121,13 @@
                           </select>
                         </div>
                         <div class="col-sm-8">
-                          <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}}</label>
+                          <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}} *</label>
                           <input required type="text" class="form-control" formControlName="descripcion">
                         </div>
                         <DragDrop [file]="file" (sendFile)="reciveFile($event)" (reset)="reset()"></DragDrop>
                       </div>
-                      <div style="position: absolute;top: 43%; right: 7%; ">
-                        <button *ngIf="file.length" style="margin-left: 5px;"  type="submit" class="btn btn-primary btn-sm pull-right"
+                      <div class="dropButtons">
+                        <button *ngIf="file.length" type="submit" class="btn btn-primary btn-sm pull-right spaceing-right"
                         >{{'GENERAL.CONFIRM' | translate}}
                         </button>
                         <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger .close btn-sm pull-right"

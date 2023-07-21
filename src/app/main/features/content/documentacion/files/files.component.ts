@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
 
 
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {FileService} from "../../../../../shared/services/api/documentation/file/file.service";
 import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
 import {DragDropComponent} from "../../../../../shared/components/DragDrop/DragDrop.component";
+import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 
 @Component({
   selector: 'document-links',
@@ -21,21 +22,27 @@ export class FilesComponent {
   protected rowData: any[] = [];
   protected counter: number = 0;
   protected currentPage: number = 1;
-  protected pageSize: number = 5;
+  protected pageSize: number = 10;
   protected types: any[] = [{k:"Hotel", v:"GENERAL.HOTEL"},{k:"Agencia", v:"GENERAL.AGENCY"}, {k:"Otros", v:"GENERAL.OTHER"}];
+
+  protected file: File[]= [];
+  protected filesAdded:boolean = false;
+  protected forme!:FormGroup ;
+
   constructor(
     private _dragDrop: DragDropService,
     private _translate: TranslateService,
     private _cookie: CookiesService,
     private _fileService: FileService,
-    private _Dragdrop: DragDropComponent
+    private _Dragdrop: DragDropComponent,
+    private _loader: CrmLoaderService
   ) {
-      this._translate.use(_cookie.getLanguage())
+      this._translate.use(_cookie.getLanguage());
   }
 
   ngOnInit() {
-    this.initForms()
-    this.getFiles()
+    this.initForms();
+    this.getFiles();
 
   }
 
@@ -55,12 +62,12 @@ export class FilesComponent {
     });
   }
 
-  public async getFiles() {
+  protected async getFiles() {
 
-    //crmLoadingPage(true);
+    this._loader.setLoading(true);
     this.rowData = [];
-    var list: any=[];
-    //crmLoadingPage(false);
+    let list: any=[];
+
     this._fileService.getFiles(this.filesForm.value).subscribe(response=>{
       if (response !== undefined) {
         var localData:any = response;
@@ -82,7 +89,7 @@ export class FilesComponent {
           this.rowData.push(it)
         });
         this.rowData.sort((a,b) => b.dateCreation - a.dateCreation);
-        console.log("rowData", this.rowData);
+        this._loader.setLoading(false);
         this.counter = fechResult.length;
 
       }
@@ -92,77 +99,33 @@ export class FilesComponent {
 
   };
 
-  public deleteFile(name:string, id:number, original_n:string, event:any) {
-    /*Swal.fire({
-      title: this._translate.instant('SWEET_ALERT_TITLE_DELETE'),
-      text: this._translate.instant('SWEET_ALERT_TEXT_ADJUNTO_DELETE') + " " + original_n + "!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: this._translate.instant('SWEET_ALERT_CONFIRM_DELETE'),
-      cancelButtonText: this._translate.instant('SWEET_ALERT_CANCEL_DELETE'),
-      scrollbarPadding: false,
-      heightAuto: false,
-    }).then((isConfirm) => {
-      if (isConfirm) {
-*/
-
-        //{"Servicio":"ficheros","Metodo":"DeleteFichero","Tipo":"","Entrada":{"type_file":"Ficheros","file_name":"1689673059526.log","neo_id":639225},"Id":"16bmd4rOuLurngAaJQyuSU80dEFt0gyTzMxU05up","URL":"","recuerdame_id":""}:
-    event.preventDefault()
-        //crmLoadingPage(true);
-        this._fileService.deleteFile(name,id).subscribe((response) => {
-          console.log(response);
-          this.getFiles();
-        });/*.subscribe(response=>{
-          //crmLoadingPage(false);
-          if (response !== undefined && response.Salida !== undefined && response.Status === 'OK') {
-            Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE'), "success");
-          } else {
-            Swal.fire(this._translate.instant('SWEET_ALERT_RESPONSE1_ADJUNTO_DELETE_ERROR'), this._translate.instant('SWEET_ALERT_RESPONSE2_ADJUNTO_DELETE_ERROR'), "error");
-          }
-          *//*
-        })
-
-      }
-    });
-    */
+  protected deleteFile(name:string, id:number, original_n:string, event:any) {
+    //TODO:swal solicitud
+    event.preventDefault();
+    this._loader.setLoading(true);
+      this._fileService.deleteFile(name,id).subscribe((response) => {
+        this._loader.setLoading(false);
+        this.getFiles();
+      });
+      //TODO: esperar resposta i donar swal succes o swal error
   };
 
-
-  public sendFile(){
-  if(this.newForm.value.descripcion !== ""){
-    this.send();
-    this.reset();
-    this.getFiles()
-  }else {
-    console.log("falta descripcio")
+  protected sendFile(){
+    if(this.newForm.value.descripcion !== ""){
+      this.send();
+      this.reset();
+      this.getFiles()
+    }else {
+      console.log("falta descripcio")
+    }
   }
-
-}
-
-
-
-
 
   protected reciveFile(file:any):void{
     this.file = file;
     this.filesAdded = true;
-    console.log(file)
   }
 
-
-
-
-
-
-
-  protected file: File[]= [];
-  protected filesAdded:boolean = false;
-  protected forme!:FormGroup ;
-
-
-  public send() {
-    //TODO:do the thing
+  private send() {
 
     this.forme = new FormGroup({
       type_file: new FormControl<string>('Ficheros'),
@@ -173,14 +136,15 @@ export class FilesComponent {
       catregoria: new FormControl<string>(this.newForm.value.categoria),
       descripcion: new FormControl<string>(this.newForm.value.descripcion),
     });
+    this._loader.setLoading(true);
     this._dragDrop.sendFiles(this.forme.value).subscribe(response=>{
       if (response !== undefined) {
-
       }
-    })
+      this._loader.setLoading(true);
+    });
   };
 
-  public reset() {
+  protected reset() {
     this.removeAllFiles();
     this.filesAdded = false;
   };
@@ -189,3 +153,4 @@ export class FilesComponent {
     this.file = [];
   };
 }
+

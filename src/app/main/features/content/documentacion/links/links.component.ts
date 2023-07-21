@@ -19,7 +19,7 @@ export class LinksComponent {
   public newForm!: FormGroup;
   public types: TypeModel[]=TypeArray;
   public counter: number = 0;
-  public fechResult: any[]=[];
+  public fetchResult: any[]=[];
   public currentPage = 1;
   public pageSize =10;
   public rowData: any[]= [];
@@ -67,11 +67,11 @@ export class LinksComponent {
     this._loader.setLoading(true);
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
       var localData:any = response;
-      this.fechResult=[];
-      this.fechResult = localData.Salida.lineas;
+      this.fetchResult=[];
+      this.fetchResult = localData.Salida.lineas;
       this.rowData = [];
       var info: any[] = [];
-      this.fechResult.forEach((value) => {
+      this.fetchResult.forEach((value) => {
         var a:string = value.data.categoria;
         var it = {
           c:translateType[a],
@@ -129,14 +129,7 @@ export class LinksComponent {
         this._loader.setLoading(false);
         if (response !== undefined) {
           this.modalRef.close();
-          /*
-          notify({
-            message: $translate.instant("PAG_LINKS_NOTIFY_ANADIDO_OK"),//Texto plano
-            position: 'right',//center,right
-            classes: 'alert-success',//,//alert-info,alert-success,alert-warning,alert-danger
-            templateUrl: 'general/common/notify.html'
-          });
-          */
+          //TODO: Add notify
           this.getLinks();
         }
         return response;
@@ -144,14 +137,7 @@ export class LinksComponent {
 
     } else {
       console.log(this.newForm.value.link)
-      /*
-      notify({
-        message: $translate.instant("PAG_LINKS_NOTIFY_NECESARIO_LINK"),//Texto plano
-        position: 'right',//center,right
-        classes: 'alert-warning',//,//alert-info,alert-success,alert-warning,alert-danger
-        templateUrl: 'general/common/notify.html'
-      });
-       */
+      //TODO: Add notify (error)
     }
   }
 }

@@ -19,7 +19,7 @@ export class LinkService extends CrmService {
       Servicio: "links",
       Metodo: "",
       Tipo: "",
-      Entrada: {}, //ya rellenaremos la entrada con los datos especificos mas adelante
+      Entrada: {},
       Id: this._cookie.getSessionId(),
       URL: "",
       recuerdame_id: ""};

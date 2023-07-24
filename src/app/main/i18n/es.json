@@ -37,6 +37,7 @@
   "CHANNELS.PERPAGE20" : "20 elementos por pág.",
   "CHANNELS.COD"  : "Cód.",
   "CHANNELS.CERT" : "Cert.",
-  "CHANNELS.RESULTNAME" : "Nombre"
+  "CHANNELS.RESULTNAME" : "Nombre",
+  "CHANNELS.PROCESS" : "No, en proceso"
 
 }

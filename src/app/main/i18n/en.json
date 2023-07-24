@@ -35,5 +35,6 @@
   "CHANNELS.PERPAGE20" : "20 elements per page",
   "CHANNELS.COD"  : "Cod.",
   "CHANNELS.CERT" : "Cert.",
-  "CHANNELS.RESULTNAME" : "Name"
+  "CHANNELS.RESULTNAME" : "Name",
+  "CHANNELS.PROCESS" : "No, in process"
 }

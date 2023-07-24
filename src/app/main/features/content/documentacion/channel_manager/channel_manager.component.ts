@@ -65,9 +65,13 @@ export class ChannelManagerComponent {
       this.channels = [];
       var info: any[] = [];
       fetchResult.forEach((value:any) => {
-
+        var a = value.certificado ;
+        console.log(a);
+        if (a === undefined){
+          a=""
+        }
         var item = {
-          certificado: channelState[value.certificado] ,
+          certificado: channelState[a] ,
           comentario: value.comentario,
           contacto: value.contacto,
           description: value.description ,

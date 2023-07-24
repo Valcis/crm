@@ -49,7 +49,7 @@ export class ChannelManagerComponent {
       nombre_certificado: new FormControl<string>(""),
       comentario: new FormControl<string>(""),
       pagina: new FormControl<number>(1),
-      num_resultados: new FormControl<number>(10),
+      num_resultados: new FormControl<number>(20),
       orden: new FormControl<string>("fecha_creacion_ts"),
       tipo_orden: new FormControl<string>("DESC"),
     });

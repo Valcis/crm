@@ -1,9 +1,15 @@
 html, body {
-  height: 100vh;
+  min-height: 100vh;
   font-size: 14px;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #676a6c;
+  flex:1;
+}
 
+html{
+  min-height: 100vh;
+  display: flex;
+  max-height: 500vh;
 }
 
 // Basic Colors
@@ -245,4 +251,8 @@ hr.divider {
   border-color: #DDDDDD;
   color: inherit;
   box-shadow:unset;
+}
+
+.side-container{
+  background-color: #676a6c;
 }

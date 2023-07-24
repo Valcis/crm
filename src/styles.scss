@@ -216,3 +216,30 @@ hr.divider {
   outline: 0;
   box-shadow: 0 0 0 0px;
 }
+
+
+
+.page-link    {
+  background-color: #FFFFFF;
+  color: #676a6c;
+  border: 1px solid #DDDDDD;
+}
+
+.page-link:hover    {
+  background-color:#eee;
+  border-color: #ddd;
+  color:#23527c
+}
+
+.active .page-link    {
+  background-color:#f4f4f4;
+  border-color: #DDDDDD;
+  color: inherit;
+}
+
+.active .page-link:focus    {
+  background-color:#f4f4f4;
+  border-color: #DDDDDD;
+  color: inherit;
+  box-shadow:unset;
+}

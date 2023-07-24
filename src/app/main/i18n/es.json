@@ -2,6 +2,9 @@
   "MAIN.WORKS": "Main funciona",
   "CONTENT.WORKS": "Contenido funciona",
 
+  "GLOBAL.RESULTS": "Resultado/s",
+  "GLOBAL.SEARCH": "Buscar",
+
   "LINKS.CRITERIA": "Criterios para buscar links",
   "LINKS.TYPE": "Tipo",
   "LINKS.HOTEL": "Hotel",
@@ -18,6 +21,22 @@
   "LINKS.CREATE": "Añadir",
   "LINKS.ALERT_RESPONSE1": "Borrado!",
   "LINKS.ALERT_LINK_BORRADO": "El link ha sido borrado correctamente",
-  "LINKS.DELETE": "Eliminar"
+  "LINKS.DELETE": "Eliminar",
+
+  "CHANNELS.CRITERIA" : "Criterios para buscar channels\n",
+  "CHANNELS.CODE" : "Código channel",
+  "CHANNELS.NAME" : "Nombre channel",
+  "CHANNELS.CERTIFIED" : "Certificado",
+  "CHANNELS.ALL" : "Todos",
+  "CHANNELS.YES" : "Sí",
+  "CHANNELS.NO" : "No",
+  "CHANNELS.DESCRIPTION" : "Descripción" ,
+  "CHANNELS.COMMENT" : "Comentario",
+  "CHANNELS.PERPAGE5" : "5 elementos por pág.",
+  "CHANNELS.PERPAGE10" : "10 elementos por pág.",
+  "CHANNELS.PERPAGE20" : "20 elementos por pág.",
+  "CHANNELS.COD"  : "Cód.",
+  "CHANNELS.CERT" : "Cert.",
+  "CHANNELS.RESULTNAME" : "Nombre"
 
 }

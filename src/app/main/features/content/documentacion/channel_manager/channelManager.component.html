@@ -1,0 +1,128 @@
+<div class="colocation  body-position">
+  <div>
+    <h4>Channel Manager</h4>
+  </div>
+  <div class="body-right">
+    <form [formGroup]="channelSearch" (submit)="getResults()"  >
+      <div class="card rounded-0 ">
+        <div class="card-title border-bottom">
+          <div class="m-3"><h6>{{'CHANNELS.CRITERIA'|translate}}</h6></div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <small> {{"CHANNELS.CODE" | translate}}</small>
+              <input class="form-control" formControlName="idcm">
+            </div>
+            <div class="col-sm-3">
+              <small> {{"CHANNELS.NAME" | translate}}</small>
+              <input class="form-control" formControlName="nombre">
+            </div>
+            <div class="col-sm-3">
+              <small> {{"CHANNELS.CERTIFIED" | translate}}</small>
+              <select class="form-select" formControlName="certificado">
+                <option selected value="">
+                  {{"CHANNELS.ALL" | translate}}
+                </option>
+                <option value="y">
+                  {{"CHANNELS.YES" | translate}}
+                </option>
+                <option value="n">
+                  {{"CHANNELS.NO" | translate}}
+                </option>
+
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <small> PCI </small>
+              <select class="form-select" formControlName="pci">
+                <option selected value="">
+                  {{"CHANNELS.ALL" | translate}}
+                </option>
+                <option value="y">
+                  {{"CHANNELS.YES" | translate}}
+                </option>
+                <option value="n">
+                  {{"CHANNELS.NO" | translate}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <small> {{"CHANNELS.DESCRIPTION" | translate}}</small>
+              <input class="form-control" formControlName="nombre_certificado">
+            </div>
+            <div class="col-sm-6">
+              <small> {{"CHANNELS.COMMENT" | translate}}</small>
+              <input class="form-control" formControlName="comentario">
+            </div>
+            <div class="col-sm-2 text-right">
+              <div>&nbsp;</div>
+              <button class="btn btn-search float-right" style="color: #676a6c !important;" type="submit"><i class="fa fa-search"></i> {{'GLOBAL.SEARCH'|translate}} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div class="card rounded-0">
+        <div class="card-title border-bottom">
+          <div class="m-3"  > <h6>{{counter+ " "}}{{"GLOBAL.RESULTS" | translate }}</h6> </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <table class="table table-bordered">
+              <thead>
+              <tr class="tableHead">
+                <th>{{'CHANNELS.COD'|translate}}</th>
+                <th>{{'CHANNELS.RESULTNAME'|translate}}</th>
+                <th>{{'CHANNELS.DESCRIPTION'|translate}}</th>
+                <th>{{'CHANNELS.CERT'|translate}}</th>
+                <th>{{'CHANNELS.COMMENT'|translate}}</th>
+                <th>PCI</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let chanannel of channels">
+                <td>{{chanannel.idcm}}</td>
+                <td>{{chanannel.nombre}}</td>
+                <td>{{chanannel.nombre_certificado}}</td>
+                <td>{{chanannel.certificado | translate}}</td>
+                <td>{{chanannel.comentario}}</td>
+                <td>{{chanannel.pci | translate}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div>&nbsp;</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <select [formGroup]="channelSearch" formControlName="num_resultados" [value]="pages" class="form-control" (change)="pageHandler($any($event.target).value)" >
+                  <option value=5 >{{"CHANNELS.PERPAGE5" | translate}}</option>
+                  <option selected value=10 >{{"CHANNELS.PERPAGE10" | translate}}</option>
+                  <option value=20 > {{"CHANNELS.PERPAGE20" | translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6 text-right">
+              <ngb-pagination *ngIf="!(counter<=pages)"
+                class="d-flex justify-content-end"
+                [maxSize]="maxPaginator"
+                [collectionSize]="counter"
+                [pageSize]="pages"
+                [(page)]="currentPage"
+                [rotate]="true"
+                size="sm"
+                (pageChange)="paginationHandler(currentPage)" >
+                <ng-template ngbPaginationPrevious><</ng-template>
+                <ng-template ngbPaginationNext>></ng-template>
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

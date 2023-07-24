@@ -1,0 +1,41 @@
+
+
+.body-right{
+  width: 98%;
+
+}
+.body-position{
+  margin-left: 230px;
+
+}
+
+.float-right{
+  float: right;
+
+}
+
+.btn-search:hover{
+  border-color: #d2d2d2;
+  background-color: #e6e6e6;
+}
+.btn-search{
+  border-color: #e7eaec;
+}
+
+
+.btn-search:focus{
+  background-color: lightgrey;
+  border-color: #d2d2d2;
+  background-color: #e6e6e6;
+}
+.btn-search:active{
+  background-color: #e6e6e6;
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
+  background-image: none;
+  outline: 0;
+  border-color: #d2d2d2;
+}
+
+.tableHead th{
+  background-color: #F5F5F6;
+}

@@ -182,27 +182,3 @@ button.close {
 }
 
 
-:host ::ng-deep .page-link    {
-  background-color: #FFFFFF;
-  color: #676a6c;
-  border: 1px solid #DDDDDD;
-}
-
-:host ::ng-deep .page-link:hover    {
-  background-color:#eee;
-  border-color: #ddd;
-  color:#23527c
-}
-
-:host ::ng-deep .active .page-link    {
-  background-color:#f4f4f4;
-  border-color: #DDDDDD;
-  color: inherit;
-}
-
-:host ::ng-deep .active .page-link:focus    {
-  background-color:#f4f4f4;
-  border-color: #DDDDDD;
-  color: inherit;
-  box-shadow:unset;
-}

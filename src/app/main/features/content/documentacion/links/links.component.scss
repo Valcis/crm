@@ -1,10 +1,5 @@
 @import "src/styles.scss";
 
-body{
-  font-family: 'Open Sans';
-  font-size: 16px;
-}
-
 
 table,
 tr, th, td {
@@ -14,18 +9,7 @@ tr, th, td {
 .table-title{
   display: flex;
 }
-.body-right{
-  width: 97%;
 
-}
-.body-position{
-  margin-left: 230px;
-
-}
-.float-right{
-  float: right;
-
-}
 .dark-plus{
   color: $text-color !important;
 }
@@ -65,34 +49,8 @@ tr, th, td {
 .btn{
   border-radius: 3px;
 }
-.btn-add{
-  border-color: lightgrey;
-}
-.btn-add:hover{
-  border-color: #5E5E5E;
-  background-color: lightgrey;
-}
-.btn-search:hover{
-  border-color: #d2d2d2;
-  background-color: #e6e6e6;
-}
-.btn-search{
-  border-color: #e7eaec;
-}
 
 
-.btn-search:focus{
-  background-color: lightgrey;
-  border-color: #d2d2d2;
-  background-color: #e6e6e6;
-}
-.btn-search:active{
-  background-color: #e6e6e6;
-  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
-  background-image: none;
-  outline: 0;
-  border-color: #d2d2d2;
-}
 
 .btn-group>.btn{
   position: relative;

@@ -44,7 +44,7 @@
               <div class="table-title mx-3 my4" >
                 <div class=" my-3" >{{counter}} {{'LINKS.RESULTS'|translate}}</div>
                   <div class="justify-content-md-end-me-2 me-2 my-1 margin-auto" >
-                    <button type="button" class="btn btn-add btn-sm mt-1" (click)="open(newLink)"><i class="fa fa-plus dark-plus"></i></button>
+                    <button type="button" class="btn btn-search btn-sm mt-1" (click)="open(newLink)"><i class="fa fa-plus dark-plus"></i></button>
                   </div>
               </div>
             </div>
@@ -53,13 +53,13 @@
               <div>
                 <table class="mx-2 table table-bordered" >
                   <tr class="background-title">
-                    <th>{{"LINKS.TYPE" | translate}}</th>
-                    <th>{{"LINKS.DESCRIPTION" | translate}}</th>
-                    <th>{{"LINKS.LINK" | translate}}</th>
+                    <th>&nbsp;{{"LINKS.TYPE" | translate}}</th>
+                    <th>&nbsp;{{"LINKS.DESCRIPTION" | translate}}</th>
+                    <th>&nbsp;{{"LINKS.LINK" | translate}}</th>
                     <th class="white-space"></th>
                   </tr>
                   <tr *ngFor="let element of rowData  | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
-                    <td>{{element.c | translate}}</td>
+                    <td>&nbsp;{{element.c | translate}}</td>
                     <td><a class="no-decoration" href="{{element.link}}" [innerHTML]="element.description"></a></td>
                     <td><span [innerHTML]="element.name"></span></td>
                     <div class="btn-group dropdown">

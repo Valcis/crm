@@ -9,6 +9,8 @@ import {FileService} from "../../../../../shared/services/api/documentation/file
 import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
 import {DragDropComponent} from "../../../../../shared/components/DragDrop/DragDrop.component";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {SwalService} from "../../../../../shared/services/swal/swal.service";
 
 @Component({
   selector: 'document-links',
@@ -23,8 +25,7 @@ export class FilesComponent {
   protected counter: number = 0;
   protected currentPage: number = 1;
   protected pageSize: number = 10;
-  protected types: any[] = [{k:"Hotel", v:"GENERAL.HOTEL"},{k:"Agencia", v:"GENERAL.AGENCY"}, {k:"Otros", v:"GENERAL.OTHER"}];
-
+  public types: TypeModel[]=TypeArray;
   protected file: File[]= [];
   protected filesAdded:boolean = false;
   protected forme!:FormGroup ;
@@ -35,7 +36,8 @@ export class FilesComponent {
     private _cookie: CookiesService,
     private _fileService: FileService,
     private _Dragdrop: DragDropComponent,
-    private _loader: CrmLoaderService
+    private _loader: CrmLoaderService,
+    private _swal: SwalService
   ) {
       this._translate.use(_cookie.getLanguage());
   }
@@ -100,14 +102,23 @@ export class FilesComponent {
   };
 
   protected deleteFile(name:string, id:number, original_n:string, event:any) {
-    //TODO:swal solicitud
     event.preventDefault();
-    this._loader.setLoading(true);
-      this._fileService.deleteFile(name,id).subscribe((response) => {
-        this._loader.setLoading(false);
-        this.getFiles();
+    this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"), name).then(
+      (res:any)=> {
+        if (res.isConfirmed) {
+          this._loader.setLoading(true);
+          this._fileService.deleteFile(name, id).subscribe((response) => {
+            this._loader.setLoading(false);
+            // @ts-ignore
+            if (response !== undefined && response.Status !== undefined && response.Status === 'OK') {
+              this._swal.swalSucces(this._translate.instant("GENERAL.DELETESUCCESS"),this._translate.instant("GENERAL.REQUESTSUCCESS"));
+            } else {
+              this._swal.swalError(this._translate.instant("GENERAL.DELETEFAIL"),this._translate.instant("GENERAL.REQUESTERR"));
+            }
+            this.getFiles();
+          });
+        }
       });
-      //TODO: esperar resposta i donar swal succes o swal error
   };
 
   protected sendFile(){

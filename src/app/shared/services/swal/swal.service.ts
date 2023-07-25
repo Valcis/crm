@@ -88,7 +88,7 @@ export class SwalService {
       heightAuto: false,
       title:this._translate.instant(title),
       text:this._translate.instant(text),
-      icon:"success",
+      icon:"error",
       denyButtonColor: "rgb(174, 222, 244)",
       denyButtonText:"OK",
       showConfirmButton:false,

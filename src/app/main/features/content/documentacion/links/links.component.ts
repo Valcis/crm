@@ -7,6 +7,7 @@ import {CookiesService} from "../../../../../shared/services/cookies/cookies.ser
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {NotificationsService} from "../../../../../shared/services/api/user/notifications.service";
 
 @Component({
   selector: 'document-links',
@@ -34,6 +35,7 @@ export class LinksComponent {
     private _cookie: CookiesService,
     private _swal: SwalService,
     private _loader: CrmLoaderService,
+    private _notifier: NotificationsService
 
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
@@ -98,7 +100,6 @@ export class LinksComponent {
             this._link.eliminateLink(this.delObj).subscribe(response=>{
               this._loader.setLoading(false);
               if (response !== undefined) {
-
                 this._swal.swalSucces(this._translate.instant('LINKS.ALERT_RESPONSE1'),this._translate.instant('LINKS.ALERT_LINK_BORRADO'));
                 this.getLinks();
               }

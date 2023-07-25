@@ -25,9 +25,16 @@
   "GENERAL.AGENCY":"Agencia",
   "GENERAL.CONFIRM":"Confirmar",
   "GENERAL.DENY":"Cancelar",
+  "GENERAL.DELETESUCCESS": "Borrada!",
+  "GENERAL.REQUESTSUCCESS":"El fichero ha sido borrado.",
+  "GENERAL.DELETEFAIL":"No Borrada!",
+  "GENERAL.REQUESTERR":"Error en la petición.",
+
+
 
   "DOCUMENTATION.SEARCH":"Buscar",
   "DOCUMENTATION.RESULTS":"Resultado/s",
+  "DOCUMENTATION.NORESULTS":"No se han encontrado resultados",
   "DOCUMENTATION.USER":"Usuario",
   "DOCUMENTATION.DELETE":"Borrar",
   "DOCUMENTATION.DESCRIPTION":"Descripción",

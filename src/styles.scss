@@ -1,6 +1,8 @@
 html, body {
   height: 100vh;
-  font-size: 14px
+  font-size: 14px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 
 // Basic Colors
@@ -236,9 +238,9 @@ hr.divider {
   padding: .5rem .75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
+  background-color: #FFFFFF;
+  color: #676a6c;
+  border: 1px solid #DDDDDD;
 }
 .page-item.active .page-link {
   z-index: 1;
@@ -264,11 +266,6 @@ hr.divider {
   border-color: #dee2e6;
 }
 
-.page-link    {
-  background-color: #FFFFFF;
-  color: #676a6c;
-  border: 1px solid #DDDDDD;
-}
 
 .page-link:hover    {
   background-color:#eee;
@@ -287,4 +284,37 @@ hr.divider {
     background-color:#f4f4f4;
     border-color: #DDDDDD;
     color: inherit;
+}
+
+
+.float-right{
+  float: right;
+
+}
+.body-right{
+  width: 97%;
+
+}
+.body-position{
+  margin-left: 230px;
+
+}
+
+.btn-search:hover{
+  border-color: #d2d2d2;
+  background-color: #e6e6e6;
+}
+.btn-search{
+  border-color: #e7eaec;
+}
+.btn-search:focus{
+  border-color: #d2d2d2;
+  background-color: #e6e6e6;
+}
+.btn-search:active{
+  background-color: #e6e6e6 !important;
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
+  background-image: none;
+  outline: 0;
+  border-color: #d2d2d2 !important;
 }

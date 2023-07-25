@@ -28,9 +28,14 @@
 
   "DOCUMENTATION.SEARCH":"Search",
   "DOCUMENTATION.RESULTS":"Results",
+  "DOCUMENTATION.NORESULTS":"No results found",
   "DOCUMENTATION.USER":"User",
   "DOCUMENTATION.DELETE":"Delete",
   "DOCUMENTATION.DESCRIPTION":"Description",
+  "GENERAL.DELETESUCCESS": "Deleted!",
+  "GENERAL.REQUESTSUCCESS":"The file has been deleted.",
+  "GENERAL.DELETEFAIL":"Not deleted!",
+  "GENERAL.REQUESTERR":"Error in request.",
 
   "FILES.CATEGORY":"Category",
   "FILES.NAME":"File's name",

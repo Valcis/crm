@@ -4,9 +4,9 @@ export interface TypeModel {
 }
 
 export const translateType:{ [key: string]: string; }={
-  "Otros":"LINKS.OTHER",
   "Agencia":"LINKS.AGENCY",
   "Hotel":"LINKS.HOTEL",
+  "Otros":"LINKS.OTHER",
 };
 
 

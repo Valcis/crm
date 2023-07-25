@@ -1,12 +1,11 @@
 <div>
-  <div>
+  <div class="body-position">
 
     <div class="fonte" >
       <h5>{{ 'FILES.FORM-TITLE' | translate}}</h5>
-
     </div>
-    <div>
-      <div class="card rounded-0 mx-4 my-4 width">
+    <div >
+      <div class="card rounded-0 mx-4 my-4 body-right ">
         <div class="card-content">
           <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
             <!--TODO:mirar l'espai entre pestanyes-->
@@ -22,15 +21,12 @@
                       <div class="row">
                         <div class="col-sm-3">
                           <label>{{ 'FILES.CATEGORY' | translate}}</label>
-                          <!--TODO:ordre del dropdown-->
                           <select class="form-select rounded-0" formControlName="type_file" >
-                            <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
-                            <option [value]="types[1].k">{{types[1].v | translate}}</option>
-                            <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
+                            <option [value]="type.k" *ngFor="let type of types" >{{type.v | translate}}</option>
                           </select>
                         </div>
                         <div class="col-sm-3">
-                          <label>{{ 'FILES.NAME' | translate}}</label>
+                          <label> {{ 'FILES.NAME' | translate}}</label>
                           <input type="text" class="form-control" formControlName="descripcion">
                         </div>
                         <div class="col-sm-6">
@@ -41,7 +37,7 @@
                       <div class ="row">
                         <div class="">
                           <div>&nbsp;</div>
-                          <button type="submit" class="btn btn-search to-the-right" ><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
+                          <button type="submit" class="btn btn-search float-right" style="color: #676a6c !important;"><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
                         </div>
                       </div>
                     </form>
@@ -54,15 +50,16 @@
                     </div>
                   </div>
                   <div class="card-content mx-3 my-2 mb-5">
-                    <div (show)="counter>0">
+                    <div *ngIf="counter>0;then table else noTable"></div>
+                    <ng-template #table>
                       <table class=" table table-bordered " >
                         <tr class="background-title" >
                           <th ></th>
-                          <th>{{"FILES.NAME" | translate}}</th>
-                          <th>{{"DOCUMENTATION.DESCRIPTION" | translate}}</th>
-                          <th class="centred">{{"FILES.SIZE" | translate}}</th>
-                          <th class="centred">{{"FILES.CATEGORY" | translate}}</th>
-                          <th class="centred">{{"DOCUMENTATION.USER" | translate}}</th>
+                          <th>&nbsp;{{"FILES.NAME" | translate}}</th>
+                          <th>&nbsp;{{"DOCUMENTATION.DESCRIPTION" | translate}}&nbsp;</th>
+                          <th class="centred">&nbsp;{{"FILES.SIZE" | translate}}&nbsp;</th>
+                          <th class="centred">&nbsp;{{"FILES.CATEGORY" | translate}}&nbsp;</th>
+                          <th class="centred">&nbsp;{{"DOCUMENTATION.USER" | translate}}&nbsp;</th>
                           <th class="centred">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o"></i></th>
                         </tr>
                         <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
@@ -94,12 +91,13 @@
                           <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
                         </tr>
                       </table>
-                      <!--TODO:mirar l'espai entre páginador i taula-->
+                      <div>&nbsp;</div>
                       <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
                         <ng-template ngbPaginationPrevious><</ng-template>
                         <ng-template ngbPaginationNext>></ng-template>
                       </ngb-pagination>
-                    </div>
+                    </ng-template>
+                    <ng-template #noTable ><div class="card well rounded-3" >{{"DOCUMENTATION.NORESULTS" | translate }} </div></ng-template>
                   </div>
                 </div>
               </ng-template>

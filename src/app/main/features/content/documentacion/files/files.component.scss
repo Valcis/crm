@@ -1,12 +1,4 @@
 
-
-body{
-  font-family: 'Open Sans';
-  font-size: 16px;
-}
-
-.width{width: 96%;}
-
 .to-the-right{float: right;}
 
 table,
@@ -16,10 +8,11 @@ tr, th, td {
   font-size: 13px;
 
 }
-.fonte{
-  font-family: 'Open Sans';
-}
 
+.body-position{
+  margin-left: 230px;
+
+}
 
 .background-title{
   background-color: #f4f4f5
@@ -48,13 +41,6 @@ tr, th, td {
 
 .btn{
   border-radius: 3px;
-}
-.btn-search:hover, .btn-search:focus{
-  background-color: lightgrey;
-  border-color: grey;
-}
-.btn-search{
-  border-color: lightgrey;
 }
 
 .btn-group>.btn{
@@ -161,8 +147,26 @@ spaceing-right{
 
 .nav-tabs .nav-item:hover, .nav-tabs .nav-item:focus {
   background-color: #e6e6e6;
+  border-radius: 3px;
 }
 
 .nav-tabs .nav-item:hover .fa {
   color: #676a6c
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 5%);
+  position: relative;
+}
+
+.nav-tabs li{
+  margin-left:1px;
+  margin-right:1px;
 }

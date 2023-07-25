@@ -7,7 +7,7 @@ import {ChannelManagerService} from "../../../../../shared/services/api/document
 import {channelState} from "../../../../../shared/models/documentation/channel.model";
 
 @Component({
-  selector: 'document-links',
+  selector: 'document-channel',
   templateUrl: './channelManager.component.html',
   styleUrls: ['./channelManager.component.scss',],
 })

@@ -4,7 +4,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {ChannelManagerService} from "../../../../../shared/services/api/documentatnion/channelManager.service";
-import {channelState} from "../../../../../shared/models/documentation/channel.model";
+import {channelState, table} from "../../../../../shared/models/documentation/channel.model";
 
 @Component({
   selector: 'document-channel',
@@ -59,18 +59,18 @@ export class ChannelManagerComponent {
 
     this._channel.fetchResults(this.channelSearch.value).subscribe(result =>{
       console.log(result);
-      var localData:any = result;
-      var fetchResult = localData.Salida.lineas;
+      let localData:any = result;
+      let fetchResult = localData.Salida.lineas;
       this.counter = localData.Salida.datos.num_elementos;
       this.channels = [];
-      var info: any[] = [];
+      let info: any[] = [];
       fetchResult.forEach((value:any) => {
-        var a = value.certificado ;
+        let a = value.certificado ;
         console.log(a);
         if (a === undefined){
           a=""
         }
-        var item = {
+        let item:table = {
           certificado: channelState[a] ,
           comentario: value.comentario,
           contacto: value.contacto,
@@ -88,14 +88,14 @@ export class ChannelManagerComponent {
   }
 
   protected pageHandler(event:any){
-    var num: number = +event;
+    let num: number = +event;
     this.channelSearch.get("num_resultados")!.setValue(event);
     this.pages = num;
     this.getResults()
   }
 
   protected paginationHandler(event:any){
-    var num: number = +event;
+    let num: number = +event;
     this.channelSearch.get('pagina')!.setValue(event);
     this.currentPage = num;
     this.getResults()

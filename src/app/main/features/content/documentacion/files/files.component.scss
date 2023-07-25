@@ -1,0 +1,168 @@
+
+
+body{
+  font-family: 'Open Sans';
+  font-size: 16px;
+}
+
+.width{width: 96%;}
+
+.to-the-right{float: right;}
+
+table,
+tr, th, td {
+  border: 1px solid #333;
+  border-color: #e7e7e7;
+  font-size: 13px;
+
+}
+.fonte{
+  font-family: 'Open Sans';
+}
+
+
+.background-title{
+  background-color: #f4f4f5
+}
+
+.centred{
+  text-align: center
+}
+.dropdown-toggle::after{
+  display: none;
+}
+
+.form-control, .single-line {
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #e5e6e7;
+  border-radius: 1px;
+  color: inherit;
+  display: block;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.btn{
+  border-radius: 3px;
+}
+.btn-search:hover, .btn-search:focus{
+  background-color: lightgrey;
+  border-color: grey;
+}
+.btn-search{
+  border-color: lightgrey;
+}
+
+.btn-group>.btn{
+  position: relative;
+  float: left;
+}
+
+
+
+.btn-danger{
+  background-color: #ED5565;
+  border-color: #ed5565;
+}
+
+.btn-danger:hover{
+  background-color: #ec4758;
+  border-color: #ec4758;
+}
+.btn-danger:active{
+  background-color: #ec4758;
+  border-color: #ec4758;
+}
+
+.btn-primary{
+  background-color: #1ab394;
+  border-color: #1ab394;
+}
+
+.btn-primary:hover{
+  background-color: #18a689;
+  border-color: #18a689;
+}
+
+
+
+.btn:active{
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
+
+  background-image: none;
+  outline: 0;
+
+}
+
+.dropButtons{position: absolute;top: 45%; right: 5.5%;}
+
+.card{
+  border-color: #e7eaec;
+}
+
+.tab-background{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
+button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  float:right;
+}
+
+.close {
+  float: right;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+  position: absolute;
+  top: 2%;
+  right: 1.5%;
+}
+
+
+
+.nav-tabs .nav-item .fa {
+  color: #A7B1C2;
+  font-weight: 300;
+  padding: 5px 10px 5px 10px;
+}
+.nav-tabs .active .fa  {
+  color: #555555;
+  font-weight: 300;
+  padding: 5px 10px 5px 10px;
+
+}
+//font-size: 0.8em;
+spaceing-right{
+  margin-left: 5px;
+}
+
+.fa{
+  background: none;
+  color: #555555;
+  cursor: default;
+}
+
+
+.nav-tabs .nav-item:hover, .nav-tabs .nav-item:focus {
+  background-color: #e6e6e6;
+}
+
+.nav-tabs .nav-item:hover .fa {
+  color: #676a6c
+}

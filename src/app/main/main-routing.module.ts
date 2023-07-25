@@ -9,6 +9,7 @@ import {CalendarioComponent} from "./features/content/calendario/calendario.comp
 import {ActividadesComponent} from "./features/content/actividades/actividades.component";
 import {NotificacionesComponent} from "./features/content/notificaciones/notificaciones.component";
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
+import {FilesComponent} from "./features/content/documentacion/files/files.component";
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
       {path: '#/index/crm_lista_links', component: LinksComponent},
-
+      {path: '#/index/crm_lista_ficheros', component: FilesComponent}
     ]
   }
 ];

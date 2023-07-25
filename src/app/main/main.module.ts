@@ -19,11 +19,15 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
-
+import {FilesComponent} from "./features/content/documentacion/files/files.component";
+import {NgxDropzoneModule} from "ngx-dropzone";
+import {DragDropComponent} from "../shared/components/DragDrop/DragDrop.component";
 
 
 @NgModule({
   declarations: [
+    DragDropComponent,
+    FilesComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -39,6 +43,7 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
     ],
   imports: [
     NgbPaginationModule,
+    NgxDropzoneModule,
     CommonModule,
     MainRoutingModule,
     TranslateModule.forRoot({
@@ -53,11 +58,13 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
       extend: true
     }),
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
   ],
+  exports: [DragDropComponent],
   providers: []
 })
 export class MainModule {

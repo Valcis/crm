@@ -18,6 +18,27 @@
   "LINKS.CREATE": "Añadir",
   "LINKS.ALERT_RESPONSE1": "Borrado!",
   "LINKS.ALERT_LINK_BORRADO": "El link ha sido borrado correctamente",
-  "LINKS.DELETE": "Eliminar"
+  "LINKS.DELETE": "Eliminar",
 
+  "GENERAL.OTHER":"Otros",
+  "GENERAL.HOTEL":"Hotel",
+  "GENERAL.AGENCY":"Agencia",
+  "GENERAL.CONFIRM":"Confirmar",
+  "GENERAL.DENY":"Cancelar",
+
+  "DOCUMENTATION.SEARCH":"Buscar",
+  "DOCUMENTATION.RESULTS":"Resultado/s",
+  "DOCUMENTATION.USER":"Usuario",
+  "DOCUMENTATION.DELETE":"Borrar",
+  "DOCUMENTATION.DESCRIPTION":"Descripción",
+
+  "FILES.CATEGORY":"Categoría",
+  "FILES.NAME":"Nombre del fichero",
+  "FILES.SIZE":"Tamaño",
+  "FILES.DATE":"Fecha de creación",
+  "FILES.CRITERIA":"Criterios para buscar ficheros",
+  "FILES.VIEW":"Ver",
+  "FILES.DOWNLOAD":"Descargar",
+
+  "DRAGDROP.FILESDROP":"Sube ficheros arrastrándolos aquí (o haz click)"
 }

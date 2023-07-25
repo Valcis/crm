@@ -18,5 +18,27 @@
   "LINKS.CREATE": "Add",
   "LINKS.ALERT_RESPONSE1": "Deleted!",
   "LINKS.ALERT_LINK_BORRADO": "The link has been correctly deleted",
-  "LINKS.DELETE": "Delete"
+  "LINKS.DELETE": "Delete",
+
+  "GENERAL.OTHER":"Other",
+  "GENERAL.HOTEL":"Hotel",
+  "GENERAL.AGENCY":"Agency",
+  "GENERAL.CONFIRM":"Confirm",
+  "GENERAL.DENY":"Cancel",
+
+  "DOCUMENTATION.SEARCH":"Search",
+  "DOCUMENTATION.RESULTS":"Results",
+  "DOCUMENTATION.USER":"User",
+  "DOCUMENTATION.DELETE":"Delete",
+  "DOCUMENTATION.DESCRIPTION":"Description",
+
+  "FILES.CATEGORY":"Category",
+  "FILES.NAME":"File's name",
+  "FILES.SIZE":"Size",
+  "FILES.DATE":"Creation date",
+  "FILES.CRITERIA":"Searching files’ criteria",
+  "FILES.VIEW":"View",
+  "FILES.DOWNLOAD":"Download",
+
+  "DRAGDROP.FILESDROP":"Upload files moving them here (or click)"
 }

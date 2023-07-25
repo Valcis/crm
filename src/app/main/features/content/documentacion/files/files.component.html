@@ -1,0 +1,148 @@
+<div>
+  <div>
+
+    <div class="fonte" >
+      <h5>{{ 'FILES.FORM-TITLE' | translate}}</h5>
+
+    </div>
+    <div>
+      <div class="card rounded-0 mx-4 my-4 width">
+        <div class="card-content">
+          <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
+            <!--TODO:mirar l'espai entre pestanyes-->
+            <li ngbNavItem>
+              <button ngbNavLink><i class="fa fa-list"></i></button>
+              <ng-template ngbNavContent>
+                <div class="card rounded-0 mx-4 mt-3">
+                  <div class="card-title mt-1 border-bottom">
+                    <div class="mx-3 my-3">{{ 'FILES.CRITERIA' | translate}}</div>
+                  </div>
+                  <div class="card-content  mx-3 my-3">
+                    <form [formGroup]="filesForm" (submit)="getFiles()">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <label>{{ 'FILES.CATEGORY' | translate}}</label>
+                          <!--TODO:ordre del dropdown-->
+                          <select class="form-select rounded-0" formControlName="type_file" >
+                            <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
+                            <option [value]="types[1].k">{{types[1].v | translate}}</option>
+                            <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-3">
+                          <label>{{ 'FILES.NAME' | translate}}</label>
+                          <input type="text" class="form-control" formControlName="descripcion">
+                        </div>
+                        <div class="col-sm-6">
+                          <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}}</label>
+                          <input type="text" class="form-control" formControlName="original_name">
+                        </div>
+                      </div>
+                      <div class ="row">
+                        <div class="">
+                          <div>&nbsp;</div>
+                          <button type="submit" class="btn btn-search to-the-right" ><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="card rounded-0 mx-4 mt-4 mb-5">
+                  <div class="card-title border-bottom">
+                    <div class="table-title mx-3 my4" >
+                      <div class=" my-3" >{{counter}} {{'DOCUMENTATION.RESULTS'|translate}}</div>
+                    </div>
+                  </div>
+                  <div class="card-content mx-3 my-2 mb-5">
+                    <div (show)="counter>0">
+                      <table class=" table table-bordered " >
+                        <tr class="background-title" >
+                          <th ></th>
+                          <th>{{"FILES.NAME" | translate}}</th>
+                          <th>{{"DOCUMENTATION.DESCRIPTION" | translate}}</th>
+                          <th class="centred">{{"FILES.SIZE" | translate}}</th>
+                          <th class="centred">{{"FILES.CATEGORY" | translate}}</th>
+                          <th class="centred">{{"DOCUMENTATION.USER" | translate}}</th>
+                          <th class="centred">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o"></i></th>
+                        </tr>
+                        <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
+                          <td>
+                            <div class="dropdown nav" ngbDropdown>
+                              <button class="btn btn-search btn-sm no-decoration" ngbDropdownToggle>
+                                <i class="fa fa-cog"></i>
+                              </button>
+                              <ul class="dropdown-menu" ngbDropdownMenu>
+                                <li><a class="dropdown-item" href="{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="{{element.cog.linked}}" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName, $event)"> <i class="fa fa-trash"></i> {{"DOCUMENTATION.DELETE" | translate}}</a> </li>
+                              </ul>
+                            </div>
+                          </td>
+                          <td class="">&nbsp;&nbsp;{{element.fileName}}</td>
+                          <td class="">&nbsp;&nbsp;{{element.des}}</td>
+                          <td class="text-center" *ngIf="element.siz / 1000000 >= 1">
+                            {{element.siz
+                          / 1000000 | number:"1.2-2"}} MB
+                          </td>
+                          <td class="text-center" *ngIf="element.siz / 1000000 < 1">
+                            {{element.siz
+                          / 1000 | number:"1.2-2"}} KB
+                          </td>
+                          <!--TODO:traduir-->
+                          <td class="text-center">{{element.categor | translate}}</td>
+                          <td class="text-center">{{element.userName}}</td>
+                          <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
+                        </tr>
+                      </table>
+                      <!--TODO:mirar l'espai entre páginador i taula-->
+                      <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
+                        <ng-template ngbPaginationPrevious><</ng-template>
+                        <ng-template ngbPaginationNext>></ng-template>
+                      </ngb-pagination>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li ngbNavItem>
+              <button ngbNavLink><i class="fa fa-upload"></i></button>
+              <ng-template ngbNavContent>
+
+                <div class=" mx-4 mt-3">
+                  <div class="  mx-3 my-3">
+                    <form [formGroup]="newForm" (submit)="sendFile()">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <label>{{ 'FILES.CATEGORY' | translate}}</label>
+                          <select class="form-select" formControlName="categoria" >
+                            <option  [value]="types[0].k" >{{types[0].v | translate}}</option>
+                            <option [value]="types[1].k">{{types[1].v | translate}}</option>
+                            <option selected [value]="types[2].k" >{{types[2].v | translate}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-8">
+                          <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}} *</label>
+                          <input required type="text" class="form-control" formControlName="descripcion">
+                        </div>
+                        <DragDrop [file]="file" (sendFile)="reciveFile($event)" (reset)="reset()"></DragDrop>
+                      </div>
+                      <div class="dropButtons">
+                        <button *ngIf="file.length" type="submit" class="btn btn-primary btn-sm pull-right spaceing-right"
+                        >{{'GENERAL.CONFIRM' | translate}}
+                        </button>
+                        <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger .close btn-sm pull-right"
+                        >{{'GENERAL.DENY' | translate}}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

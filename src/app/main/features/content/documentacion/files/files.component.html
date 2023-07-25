@@ -8,13 +8,12 @@
       <div class="card rounded-0 mx-4 my-4 body-right ">
         <div class="card-content">
           <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
-            <!--TODO:mirar l'espai entre pestanyes-->
             <li ngbNavItem>
               <button ngbNavLink><i class="fa fa-list"></i></button>
               <ng-template ngbNavContent>
                 <div class="card rounded-0 mx-4 mt-3">
                   <div class="card-title mt-1 border-bottom">
-                    <div class="mx-3 my-3">{{ 'FILES.CRITERIA' | translate}}</div>
+                    <div class="mx-3 my-3"><label>{{ 'FILES.CRITERIA' | translate}}</label></div>
                   </div>
                   <div class="card-content  mx-3 my-3">
                     <form [formGroup]="filesForm" (submit)="getFiles()">
@@ -36,7 +35,7 @@
                       </div>
                       <div class ="row">
                         <div class="">
-                          <div>&nbsp;</div>
+                          <br/>
                           <button type="submit" class="btn btn-search float-right" style="color: #676a6c !important;"><i class="fa fa-search"></i> {{'DOCUMENTATION.SEARCH'|translate}} </button>
                         </div>
                       </div>
@@ -52,17 +51,17 @@
                   <div class="card-content mx-3 my-2 mb-5">
                     <div *ngIf="counter>0;then table else noTable"></div>
                     <ng-template #table>
-                      <table class=" table table-bordered " >
-                        <tr class="background-title" >
-                          <th ></th>
-                          <th>&nbsp;{{"FILES.NAME" | translate}}</th>
-                          <th>&nbsp;{{"DOCUMENTATION.DESCRIPTION" | translate}}&nbsp;</th>
-                          <th class="centred">&nbsp;{{"FILES.SIZE" | translate}}&nbsp;</th>
-                          <th class="centred">&nbsp;{{"FILES.CATEGORY" | translate}}&nbsp;</th>
-                          <th class="centred">&nbsp;{{"DOCUMENTATION.USER" | translate}}&nbsp;</th>
-                          <th class="centred">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o"></i></th>
+                      <table class="table table-bordered ">
+                        <tr class="background-title ">
+                          <th class="tile-xs"></th>
+                          <th class="tile-xl">{{"FILES.NAME" | translate}}</th>
+                          <th class="tile-l">{{"DOCUMENTATION.DESCRIPTION" | translate}}</th>
+                          <th class="centred tile-s" style="width:10%;">{{"FILES.SIZE" | translate}}</th>
+                          <th class="centred tile-s" style="width:10%; ">{{"FILES.CATEGORY" | translate}}</th>
+                          <th class="centred tile-m" style="width:15%; ">{{"DOCUMENTATION.USER" | translate}}</th>
+                          <th class="centred tile-m" style="width:15%; ">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o"></i></th>
                         </tr>
-                        <tr *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
+                        <tr class="tile-height" *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                           <td>
                             <div class="dropdown nav" ngbDropdown>
                               <button class="btn btn-search btn-sm no-decoration" ngbDropdownToggle>
@@ -75,8 +74,8 @@
                               </ul>
                             </div>
                           </td>
-                          <td class="">&nbsp;&nbsp;{{element.fileName}}</td>
-                          <td class="">&nbsp;&nbsp;{{element.des}}</td>
+                          <td class="">{{element.fileName}}</td>
+                          <td class="">{{element.des}}</td>
                           <td class="text-center" *ngIf="element.siz / 1000000 >= 1">
                             {{element.siz
                           / 1000000 | number:"1.2-2"}} MB
@@ -91,7 +90,7 @@
                           <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
                         </tr>
                       </table>
-                      <div>&nbsp;</div>
+                      <br/>
                       <ngb-pagination *ngIf="!(counter/pageSize<=1)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm">
                         <ng-template ngbPaginationPrevious><</ng-template>
                         <ng-template ngbPaginationNext>></ng-template>

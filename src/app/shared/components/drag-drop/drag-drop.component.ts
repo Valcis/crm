@@ -6,8 +6,8 @@ import {FormGroup, FormControl} from "@angular/forms";
 })
 @Component({
   selector: 'DragDrop.',
-  templateUrl: './DragDrop.component.html',
-  styleUrls: ['./DragDrop.component.scss',]
+  templateUrl: './drag-drop.component.html',
+  styleUrls: ['./drag-drop.component.scss',]
 })
 export class DragDropComponent{
 

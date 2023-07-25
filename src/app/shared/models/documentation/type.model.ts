@@ -11,6 +11,7 @@ export const translateType:{ [key: string]: string; }={
 
 
 export const TypeArray:TypeModel[] =[
-  {v:"LINKS.OTHER", k:"Otros"},
+
   {v:"LINKS.AGENCY", k:"Agencia"},
-  {v:"LINKS.HOTEL", k:"Hotel"}];
+  {v:"LINKS.HOTEL", k:"Hotel"},
+  {v:"LINKS.OTHER", k:"Otros"}];

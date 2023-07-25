@@ -7,9 +7,9 @@ import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {FileService} from "../../../../../shared/services/api/documentation/file/file.service";
 import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
-import {DragDropComponent} from "../../../../../shared/components/DragDrop/DragDrop.component";
+import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 
 @Component({
@@ -85,7 +85,7 @@ export class FilesComponent {
               id: value.metadata.neo_id, name:value.data.name},
             fileName: value.data.original_name, des:value.data.descripcion,
             siz: value.data.size,
-            categor:value.data.categoria,
+            categor:translateType[value.data.categoria],
             userName: completeName,
             dateCreation:value.data.creacion_ts };
           this.rowData.push(it)

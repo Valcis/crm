@@ -101,8 +101,8 @@
               <div class="form-group">
                 <select [formGroup]="channelSearch" formControlName="num_resultados" [value]="pages" class="form-control" (change)="pageHandler($any($event.target).value)" >
                   <option value=5 >{{"CHANNELS.PERPAGE5" | translate}}</option>
-                  <option  value=10 >{{"CHANNELS.PERPAGE10" | translate}}</option>
-                  <option selected value=20 > {{"CHANNELS.PERPAGE20" | translate}}</option>
+                  <option selected value=10 >{{"CHANNELS.PERPAGE10" | translate}}</option>
+                  <option value=20 > {{"CHANNELS.PERPAGE20" | translate}}</option>
                 </select>
               </div>
             </div>

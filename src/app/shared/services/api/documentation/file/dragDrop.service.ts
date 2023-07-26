@@ -46,7 +46,6 @@ export class DragDropService extends CrmService{
         "descripcion": request.descripcion
       },
     };
-    console.log(modifiedFilesBodyRq);
     return this.sendPost(modifiedFilesBodyRq);
   };
 

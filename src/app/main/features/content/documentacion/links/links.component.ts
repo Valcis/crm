@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {LinkService} from "src/app/shared/services/api/documentatnion/link.service"
+import {LinkService} from "src/app/shared/services/api/documentation/link.service"
 import {TranslateService} from "@ngx-translate/core";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";

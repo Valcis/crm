@@ -11,6 +11,7 @@ import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'document-links',
@@ -37,7 +38,8 @@ export class FilesComponent {
     private _fileService: FileService,
     private _Dragdrop: DragDropComponent,
     private _loader: CrmLoaderService,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private _router: Router
   ) {
       this._translate.use(_cookie.getLanguage());
   }
@@ -103,7 +105,7 @@ export class FilesComponent {
 
   protected deleteFile(name:string, id:number, original_n:string, event:any) {
     event.preventDefault();
-    this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"), name).then(
+    this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant("LINKS.ALERT_TEXT"), original_n).then(
       (res:any)=> {
         if (res.isConfirmed) {
           this._loader.setLoading(true);
@@ -127,8 +129,9 @@ export class FilesComponent {
       this.reset();
       this.getFiles()
     }else {
-      console.log("falta descripcio")
+      console.log("falta descripción")
     }
+    this.newForm.reset( {categoria: 'Otros'});
   }
 
   protected reciveFile(file:any):void{
@@ -149,7 +152,11 @@ export class FilesComponent {
     });
     this._loader.setLoading(true);
     this._dragDrop.sendFiles(this.forme.value).subscribe(response=>{
-      if (response !== undefined) {
+      //@ts-ignore
+      if (response !== undefined && response.Status !== undefined && response.Status === 'OK') {
+        console.log("subido con éxito")
+      }else{
+        console.log("fallo en la subida")
       }
       this._loader.setLoading(true);
     });
@@ -163,5 +170,10 @@ export class FilesComponent {
   private removeAllFiles(){
     this.file = [];
   };
+
+  protected navigate(url:string) {
+    window.location.href = "https://google.com/";
+
+  }
 }
 

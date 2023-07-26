@@ -68,8 +68,8 @@
                                 <i class="fa fa-cog"></i>
                               </button>
                               <ul class="dropdown-menu" ngbDropdownMenu>
-                                <li><a class="dropdown-item" href="{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
-                                <li><a class="dropdown-item" href="{{element.cog.linked}}" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
+                                <li><a class="dropdown-item" href="http://localhost:8080{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
+                                <li><a class="dropdown-item" [href]="element.cog.linked" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
                                 <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName, $event)"> <i class="fa fa-trash"></i> {{"DOCUMENTATION.DELETE" | translate}}</a> </li>
                               </ul>
                             </div>
@@ -107,7 +107,7 @@
 
                 <div class=" mx-4 mt-3">
                   <div class="  mx-3 my-3">
-                    <form [formGroup]="newForm" (submit)="sendFile()">
+                    <form [formGroup]="newForm"  (submit)="sendFile()">
                       <div class="row">
                         <div class="col-sm-4">
                           <label>{{ 'FILES.CATEGORY' | translate}}</label>
@@ -121,15 +121,17 @@
                           <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}} *</label>
                           <input required type="text" class="form-control" formControlName="descripcion">
                         </div>
-                        <DragDrop [file]="file" (sendFile)="reciveFile($event)" (reset)="reset()"></DragDrop>
-                      </div>
-                      <div class="dropButtons">
-                        <button *ngIf="file.length" type="submit" class="btn btn-primary btn-sm pull-right spaceing-right"
-                        >{{'GENERAL.CONFIRM' | translate}}
-                        </button>
-                        <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger .close btn-sm pull-right"
-                        >{{'GENERAL.DENY' | translate}}
-                        </button>
+                        <div class="holder">
+                          <DragDrop [file]="file" (sendFile)="reciveFile($event)" (reset)="reset()"></DragDrop>
+                          <div class="dropButtons">
+                            <button *ngIf="file.length" type="submit" class="btn btn-primary btn-sm pull-right space"
+                            >{{'GENERAL.CONFIRM' | translate}}
+                            </button>
+                            <button *ngIf="file.length" (click)="reset()" type="button" class="btn btn-danger  btn-sm pull-right space"
+                            >{{'GENERAL.DENY' | translate}}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </form>
                   </div>

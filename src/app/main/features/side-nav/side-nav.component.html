@@ -1,5 +1,5 @@
 <!--<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100" appSideClosed>-->
-<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100">
+<div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100" [ngClass]="!isExpandedFlag ? 'short' : ''">
   <div class="header-profile">
     <div class="header-content">
       <h5 class="border-bottom pt-4">
@@ -33,13 +33,14 @@
     <div *ngFor="let item of menuList; let i = index">
 
     <!--DIVS para menus SIN submenu-->
-      <ul class="dark-bg-container">
+<!--      Todo: cambiar el nom de la classe-->
+      <ul [ngClass]="isExpandedFlag === false ? 'temp ' : 'dark-bg-container'">
         <div *ngIf="item.subMenu.length <= 0">
           <li class="sidenav-list-item collapsed">
-            <div [id]="'accordion-' + i" >
+            <div [ngClass]="!isExpandedFlag ? 'center' : ''" [id]="'accordion-' + i" >
 <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
 
-              <span type="button" [routerLink]="item.link_pag">
+              <span  type="button" [routerLink]="item.link_pag">
                 <i [class]="item.icono"></i>
                 <span *ngIf="isExpandedFlag">
                   {{ formatName(item.descripcion) | translate }}
@@ -51,19 +52,20 @@
 
         <!--DIVS para menus CON submenu-->
         <div *ngIf="item.subMenu.length > 0">
-          <li class="sidenav-list-item collapsed"  data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
-            <div [id]="'accordion-' + i">
+          <li class="sidenav-list-item collapsed"  data-bs-toggle="collapse"  (click)="toggleOpen(item)" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
+            <div [ngClass]="!isExpandedFlag ? 'center' : ''" [id]="'accordion-' + i">
               <span class="sidenav-item">
                 <i [class]="item.icono"></i>
                 <span *ngIf="isExpandedFlag" >
                   {{ formatName(item.descripcion) | translate }}
+                  <i [ngClass]="isOpen === item ? 'fa-angle-down' : 'fa-angle-left'" class="fa" style="margin-left: 10%"></i>
                 </span>
 <!--                TODO: Cambiar las flechas por iconos, alinear derecha y rotar al click-->
-                <i class="fa fa-angle-left" style="margin-left: 10%"></i>
+
 <!--                <span class="submenu-arrow"></span>-->
 
               </span>
-              <div [id]="'accordion-' + i + '-collapse'" class=" collapse"
+              <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
                    [attr.aria-labelledby]="'accordion-' + i + '-header'">
                 <div>
                   <ul class="list-group crm-ul">

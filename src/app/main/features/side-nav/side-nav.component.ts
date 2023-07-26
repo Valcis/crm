@@ -13,6 +13,7 @@ export class SideNavComponent implements OnInit {
   @Input() public isExpandedFlag: boolean = true;
   @Input() public userData: any;
 
+  protected isOpen:any = null;
   public isCollapsed = false;
 
   //TODO: Mover a objeto externo
@@ -66,5 +67,13 @@ export class SideNavComponent implements OnInit {
       this._cookie.deleteSessionId();
     }
     this._router.navigate(['/login'])
+  }
+  toggleOpen(item: any){
+    if(this.isOpen === item){
+      this.isOpen=null;
+    }else{
+      this.isOpen=item;
+    }
+
   }
 }

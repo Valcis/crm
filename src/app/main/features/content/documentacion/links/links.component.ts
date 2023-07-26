@@ -5,7 +5,7 @@ import {TranslateService} from "@ngx-translate/core";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
-import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {linksTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {NotificationsService} from "../../../../../shared/services/api/user/notifications.service";
 
@@ -68,14 +68,14 @@ export class LinksComponent {
   public async getLinks(){
     this._loader.setLoading(true);
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
-      var localData:any = response;
+      let localData:any = response;
       this.fetchResult=[];
       this.fetchResult = localData.Salida.lineas;
       this.rowData = [];
-      var info: any[] = [];
+      let info: any[] = [];
       this.fetchResult.forEach((value) => {
-        var a:string = value.data.categoria;
-        var it = {
+        let a:string = value.data.categoria;
+        let it:linksTable = {
           c:translateType[a],
           link:value.data.link,
           description:value.data.descripcion,

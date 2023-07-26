@@ -9,7 +9,7 @@ import {FileService} from "../../../../../shared/services/api/documentation/file
 import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
 import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 
 @Component({
@@ -72,14 +72,14 @@ export class FilesComponent {
 
     this._fileService.getFiles(this.filesForm.value).subscribe(response=>{
       if (response !== undefined) {
-        var localData:any = response;
-        var fechResult=[];
+        let localData:any = response;
+        let fechResult=[];
         fechResult = localData.Salida.lineas;
         this.rowData = [];
         fechResult.forEach((value :any) =>{
-          var completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
+          let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
           //TODO: correct gmt
-          var it={
+          let it:filesTable={
             cog: {
               linked: "/CRMServlet/neo/files/private/Ficheros/" + value.data.name ,
               id: value.metadata.neo_id, name:value.data.name},

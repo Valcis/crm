@@ -8,7 +8,7 @@
         <div class="card-content">
           <div class="card rounded-0 mx-4 mt-3">
             <div class="card-title mt-1 border-bottom">
-              <div class="mx-3 my-3">{{ 'LINKS.CRITERIA' | translate}}</div>
+              <div class="mx-3 my-3"><label>{{ 'LINKS.CRITERIA' | translate}}</label></div>
             </div>
 
             <div class="card-content  mx-3 my-3">
@@ -53,13 +53,13 @@
               <div>
                 <table class="mx-2 table table-bordered" >
                   <tr class="background-title">
-                    <th>&nbsp;{{"LINKS.TYPE" | translate}}</th>
-                    <th>&nbsp;{{"LINKS.DESCRIPTION" | translate}}</th>
-                    <th>&nbsp;{{"LINKS.LINK" | translate}}</th>
+                    <th>{{"LINKS.TYPE" | translate}}</th>
+                    <th>{{"LINKS.DESCRIPTION" | translate}}</th>
+                    <th>{{"LINKS.LINK" | translate}}</th>
                     <th class="white-space"></th>
                   </tr>
                   <tr *ngFor="let element of rowData  | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
-                    <td>&nbsp;{{element.c | translate}}</td>
+                    <td>{{element.c | translate}}</td>
                     <td><a class="no-decoration" href="{{element.link}}" [innerHTML]="element.description"></a></td>
                     <td><span [innerHTML]="element.name"></span></td>
                     <div class="btn-group dropdown">

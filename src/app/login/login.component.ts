@@ -58,7 +58,8 @@ export class LoginComponent implements OnInit {
     /*console.log("boton pressed 'login()'");*/
     this._user.retrieveUser(this.loginForm.value)
       .then(hasId => {
-          if (hasId) this.route.navigate(['/main']);
+          // if (hasId) this.route.navigate(['/main']);
+          if (hasId) this.route.navigate(['/crm/app/index.html/main']);
           // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
           else console.error("usuario no valido")
         }
@@ -78,7 +79,8 @@ export class LoginComponent implements OnInit {
       });
       const hasId = await this._user.retrieveUser(autoLogForm.value);
       if (hasId) {
-        await this.route.navigate(['/main']);
+        // await this.route.navigate(['/main']);
+        await this.route.navigate(['/crm/app/index.html/main']);
       } else {
         console.error('Invalid user'); // TODO: Display an error message or handle the case of an invalid user
       }

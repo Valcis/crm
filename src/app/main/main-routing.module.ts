@@ -16,7 +16,7 @@ const routes: Routes = [
     component: MainComponent,
     data: {
       shouldReuse: true,
-      key: 'main'
+      key: 'crm/app/index/main'
     },
     children: [
       {path: '#/crm_graficos', component: GraficosComponent},

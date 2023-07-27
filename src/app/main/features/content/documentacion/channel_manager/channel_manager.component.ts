@@ -58,7 +58,6 @@ export class ChannelManagerComponent {
   protected getResults(){
 
     this._channel.fetchResults(this.channelSearch.value).subscribe(result =>{
-      console.log(result);
       let localData:any = result;
       let fetchResult = localData.Salida.lineas;
       this.counter = localData.Salida.datos.num_elementos;
@@ -66,7 +65,6 @@ export class ChannelManagerComponent {
       let info: any[] = [];
       fetchResult.forEach((value:any) => {
         let a = value.certificado ;
-        console.log(a);
         if (a === undefined){
           a=""
         }
@@ -100,8 +98,6 @@ export class ChannelManagerComponent {
     this.currentPage = num;
     this.getResults()
   }
-
-
 }
 
 

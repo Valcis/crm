@@ -80,14 +80,14 @@ export class SwalService {
       showCancelButton:false,
     });
   };
-
+ //TODO: modificar el color del text
   public swalError = (title:string, text:string) =>{
     Swal.fire({
       scrollbarPadding: false,
       showDenyButton: true,
       heightAuto: false,
       title:this._translate.instant(title),
-      text:this._translate.instant(text),
+      text: this._translate.instant(text),
       icon:"error",
       denyButtonColor: "rgb(174, 222, 244)",
       denyButtonText:"OK",

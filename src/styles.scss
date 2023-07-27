@@ -211,6 +211,11 @@ hr.divider {
 }
 .swal2-popup .swal2-styled:focus {
   box-shadow: none !important;
+
+}
+
+.swal2-styled{
+  opacity:0.3;
 }
 
 .form-control:focus, .form-select:focus {

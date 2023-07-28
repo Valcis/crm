@@ -30,9 +30,7 @@ export class FilesComponent {
   protected forme!:FormGroup ;
   protected ts = DateTime.now();
   protected tz:any = this.ts.zoneName;
-  protected off = DateTime.local().setZone(this.tz);
-  protected utc = this.ts.toUTC();
-  bogus = DateTime.local().setZone("America/Bogus");
+  protected utc = this.ts.offset;
 
 
 
@@ -95,7 +93,7 @@ export class FilesComponent {
             siz: value.data.size,
             categor:translateType[value.data.categoria],
             userName: completeName,
-            dateCreation:DateTime.fromMillis(value.data.creacion_ts).toUTC().toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+            dateCreation:DateTime.fromMillis(value.data.creacion_ts+(this.utc*60*1000)).toUTC().toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
           };
           this.rowData.push(it)
         });

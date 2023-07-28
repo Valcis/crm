@@ -1,19 +1,15 @@
 import {Component} from '@angular/core';
-
-
 import {FormControl, FormGroup} from "@angular/forms";
-
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
-import {FileService} from "../../../../../shared/services/api/documentation/file/file.service";
-import {DragDropService} from "../../../../../shared/services/api/documentation/file/dragDrop.service";
+import {FileService} from "../../../../../shared/services/api/documentation/file.service";
+import {DragDropService} from "../../../../../shared/services/dragDrop/drag-drop.service";
 import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";
-
-//TODO: Formatejar bé els imports, vigilar amb els ; i els intros
+import {DateTime} from "luxon";
 
 @Component({
   selector: 'document-links',
@@ -32,6 +28,14 @@ export class FilesComponent {
   protected file: File[]= [];
   protected filesAdded:boolean = false;
   protected forme!:FormGroup ;
+  protected ts = DateTime.now();
+  protected tz:any = this.ts.zoneName;
+  protected off = DateTime.local().setZone(this.tz);
+  protected utc = this.ts.toUTC();
+  bogus = DateTime.local().setZone("America/Bogus");
+
+
+
 
   constructor(
     private _dragDrop: DragDropService,
@@ -41,7 +45,7 @@ export class FilesComponent {
     private _Dragdrop: DragDropComponent,
     private _loader: CrmLoaderService,
     private _swal: SwalService,
-    private _router: Router
+    private _router: Router,
   ) {
       this._translate.use(_cookie.getLanguage());
   }
@@ -69,12 +73,9 @@ export class FilesComponent {
   }
 
   protected async getFiles() {
-
+    console.log(this.ts)
     this._loader.setLoading(true);
     this.rowData = [];
-    //TODO: Ja vam dir que aquest sobrava
-    let list: any=[];
-
     this._fileService.getFiles(this.filesForm.value).subscribe(response=>{
       if (response !== undefined) {
         let localData:any = response;
@@ -83,7 +84,9 @@ export class FilesComponent {
         this.rowData = [];
         fechResult.forEach((value :any) =>{
           let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
-          //TODO: correct gmt
+
+          //TODO:arreglar ts
+
           let it:filesTable={
             cog: {
               linked: "/CRMServlet/neo/files/private/Ficheros/" + value.data.name ,
@@ -92,13 +95,13 @@ export class FilesComponent {
             siz: value.data.size,
             categor:translateType[value.data.categoria],
             userName: completeName,
-            dateCreation:value.data.creacion_ts };
+            dateCreation:DateTime.fromMillis(value.data.creacion_ts).toUTC().toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+          };
           this.rowData.push(it)
         });
         this.rowData.sort((a,b) => b.dateCreation - a.dateCreation);
         this._loader.setLoading(false);
         this.counter = fechResult.length;
-
       }
 
     });
@@ -155,9 +158,8 @@ export class FilesComponent {
     });
     this._loader.setLoading(true);
     this._dragDrop.sendFiles(this.forme.value).subscribe(response=>{
-      //TODO: El comentari aquest sobra
-      //@ts-ignore
-      if (response !== undefined && response.Status !== undefined && response.Status === 'OK') {
+      var resp: any = response;
+      if (resp !== undefined && resp.Status !== undefined && resp.Status === 'OK') {
         console.log("subido con éxito")
       }else{
         console.log("fallo en la subida")

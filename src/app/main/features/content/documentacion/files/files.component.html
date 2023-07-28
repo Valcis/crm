@@ -26,11 +26,11 @@
                         </div>
                         <div class="col-sm-3">
                           <label> {{ 'FILES.NAME' | translate}}</label>
-                          <input type="text" class="form-control" formControlName="descripcion">
+                          <input type="text" class="form-control" formControlName="original_name">
                         </div>
                         <div class="col-sm-6">
                           <label>{{ 'DOCUMENTATION.DESCRIPTION' | translate}}</label>
-                          <input type="text" class="form-control" formControlName="original_name">
+                          <input type="text" class="form-control" formControlName="descripcion">
                         </div>
                       </div>
                       <div class ="row">
@@ -45,7 +45,7 @@
                 <div class="card rounded-0 mx-4 mt-4 mb-5">
                   <div class="card-title border-bottom">
                     <div class="table-title mx-3 my4" >
-                      <div class=" my-3" >{{counter}} {{'DOCUMENTATION.RESULTS'|translate}}</div>
+                      <div class=" my-3" >{{counter +" "}}<label> {{'DOCUMENTATION.RESULTS'|translate}}</label></div>
                     </div>
                   </div>
                   <div class="card-content mx-3 my-2 mb-5">
@@ -59,7 +59,7 @@
                           <th class="centred tile-s" style="width:10%;">{{"FILES.SIZE" | translate}}</th>
                           <th class="centred tile-s" style="width:10%; ">{{"FILES.CATEGORY" | translate}}</th>
                           <th class="centred tile-m" style="width:15%; ">{{"DOCUMENTATION.USER" | translate}}</th>
-                          <th class="centred tile-m" style="width:15%; ">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o"></i></th>
+                          <th class="centred tile-m" style="width:15%; ">{{"FILES.DATE" | translate}} <i class="fa fa-clock-o" [ngbTooltip]="tz"></i></th>
                         </tr>
                         <tr class="tile-height" *ngFor="let element of rowData | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                           <td>
@@ -69,7 +69,7 @@
                               </button>
                               <ul class="dropdown-menu" ngbDropdownMenu>
                                 <li><a class="dropdown-item" href="http://localhost:8080{{element.cog.linked}}" target="_blank"> <i class="fa fa-eye"></i> {{"FILES.VIEW" | translate}}</a> </li>
-                                <li><a class="dropdown-item" [href]="element.cog.linked" download="{{element.fileNames}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
+                                <li><a class="dropdown-item" [href]="element.cog.linked" download="{{element.fileName}}"> <i class="fa fa-download"></i> {{"FILES.DOWNLOAD" | translate}}</a> </li>
                                 <li><a class="dropdown-item" href="" (click)="deleteFile(element.cog.name,element.cog.id,element.fileName, $event)"> <i class="fa fa-trash"></i> {{"DOCUMENTATION.DELETE" | translate}}</a> </li>
                               </ul>
                             </div>
@@ -87,7 +87,7 @@
                           <!--TODO:traduir-->
                           <td class="text-center">{{element.categor | translate}}</td>
                           <td class="text-center">{{element.userName}}</td>
-                          <td class="text-center">{{element.dateCreation  | date:'dd/MM/yyyy HH:mm':'UTC+0400'}}</td>
+                          <td class="text-center">{{element.dateCreation  }}</td>
                         </tr>
                       </table>
                       <br/>

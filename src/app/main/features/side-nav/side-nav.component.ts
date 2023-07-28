@@ -4,6 +4,7 @@ import {UserService} from "../../../shared/services/api/user/user.service";
 import {Router} from "@angular/router";
 
 
+
 @Component({
   selector: 'side-nav',
   templateUrl: './side-nav.component.html',
@@ -15,6 +16,8 @@ export class SideNavComponent implements OnInit {
 
   protected isOpen:any = null;
   public isCollapsed = false;
+  private canRun:boolean=true;
+  protected showSm:any=null;
 
   //TODO: Mover a objeto externo
   public menuList: Array<any> = [
@@ -68,12 +71,22 @@ export class SideNavComponent implements OnInit {
     }
     this._router.navigate(['/login'])
   }
-  toggleOpen(item: any){
+
+  private toggleOpen(item: any){
     if(this.isOpen === item){
       this.isOpen=null;
     }else{
       this.isOpen=item;
     }
-
   }
+
+  protected async controlTime(index:any) {
+    console.log(this.canRun)
+    if (this.canRun) {
+      this.toggleOpen(index);
+      this.canRun = false;
+      setTimeout(()=>{this.canRun = true;}, 350);
+    }
+  }
+
 }

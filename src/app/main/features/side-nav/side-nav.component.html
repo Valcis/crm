@@ -1,8 +1,11 @@
 <!--<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100" appSideClosed>-->
-<div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100" [ngClass]="!isExpandedFlag ? 'short' : ''">
-  <div class="header-profile">
-    <div class="header-content">
-      <h5 class="border-bottom pt-4">
+
+
+
+<div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100" [ngClass]="!isExpandedFlag ? 'thin' : ''">
+  <div [ngClass]="!isExpandedFlag ? 'short-header-profile':''">
+    <div [ngClass]="!isExpandedFlag ? 'sm-header-content' : 'header-content'">
+      <h5 [ngClass]="isExpandedFlag ? 'border-bottom' : ''" class="pt-4">
         <i class="text-white fa fa-share-alt" style="font-size: 18px"></i>
         Neo
       </h5>
@@ -36,7 +39,7 @@
 <!--      Todo: cambiar el nom de la classe-->
       <ul [ngClass]="isExpandedFlag === false ? 'temp ' : 'dark-bg-container'">
         <div *ngIf="item.subMenu.length <= 0">
-          <li class="sidenav-list-item collapsed">
+          <li class=" collapsed" [ngClass]="!isExpandedFlag ? 'sm-sidenav-list-item' : 'sidenav-list-item'">
             <div [ngClass]="!isExpandedFlag ? 'center' : ''" [id]="'accordion-' + i" >
 <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
 
@@ -52,32 +55,40 @@
 
         <!--DIVS para menus CON submenu-->
         <div *ngIf="item.subMenu.length > 0">
-          <li class="sidenav-list-item collapsed"  data-bs-toggle="collapse"  (click)="toggleOpen(item)" [attr.data-bs-target]="'#accordion-' + i + '-collapse'">
+          <li [id]="'collapse-'+i" class="sidenav-list-item collapsed"  data-bs-toggle="collapse"  (click)="controlTime(i)" [attr.data-bs-target]="'#accordion-' + i + '-collapse'"
+              (mouseout)="showSm=null" (mouseover)="showSm=i"
+          [ngClass]="!isExpandedFlag ? 'sm-sidenav-list-item' : ''">
             <div [ngClass]="!isExpandedFlag ? 'center' : ''" [id]="'accordion-' + i">
               <span class="sidenav-item">
-                <i [class]="item.icono"></i>
+                <i [class]="item.icono" class="fa"></i>
                 <span *ngIf="isExpandedFlag" >
                   {{ formatName(item.descripcion) | translate }}
-                  <i [ngClass]="isOpen === item ? 'fa-angle-down' : 'fa-angle-left'" class="fa" style="margin-left: 10%"></i>
-                </span>
-<!--                TODO: Cambiar las flechas por iconos, alinear derecha y rotar al click-->
 
+                </span>
+
+                <i *ngIf="isExpandedFlag" [ngClass]="isOpen === i ? 'fa-angle-down' : 'fa-angle-left'" class="fa right" style="margin-left: 10%"></i>
 <!--                <span class="submenu-arrow"></span>-->
 
               </span>
-              <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
-                   [attr.aria-labelledby]="'accordion-' + i + '-header'">
-                <div>
-                  <ul class="list-group crm-ul">
-                    <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
-                        [id]="sub.descripcion"
-                        [routerLink]="sub.link_pag"
-                    >
-                      {{ formatName(sub.descripcion) | translate }}
-                    </li>
-                  </ul>
+              <div [ngClass]="!(isExpandedFlag || showSm === i) ? 'hide':''">
+                <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
+                     [attr.aria-labelledby]="'accordion-' + i + '-header'"
+                     [ngClass]="!isExpandedFlag ? 'small-collapse' : 'big-collapse'"
+                >
+                  <div>
+                    <ul class="list-group crm-ul">
+                      <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
+                          [id]="sub.descripcion"
+                          [routerLink]="sub.link_pag"
+                          [ngClass]="!isExpandedFlag ? 'small-sub' : ''"
+                      >
+                        {{ formatName(sub.descripcion) | translate }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
+
             </div>
           </li>
         </div>

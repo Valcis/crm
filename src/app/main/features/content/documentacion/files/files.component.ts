@@ -13,6 +13,8 @@ import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../sh
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";
 
+//TODO: Formatejar bé els imports, vigilar amb els ; i els intros
+
 @Component({
   selector: 'document-links',
   templateUrl: './files.component.html',
@@ -70,6 +72,7 @@ export class FilesComponent {
 
     this._loader.setLoading(true);
     this.rowData = [];
+    //TODO: Ja vam dir que aquest sobrava
     let list: any=[];
 
     this._fileService.getFiles(this.filesForm.value).subscribe(response=>{
@@ -152,6 +155,7 @@ export class FilesComponent {
     });
     this._loader.setLoading(true);
     this._dragDrop.sendFiles(this.forme.value).subscribe(response=>{
+      //TODO: El comentari aquest sobra
       //@ts-ignore
       if (response !== undefined && response.Status !== undefined && response.Status === 'OK') {
         console.log("subido con éxito")

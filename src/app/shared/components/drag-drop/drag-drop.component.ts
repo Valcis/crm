@@ -1,6 +1,10 @@
 import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {CrmLoaderService} from "../../services/crmLoader/crm-loader.service";
 import {FormGroup, FormControl} from "@angular/forms";
+//TODO: canviar el nom del selector, vigilar espais, vigilar ; l'ngOninit no fa res, netejar els imports que no facis servir.
+//TODO: Per l'estructura de carpetes, a api>documentation no pots tenir el fitxer de links per separat, s'ha d'afegir una carpeta o treure els fitxers de file de la carpeta.
+//TODO: Per altra banda, el nom del servei de drag and drop, està amb camelcase, i no és exclusiu de documentation o sigui que s'hauria de posar a una altra banda.
+//TODO: Quan fagis servir llibreries externes, i després les treguis, recorda treure-les del package, perquè hi ha 3 o 4 que no estàs fent servir però s'instalen cada vegada.
 @Injectable({
     providedIn: 'root'
 })

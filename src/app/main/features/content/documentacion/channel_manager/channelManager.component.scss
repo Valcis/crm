@@ -1,19 +1,20 @@
+@import "src/styles";
 
 body {
   min-height: 100vh !important;
   max-height: 500vh !important;
 
 }
-
+.bold{
+  font-weight: bold ;
+}
 .body-right{
   width: 98%;
 
 
 }
-.body-position{
-  margin-left: 250px;
 
-}
+
 
 .float-right{
   float: right;
@@ -30,7 +31,6 @@ body {
 
 
 .btn-search:focus{
-  background-color: lightgrey;
   border-color: #d2d2d2;
   background-color: #e6e6e6;
 }

@@ -5,8 +5,8 @@ import {TranslateService} from "@ngx-translate/core";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
-import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 
 @Component({
   selector: 'document-links',

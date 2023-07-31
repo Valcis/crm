@@ -33,6 +33,7 @@ export class ChannelManagerService extends CrmService {
       ...this.channelBodyRq,
       Metodo:"GetChannelManagers",
       Entrada: linkForm};
+    console.log(linkForm)
     return this.sendPost(modifiedLinkBodyRq);
   };
 

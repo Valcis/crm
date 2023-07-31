@@ -1,14 +1,14 @@
-<div class="colocation  body-position">
+<div >
   <div>
     <h4>Channel Manager</h4>
   </div>
-  <div class="body-right">
-    <form [formGroup]="channelSearch" (submit)="getResults()"  >
+  <div class="body-right ">
+    <form [formGroup]="channelSearch" (submit)="getResults()"   class="pageColor">
       <div class="card rounded-0 ">
         <div class="card-title border-bottom">
-          <div class="m-3"><h6>{{'CHANNELS.CRITERIA'|translate}}</h6></div>
+          <div class="m-3"><h6 class="bold grey">{{'CHANNELS.CRITERIA'|translate}}</h6></div>
         </div>
-        <div class="card-body">
+        <div class="card-body grey">
           <div class="row">
             <div class="col-sm-3">
               <small> {{"CHANNELS.CODE" | translate}}</small>
@@ -20,11 +20,11 @@
             </div>
             <div class="col-sm-3">
               <small> {{"CHANNELS.CERTIFIED" | translate}}</small>
-              <select class="form-select" formControlName="certificado">
+              <select class="form-select rounded-0 grey" formControlName="certificado">
                 <option selected value="">
                   {{"CHANNELS.ALL" | translate}}
                 </option>
-                <option value="y">
+                <option value="S">
                   {{"CHANNELS.YES" | translate}}
                 </option>
                 <option value="n">
@@ -35,11 +35,11 @@
             </div>
             <div class="col-sm-3">
               <small> PCI </small>
-              <select class="form-select" formControlName="pci">
+              <select class="form-select rounded-0 grey" formControlName="pci">
                 <option selected value="">
                   {{"CHANNELS.ALL" | translate}}
                 </option>
-                <option value="y">
+                <option value="S">
                   {{"CHANNELS.YES" | translate}}
                 </option>
                 <option value="n">
@@ -67,29 +67,29 @@
       <div>&nbsp;</div>
       <div class="card rounded-0 mb-3">
         <div class="card-title border-bottom">
-          <div class="m-3"  > <h6>{{counter+ " "}}{{"GLOBAL.RESULTS" | translate }}</h6> </div>
+          <div class="m-3 grey bold"  > <h6>{{counter+ " "}}{{"GLOBAL.RESULTS" | translate }}</h6> </div>
         </div>
         <div class="card-body">
           <div>
             <table class="table table-bordered">
               <thead>
-              <tr class="tableHead">
-                <th>{{'CHANNELS.COD'|translate}}</th>
-                <th>{{'CHANNELS.RESULTNAME'|translate}}</th>
-                <th>{{'CHANNELS.DESCRIPTION'|translate}}</th>
-                <th>{{'CHANNELS.CERT'|translate}}</th>
-                <th>{{'CHANNELS.COMMENT'|translate}}</th>
-                <th>PCI</th>
+              <tr class="tableHead ">
+                <th class="grey">{{'CHANNELS.COD'|translate}}</th>
+                <th class="grey">{{'CHANNELS.RESULTNAME'|translate}}</th>
+                <th class="grey">{{'CHANNELS.DESCRIPTION'|translate}}</th>
+                <th class="grey">{{'CHANNELS.CERT'|translate}}</th>
+                <th class="grey">{{'CHANNELS.COMMENT'|translate}}</th>
+                <th class="grey">PCI</th>
               </tr>
               </thead>
-              <tbody>
-              <tr *ngFor="let chanannel of channels">
-                <td>{{chanannel.idcm}}</td>
-                <td>{{chanannel.nombre}}</td>
-                <td>{{chanannel.nombre_certificado}}</td>
-                <td>{{chanannel.certificado | translate}}</td>
-                <td>{{chanannel.comentario}}</td>
-                <td>{{chanannel.pci | translate}}</td>
+              <tbody >
+              <tr *ngFor="let chanannel of channels" >
+                <td class="grey">{{chanannel.idcm}}</td>
+                <td class="grey">{{chanannel.nombre}}</td>
+                <td class="grey">{{chanannel.nombre_certificado}}</td>
+                <td class="grey">{{chanannel.certificado | translate}}</td>
+                <td class="grey">{{chanannel.comentario}}</td>
+                <td class="grey">{{chanannel.pci | translate}}</td>
               </tr>
               </tbody>
             </table>
@@ -99,7 +99,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
               <div class="form-group">
-                <select [formGroup]="channelSearch" formControlName="num_resultados" [value]="pages" class="form-control" (change)="pageHandler($any($event.target).value)" >
+                <select [formGroup]="channelSearch" formControlName="num_resultados" [value]="pages" class="form-select border-0 grey" (change)="pageHandler($any($event.target).value)" >
                   <option value=5 >{{"CHANNELS.PERPAGE5" | translate}}</option>
                   <option selected value=10 >{{"CHANNELS.PERPAGE10" | translate}}</option>
                   <option value=20 > {{"CHANNELS.PERPAGE20" | translate}}</option>
@@ -108,7 +108,7 @@
             </div>
             <div class="col-sm-6 text-right">
               <ngb-pagination *ngIf="!(counter<=pages)"
-                class="d-flex justify-content-end"
+                class="d-flex justify-content-end grey"
                 [maxSize]="maxPaginator"
                 [collectionSize]="counter"
                 [pageSize]="pages"

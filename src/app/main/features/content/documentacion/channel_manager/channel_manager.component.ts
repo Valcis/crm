@@ -19,6 +19,7 @@ export class ChannelManagerComponent {
   protected currentPage:number = 1;
   protected maxPaginator:number = 10;
 
+
   constructor(
     private _translate: TranslateService,
     private _channel: ChannelManagerService,

@@ -1,8 +1,5 @@
+@import "src/styles";
 
-.fonte{
-
-}
-.to-the-right{float: right;}
 
 table,
 tr, th, td {
@@ -16,9 +13,10 @@ th,td{
   padding-right: 5px;
 }
 label, th{
-  font-weight: bold;
-  font-size: 13px;
-  opacity: 0.7 !important;
+  font-weight: bolder;
+  font-size: 14px;
+  color: $text-color;
+
 }
 
 .body-position{

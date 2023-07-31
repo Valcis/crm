@@ -10,11 +10,14 @@ import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../sh
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";
 import {DateTime} from "luxon";
+import {DatePipe} from "@angular/common";
+
 
 @Component({
   selector: 'document-links',
   templateUrl: './files.component.html',
-  styleUrls: ['./files.component.scss',]
+  styleUrls: ['./files.component.scss',],
+  providers:[DatePipe]
 })
 export class FilesComponent {
   protected filesForm!: FormGroup;
@@ -36,6 +39,7 @@ export class FilesComponent {
 
 
   constructor(
+    private _datepipe:DatePipe,
     private _dragDrop: DragDropService,
     private _translate: TranslateService,
     private _cookie: CookiesService,
@@ -82,9 +86,7 @@ export class FilesComponent {
         this.rowData = [];
         fechResult.forEach((value :any) =>{
           let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
-
-          //TODO:arreglar ts
-
+          //TODO:arreglar ts(algunos funcionan y otros no)
           let it:filesTable={
             cog: {
               linked: "/CRMServlet/neo/files/private/Ficheros/" + value.data.name ,
@@ -93,7 +95,7 @@ export class FilesComponent {
             siz: value.data.size,
             categor:translateType[value.data.categoria],
             userName: completeName,
-            dateCreation:DateTime.fromMillis(value.data.creacion_ts+(this.utc*60*1000)).toUTC().toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+            dateCreation: value.data.creacion_ts+(this.utc*60*1000),
           };
           this.rowData.push(it)
         });

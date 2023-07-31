@@ -32,7 +32,7 @@ export interface filesTable {
   siz: number,
   categor:string,
   userName: string,
-  dateCreation:string
+  dateCreation:string |null
 }
 
 interface cog {

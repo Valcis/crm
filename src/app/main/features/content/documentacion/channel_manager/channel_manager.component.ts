@@ -64,6 +64,7 @@ export class ChannelManagerComponent {
       this.counter = localData.Salida.datos.num_elementos;
       this.channels = [];
       let info: any[] = [];
+      //TODO: Això de l'if a, el nom de la variable ha de ser explicatiu, havíem dit de canviar-ho o va ser a un altre lloc?
       fetchResult.forEach((value:any) => {
         let a = value.certificado ;
         if (a === undefined){

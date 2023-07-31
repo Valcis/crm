@@ -9,7 +9,7 @@ import {CookiesService} from "../../cookies/cookies.service";
 })
 export class ChannelManagerService extends CrmService {
   private readonly channelBodyRq: GenericRequest;
-
+  //TODO: Crec que ja ho vam comentar, però el nom continua estant en camelcase i t'has deixat un log per aquí
   constructor(
     private _http: HttpClient,
     private _cookie: CookiesService,

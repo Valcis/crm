@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {ChannelManagerService} from "../../../../../shared/services/api/documentatnion/channelManager.service";
+import {ChannelManagerService} from "../../../../../shared/services/api/documentatnion/channel-manager.service";
 import {channelState, table} from "../../../../../shared/models/documentation/channel.model";
 
 @Component({
@@ -64,14 +64,11 @@ export class ChannelManagerComponent {
       this.counter = localData.Salida.datos.num_elementos;
       this.channels = [];
       let info: any[] = [];
-      //TODO: Això de l'if a, el nom de la variable ha de ser explicatiu, havíem dit de canviar-ho o va ser a un altre lloc?
       fetchResult.forEach((value:any) => {
-        let a = value.certificado ;
-        if (a === undefined){
-          a=""
-        }
+        let certificadoProcessado;
+        (value.certificado === undefined) ? certificadoProcessado="" : certificadoProcessado = value.certificado;
         let item:table = {
-          certificado: channelState[a] ,
+          certificado: channelState[certificadoProcessado] ,
           comentario: value.comentario,
           contacto: value.contacto,
           description: value.description ,

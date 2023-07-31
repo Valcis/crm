@@ -9,7 +9,6 @@ import {CookiesService} from "../../cookies/cookies.service";
 })
 export class ChannelManagerService extends CrmService {
   private readonly channelBodyRq: GenericRequest;
-  //TODO: Crec que ja ho vam comentar, però el nom continua estant en camelcase i t'has deixat un log per aquí
   constructor(
     private _http: HttpClient,
     private _cookie: CookiesService,
@@ -26,14 +25,12 @@ export class ChannelManagerService extends CrmService {
       recuerdame_id: ""};
   }
 
-//"Entrada":{"idcm":"","nombre":"","certificado":"","pci":"","nombre_certificado":"","comentario":"","pagina":"1","num_resultados":"10","orden":"fecha_creacion_ts","tipo_orden":"DESC"}
 
   public fetchResults = (linkForm: any) => {
     const modifiedLinkBodyRq = {
       ...this.channelBodyRq,
       Metodo:"GetChannelManagers",
       Entrada: linkForm};
-    console.log(linkForm)
     return this.sendPost(modifiedLinkBodyRq);
   };
 

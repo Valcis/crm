@@ -19,7 +19,7 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
-
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
     LinksComponent,
     ],
   imports: [
+    NgbTimepickerModule,
     NgbPaginationModule,
     CommonModule,
     MainRoutingModule,

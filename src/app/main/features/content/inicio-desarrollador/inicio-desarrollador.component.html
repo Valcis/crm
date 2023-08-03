@@ -4,76 +4,75 @@
       <h3 class="p-3" style="font-weight:lighter;">Aquí iría el Toast. Título</h3>
     </div>
   </div>
-<!--BUTTONS CODE-->
-  <div class="row m-0">
-    <div class="col-sm m-0 p-0">
-      <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
-      <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
-    </div>
-  </div>
-<!--TIME ZONE CODE-->
-  <div class="row m-0 p-0">
-    <div class="col-sm-1">
-      <div class="m-2">
-        <p>Fecha:
-          <!-- para poner el tooltip en la posición que se quiera se debe hacer con un placement="top/bottom/left/right"-->
-          <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
-        </p>
+  <div class="col">
+    <!--TRANSLATE TEST-->
+    <div class="row m-0">
+      <div class="col-sm m-0 p-0">
+        <p class="row"> TRANSALTE TEST1: {{_translate.currentLang}} </p>
+        <p class="row"> TRANSALTE GENERAL_TEXT_YES: {{'translate'| translate}} </p>
+        <p class="row"> TRANSALTE GENERAL_TEXT_YES: {{'translate'| translate}}</p>
       </div>
     </div>
-    <div class="col-sm-3">
-      <div class="m-2">
-        <p>DateTime:
-          {{ts}}
-        </p>
+    <!--BUTTONS CODE-->
+    <div class="row m-0">
+      <div class="col-sm m-0 p-0">
+        <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
+        <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
       </div>
     </div>
-    <div class="col-sm-3">
-      <div class="m-2">
-        <p>ts-Original:
-          {{utc}}
-        </p>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="m-2">
-        <p>ts-parsed:
-          {{formatedTime}}
-        </p>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="m-2">
-        <p>timezone:
-          {{tz}}
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="row m-0 p-0">
-    <div class="col-sm-3">
-      <div class="m-3">
-        <!-- DATE PICKER -->
-        <div class="input-group m-l-2">
-          <input
-            class="form-control"
-            placeholder="dd/mm/yyyy"
-            name="d2"
-            [(ngModel)]="model2"
-            ngbDatepicker
-            #d2="ngbDatepicker"
-          />
-          <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
-          <button class="btn btn-outline-secondary fa fa-eraser" (click)="erase()" type="button"></button>
-          <button class="btn btn-outline-secondary fa fa-clock-o" (click)="openTime()" type="button"></button>
+    <!--TIME ZONE CODE-->
+    <div class="row m-0 p-0">
+      <div class="col-sm-1">
+        <div class="m-2">
+          <span>Fecha:
+            <!-- para poner el tooltip en la posición que se quiera se debe hacer con un placement="top/bottom/left/right"-->
+            <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
+          </span>
         </div>
       </div>
-    </div>
-<!--    TIMEPICKER -->
-    <div *ngIf="showTime===true" class="col-sm-3">
-      <div class="m-2">
-        <ngb-timepicker [(ngModel)]="time2"></ngb-timepicker>
+      <div class="row">
+          <span class="row">DateTime:
+            {{ts}}
+          </span>
+          <span class="row">ts-Original:
+            {{utc}}
+          </span>
+          <span class="row">ts-(UTC)):
+            {{formatedTime}}
+          </span>
+          <span class="row">timezone:
+            {{tz}}
+          </span>
       </div>
     </div>
+    <div class="row-sm m-0 p-0">
+      <div class="col-sm-7">
+        <div class="row m-3">
+          <!-- DATE PICKER -->
+          <div class="col input-group m-l-2 dayBar">
+            <input
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              name="d2"
+              [(ngModel)]="model2"
+              ngbDatepicker
+              #d2="ngbDatepicker"
+            />
+            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+            <button class="btn btn-outline-secondary fa fa-eraser" (click)="erase()" type="button"></button>
+            <button class="btn btn-outline-secondary fa fa-clock-o" (click)="openTime()" type="button"></button>
+          </div>
+          <!--    TIMEPICKER -->
+          <div *ngIf="showTime===true" class="col-sm-3">
+            <div class="m-2">
+              <ngb-timepicker [(ngModel)]="time2"></ngb-timepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--NOUISLIDER-->
+    <!--summernote-->
   </div>
 </div>

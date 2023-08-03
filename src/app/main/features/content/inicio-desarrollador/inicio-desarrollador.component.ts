@@ -8,6 +8,12 @@ import {
   CustomDateParserFormatter,
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
+import {TranslateService} from "@ngx-translate/core";
+import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
+
+
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -29,13 +35,14 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected utc: any;
   protected formatedTime: any;
   protected model2: string = '';
-  protected time2: any;
-  protected showTime: boolean = false;
+  protected time2: timepick = {hour:10,minute:15};
+  protected showTime: boolean = true;
 
   constructor(
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
-    private _calendar: NgbCalendar) {
+    private _calendar: NgbCalendar,
+    protected _translate: TranslateService){
   }
 
   ngOnInit(): void {

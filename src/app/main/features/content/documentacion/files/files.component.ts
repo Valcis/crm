@@ -117,8 +117,8 @@ export class FilesComponent {
           this._loader.setLoading(true);
           this._fileService.deleteFile(name, id).subscribe((response) => {
             this._loader.setLoading(false);
-            // @ts-ignore
-            if (response !== undefined && response.Status !== undefined && response.Status === 'OK') {
+            let resp:any = response;
+            if (resp !== undefined && resp.Status !== undefined && resp.Status === 'OK') {
               this._swal.swalSucces(this._translate.instant("GENERAL.DELETESUCCESS"),this._translate.instant("GENERAL.REQUESTSUCCESS"));
             } else {
               this._swal.swalError(this._translate.instant("GENERAL.DELETEFAIL"),this._translate.instant("GENERAL.REQUESTERR"));
@@ -136,6 +136,7 @@ export class FilesComponent {
       this.getFiles()
     }else {
       console.log("falta descripción")
+      //TODO: mensaje de aviso
     }
     this.newForm.reset( {categoria: 'Otros'});
   }
@@ -161,8 +162,10 @@ export class FilesComponent {
       var resp: any = response;
       if (resp !== undefined && resp.Status !== undefined && resp.Status === 'OK') {
         console.log("subido con éxito")
+        //TODO: mensaje de exito
       }else{
         console.log("fallo en la subida")
+        //TODO: mensaje de error
       }
       this._loader.setLoading(true);
     });

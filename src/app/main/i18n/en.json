@@ -2,6 +2,9 @@
   "MAIN.WORKS": "Main works",
   "CONTENT.WORKS": "Content works",
 
+  "GLOBAL.RESULTS": "Results",
+  "GLOBAL.SEARCH": "Search",
+
   "LINKS.CRITERIA": "Links searching criteria",
   "LINKS.TYPE": "Type",
   "LINKS.HOTEL": "Hotel",
@@ -11,12 +14,27 @@
   "LINKS.LINK": "Link",
   "LINKS.ALERT_TITLE_DELETE": "¿Are you sure?",
   "LINKS.ALERT_TEXT": "You will not be able to recover the link",
-  "LINKS.SEARCH": "Search",
-  "LINKS.RESULTS": "Results",
   "LINKS.NEW": "Create a new link",
   "LINKS.CLOSE": "Cancel",
   "LINKS.CREATE": "Add",
   "LINKS.ALERT_RESPONSE1": "Deleted!",
   "LINKS.ALERT_LINK_BORRADO": "The link has been correctly deleted",
-  "LINKS.DELETE": "Delete"
+  "LINKS.DELETE": "Delete",
+
+  "CHANNELS.CRITERIA" : "Criteria for searching channels",
+  "CHANNELS.CODE" : "Channel’s code",
+  "CHANNELS.NAME" : "Channel’s name",
+  "CHANNELS.CERTIFIED" : "Certified",
+  "CHANNELS.ALL" : "All",
+  "CHANNELS.YES" : "Yes",
+  "CHANNELS.NO" : "No",
+  "CHANNELS.DESCRIPTION" : "Description" ,
+  "CHANNELS.COMMENT" : "Comment",
+  "CHANNELS.PERPAGE5" : "5 elements per page",
+  "CHANNELS.PERPAGE10" : "10 elements per page",
+  "CHANNELS.PERPAGE20" : "20 elements per page",
+  "CHANNELS.COD"  : "Cod.",
+  "CHANNELS.CERT" : "Cert.",
+  "CHANNELS.RESULTNAME" : "Name",
+  "CHANNELS.PROCESS" : "No, in process"
 }

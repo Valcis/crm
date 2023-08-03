@@ -19,8 +19,7 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
-
-
+import {ChannelManagerComponent} from "./features/content/documentacion/channel_manager/channel_manager.component";
 
 @NgModule({
   declarations: [
@@ -36,6 +35,7 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
+    ChannelManagerComponent
     ],
   imports: [
     NgbPaginationModule,

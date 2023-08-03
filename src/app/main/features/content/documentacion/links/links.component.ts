@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {LinkService} from "src/app/shared/services/api/documentatnion/link.service"
+import {LinkService} from "src/app/shared/services/api/documentation/link.service"
 import {TranslateService} from "@ngx-translate/core";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
+import {linksTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
+import {NotificationsService} from "../../../../../shared/services/api/user/notifications.service";
 
 @Component({
   selector: 'document-links',
@@ -34,6 +35,7 @@ export class LinksComponent {
     private _cookie: CookiesService,
     private _swal: SwalService,
     private _loader: CrmLoaderService,
+    private _notifier: NotificationsService
 
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
@@ -66,14 +68,14 @@ export class LinksComponent {
   public async getLinks(){
     this._loader.setLoading(true);
     this._link.fetchLinks(this.linkForm.value).subscribe(response =>{
-      var localData:any = response;
+      let localData:any = response;
       this.fetchResult=[];
       this.fetchResult = localData.Salida.lineas;
       this.rowData = [];
-      var info: any[] = [];
+      let info: any[] = [];
       this.fetchResult.forEach((value) => {
-        var a:string = value.data.categoria;
-        var it = {
+        let a:string = value.data.categoria;
+        let it:linksTable = {
           c:translateType[a],
           link:value.data.link,
           description:value.data.descripcion,
@@ -98,7 +100,6 @@ export class LinksComponent {
             this._link.eliminateLink(this.delObj).subscribe(response=>{
               this._loader.setLoading(false);
               if (response !== undefined) {
-
                 this._swal.swalSucces(this._translate.instant('LINKS.ALERT_RESPONSE1'),this._translate.instant('LINKS.ALERT_LINK_BORRADO'));
                 this.getLinks();
               }

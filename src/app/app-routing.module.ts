@@ -9,9 +9,11 @@ const routes: Routes = [
   { path: '**', redirectTo: 'login' }
 ];
 
+
+
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{useHash:true}),
   ],
   providers:[CookieService],
   exports: [RouterModule],

@@ -20,9 +20,15 @@ import { ActividadesComponent } from './features/content/actividades/actividades
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import {ChannelManagerComponent} from "./features/content/documentacion/channel_manager/channel_manager.component";
+import {FilesComponent} from "./features/content/documentacion/files/files.component";
+import {NgxDropzoneModule} from "ngx-dropzone";
+import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
+
 
 @NgModule({
   declarations: [
+    DragDropComponent,
+    FilesComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -39,6 +45,7 @@ import {ChannelManagerComponent} from "./features/content/documentacion/channel_
     ],
   imports: [
     NgbPaginationModule,
+    NgxDropzoneModule,
     CommonModule,
     MainRoutingModule,
     TranslateModule.forRoot({
@@ -53,11 +60,13 @@ import {ChannelManagerComponent} from "./features/content/documentacion/channel_
       extend: true
     }),
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
   ],
+  exports: [DragDropComponent],
   providers: []
 })
 export class MainModule {

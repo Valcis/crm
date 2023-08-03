@@ -38,6 +38,32 @@
   "CHANNELS.COD"  : "Cód.",
   "CHANNELS.CERT" : "Cert.",
   "CHANNELS.RESULTNAME" : "Nombre",
-  "CHANNELS.PROCESS" : "No, en proceso"
+  "CHANNELS.PROCESS" : "No, en proceso",
 
+  "GENERAL.OTHER":"Otros",
+  "GENERAL.HOTEL":"Hotel",
+  "GENERAL.AGENCY":"Agencia",
+  "GENERAL.CONFIRM":"Confirmar",
+  "GENERAL.DENY":"Cancelar",
+  "GENERAL.DELETESUCCESS": "Borrada!",
+  "GENERAL.REQUESTSUCCESS":"El fichero ha sido borrado.",
+  "GENERAL.DELETEFAIL":"No Borrada!",
+  "GENERAL.REQUESTERR":"Error en la petición.",
+
+  "DOCUMENTATION.SEARCH":"Buscar",
+  "DOCUMENTATION.RESULTS":"Resultado/s",
+  "DOCUMENTATION.NORESULTS":"No se han encontrado resultados",
+  "DOCUMENTATION.USER":"Usuario",
+  "DOCUMENTATION.DELETE":"Borrar",
+  "DOCUMENTATION.DESCRIPTION":"Descripción",
+
+  "FILES.CATEGORY":"Categoría",
+  "FILES.NAME":"Nombre del fichero",
+  "FILES.SIZE":"Tamaño",
+  "FILES.DATE":"Fecha de creación",
+  "FILES.CRITERIA":"Criterios para buscar ficheros",
+  "FILES.VIEW":"Ver",
+  "FILES.DOWNLOAD":"Descargar",
+
+  "DRAGDROP.FILESDROP":"Sube ficheros arrastrándolos aquí (o haz click)"
 }

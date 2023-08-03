@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {ChannelManagerService} from "../../../../../shared/services/api/documentatnion/channel-manager.service";
 import {channelState, table} from "../../../../../shared/models/documentation/channel.model";
+import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 @Component({
   selector: 'document-channel',
@@ -12,13 +13,18 @@ import {channelState, table} from "../../../../../shared/models/documentation/ch
   styleUrls: ['./channelManager.component.scss',],
 })
 export class ChannelManagerComponent {
+  @HostListener('window:resize', ['$event'])
+  public detectResize(event:any): void {
+    this.width = window.innerWidth;
+  }
   protected channelSearch!: FormGroup;
   protected channels:any[] = [];
   protected pages:number = 10;
   protected counter:number = 0;
   protected currentPage:number = 1;
   protected maxPaginator:number = 10;
-
+  protected width = window.innerWidth;
+  protected breaking_width:number = 1100;
 
   constructor(
     private _translate: TranslateService,
@@ -36,12 +42,19 @@ export class ChannelManagerComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this._loader.setLoading(true);
+    this.loadLoacalStorage();
     this.loadForms();
     this.getResults();
-
+    this._loader.setLoading(false);
   }
-
-  private async loadForms(){
+  private loadLoacalStorage(){
+    if(localStorage.getItem("channelPages")){
+      let pag:any = localStorage.getItem("channelPages");
+      this.pages = +pag;
+    }
+  }
+  private loadForms(){
     this.channelSearch! = new FormGroup({
       idcm: new FormControl<string>(""),
       nombre: new FormControl<string>(""),
@@ -50,14 +63,14 @@ export class ChannelManagerComponent {
       nombre_certificado: new FormControl<string>(""),
       comentario: new FormControl<string>(""),
       pagina: new FormControl<number>(1),
-      num_resultados: new FormControl<number>(10),
+      num_resultados: new FormControl<number>(this.pages),
       orden: new FormControl<string>("fecha_creacion_ts"),
       tipo_orden: new FormControl<string>("DESC"),
     });
   }
 
   protected getResults(){
-
+    this._loader.setLoading(true);
     this._channel.fetchResults(this.channelSearch.value).subscribe(result =>{
       let localData:any = result;
       let fetchResult = localData.Salida.lineas;
@@ -87,6 +100,7 @@ export class ChannelManagerComponent {
   protected pageHandler(event:any){
     let num: number = +event;
     this.channelSearch.get("num_resultados")!.setValue(event);
+    localStorage.setItem("channelPages", event);
     this.pages = num;
     this.getResults()
   }

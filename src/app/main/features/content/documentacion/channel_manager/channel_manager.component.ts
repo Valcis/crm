@@ -3,9 +3,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {ChannelManagerService} from "../../../../../shared/services/api/documentatnion/channel-manager.service";
+
 import {channelState, table} from "../../../../../shared/models/documentation/channel.model";
 import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
+import {ChannelManagerService} from "../../../../../shared/services/api/documentation/channel-manager.service";
 
 @Component({
   selector: 'document-channel',

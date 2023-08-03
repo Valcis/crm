@@ -1,19 +1,33 @@
 @import "src/styles.scss";
 
 .header-profile{
-  background: url("../../../../assets/images/profile/header-profile.png");
+
+  background-image: url("../../../../assets/images/profile/header-profile.png");
   height: 185px;
 }
+
 .short-header-profile{
-  background: url("../../../../assets/images/profile/header-profile.png");
+  background-image: url("../../../../assets/images/profile/header-profile.png");
   height: 61px;
 
 }
+.dropdown-item{
+  color: #66696b;
+  font-weight: normal;
+  font-size: 12px;
+
+}
+
+.dropdown-item:hover{
+  color:#262626;
+  cursor: pointer;
+}
 
 .header-content {
-  padding-top: 25px;
+  padding-top: 20px;
   padding-left: 27px;
   padding-right: 27px;
+  padding-bottom: 25px;
 }
 .sm-header-content{
   padding-left: 10px;
@@ -22,13 +36,14 @@
 // SIDENAV
 
 .crm-ul-sub {
-  margin-left: 7%;
-
   font-size: 13px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   text-align: right; /* Align text to the right */
+}
+.crm-ul{
+  margin-top: 10px;
 }
 
 li {
@@ -79,17 +94,15 @@ li:hover {
   text-decoration: none;
 }
 
-.thin{
-  width: 70px !important;
-}
+
 
 .center {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-left: 13px;
 }
 .right{
   float: right;
+
 }
 
 .small-collapse{
@@ -99,13 +112,16 @@ li:hover {
   background-color: #2F4050;
   width:150px !important;
   padding:10px;
-  margin-top: -21px;
+  margin-top: -11px;
 
 }
 .big-collapse{
   background-color: #293846;
   }
 
+  .big-sub{
+  margin: 7%;
+}
 .small-sub{
   height: auto;
   width:auto;
@@ -123,3 +139,8 @@ li:hover {
   height: 43px;
   padding:(15% 20% 15% 20%);
 }
+.perfil{
+  font-size: 13px;
+  color: #a7b1c2;
+}
+

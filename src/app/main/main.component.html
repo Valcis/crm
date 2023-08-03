@@ -1,10 +1,13 @@
-<div class=" h-100 gray-bg">
-  <div class="side-container">
+<div class=" h-100 gray-bg min-height">
+  <div class="side-container" [@bigSmallSide]="isExpanded ? animationCall():'sm'">
     <side-nav [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
   </div>
-  <div class="top-container row p-0">
+
+  <div class="top-container row p-0" [@bigSmall]="isExpanded ? animationCall() : 'sm'" >
     <top-nav class="p-0" (expander)="onToggle()" [mydata]=userData></top-nav>
   </div>
-  <hr class="divider">
-  <app-router-outlet></app-router-outlet>
+  <div class="body-position " [@bigSmall]="isExpanded ? animationCall() : 'sm'" >
+    <hr class="divider">
+    <app-router-outlet class="fadeInRight" ></app-router-outlet>
+  </div>
 </div>

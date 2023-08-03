@@ -34,6 +34,7 @@ export class FilesComponent {
   protected ts = DateTime.now();
   protected tz:any = this.ts.zoneName;
   protected utc = this.ts.offset;
+  protected test = DateTime;
 
 
 
@@ -75,7 +76,6 @@ export class FilesComponent {
   }
 
   protected async getFiles() {
-    console.log(this.ts)
     this._loader.setLoading(true);
     this.rowData = [];
     this._fileService.getFiles(this.filesForm.value).subscribe(response=>{
@@ -85,7 +85,11 @@ export class FilesComponent {
         fechResult = localData.Salida.lineas;
         this.rowData = [];
         fechResult.forEach((value :any) =>{
-          let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1 +" " + value.relations[0].node.data.empl_ape2;
+          let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1;
+          let time = this.test.fromMillis(value.data.creacion_ts).toUTC().weekday;
+          console.log(time);
+          let tDiff:number=this.calculateDate(value.data.creacion_ts);
+          console.log(tDiff);
           //TODO:arreglar ts(algunos funcionan y otros no)
           let it:filesTable={
             cog: {
@@ -95,7 +99,7 @@ export class FilesComponent {
             siz: value.data.size,
             categor:translateType[value.data.categoria],
             userName: completeName,
-            dateCreation: value.data.creacion_ts+(this.utc*60*1000),
+            dateCreation: value.data.creacion_ts+(this.utc*tDiff*1000),
           };
           this.rowData.push(it)
         });
@@ -108,6 +112,33 @@ export class FilesComponent {
 
 
   };
+
+  private calculateDate(timestamp: number){
+    let time = this.test.fromMillis(timestamp).toUTC();
+    if(time.month>=8 || time.month <=3){
+      if(time.month === 8){
+        let daysOfMonth:any =time.daysInMonth;
+        if(( daysOfMonth - time.day <= 7 && time.weekday === 6 && time.hour >= 1) || daysOfMonth - time.day  + time.weekday -6 < 0  ){
+          return 30;
+        }
+        return 60;
+      }
+      if(time.month === 3){
+
+        let daysOfMonth:any =time.daysInMonth;
+        if((daysOfMonth - time.day <= 7 && time.weekday === 6 && time.hour >= 1) || daysOfMonth - time.day + time.weekday -6 < 0  ){
+          return 60;
+        }
+        return 30;
+      }
+      //+1
+      return 30;
+    }else{
+      //+2
+      return 60;
+    }
+
+  }
 
   protected deleteFile(name:string, id:number, original_n:string, event:any) {
     event.preventDefault();

@@ -4,7 +4,7 @@
       <h3 class="p-3" style="font-weight:lighter;">Aquí iría el Toast. Título</h3>
     </div>
   </div>
-  <div class="col">
+  <div class=" col">
     <!--TRANSLATE TEST-->
     <div class="row m-0">
       <div class="col-sm m-0 p-0">
@@ -49,30 +49,267 @@
       <div class="col-sm-7">
         <div class="row m-3">
           <!-- DATE PICKER -->
-          <div class="col input-group m-l-2 dayBar">
-            <input
-              class="form-control"
-              placeholder="dd/mm/yyyy"
-              name="d2"
-              [(ngModel)]="model2"
-              ngbDatepicker
-              #d2="ngbDatepicker"
-            />
-            <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
-            <button class="btn btn-outline-secondary fa fa-eraser" (click)="erase()" type="button"></button>
-            <button class="btn btn-outline-secondary fa fa-clock-o" (click)="openTime()" type="button"></button>
+          <app-datepicker [clock]="true" ></app-datepicker>
+
+        </div>
+      </div>
+    </div>
+    <!--NOUISLIDER-->
+    <div class="noiuslider">
+      <h5>NOUISLIDER</h5>
+
+      <span class="row">https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
+      <span class="row">sliderConfig:{{sliderConfig.toString()}}</span>
+      <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
+      <br>
+      <nouislider  [config]="sliderConfig" [(ngModel)]="sliderModel"></nouislider>
+
+    </div>
+    <!--summernote-->
+    <div>
+      <br>
+      <br>
+      <h5>SUMMERNOTE</h5>
+      <div class="summernote">
+        <div [ngxSummernote]="summerConfig">
+        </div>
+      </div>
+    </div>
+    <br>
+    <!--fatos economicos-->
+    <div class="summernote">
+      <h5>DATOSECONÓMICOS</h5>
+      <div class="col-sm-12">
+        <div class="row" style="float:right">
+          <div class="col-sm-12 text-right">
+            <div class="btn-group">
+              <button type="button" class="bnt btn-sm btn-default"></button>
+              <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a ng-click="ohe.conversionMoneda('EUR')" class="ng-binding"><i class="fa fa-eur"></i> Euro</a></li>
+                <li><a ng-click="ohe.conversionMoneda('USD')" class="ng-binding"><i class="fa fa-usd"></i> Dólar</a></li>
+                <li><a ng-click="ohe.conversionMoneda('GBP')" class="ng-binding"><i class="fa fa-gbp"></i> Libra esterlina</a></li>
+              </ul>
+              <button type="button" class="btn btn-default btn-sm" ng-click="ohe.recalcularDatosEconomicos()">
+                <i class="fa fa-refresh"></i> <span class="ng-binding">Recalcular datos económicos</span>
+              </button>
+            </div>
           </div>
-          <!--    TIMEPICKER -->
-          <div *ngIf="showTime===true" class="col-sm-3">
-            <div class="m-2">
-              <ngb-timepicker [(ngModel)]="time2"></ngb-timepicker>
+        </div>
+        <div class="row card">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Población
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Paprov
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Cód. país
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Categoría
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Núm
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Afiliación
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="row">
+                  <div class="col-sm-5">
+                    habitaciones
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Marca
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+                    Año
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-5">
+
+                  </div>
+                  <div class="col-sm-7">
+                    <strong></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- FECHA INICIO CONTRATO -->
+          <div class="col-sm-3">
+            <label></label>
+            <app-datepicker ></app-datepicker>
+          </div>
+          <!-- FECHA FIN CONTRATO -->
+          <div class="col-sm-3">
+            <label></label>
+            <app-datepicker ></app-datepicker>
+          </div>
+          <!-- FECHA PRIMER PAGO CUOTA -->
+          <div class="col-sm-3">
+            <label></label>
+            <app-datepicker ></app-datepicker>
+          </div>
+          <!-- CARENCIA -->
+          <div class="col-sm-3">
+            <label></label>
+            <div>
+              <input type="number" class="form-control ng-pristine ng-valid ng-empty ng-touched" name="carencia"  style="">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default ng-binding" ng-click="ohe.calcularCarencia()">Calcular</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <!--TARIFA-->
+            <div class="card border-left-right border-bottom" style="height: 199px">
+              <div class="card-title"><h5 class="ng-binding">Tarifa</h5></div>
+              <div class="card-content">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+
+                      <label class="ng-binding"> <input type="checkbox" ng-model="ohe.datosEconomicos.tarifa_neta" ng-true-value="'true'" ng-false-value="'false'" class="ng-pristine ng-untouched ng-valid ng-empty" style=""> Tarifa neta</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+
+                      <label class="ng-binding"> <input type="checkbox" ng-model="ohe.datosEconomicos.tarifa_comisionable" ng-true-value="'true'" ng-false-value="'false'" class="ng-pristine ng-untouched ng-valid ng-empty" style=""> Tarifa comisionable</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row ng-hide" ng-show="ohe.datosEconomicos.tarifa_neta==='true'" style="">
+                  <div class="col-sm-6">
+                    <label class="ng-binding">Descuento sobre la bar</label>
+                    <br>
+                    <div class="input-group m-b">
+                      <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-minlength ng-valid-maxlength" ng-minlength="1" ng-maxlength="50" ng-model="ohe.datosEconomicos.descuento_bar" style="">
+                      <span class="input-group-addon">%</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Mark-up</label>
+                    <br>
+                    <div class="input-group m-b">
+                      <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-minlength ng-valid-maxlength" ng-minlength="1" ng-maxlength="50" ng-model="ohe.datosEconomicos.markup" style="">
+                      <span class="input-group-addon">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <!--PRODUCCIÓN MINIMA-->
+            <div class="card border-left-right border-bottom" style="height: 199px">
+              <div class="card-title"><h5 class="ng-binding">Producción mínima</h5></div>
+              <div class="card-content">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label class="ng-binding">
+                        <input type="checkbox" ng-model="ohe.datosEconomicos.produccion_minima" ng-true-value="'true'" ng-false-value="'false'" class="ng-pristine ng-untouched ng-valid ng-empty" style=""> Producción mínima garantizada</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 ng-hide" ng-show="ohe.datosEconomicos.produccion_minima==='true'" style="">
+                    <div class="form-group">
+                      <label class="ng-binding">Valor producción</label>
+                      <input type="text" ng-model="ohe.datosEconomicos.produccion_minima_value" class="form-control ng-pristine ng-untouched ng-valid ng-empty" style="">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-    <!--NOUISLIDER-->
-    <!--summernote-->
   </div>
 </div>

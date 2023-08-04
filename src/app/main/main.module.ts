@@ -20,10 +20,15 @@ import { ActividadesComponent } from './features/content/actividades/actividades
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NouisliderModule } from 'ng2-nouislider';
+import {NgxSummernoteModule} from "ngx-summernote";
+import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
+
 
 
 @NgModule({
   declarations: [
+    DatepickerComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -36,9 +41,11 @@ import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
-    ],
+  ],
   imports: [
     NgbTimepickerModule,
+    NgxSummernoteModule,
+    NouisliderModule,
     NgbPaginationModule,
     CommonModule,
     MainRoutingModule,
@@ -58,10 +65,12 @@ import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
+
   ],
   providers: []
 })
 export class MainModule {
 }
+
 
 

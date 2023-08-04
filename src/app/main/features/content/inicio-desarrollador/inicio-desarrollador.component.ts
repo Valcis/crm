@@ -10,6 +10,8 @@ import {
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
 import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
+import {FormControl,FormGroup, Validators} from "@angular/forms";
+
 
 
 
@@ -37,16 +39,94 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected model2: string = '';
   protected time2: timepick = {hour:10,minute:15};
   protected showTime: boolean = true;
+  sliderConfig: any;
+  summerConfig: any;
+  sliderModel: number[] = [0];
+
+  form: FormGroup = new FormGroup({
+    html: new FormControl("", Validators.required)
+  });
 
   constructor(
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
     protected _translate: TranslateService){
+    this.sliderConfig = {
+      connect: 'lower',
+      step: 1,
+      range: {
+        min: 0,
+        max: 10
+      },
+      behaviour: 'snap',
+      pips: {
+        mode: 'steps',
+        density: 10
+      }
+    };
+
+    this.summerConfig = {
+      airMode: false,
+      tabDisable: true,
+      popover: {
+        table: [
+          ["add", ["addRowDown", "addRowUp", "addColLeft", "addColRight"]],
+          ["delete", ["deleteRow", "deleteCol", "deleteTable"]]
+        ],
+        image: [
+          ["image", ["resizeFull", "resizeHalf", "resizeQuarter", "resizeNone"]],
+          ["float", ["floatLeft", "floatRight", "floatNone"]],
+          ["remove", ["removeMedia"], ["insert", ["picture"]]]
+        ],
+        link: [["link", ["linkDialogShow", "unlink"]]],
+        air: [
+          [
+            "font",
+            [
+              "bold",
+              "italic",
+              "underline",
+              "strikethrough",
+              "superscript",
+              "subscript",
+              "clear"
+            ]
+          ]
+        ]
+      },
+      height: "200px",
+      uploadImagePath: "/api/upload",
+      toolbar: [
+        ["misc", ["codeview", "undo", "redo", "codeBlock"]],
+        [
+          "font",
+          [
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "superscript",
+            "subscript",
+            "clear"
+          ]
+        ],
+        ["fontsize", ["fontname", "fontsize", "color"]],
+        ["para", ["style0", "ul", "ol", "paragraph", "height"]],
+        ["insert", ["table", "picture", "link", "video", "hr"]],
+        ["customButtons", ["testBtn"]]
+      ],
+      buttons: {
+      },
+      codeviewFilter: true,
+      codeviewFilterRegex: /<\/*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|ilayer|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|t(?:itle|extarea)|xml|.*onmouseover)[^>]*?>/gi,
+      codeviewIframeFilter: true
+    };
   }
 
   ngOnInit(): void {
     this.time();
+    this.sliderModel = [5];
   }
 
   generatePDF() {
@@ -93,4 +173,5 @@ export class InicioDesarrolladorComponent implements OnInit{
       minute: +testParse3[1]
     }
   }
+
 }

@@ -1,0 +1,19 @@
+<div class="col input-group m-l-2 dayBar rounded-0">
+  <input
+    class="form-control"
+    placeholder="dd/mm/yyyy"
+    name="d2"
+    [(ngModel)]="model2"
+    ngbDatepicker
+    #d2="ngbDatepicker"
+  />
+  <button class="btn btn-outline-secondary fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+  <button class="btn btn-outline-secondary fa fa-eraser rounded-0" (click)="erase()" type="button"></button>
+  <button *ngIf="clock" class="btn btn-outline-secondary fa fa-clock-o rounded-0" (click)="openTime()" type="button"></button>
+</div>
+<!--    TIMEPICKER -->
+<div *ngIf="showTime" class="col-sm-3">
+  <div class="m-2">
+    <ngb-timepicker [(ngModel)]="time2"></ngb-timepicker>
+  </div>
+</div>

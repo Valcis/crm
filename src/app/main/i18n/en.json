@@ -18,5 +18,45 @@
   "LINKS.CREATE": "Add",
   "LINKS.ALERT_RESPONSE1": "Deleted!",
   "LINKS.ALERT_LINK_BORRADO": "The link has been correctly deleted",
-  "LINKS.DELETE": "Delete"
+  "LINKS.DELETE": "Delete",
+
+  "GENERAL.TEXT.YES":"Yes",
+  "GENERAL.TEXT.NO":"No",
+  "DATETIME.DELETE": "Delete date",
+  "DATETIME.HIDE":"Hide clock",
+  "DATETIME.SHOW":"Show clock",
+  "ECONOMIC.EUR":"Euro",
+  "ECONOMIC.USD": "Dollar",
+  "ECONOMIC.GBP": "Pound sterling",
+  "ECONOMIC.CITY": "City",
+  "ECONOMIC.COUNTRY": "Country code",
+  "ECONOMIC.CATEGORY":"Category",
+  "ECONOMIC.ROOMNUM":"Number of rooms",
+  "ECONOMIC.AFFILIATION":"Affiliation",
+  "ECONOMIC.BRAND": "Brand",
+  "ECONOMIC.YEAR": "Year",
+  "ECONOMIC.EXPLANATION": "The official data are created the first time that this tab is visited.\nIf you need to update the official data with current hotel's information, press the 'Recalculate economic data' button.\n\n",
+  "ECONOMIC.CONVERSION": "Conversion",
+  "ECONOMIC.SPECIAL": "Seasonal special fee",
+  "ECONOMIC.START": "Contract starting date ",
+  "ECONOMIC.END": "Contract ending date ",
+  "ECONOMIC.FIRST": "Fee’s first payment date ",
+  "ECONOMIC.LACK": "Lack (in months) ",
+  "ECONOMIC.TIPLACK": "First payment’s date -  Contract starting date",
+  "ECONOMIC.RECALCULATE":"Recalcuclate economic data",
+  "RATE.TITLE": "Rate",
+  "RATE.CLEAN": "Net rate",
+  "RATE.COMMISION": "Commissionable rate",
+  "RATE.BAR": "Discount on the BAR",
+  "RATE.MARK": "Mark-up",
+  "PRODUCTION.TITLE": "Minimum production",
+  "PRODUCTION.MINIMUM": "Guaranteed minimum production",
+  "PRODUCTION.VALUE": "Production value",
+  "COMMISIONS.TYPE": "Description",
+  "COMMISIONS.DESCRIPTION": "Official",
+  "COMMISIONS.LINK": "Final"
+
+
+
+
 }

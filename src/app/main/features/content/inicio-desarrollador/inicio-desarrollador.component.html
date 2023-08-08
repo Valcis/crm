@@ -9,8 +9,8 @@
     <div class="row m-0">
       <div class="col-sm m-0 p-0">
         <p class="row"> TRANSALTE TEST1: {{_translate.currentLang}} </p>
-        <p class="row"> TRANSALTE GENERAL.TEXT.YES: {{'GENERAL.TEXT.YES'| translate}} </p>
-        <p class="row"> TRANSALTE GENERAL.TEXT.NO: {{'GENERAL.TEXT.NO'| translate}}</p>
+        <p class="row"> TRANSALTE COMMON.TEXT.YES: {{'COMMON.TEXT.YES'| translate}} </p>
+        <p class="row"> TRANSALTE COMMON.TEXT.NO: {{'COMMON.TEXT.NO'| translate}}</p>
       </div>
     </div>
     <!--BUTTONS CODE-->
@@ -31,18 +31,10 @@
         </div>
       </div>
       <div class="row">
-          <span class="row bold">DateTime:
-            {{ts}}
-          </span>
-          <span class="row bold">ts-Original:
-            {{utc}}
-          </span>
-          <span class="row bold">ts-(UTC)):
-            {{formatedTime}}
-          </span>
-          <span class="row bold">timezone:
-            {{tz}}
-          </span>
+          <span class="row bold">DateTime: </span> {{ts}}
+          <span class="row bold">ts-Original: </span> {{utc}}
+          <span class="row bold">ts-(UTC)): </span> {{formatedTime}}
+          <span class="row bold">timezone: </span> {{tz}}
       </div>
     </div>
     <div class="row-sm m-0 p-0">

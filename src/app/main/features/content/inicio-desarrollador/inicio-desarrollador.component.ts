@@ -61,62 +61,30 @@ export class InicioDesarrolladorComponent implements OnInit{
     protected _translate: TranslateService){
 
     this.summerConfig = {
-      airMode: false,
-      tabDisable: true,
-      popover: {
-        table: [
-          ["add", ["addRowDown", "addRowUp", "addColLeft", "addColRight"]],
-          ["delete", ["deleteRow", "deleteCol", "deleteTable"]]
-        ],
-        image: [
-          ["image", ["resizeFull", "resizeHalf", "resizeQuarter", "resizeNone"]],
-          ["float", ["floatLeft", "floatRight", "floatNone"]],
-          ["remove", ["removeMedia"], ["insert", ["picture"]]]
-        ],
-        link: [["link", ["linkDialogShow", "unlink"]]],
-        air: [
-          [
-            "font",
-            [
-              "bold",
-              "italic",
-              "underline",
-              "strikethrough",
-              "superscript",
-              "subscript",
-              "clear"
-            ]
-          ]
-        ]
-      },
-      height: "200px",
-      uploadImagePath: "/api/upload",
-      toolbar: [
-        ["misc", [ "undo", "redo"]],
-
-        [
-          "font",
-          [
-            "bold",
-            "italic",
-            "clear"
-          ]
-        ],
-        ["fontsize", ["fontname"]],
-        ["fontsize", ["fontsize"]],
-        ["fontsize", ["color"]],
-        ["para", ["style", "ul", "ol", "paragraph"]],
-        ["para", ["height"]],
-        ["insert", ["table"]],
-        ["insert", ["link"]],
-        ["customButtons", ["testBtn"]],
-        ["misc",["codeview","codeBlock",]],
-      ],
-      buttons: {
-      },
-      codeviewFilter: true,
-      codeviewFilterRegex: /<\/*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|ilayer|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|t(?:itle|extarea)|xml|.*onmouseover)[^>]*?>/gi,
-      codeviewIframeFilter: true
+      height: 500
+      //,focus: true
+      //,airMode: true
+      ,fontNames: ['Arial', 'Courier New','Helvetica'],
+      addDefaultFonts: false
+      ,style: ["codeBlock"]
+      ,toolbar: [
+        ['edit',['undo','redo']],
+        ['headline', ['style']],
+        ['style', ['bold', 'italic', /* 'underline','superscript', 'subscript', 'strikethrough', */'clear']],
+        ['fontface', ['fontname']],
+        ['textsize', ['fontsize']],
+        ['fontclr', ['color']],
+        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link'
+          //'picture','video',
+          /*'hr'*/]],
+        ['view', [
+          //'fullscreen',
+          'codeview']],
+        ['help', ['help',"codeBlock"]]
+      ]
     };
   }
 
@@ -149,6 +117,7 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
+    console.log(this.utc);
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
   }
 

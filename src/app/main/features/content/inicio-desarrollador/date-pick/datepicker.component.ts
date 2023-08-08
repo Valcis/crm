@@ -1,6 +1,6 @@
 
 import {Component, Input, OnInit,EventEmitter, Output} from "@angular/core";
-import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {CustomDateParserFormatter, DateAdapterService} from "../../../../../shared/services/datepicker/date-adapter.service";
 import {timepick} from "../../../../../shared/models/inicio-desarrollador.model";
 import {TranslateService} from "@ngx-translate/core";
@@ -20,6 +20,7 @@ import {DateTime} from "luxon";
 })
 export class DatepickerComponent implements OnInit{
 
+  @Input() initDate:string = "";
   @Input() clock:boolean = false;
   @Output() newTime = new EventEmitter<string>();
 
@@ -52,7 +53,12 @@ export class DatepickerComponent implements OnInit{
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
-    this.model2 = this.utc.toLocaleString(DateTime.DATE_SHORT);
+    if(this.initDate !== ""){
+      //DateTime.fromISO('2019-06-23T00:00:00.00')
+      //date = new NgbDate(2020,19,02);
+      this.model2 = this.utc.toLocaleString(DateTime.DATE_SHORT);
+
+    }
     this.setTime()
   }
 

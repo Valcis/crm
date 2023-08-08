@@ -13,10 +13,10 @@ import {firstValueFrom, isObservable} from "rxjs";
   providedIn: 'root'
 })
 export class SwalService {
-  private confirm:any= "SWAL.ALERT_CONFIRM";
-  private deny:any ="SWAL.ALERT_CANCEL";
-  private yes:any= "SWAL.YES";
-  private no:any ="SWAL.NO";
+  private confirm:any= "SWEET.ALERT.CONFIRM.DELETE";
+  private deny:any ="SWEET.ALERT.CANCEL.DELETE";
+  private yes:any= "COMMON.TEXT.YES";
+  private no:any ="COMMON.TEXT.NO";
 
   constructor(private _translate:TranslateService,
               private _cookie: CookiesService,

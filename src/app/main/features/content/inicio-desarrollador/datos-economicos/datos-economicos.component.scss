@@ -1,4 +1,15 @@
-@import "~nouislider/dist/nouislider.css";
+
+.summernote{
+  margin-left: 240px;
+
+}
+.pointer{
+  cursor: pointer;
+}
+.form-control, .btn{
+  border: 1px solid #e7eaec
+}
+
 .form-control, .btn{
   border: 1px solid #e7eaec
 }
@@ -19,17 +30,9 @@
   border: 1px solid #e7eaec;;
 }
 
-.dayBar{
-  height: 40px;
-  margin-top: 37px;
-}
-.noiuslider{
 
-  width: 310px;
-  margin-left: 240px;
-
+th{
+  background-color: #F5F5F6;
+  border: 1px solid #e7e7e7;
 }
-.summernote{
-  margin-left: 240px;
 
-}

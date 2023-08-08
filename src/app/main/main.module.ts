@@ -23,11 +23,13 @@ import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
 import {NgxSummernoteModule} from "ngx-summernote";
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
+import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
 
 
 
 @NgModule({
   declarations: [
+    DatosEconomicosComponent,
     DatepickerComponent,
     MainComponent,
     AppRouterOutletDirective,

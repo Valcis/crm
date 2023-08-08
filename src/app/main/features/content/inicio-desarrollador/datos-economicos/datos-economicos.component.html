@@ -1,0 +1,259 @@
+<div class="summernote">
+  <h5>DATOSECONÓMICOS</h5>
+  <div class="col-sm-12">
+    <div style="">
+      <div class="row justify-content-end">
+        <div class="col-sm-12 text-right" style="position: relative; margin-bottom: 40px;">
+          <div class="btn-group d-inline-block" style="position: absolute; right: 1%" ngbDropdown #myDrop="ngbDropdown">
+            <button type="button" class="btn btn-default btn-sm ">
+              <span *ngIf="divisaFinal ==='EUR'"><i class="fa fa-eur"></i> Euro</span>
+              <span *ngIf="divisaFinal ==='USD'"><i class="fa fa-usd"></i> Dólar</span>
+              <span *ngIf="divisaFinal ==='GBP'"><i class="fa fa-usd"></i> Libra esterlina </span>
+            </button>
+            <button type="button" class="btn btn-sm btn-default" id="dropdownMoneda" ngbDropdownAnchor (focus)="myDrop.open()">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMoneda">
+              <a ngbDropdownItem (click)="conversionMoneda('EUR')" class="pointer"><i class="fa fa-eur"></i> Euro</a>
+              <a ngbDropdownItem (click)="conversionMoneda('USD')" class="pointer"><i class="fa fa-usd"></i> Dólar</a>
+              <a ngbDropdownItem (click)="conversionMoneda('GBP')" class="pointer"><i class="fa fa-gbp"></i> Libra esterlina</a>
+            </div>
+            <button type="button" class="btn btn-default btn-sm" (click)="recalcularDatosEconomicos()">
+              <i class="fa fa-refresh"></i> <span class="ng-binding">Recalcular datos económicos</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Población:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Paprov:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Cód. país:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Categoría:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Núm.habitaciones:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Afiliación:
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Marca
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+                Año
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-5">
+
+              </div>
+              <div class="col-sm-7">
+                <strong></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>- {{'ECONOMIC.EXPLANATION' | translate}}</p>
+            <p>- {{'ECONOMIC.CONVERSION' | translate}}: 1<i class="fa fa-eur"></i> = 1.35 <i class="fa fa-dollar"></i> = 0.85 <i class="fa fa-gbp"></i></p>
+            <p>- {{'ECONOMIC.SPECIAL' | translate}}: 350<i class="fa fa-eur"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="position: relative; padding-top: 25px">
+      <!-- FECHA INICIO CONTRATO -->
+      <div class="col-sm-3">
+        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+          <div><label>Contract starting date</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
+        </div>
+        <div class="row">
+          <app-datepicker></app-datepicker>
+        </div>
+      </div>
+      <!-- FECHA FIN CONTRATO -->
+      <div class="col-sm-3">
+        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+          <div><label>Contract ending date</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
+        </div>
+        <div class="row">
+          <app-datepicker></app-datepicker>
+        </div>
+      </div>
+      <!-- FECHA PRIMER PAGO CUOTA -->
+      <div class="col-sm-3">
+        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+          <div><label>Fee’s first payment date</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
+        </div>
+        <div class="row">
+          <app-datepicker></app-datepicker>
+        </div>
+      </div>
+      <!-- CARENCIA -->
+      <div class="col-sm-3">
+        <div style="position: absolute;margin-top: -10px;">
+          <div><label>Lack (in months)</label> <i class="fa fa-clock-o" [ngbTooltip]="'ECONOMIC.LACK' | translate"></i></div>
+        </div>
+        <label class="input-group" style="margin-top: 12px" >
+          <input type="number" class="form-control col-sm-8" name="carencia"  style="">
+          <button type="button" class="btn btn-default ng-binding" ng-click="ohe.calcularCarencia()">Calcular</button>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <!--TARIFA-->
+        <div class="card border-left-right border-bottom" style="height: 199px">
+          <div class="card-title"><h5 class="ng-binding">Tarifa</h5></div>
+          <div class="card-content">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="ng-binding"> <input type="checkbox" [(ngModel)]="tarifa_neta" class="ng-pristine ng-untouched ng-valid ng-empty"> Tarifa neta</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+
+                  <label class="ng-binding"> <input type="checkbox" [(ngModel)]="tarifa_comisionable" class="ng-pristine ng-untouched ng-valid ng-empty"> Tarifa comisionable</label>
+                </div>
+              </div>
+            </div>
+            <div class="row ng-hide" *ngIf="tarifa_neta">
+              <div class="col-sm-6">
+                <label class="ng-binding">Descuento sobre la bar</label>
+                <br>
+                <div class="input-group m-b">
+                  <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-minlength ng-valid-maxlength" minlength="1" maxlength="50" [(ngModel)]="descuento_bar" >
+                  <span class="input-group-addon">%</span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label>Mark-up</label>
+                <br>
+                <div class="input-group m-b">
+                  <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-minlength ng-valid-maxlength" minlength="1" maxlength="50" [(ngModel)]="markup">
+                  <span class="input-group-addon">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <!--PRODUCCIÓN MINIMA-->
+        <div class="card border-left-right border-bottom" style="height: 199px">
+          <div class="card-title"><h5 class="ng-binding">Producción mínima</h5></div>
+          <div class="card-content">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label class="ng-binding">
+                    <input type="checkbox" [(ngModel)]="produccion_minima" class="ng-pristine ng-untouched ng-valid ng-empty" > Producción mínima garantizada</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 ng-hide" *ngIf="produccion_minima">
+                <div class="form-group">
+                  <label class="ng-binding">Valor producción</label>
+                  <input type="text" [(ngModel)]="produccion_minima_value" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-title">
+        <h5>Commissions</h5>
+      </div>
+      <div class="card-body">
+        <div>
+          <table class="mx-2 table table-bordered" >
+            <tr class="background-title">
+              <th>{{"COMMISIONS.TYPE" | translate}}</th>
+              <th>{{"COMMISIONS.DESCRIPTION" | translate}}</th>
+              <th>{{"COMMISIONS.LINK" | translate}}</th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

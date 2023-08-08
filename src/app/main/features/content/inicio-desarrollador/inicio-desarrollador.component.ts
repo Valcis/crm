@@ -16,7 +16,6 @@ import {FormControl,FormGroup, Validators} from "@angular/forms";
 
 
 
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -39,9 +38,17 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected model2: string = '';
   protected time2: timepick = {hour:10,minute:15};
   protected showTime: boolean = true;
-  sliderConfig: any;
-  summerConfig: any;
-  sliderModel: number[] = [0];
+
+  protected summerConfig: any;
+  protected sliderModel: number[] = [0];
+
+  protected tarifa_neta: boolean = false;
+  protected tarifa_comisionable: boolean = false;
+  protected descuento_bar:string = "";
+  protected markup:string = "";
+
+  protected produccion_minima: boolean = false;
+  protected produccion_minima_value: string = "";
 
   form: FormGroup = new FormGroup({
     html: new FormControl("", Validators.required)
@@ -52,19 +59,6 @@ export class InicioDesarrolladorComponent implements OnInit{
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
     protected _translate: TranslateService){
-    this.sliderConfig = {
-      connect: 'lower',
-      step: 1,
-      range: {
-        min: 0,
-        max: 10
-      },
-      behaviour: 'snap',
-      pips: {
-        mode: 'steps',
-        density: 10
-      }
-    };
 
     this.summerConfig = {
       airMode: false,
@@ -98,23 +92,25 @@ export class InicioDesarrolladorComponent implements OnInit{
       height: "200px",
       uploadImagePath: "/api/upload",
       toolbar: [
-        ["misc", ["codeview", "undo", "redo", "codeBlock"]],
+        ["misc", [ "undo", "redo"]],
+
         [
           "font",
           [
             "bold",
             "italic",
-            "underline",
-            "strikethrough",
-            "superscript",
-            "subscript",
             "clear"
           ]
         ],
-        ["fontsize", ["fontname", "fontsize", "color"]],
-        ["para", ["style0", "ul", "ol", "paragraph", "height"]],
-        ["insert", ["table", "picture", "link", "video", "hr"]],
-        ["customButtons", ["testBtn"]]
+        ["fontsize", ["fontname"]],
+        ["fontsize", ["fontsize"]],
+        ["fontsize", ["color"]],
+        ["para", ["style", "ul", "ol", "paragraph"]],
+        ["para", ["height"]],
+        ["insert", ["table"]],
+        ["insert", ["link"]],
+        ["customButtons", ["testBtn"]],
+        ["misc",["codeview","codeBlock",]],
       ],
       buttons: {
       },

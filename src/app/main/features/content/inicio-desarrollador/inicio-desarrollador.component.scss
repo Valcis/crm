@@ -34,6 +34,31 @@
   margin-left: 240px;
 
 }
+
 .bold{
   font-weight: bold;
 }
+
+.white-bg{
+  background-color: #FFFFFF;
+}
+.page-heading {
+  border-top: 0;
+  padding: 0 10px 20px 10px;
+}
+h2{
+  font-size: 24px;
+  font-weight: 100;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  line-height: 1.1;
+  color: inherit;
+}
+.breadcrumb > li a {
+  color: inherit;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+

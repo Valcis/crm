@@ -1,4 +1,4 @@
-<div class="row m-3" style="display: flex">
+<div class="row m-3 flex-row">
   <div [ngClass]="clock ? 'col-sm-8' : 'col-sm-12' " >
     <p class="input-group  rounded-0" >
 
@@ -21,8 +21,8 @@
     </p>
   </div>
   <!--    TIMEPICKER -->
-  <div class="col-sm-4" style="margin-top: -34px;">
-    <div *ngIf="showTime" class="col-sm-4 text-left ng-scope" style="width:90px">
+  <div class="col-sm-4 clock">
+    <div *ngIf="showTime" class="text-left ng-scope" >
       <ngb-timepicker [(ngModel)]="time2" (ngModelChange)="actualizeDay()"></ngb-timepicker>
     </div>
   </div>

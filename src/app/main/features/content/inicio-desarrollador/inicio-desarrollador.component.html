@@ -1,10 +1,19 @@
 <div class="container-flex w-100 m-0 p-0" >
   <div class="m-0">
-    <div class="wrapper border-bottom white-bg page-heading">
-      <h3 class="p-3" style="font-weight:lighter;">Aquí iría el Toast. Título</h3>
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-9">
+        <h2>{{'title'|translate|uppercase}}</h2>
+        <ol class="breadcrumb">
+          <li><a href="index.html" class="ng-binding">{{'SUBGROUP'|translate}}</a>
+          </li>
+          <li class="active">
+            {{'  /  ' }}<strong>{{ 'PAGE'|translate}}</strong>
+          </li>
+        </ol>
+      </div>
     </div>
   </div>
-  <div class=" col" style="width: 99%;">
+  <div class=" col mt-3no" style="width: 99%;">
     <!--TRANSLATE TEST-->
     <div class="row m-0">
       <div class="col-sm m-0 p-0">
@@ -30,24 +39,27 @@
           </span>
         </div>
       </div>
-      <div class="row">
-          <span class="row bold">DateTime: </span> {{ts}}
-          <span class="row bold">ts-Original: </span> {{utc}}
-          <span class="row bold">ts-(UTC)): </span> {{formatedTime}}
-          <span class="row bold">timezone: </span> {{tz}}
+      <div >
+        <span><strong>DateTime: </strong> {{ts}} </span>
+        <br>
+        <span><strong>ts-Original: </strong> {{utc}} </span>
+        <br>
+        <span><strong>ts-(UTC)): </strong> {{formatedTime}} </span>
+        <br>
+        <span><strong>timezone: </strong> {{tz}} </span>
       </div>
     </div>
     <div class="row-sm m-0 p-0">
       <div class="col-sm-7">
 
           <!-- DATE PICKER -->
-          <app-datepicker [clock]="true" ></app-datepicker>
+          <app-datepicker [clock]="true" [initDate]="newDate" ></app-datepicker>
 
       </div>
     </div>
     <!--NOUISLIDER-->
     <div >
-      <h5>NOUISLIDER</h5>
+      <h2>NOUISLIDER</h2>
 
       <span class="row">https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
       <span>[config]:{{"{"}}start:5,connect:'lower',step:1,range:{{"{"}}min:0,max:10},behaviour:'snap',pips:{{"{"}}mode:'steps',density:10}}</span>
@@ -60,7 +72,7 @@
     <div>
       <br>
       <br>
-      <h5>SUMMERNOTE</h5>
+      <h2>SUMMERNOTE</h2>
       <div class="summernote">
         <div [ngxSummernote]="summerConfig">
         </div>

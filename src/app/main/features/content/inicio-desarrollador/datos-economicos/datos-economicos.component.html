@@ -1,10 +1,10 @@
 <div class="summernote">
   <h5>DATOSECONÓMICOS</h5>
   <div class="col-sm-12">
-    <div style="">
+    <div>
       <div class="row justify-content-end">
-        <div class="col-sm-12 text-right" style="position: relative; margin-bottom: 40px;">
-          <div class="btn-group d-inline-block" style="position: absolute; right: 1%" ngbDropdown #myDrop="ngbDropdown">
+        <div class="col-sm-12 text-right group-box" >
+          <div class="btn-group d-inline-block group-items" ngbDropdown #myDrop="ngbDropdown">
             <button type="button" class="btn btn-default btn-sm ">
               <span *ngIf="divisaFinal ==='EUR'"><i class="fa fa-eur"></i> Euro</span>
               <span *ngIf="divisaFinal ==='USD'"><i class="fa fa-usd"></i> Dólar</span>
@@ -20,7 +20,7 @@
               <a ngbDropdownItem (click)="conversionMoneda('GBP')" class="pointer"><i class="fa fa-gbp"></i> {{'ECONOMIC.GBP' | translate}}</a>
             </div>
             <button type="button" class="btn btn-default btn-sm" (click)="recalcularDatosEconomicos()">
-              <i class="fa fa-refresh"></i> <span class="ng-binding"> {{' ' + 'ECONOMIC.RECALCULATE' | translate}}</span>
+              <i class="fa fa-refresh"></i> <span class="ng-binding"> {{' '}}{{'ECONOMIC.RECALCULATE' | translate}}</span>
             </button>
           </div>
         </div>
@@ -134,10 +134,10 @@
         </div>
       </div>
     </div>
-    <div class="row" style="position: relative; padding-top: 25px">
+    <div class="row contrato" >
       <!-- FECHA INICIO CONTRATO -->
       <div class="col-sm-3">
-        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+        <div class="fecha">
           <div><label>{{'ECONOMIC.START' | translate}}</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
         </div>
         <div class="row">
@@ -146,7 +146,7 @@
       </div>
       <!-- FECHA FIN CONTRATO -->
       <div class="col-sm-3">
-        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+        <div class="fecha">
           <div><label>{{'ECONOMIC.END' | translate}}</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
         </div>
         <div class="row">
@@ -155,7 +155,7 @@
       </div>
       <!-- FECHA PRIMER PAGO CUOTA -->
       <div class="col-sm-3">
-        <div style="position: absolute;margin-left: 25px;margin-top: -10px;">
+        <div class="fecha">
           <div><label>{{'ECONOMIC.FIRST'| translate}}</label> <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
         </div>
         <div class="row">
@@ -164,19 +164,19 @@
       </div>
       <!-- CARENCIA -->
       <div class="col-sm-3">
-        <div style="position: absolute;margin-top: -10px;">
+        <div class="carencia">
           <div><label>{{'ECONOMIC.LACK' | translate}}</label> <i class="fa fa-question-circle" [ngbTooltip]="'ECONOMIC.TIPLACK' | translate"></i></div>
         </div>
-        <label class="input-group" style="margin-top: 12px" >
-          <input type="number" class="form-control col-sm-8" name="carencia"  style="">
-          <button type="button" class="btn btn-default ng-binding" ng-click="ohe.calcularCarencia()">Calcular</button>
-        </label>
+        <div class="input-group flex-row" style="margin-top: 12px" >
+          <input type="number" class="form-control col-sm-8" name="carencia"  >
+          <button type="button" class="btn btn-default ng-binding" (click)="calcularCarencia($event)">Calcular</button>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <!--TARIFA-->
-        <div class="card border-left-right" style="height: 199px">
+        <div class="card border-left-right checkbox-box" >
           <div class="card-title m-3"><h5 class="ng-binding">{{'RATE.TITLE'|translate}}</h5></div>
           <div class="border-bottom"></div>
 
@@ -195,7 +195,9 @@
               </div>
             </div>
             <div class="row ng-hide" *ngIf="tarifa_neta">
+
               <div class="col-sm-6">
+                <br>
                 <label class="ng-binding">{{'RATE.BAR'|translate}}</label>
                 <br>
                 <div class="input-group m-b">
@@ -204,8 +206,8 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                <label>{{'RATE.MARK'|translate}}</label>
                 <br>
+                <label>{{'RATE.MARK'|translate}}</label>
                 <div class="input-group m-b">
                   <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-minlength ng-valid-maxlength" minlength="1" maxlength="50" [(ngModel)]="markup">
                   <span class="input-group-addon">%</span>
@@ -213,17 +215,17 @@
               </div>
             </div>
           </div>
-          <div class=" card-footer border-top-0" [ngClass]="!tarifa_neta ? 'mt-3' : 'mt-1'">
-            <br >
-            <br *ngIf="!tarifa_neta">
-            <br *ngIf="!tarifa_neta">
+          <div class=" card-footer border-top-0 mt-3 "  *ngIf="!tarifa_neta">
+            <br>
+            <br>
+            <br>
 
           </div>
         </div>
       </div>
       <div class="col-sm-6">
         <!--PRODUCCIÓN MINIMA-->
-        <div class="card border-left-right " style="height: 199px">
+        <div class="card border-left-right checkbox-box">
           <div class="card-title m-3 "><h5 class="ng-binding">{{'PRODUCTION.TITLE'|translate}}</h5></div>
           <div class="border-bottom"></div>
           <div class="card-content m-3">
@@ -237,6 +239,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12 ng-hide" *ngIf="produccion_minima">
+                <br>
                 <div class="form-group">
                   <label class="ng-binding">{{'PRODUCTION.VALUE'|translate}}</label>
                   <input type="text" [(ngModel)]="produccion_minima_value" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
@@ -244,10 +247,10 @@
               </div>
             </div>
           </div>
-          <div class=" card-footer border-top-0" [ngClass]="!produccion_minima ? 'mt-3' : 'mt-1'">
-            <br >
-            <br *ngIf="!produccion_minima">
-            <br *ngIf="!produccion_minima">
+          <div class=" card-footer border-top-0 mt-3"  *ngIf="!produccion_minima">
+            <br>
+            <br>
+            <br>
 
           </div>
         </div>

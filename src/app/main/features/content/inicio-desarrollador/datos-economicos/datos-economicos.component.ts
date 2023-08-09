@@ -29,10 +29,13 @@ export class DatosEconomicosComponent implements OnInit{
 
   }
   conversionMoneda(value:string){
-    console.log(value)
     this.divisaFinal = value;
   }
   recalcularDatosEconomicos(){
     this._swal.swalInfoRequest("a","b")
   }
+  calcularCarencia(event:any){
+
+  }
+
 }

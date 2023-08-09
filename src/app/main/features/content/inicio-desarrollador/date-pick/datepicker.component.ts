@@ -20,7 +20,7 @@ import {DateTime} from "luxon";
 })
 export class DatepickerComponent implements OnInit{
 
-  @Input() initDate:string = "";
+  @Input() initDate?: NgbDate = undefined;
   @Input() clock:boolean = false;
   @Output() newDay = new EventEmitter<NgbDate>();
   @Output() newTime = new EventEmitter<timepick>();
@@ -54,10 +54,10 @@ export class DatepickerComponent implements OnInit{
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
-    if(this.initDate !== ""){
+    if(this.initDate !== undefined){
       //DateTime.fromISO('2019-06-23T00:00:00.00')
       //date = new NgbDate(2020,19,02);
-      this.model2 = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
+      this.model2 = this.initDate;
 
     }
     this.setTime()

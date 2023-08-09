@@ -3,7 +3,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
 import {DateTime} from 'luxon';
-import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCalendar, NgbDateAdapter,NgbDate, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {
   CustomDateParserFormatter,
   DateAdapterService
@@ -49,6 +49,8 @@ export class InicioDesarrolladorComponent implements OnInit{
 
   protected produccion_minima: boolean = false;
   protected produccion_minima_value: string = "";
+  protected newDate!: NgbDate ;
+
 
   form: FormGroup = new FormGroup({
     html: new FormControl("", Validators.required)
@@ -118,6 +120,7 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.utc = this.ts.toUTC();
     console.log(this.utc);
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+    this.newDate = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
   }
 
   get today() {

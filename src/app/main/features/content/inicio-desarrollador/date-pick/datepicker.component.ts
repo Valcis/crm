@@ -5,6 +5,7 @@ import {CustomDateParserFormatter, DateAdapterService} from "../../../../../shar
 import {timepick} from "../../../../../shared/models/inicio-desarrollador.model";
 import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
+import {FormGroup,FormControl} from "@angular/forms";
 
 
 
@@ -22,6 +23,7 @@ export class DatepickerComponent implements OnInit{
 
   @Input() initDate?: NgbDate = undefined;
   @Input() clock:boolean = false;
+  @Input() initTime?: timepick = undefined;
   @Output() newDay = new EventEmitter<NgbDate>();
   @Output() newTime = new EventEmitter<timepick>();
 
@@ -30,8 +32,9 @@ export class DatepickerComponent implements OnInit{
   protected utc: any;
   protected formatedTime: any;
   protected model2?: NgbDate = undefined;
+  protected initialTime!: NgbDate;
   protected time2!: timepick;
-  protected showTime: boolean = this.clock;
+  protected showTime!:boolean;
 
   constructor(
     private _dAdapt: NgbDateAdapter<string>,
@@ -45,7 +48,7 @@ export class DatepickerComponent implements OnInit{
 
   }
 
-
+  formGroup = new FormGroup({});
 
   // TODO: Recoger el timezone y cambiarlo dependiendo del perfil
 
@@ -55,12 +58,10 @@ export class DatepickerComponent implements OnInit{
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
     if(this.initDate !== undefined){
-      //DateTime.fromISO('2019-06-23T00:00:00.00')
-      //date = new NgbDate(2020,19,02);
-      this.model2 = this.initDate;
-
+      this.initialTime = this.initDate;
     }
     this.setTime()
+
   }
 
   get today() {
@@ -77,12 +78,20 @@ export class DatepickerComponent implements OnInit{
   }
 
   private setTime(){
-    let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-    let testParse3 = test.split(':', 2);
-    this.time2 = {
-      hour: +testParse3[0],
-      minute: +testParse3[1]
+    if(this.initTime === undefined){
+      let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
+      let testParse3 = test.split(':', 2);
+      this.time2 = {
+        hour: +testParse3[0],
+        minute: +testParse3[1]
+      }
+    }else{
+      this.time2 = {
+        hour: this.initTime.hour,
+        minute: this.initTime.minute,
+      }
     }
+
   }
   actualizeTime(){
     this.newTime.emit(this.time2);

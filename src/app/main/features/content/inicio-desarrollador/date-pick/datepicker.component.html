@@ -11,6 +11,7 @@
              class="form-control"
              placeholder="dd/mm/yyyy"
              (ngModelChange)="actualizeTime()"
+             [startDate]="initialTime"
       />
 
       <button class="btn btn-outline fa fa-calendar" (click)="d2.toggle()" type="button"></button>
@@ -22,7 +23,7 @@
   </div>
   <!--    TIMEPICKER -->
   <div class="col-sm-4 clock">
-    <div *ngIf="showTime" class="text-left ng-scope" >
+    <div *ngIf="showTime" class="text-left " >
       <ngb-timepicker [(ngModel)]="time2" (ngModelChange)="actualizeDay()"></ngb-timepicker>
     </div>
   </div>

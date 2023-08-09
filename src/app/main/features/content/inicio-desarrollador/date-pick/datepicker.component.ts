@@ -22,13 +22,14 @@ export class DatepickerComponent implements OnInit{
 
   @Input() initDate:string = "";
   @Input() clock:boolean = false;
-  @Output() newTime = new EventEmitter<string>();
+  @Output() newDay = new EventEmitter<NgbDate>();
+  @Output() newTime = new EventEmitter<timepick>();
 
   protected tz: any;
   protected ts: any;
   protected utc: any;
   protected formatedTime: any;
-  protected model2: string = DateTime.now().toUTC().toLocaleString(DateTime.DATE_SHORT);
+  protected model2?: NgbDate = undefined;
   protected time2!: timepick;
   protected showTime: boolean = this.clock;
 
@@ -56,7 +57,7 @@ export class DatepickerComponent implements OnInit{
     if(this.initDate !== ""){
       //DateTime.fromISO('2019-06-23T00:00:00.00')
       //date = new NgbDate(2020,19,02);
-      this.model2 = this.utc.toLocaleString(DateTime.DATE_SHORT);
+      this.model2 = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
 
     }
     this.setTime()
@@ -67,7 +68,7 @@ export class DatepickerComponent implements OnInit{
   }
 
   erase() {
-    this.model2 = '';
+    this.model2 = undefined;
   }
 
   openTime() {
@@ -84,7 +85,10 @@ export class DatepickerComponent implements OnInit{
     }
   }
   actualizeTime(){
-    this.newTime.emit(this.model2);
+    this.newTime.emit(this.time2);
+  }
+  actualizeDay(){
+    this.newDay.emit(this.model2);
   }
 
 }

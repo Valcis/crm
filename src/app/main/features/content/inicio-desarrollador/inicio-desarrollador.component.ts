@@ -66,7 +66,6 @@ export class InicioDesarrolladorComponent implements OnInit{
       //,airMode: true
       ,fontNames: ['Arial', 'Courier New','Helvetica'],
       addDefaultFonts: false
-      ,style: ["codeBlock"]
       ,toolbar: [
         ['edit',['undo','redo']],
         ['headline', ['style']],

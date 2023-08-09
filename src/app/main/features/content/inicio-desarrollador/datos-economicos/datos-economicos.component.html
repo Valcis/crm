@@ -20,14 +20,14 @@
               <a ngbDropdownItem (click)="conversionMoneda('GBP')" class="pointer"><i class="fa fa-gbp"></i> {{'ECONOMIC.GBP' | translate}}</a>
             </div>
             <button type="button" class="btn btn-default btn-sm" (click)="recalcularDatosEconomicos()">
-              <i class="fa fa-refresh"></i> <span class="ng-binding">{{'ECONOMIC.RECALCULATE' | translate}}</span>
+              <i class="fa fa-refresh"></i> <span class="ng-binding"> {{' ' + 'ECONOMIC.RECALCULATE' | translate}}</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="row card">
-      <div class="col-sm-12">
+    <div class="row card  ml-3">
+      <div class="col-sm-12 mt-2">
         <div class="row">
           <div class="col-sm-4">
             <div class="row">

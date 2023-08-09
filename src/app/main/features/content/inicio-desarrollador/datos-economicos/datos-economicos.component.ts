@@ -18,7 +18,7 @@ export class DatosEconomicosComponent implements OnInit{
   protected produccion_minima: boolean = false;
   protected produccion_minima_value: string = "";
 
-  protected divisaFinal:string = "EUR";
+  protected divisaFinal:string = "";
 
   constructor(
     protected _translate: TranslateService,

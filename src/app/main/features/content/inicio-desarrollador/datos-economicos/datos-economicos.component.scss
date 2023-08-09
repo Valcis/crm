@@ -1,8 +1,4 @@
 
-.summernote{
-  margin-left: 240px;
-
-}
 .pointer{
   cursor: pointer;
 }
@@ -34,6 +30,7 @@
 th{
   background-color: #F5F5F6;
   border: 1px solid #e7e7e7;
+  padding: 8px;
 }
 label{
   display: inline-block;
@@ -65,4 +62,7 @@ label{
 }
 .checkbox-box{
   height: 199px
+}
+.economy-box{
+  overflow: hidden;
 }

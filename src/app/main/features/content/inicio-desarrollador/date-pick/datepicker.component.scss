@@ -1,0 +1,29 @@
+@import "~nouislider/dist/nouislider.css";
+.form-control, .btn{
+  border: 1px solid #e7eaec
+}
+
+.btn{
+  color: #6b6e70 !important;
+  background-color: #ffffff;
+  border: 1px solid #e7eaec;
+}
+.btn:hover,.btn:focus, .btn:active{
+
+  outline:none !important;
+  background-color: #e6e6e6;
+}
+.btn:active{
+  box-shadow: 0 2px 5px rgb(0 0 0 / 15%) inset;
+  color: #6b6e70 !important;
+  border: 1px solid #e7eaec;;
+}
+
+.dayBar{
+  height: 40px;
+  margin-top: 37px;
+}
+.clock{
+  margin-top: -34px;
+  width:125px;
+}

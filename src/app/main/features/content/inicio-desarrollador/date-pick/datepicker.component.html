@@ -1,0 +1,32 @@
+<div class="row m-3 flex-row">
+  <div [ngClass]="clock ? 'col-sm-8' : 'col-sm-12' " >
+    <p class="input-group  rounded-0" >
+
+      <input type="text"
+
+             ngbDatepicker
+             #d2="ngbDatepicker"
+             [(ngModel)]="model2 "
+             name="d2"
+             class="form-control"
+             placeholder="dd/mm/yyyy"
+             (ngModelChange)="actualizeTime()"
+             [startDate]="initialTime"
+      />
+
+      <button class="btn btn-outline fa fa-calendar" (click)="d2.toggle()" type="button"></button>
+      <button class="btn btn-outline fa fa-eraser rounded-0" (click)="erase()" type="button" placement="top" ngbTooltip="{{'DATETIME.DELETE' | translate}}"></button>
+      <button *ngIf="clock && showTime" class="btn btn-outline fa fa-clock-o rounded-0" (click)="openTime()" type="button" placement="top" ngbTooltip="{{'DATETIME.HIDE' | translate}}"></button>
+      <button *ngIf="clock && !showTime" class="btn btn-outline fa fa-clock-o rounded-0" (click)="openTime()" type="button" placement="top" ngbTooltip="{{'DATETIME.show' | translate}}" ></button>
+
+    </p>
+  </div>
+  <!--    TIMEPICKER -->
+  <div class="col-sm-4 clock">
+    <div *ngIf="showTime" class="text-left " >
+      <ngb-timepicker [(ngModel)]="time2" (ngModelChange)="actualizeDay()"></ngb-timepicker>
+    </div>
+  </div>
+
+
+</div>

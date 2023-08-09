@@ -24,11 +24,20 @@ import {FilesComponent} from "./features/content/documentacion/files/files.compo
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
 
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NouisliderModule } from 'ng2-nouislider';
+import {NgxSummernoteModule} from "ngx-summernote";
+import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
+import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
+
 
 @NgModule({
   declarations: [
     DragDropComponent,
     FilesComponent,
+    DatosEconomicosComponent,
+    DatepickerComponent,
+
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -41,9 +50,13 @@ import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.compon
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
+
     ChannelManagerComponent
     ],
   imports: [
+    NgbTimepickerModule,
+    NgxSummernoteModule,
+    NouisliderModule,
     NgbPaginationModule,
     NgxDropzoneModule,
     CommonModule,
@@ -65,11 +78,13 @@ import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.compon
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
+
   ],
   exports: [DragDropComponent],
   providers: []
 })
 export class MainModule {
 }
+
 
 

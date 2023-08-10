@@ -7,7 +7,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
-import {DragDropComponent} from "./shared/components/drag-drop/drag-drop.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -18,6 +18,7 @@ import {DragDropComponent} from "./shared/components/drag-drop/drag-drop.compone
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,

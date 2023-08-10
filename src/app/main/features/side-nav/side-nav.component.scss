@@ -1,62 +1,55 @@
+@import "src/styles.scss";
+
 .header-profile{
-  background: url("../../../../assets/images/profile/header-profile.png");
+  background-image: url("../../../../assets/images/profile/header-profile.png");
   height: 185px;
+}
+.short-header-profile{
+  background-image: url("../../../../assets/images/profile/header-profile.png");
+  height: 61px;
+
+}
+
+.dropdown-item{
+  color: #66696b;
+  font-weight: normal;
+  font-size: 12px;
+
+}
+.dropdown-item:hover{
+  color:#262626;
+  cursor: pointer;
 }
 
 .header-content {
-  padding-top: 25px;
-  padding-left: 27px;
-  padding-right: 27px;
+  padding: 20px 27px 25px;
+}
+.sm-header-content{
+  padding-left: 10px;
 }
 
-// SIDENAV
-
 .crm-ul-sub {
-  margin-left: 7%;
-  background-color: #293846;
   font-size: 13px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  text-align: right; /* Align text to the right */
+  text-align: right;
+}
+.crm-ul{
+  margin-top: 10px;
 }
 
 li {
   color: #a7b1c2;
 }
-
 li.sub {
   color: #2f4050
 }
-
 li:hover {
   color:white;
   background-color: #293846;
 }
 
-//.submenu-arrow {
-//  margin-left: 1%;
-//  width: 0;
-//  height: 0;
-//  border-top: 5px solid transparent;
-//  border-bottom: 5px solid transparent;
-//  border-left: 5px solid #a7b1c2; /* Arrow color */
-//  //position: absolute;
-//  ////right: 10px;
-//  top: 50%;
-//  //transform: translateY(-50%) rotate(-180deg); /* Rotate arrow counter-clockwise */
-//}
-
-.menu-icon {
-  margin-right: 10px; /* Adjust the value as needed */
-}
-
-.sidenav-item-sub {
-  color: #a7b1c2;
-  font-weight: 300;
-  font-size: 13px;
-  align-items: end;
-}
 
 .head-logo {
   width: 50px;
@@ -67,4 +60,74 @@ li:hover {
 .us-dd {
   cursor: pointer;
   text-decoration: none;
+}
+
+.center {
+  display: flex;
+  margin-left: 13px;
+}
+.right{
+  float: right;
+
+}
+
+.small-collapse{
+  position:absolute;
+  left: 70px;
+  background-color: #2F4050;
+  width:150px !important;
+  padding:10px;
+  margin-top: -11px;
+
+}
+.big-collapse{
+  background-color: #293846;
+}
+
+.big-sub{
+  margin: 7%;
+}
+.small-sub{
+  height: auto;
+  width:auto;
+  padding:10px;
+  justify-content: center;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+.hide{
+  display:none
+}
+
+.sm-sidenav-list-item{
+  height: 43px;
+  padding:(15% 20% 15% 20%);
+}
+
+.perfil{
+  font-size: 13px;
+  color: #a7b1c2;
+}
+
+.pages{
+  position: absolute;
+}
+.pages-big{
+  top: 185px;
+  width: 200px;
+}
+.pages-sm{
+  top: 75px;
+  width: 30px;
+}
+
+.active{
+  background-color: #293846 !important;
+}
+.active div li{
+  color: $white !important;
+}
+.inactive{
+  background-color: $background;
 }

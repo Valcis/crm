@@ -11,3 +11,15 @@ export interface menuListBase {
   nivel: string,
   subMenu: Array<any>
 }
+export const menuItem: menuListBase =
+  {
+    descripcion: 'MENU_INICIO',
+    config_link_pag: '/main',
+    contenido: [],
+    icono: 'fa fa-home',
+    link_pag: '/main',
+    tipo: 'MENU',
+    id_menu_padre: '0',
+    nivel: '1',
+    subMenu: []
+  };

@@ -2,107 +2,107 @@
 
 
 <div >
-  <div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100" [@bigSmall]="(isExpandedFlag) ? animationCall() : 'sm'"
+  <div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100"  [@bigSmall]="(isExpandedFlag) ? animationCall() : 'sm'"
        (@bigSmall.done)="onAnimationEventEnd($event)"
        (@bigSmall.start)="onAnimationEventStart($event)"
   >
+    <div [@opacityNav]="isOpaque ? 'opac1' : 'opac0'">
 
-    <div class="sidenav-content" [ngClass]="!isBig ? 'short-header-profile':'header-profile'">
-      <div [ngClass]="!isBig ? 'sm-header-content' : 'header-content'">
-        <h5 [ngClass]="isBig ? 'border-bottom' : ''" class="pt-4">
-          <i class="text-white fa fa-share-alt" style="font-size: 18px"></i>
-          Neo
-        </h5>
+      <div class="sidenav-content"  [ngClass]="!isBig ? 'short-header-profile':'header-profile'">
+        <div  [ngClass]="!isBig ? 'sm-header-content' : 'header-content'">
+          <h5 [ngClass]="isBig ? 'border-bottom' : ''" class="pt-4">
+            <i class="text-white fa fa-share-alt" style="font-size: 18px"></i>
+            Neo
+          </h5>
 
-        <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
-             alt="logo keytel" class="head-logo" *ngIf="isBig"
-        >
+          <img src="../../../../assets/images/profile/LogoKeytelBlanco.png"
+               alt="logo keytel" class="head-logo" *ngIf="isBig"
+          >
 
-        <div *ngIf="isBig">
-          <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
-          <div class="dropdown nav" ngbDropdown>
-            <a class="dropdown-toggle count-info dd l-grey us-dd perfil" ngbDropdownToggle>
-              {{"PERFIL.USER." + userData.details.perfil | translate}}
-            </a>
-            <ul class="dropdown-menu m-t-xs ddMenu fadeInRight" ngbDropdownMenu>
-              <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
-              <div class="dropdown-divider"></div>
-              <li><a class="dropdown-item" (click)="logOut()"> Cerrar sesión </a></li>
-            </ul>
+          <div *ngIf="isBig">
+            <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
+            <div class="dropdown nav" ngbDropdown>
+              <a class="dropdown-toggle count-info dd l-grey us-dd perfil" ngbDropdownToggle>
+                {{"PERFIL.USER." + userData.details.perfil | translate}}
+              </a>
+              <ul class="dropdown-menu m-t-xs ddMenu fadeInRight" ngbDropdownMenu>
+                <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>
+                <div class="dropdown-divider"></div>
+                <li><a class="dropdown-item" (click)="logOut()"> Cerrar sesión </a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!--COMPONENTES-->
+      <!--COMPONENTES-->
 
-    <ng-container >
-      <div *ngFor="let item of menuList; let i = index" class="test sidenav-content">
+      <ng-container >
+        <div class="pages" [@items]="!itemsSize ? 'pages-sm' : 'pages-big'">
+          <div *ngFor="let item of menuList; let i = index" class="test sidenav-content">
 
-        <!--DIVS para menus SIN submenu-->
-        <!--      Todo: cambiar el nom de la classe-->
-        <ul [ngClass]="isBig === false ? 'temp ' : 'dark-bg-container'">
-          <div *ngIf="item.subMenu.length <= 0">
-            <li   class=" collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"
-                [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
-                [routerLink]="item.link_pag" (click)="changeLink(item.link_pag)"
-            >
-              <div  [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
-                <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
-
-                <span  type="button">
+            <!--DIVS para menus SIN submenu-->
+            <!--      Todo: cambiar el nom de la classe-->
+            <ul [ngClass]="[isBig === false ? 'dark-bg-container-sm ' : 'dark-bg-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">
+              <div *ngIf="item.subMenu.length <= 0">
+                <li   class="collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"
+                      [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
+                      [routerLink]="item.link_pag" (click)="changeLink(item.link_pag)"
+                >
+                  <div  [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
+                    <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
+                    <span  type="button">
                 <i [class]="item.icono"></i>
                 <span *ngIf="isBig">
                   {{ formatName(item.descripcion) | translate }}
                 </span>
               </span>
+                  </div>
+                </li>
               </div>
-            </li>
-          </div>
 
-          <!--DIVS para menus CON submenu-->
-          <div *ngIf="item.subMenu.length > 0">
-            <li [id]="'collapse-'+i" class="sidenav-list-item collapsed"  data-bs-toggle="collapse"  (click)="controlTime(i)" [attr.data-bs-target]="'#accordion-' + i + '-collapse'"
-                (mouseout)="showSm=null" (mouseover)="showSm=i"
-                [ngClass]="!isBig ? 'sm-sidenav-list-item' : ''"
-                [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
-            >
-              <div [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
+              <!--DIVS para menus CON submenu-->
+              <div *ngIf="item.subMenu.length > 0">
+                <li [id]="'collapse-'+i" class="sidenav-list-item collapsed"  data-bs-toggle="collapse"  (click)="controlTime(i)" [attr.data-bs-target]="'#accordion-' + i + '-collapse'"
+                    (mouseout)="showSm=null" (mouseover)="showSm=i"
+                    [ngClass]="!isBig ? 'sm-sidenav-list-item' : ''"
+                    [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
+                >
+                  <div [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
               <span class="sidenav-item">
                 <i [class]="item.icono" class="fa"></i>
                 <span *ngIf="isBig" >
                   {{ formatName(item.descripcion) | translate }}
-
                 </span>
-
                 <i *ngIf="isBig" [ngClass]="isOpen === i ? 'fa-angle-down' : 'fa-angle-left'" class="fa right" ></i>
                 <!--                <span class="submenu-arrow"></span>-->
-
               </span>
-                <div [ngClass]="!(isBig || showSm === i) ? 'hide':''">
-                  <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
-                       [attr.aria-labelledby]="'accordion-' + i + '-header'"
-                       [ngClass]="!isBig ? 'small-collapse' : 'big-collapse'"
-                  >
-                    <div>
-                      <ul class="list-group" [ngClass]="isBig ? 'crm-ul':''">
-                        <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
-                            [id]="sub.descripcion"
-                            [routerLink]="sub.link_pag" (click)="changeLink(sub.link_pag)"
-                            [ngClass]="!isBig ? 'small-sub' : 'big-sub'"
-                            data-bs-toggle="collapse" data-bs-target
-                        >
-                          {{ formatName(sub.descripcion) | translate }}
-                        </li>
-                      </ul>
+                    <div [ngClass]="!(isBig || showSm === i) ? 'hide':''">
+                      <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
+                           [attr.aria-labelledby]="'accordion-' + i + '-header'"
+                           [ngClass]="!isBig ? 'small-collapse' : 'big-collapse'"
+                      >
+                        <div>
+                          <ul class="list-group" [ngClass]="isBig ? 'crm-ul':''">
+                            <li class="crm-ul-sub mt-1" *ngFor="let sub of item.subMenu"
+                                [id]="sub.descripcion"
+                                [routerLink]="sub.link_pag" (click)="changeLink(sub.link_pag)"
+                                [ngClass]="!isBig ? 'small-sub' : 'big-sub'"
+                                data-bs-toggle="collapse" data-bs-target
+                            >
+                              {{ formatName(sub.descripcion) | translate }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </li>
               </div>
-            </li>
+            </ul>
           </div>
-        </ul>
-      </div>
-    </ng-container>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ export const Sizer = trigger('bigSmall', [
   state('*', style({width: '*'})),
   state('bg', style({width: '220px'})),
   state('sm', style({width: '70px'})),
-  state('hidden', style({width: 0, opacity: 0, transform: 'translateX(-200%) translateY(10%)'})),
+  state('hidden', style({width: 0, opacity: 0, transform: 'translateX(-200%) translateY(-100%)'})),
   transition('* => *',[animate('0.25s')]),
 ]);
 

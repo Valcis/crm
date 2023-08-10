@@ -1,5 +1,5 @@
 
-<div class=" h-100 gray-bg min-height">
+<div class="gray-bg min-height">
   <div class="side-container" [@bigSmallSide]="isExpanded ? animationCall():'sm'">
     <side-nav id="sideNav" [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
 
@@ -11,6 +11,6 @@
 
   <div class="body-position " [@bigSmall]="isExpanded ? animationCall() : 'sm'" >
     <hr class="divider">
-    <app-router-outlet class="fadeInRight" ></app-router-outlet>
+    <app-router-outlet class="fadeInRight mx-3" ></app-router-outlet>
   </div>
 </div>

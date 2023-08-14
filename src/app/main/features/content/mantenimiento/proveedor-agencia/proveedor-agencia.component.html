@@ -1,0 +1,133 @@
+<div>
+  <h1>Proveedor Agencia</h1>
+</div>
+<div class="body-right m-3">
+  <div>
+<!--button-->
+  </div>
+  <div class="card rounded-0">
+    <div class="card-title border-bottom">
+      <!--card1 title-->
+      <h5 class="m-3"><i class="fa fa-filter"></i> {{'PROVIDERFLITER' | translate}}</h5>
+    </div>
+    <div class="card-body">
+      <!--card1 body-->
+      <form class="form-group" [formGroup]="fecthForm" (submit)="submitSearch(fecthForm)">
+        <div class="row">
+          <div class="col-sm-3">
+            <input class="form-control col-sm-3" type="text" formControlName="nombre" placeholder="{{'PROVIDER' | translate}}">
+          </div>
+          <div class="col-sm-7"></div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i> {{'SEARCH' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="card rounded-0" >
+    <div class="card-title pointer " (click)="providerCreator = !providerCreator">
+      <!--card2 title-->
+      <h5 class="m-3"><i class="fa fa-plus"></i>{{'PROVIDERCREATOS' | translate}} </h5>
+    </div>
+    <div class="card-body border-top" *ngIf="providerCreator">
+      <!--card2 body-->
+      <form class="form-group" [formGroup]="newItemForm" (submit)="newProvider()">
+        <div class="row ">
+          <div class="col-sm-3">
+            <input class="form-control" type="text" formControlName="nombre" placeholder="{{'PROVIDER' | translate}}">
+          </div>
+          <div class="col-sm-7"></div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary float-right" type="submit"><i class="fa fa-plus"></i> {{'CREATE' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="card rounded-0" >
+    <div class="card-title ">
+      <!--card3 title-->
+      </div>
+      <div class="m-3">
+        <h5  class="float-left col-10">{{counter}}{{' '}}{{'RESULTS' | translate}}</h5>
+        <button class="btn btn-primary col-20 float-right" style="margin-top: -7px"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
+      </div>
+    <div class="card-body border-top">
+      <!--card3 body-->
+      <table class="mx-2 table">
+        <tr class="table-title background-title">
+          <th class="left" style="width: 50px"></th>
+          <th class="right">
+            <span class="ms-2 background-title"> {{'NAME' | translate}} </span>
+            <i
+              class="pointer fa fa-sort-alpha-asc"
+              *ngIf="testOrder('ASC') "
+              (click)="patchOrder('DESC')"
+              style="background-color: inherit"
+            ></i>
+            <i
+              class="pointer fa fa-sort-alpha-desc"
+              *ngIf="testOrder('DESC')"
+              (click)="patchOrder('ASC')"
+              style="background-color: inherit"
+            ></i>
+          </th>
+        </tr>
+        <tr class="tab-content" *ngFor="let element of itemList">
+          <td class="left">
+            <div ngbDropdown>
+              <button class="btn btn-sm btn-primary mx-3 remove-caret" id="cogBtn" ngbDropdownToggle><i class="fa fa-cog "></i></button>
+              <div ngbDropdownMenu aria-labelledby="cogBtn">
+                <button ngbDropdownItem (click)="[(editName=element),open(newLink)]"><i class="fa fa-arrow-circle-right" ></i>{{'MODIFY' | translate}}</button>
+                <button ngbDropdownItem><i class="fa fa-remove"></i>{{'delete' | translate}}</button>
+              </div>
+            </div>
+          </td>
+          <td class="right ms-2">
+            <span class="mx-2">{{element}}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="card-footer ">
+      <form class="form-group" [formGroup]="fecthForm" (change)="submitSearch(fecthForm)">
+        <div formGroupName="datos_paginacion">
+          <select class="form-select" formControlName="num_resultados" type="submit">
+            <option value="5" selected> 5 {{' '}} {{'PERPAGE'}}</option>
+            <option value="10"> 10 {{' '}} {{'PERPAGE'}}</option>
+            <option value="20"> 20 {{' '}} {{'PERPAGE'}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <ng-template #newLink let-modal  class=" modal-sm">
+    <div class="modal-header parent-center rounded-1">
+      <h4 class="modal-title centred" >{{'PROVIDER' | translate }}</h4>
+      <button type="button" class="close row btn" data-bs-dismiss="modal" style="color: black" (click)="modal.dismiss('close')">
+        <span class="cross pointer" aria-hidden="true">×</span>
+        <span class="sr-only ">Close</span></button>
+    </div>
+      <div class="modal-body">
+        <div>
+          {{'NAME' |translate}}
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="editName">
+      </div>
+      <div class="modal-footer">
+        <div class="float-right">
+          <button class=" btn-primary" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
+            {{'CANCEL' | translate}}
+          </button>
+          <button class="btn-primary">{{'SAVE' | translate}}</button>
+        </div>
+      </div>
+  </ng-template>
+
+</div>

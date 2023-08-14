@@ -19,11 +19,13 @@ import { CalendarioComponent } from './features/content/calendario/calendario.co
 import { ActividadesComponent } from './features/content/actividades/actividades.component';
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
+import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
 
 
 
 @NgModule({
   declarations: [
+    ProveedorAgenciaComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,

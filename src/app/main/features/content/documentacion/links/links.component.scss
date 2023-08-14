@@ -1,17 +1,8 @@
 @import "src/styles.scss";
 
-body{
-  font-family: 'Open Sans';
-  font-size: 16px;
-}
 
 
-table,
-tr, th, td {
-  border: 1px solid #333;
-  border-color: #e7e7e7;
-}
-.table-title{
+ble-title{
   display: flex;
 }
 .body-right{
@@ -22,19 +13,14 @@ tr, th, td {
   margin-left: 230px;
 
 }
-.float-right{
-  float: right;
 
-}
 .dark-plus{
   color: $text-color !important;
 }
 .margin-auto{
   margin: auto
 }
-.background-title{
-  background-color: #f4f4f5
-}
+
 .white-space{
   width:100px;
 }

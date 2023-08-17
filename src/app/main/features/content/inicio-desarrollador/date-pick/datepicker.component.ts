@@ -1,5 +1,5 @@
 
-import {Component, Input, OnInit,EventEmitter, Output} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output, SimpleChanges} from "@angular/core";
 import {NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {CustomDateParserFormatter, DateAdapterService} from "../../../../../shared/services/datepicker/date-adapter.service";
 import {timepick} from "../../../../../shared/models/inicio-desarrollador.model";
@@ -24,6 +24,7 @@ export class DatepickerComponent implements OnInit{
   @Input() initDate?: NgbDate = undefined;
   @Input() clock:boolean = false;
   @Input() initTime?: timepick = undefined;
+  @Input() offset?: string = undefined;
   @Output() newDay = new EventEmitter<NgbDate>();
   @Output() newTime = new EventEmitter<timepick>();
 
@@ -79,21 +80,26 @@ export class DatepickerComponent implements OnInit{
 
   private setTime(){
     if(this.initTime === undefined){
-      let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-      let testParse3 = test.split(':', 2);
+      let currentTime:string ;
+      if(this.offset !== undefined && this.offset!== ""){
+        currentTime =  DateTime.now().setZone(this.offset).toLocaleString(DateTime.TIME_24_SIMPLE);
+      }else{
+        currentTime = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
+      }
+      let testParse3 = currentTime.split(':', 2);
       this.time2 = {
         hour: +testParse3[0],
         minute: +testParse3[1]
       }
+      console.log(this.offset);
+      console.log(currentTime);
     }else{
       this.time2 = {
         hour: this.initTime.hour,
         minute: this.initTime.minute,
       }
     }
-
   }
-
 
   actualizeTime(){
     this.newTime.emit(this.time2);
@@ -101,5 +107,7 @@ export class DatepickerComponent implements OnInit{
   actualizeDay(){
     this.newDay.emit(this.model2);
   }
-
+  ngOnChanges(){
+    this.setTime();
+  }
 }

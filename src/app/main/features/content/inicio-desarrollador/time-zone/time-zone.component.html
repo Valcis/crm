@@ -1,0 +1,11 @@
+<div class="form-group">
+  <div class="mask-frame" *ngIf="currentTimeZone !== ''">
+    <span class="mask">{{timeZoneSelect + ": " + currentTimeZone}}</span>
+  </div>
+  <select id="masked" class="form-select" [value]="currentTimeZone" (change)="onChange()" [(ngModel)]="currentTimeZone" >
+
+    <optgroup *ngFor="let continent of continentList" [label]="continent.name" >
+      <option *ngFor="let zone of continent.zones" [value]="zone.name"> {{zone.name}}{{' '}}({{zone.offset}})</option>
+    </optgroup>
+  </select>
+</div>

@@ -30,15 +30,16 @@ import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
 import {FroalaEditorModule, FroalaViewModule} from "angular-froala-wysiwyg";
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {TimeZoneComponent} from "./features/content/inicio-desarrollador/time-zone/time-zone.component";
 
 
 @NgModule({
   declarations: [
+    TimeZoneComponent,
     DragDropComponent,
     FilesComponent,
     DatosEconomicosComponent,
     DatepickerComponent,
-
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,

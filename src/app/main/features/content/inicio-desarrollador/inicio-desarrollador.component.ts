@@ -9,9 +9,8 @@ import {
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
-import {FormControl,FormGroup, Validators} from "@angular/forms";
+import {FormControl,FormGroup, Validators, FormsModule} from "@angular/forms";
 import {AngularEditorConfig} from "@kolkov/angular-editor";
-
 
 
 
@@ -42,10 +41,13 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected showTime: boolean = true;
   protected currentTimeZone: string ="";
 
+  protected uiSliderConf = {start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}
   protected sliderModel: number[] = [0];
   protected editorConfig: AngularEditorConfig;
+  htmlContent ='';
   protected showTable: boolean = false;
-  protected tableSiz = {x:[1], y:[1]};
+  protected tableSiz = {x:8, y:8};
+
 
   protected newDate!: NgbDate ;
 
@@ -67,10 +69,11 @@ export class InicioDesarrolladorComponent implements OnInit{
       width: 'auto',
       enableToolbar: true,
       showToolbar: true,
+      sanitize: false,
       placeholder: 'Enter text here...',
       defaultParagraphSeparator: '',
       defaultFontName: 'Arial',
-      defaultFontSize: '13',
+      defaultFontSize: '2',
       fonts: [
         {class: 'arial', name: 'Arial'},
         {class: 'Courier New', name: 'Courier New'},
@@ -87,14 +90,87 @@ export class InicioDesarrolladorComponent implements OnInit{
         tag: 'h1',
       },
       {
-        name: 'table',
-        class: 'table',
-        tag: 'table',
+        name: 'code',
+        class: '<!--',
+        tag: 'pre class="code"'
+      },
+      {
+      name: 'table 2x2',
+      class: '<!--',
+      tag: 'table class="table table-bordered">' +
+        '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+        '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+        '</table> <!--'
+      },
+      {
+        name: 'table 4x4',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
+      },
+      {
+        name: 'table 8x8',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
+      },
+      {
+        name: 'table 4x8',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
+      },
+      {
+        name: 'table 2x4',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
+      },
+      {
+        name: 'table 4x2',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
+      },
+      {
+        name: 'table 8x4',
+        class: '<!--',
+        tag: 'table class="table table-bordered">' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
+          '</table> <!--'
       },
     ],
     uploadUrl: 'v1/image',
     uploadWithCredentials: false,
-    sanitize: true,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['underline', 'strikeThrough','subscript','superscript'],
@@ -138,6 +214,7 @@ export class InicioDesarrolladorComponent implements OnInit{
   }
 
   async getActualTitle() {
+    console.log(this.htmlContent)
     this.aTitle = this._title.getTitle().valueOf();
     return this.aTitle;
   }
@@ -165,4 +242,26 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.currentTimeZone = $event
   }
 
+  createTable(){
+    let body = document.getElementsByClassName('angular-editor-textarea')[0];
+    let tbl = document.createElement('table');
+    tbl.classList.add("table");
+    tbl.classList.add("table-bordered");
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    let tbdy = document.createElement('tbody');
+    for (let i = 0; i < this.tableSiz.y ; i++) {
+      let tr = document.createElement('tr');
+      for (let j = 0; j < this.tableSiz.x ; j++) {
+        let td = document.createElement('td');
+        td.style.height='20px'
+        td.appendChild(document.createTextNode('\u0020'));
+        i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+        tr.appendChild(td)
+      }
+      tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    body.appendChild(tbl)
+  }
 }

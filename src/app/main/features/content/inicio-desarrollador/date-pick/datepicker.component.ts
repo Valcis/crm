@@ -93,6 +93,8 @@ export class DatepickerComponent implements OnInit{
     }
 
   }
+
+
   actualizeTime(){
     this.newTime.emit(this.time2);
   }

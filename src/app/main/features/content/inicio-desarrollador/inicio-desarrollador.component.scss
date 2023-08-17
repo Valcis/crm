@@ -1,5 +1,4 @@
 @import "~nouislider/dist/nouislider.css";
-@import "~summernote/dist/summernote-bs5.min.css";
 
 .btn,
 .btn:hover,
@@ -56,3 +55,36 @@ h2{
 }
 
 .summernote{width: 97%}
+
+.mask{
+  position: absolute;
+  background: white;
+  font-size: 13px;
+  margin-top: 7px;
+  margin-left: 8px;
+  cursor: default;
+  pointer-events: none;
+  width: 80%;
+}
+.mask-frame{
+  position: relative;
+}
+
+.selected{
+  width: 15px;
+  height: 15px;
+  border: 3px black solid;
+  background-color: deepskyblue;
+  border-radius: 2px;
+}
+
+.selected{
+  width: 15px;
+  height: 15px;
+  border: 3px black solid;
+  background-color: deepskyblue;
+  border-radius: 2px;
+}
+.selected:hover{
+  color: purple;
+}

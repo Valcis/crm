@@ -10,6 +10,7 @@ import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.co
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
   ],
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

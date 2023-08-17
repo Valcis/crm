@@ -26,9 +26,10 @@ import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.compon
 
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
-import {NgxSummernoteModule} from "ngx-summernote";
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
+import {FroalaEditorModule, FroalaViewModule} from "angular-froala-wysiwyg";
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -54,8 +55,10 @@ import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/
     ChannelManagerComponent
     ],
   imports: [
+    AngularEditorModule,
+    FroalaEditorModule,
+    FroalaViewModule,
     NgbTimepickerModule,
-    NgxSummernoteModule,
     NouisliderModule,
     NgbPaginationModule,
     NgxDropzoneModule,

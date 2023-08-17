@@ -1,4 +1,4 @@
-<div class="container-flex w-100 p-0 mx-4 fadeInRight" >
+<div class="container-flex p-0 mx-4 fadeInRight" >
   <div>
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-9">
@@ -54,8 +54,18 @@
 
         <!-- DATE PICKER -->
         <!--falta la zona horaria a partir de los datos de usuario-->
-        <app-datepicker [clock]="true" [initDate]="newDate" ></app-datepicker>
+        <app-datepicker [clock]="true" [initDate]="newDate" [initTime]=""></app-datepicker>
+        <div class="form-group">
+          <div class="mask-frame">
+            <span class="mask">{{timeZoneSelect}}</span>
+          </div>
+          <select id="masked" class="form-select" [value]="currentTimeZone" (change)="onChange()" [(ngModel)]="currentTimeZone" >
 
+            <optgroup *ngFor="let continent of continentList" [label]="continent.name" >
+            <option *ngFor="let zone of continent.zones" [value]="zone.name"> {{zone.name}}{{' '}}({{zone.offset}})</option>
+            </optgroup>
+          </select>
+        </div>
       </div>
     </div>
     <!--NOUISLIDER-->
@@ -68,18 +78,36 @@
       <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
       <br>
       <nouislider class="noiuslider" [config]="{start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}" [(ngModel)]="sliderModel"></nouislider>
-
     </div>
     <!--summernote-->
     <div>
       <br>
       <br>
       <h2>SUMMERNOTE</h2>
-        <div class="summernote">
-          <!--Los estilos són diferentes i el marco de código se llama desde un boton a parte y no "styles" -->
-          <div [ngxSummernote]="summerConfig" >
-        </div>
-      </div>
+      <angular-editor formControlName="htmlContent" [config]="editorConfig">
+        <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+          <ae-toolbar-set>
+            <ae-button iconClass="fa fa-question" title="ajuda">
+            </ae-button>
+            <ae-button iconClass="fa fa-table" title="table" (buttonClick)="showTable=!showTable" id="tableSelector" >
+            </ae-button>
+            <div *ngIf="showTable === true" class="card" style=" position: absolute">
+              <table>
+                <tr *ngFor="let x of tableSiz.x">
+                  <td *ngFor="let y of tableSiz.y" class="selected"></td>
+                  <td class="selected"></td>
+                </tr>
+                <tr>
+                  <td *ngFor="let y of tableSiz.y"class="selected"></td>
+                  <td class="selected"></td>
+                </tr>
+              </table>
+              {{tableSiz.x + " x " + tableSiz.y}}
+            </div>
+          </ae-toolbar-set>
+        </ng-template>
+      </angular-editor>
+
     </div>
     <br>
     <!--datos economicos-->

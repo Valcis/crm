@@ -48,13 +48,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.scss",
-              "node_modules/summernote/dist/summernote-lite.min.css"
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "./node_modules/froala-editor/css/froala_style.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/summernote/dist/summernote-lite.min.js"
-
+              "./node_modules/froala-editor/js/froala_editor.pkgd.min.js"
             ]
           },
           "configurations": {
@@ -137,8 +136,7 @@
             ],
             "scripts": [
               "../node_modules/bootstrap/dist/js/bootstrap.js",
-              "../node_modules/angular-fontawesome/dist/angular-fontawesome.js",
-
+              "../node_modules/angular-fontawesome/dist/angular-fontawesome.js"
             ]
           }
         }

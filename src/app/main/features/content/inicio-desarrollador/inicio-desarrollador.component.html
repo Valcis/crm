@@ -74,33 +74,8 @@
       <br>
       <br>
       <h2>SUMMERNOTE</h2>
-      <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig">
-        <ng-template #customButtons let-executeCommandFn="executeCommandFn">
-          <ae-toolbar-set>
-            <ae-button iconClass="fa fa-question" title="ajuda">
-            </ae-button>
-            <ae-button iconClass="fa fa-table" title="table" (buttonClick)="showTable=!showTable" id="tableSelector" >
-            </ae-button>
-            <div *ngIf="showTable === true" class="card" style=" position: absolute">
-              <!--<table>
-                <tr *ngFor="let x of tableSiz.x">
-                  <td *ngFor="let y of tableSiz.y" class="selected"></td>
-                  <td class="selected"></td>
-                </tr>
-                <tr>
-                  <td *ngFor="let y of tableSiz.y"class="selected"></td>
-                  <td class="selected"></td>
-                </tr>
-              </table>-->
-              <form (submit)="createTable()">
-                <input type="number"  [(ngModel)]="tableSiz.y"> x  <input type="number"   [(ngModel)]="tableSiz.y">
-                <button type="submit"></button>
-              </form>
+      <div [froalaEditor]="options" [(froalaModel)]="htmlContent">Hello, Froala!</div>
 
-            </div>
-          </ae-toolbar-set>
-        </ng-template>
-      </angular-editor>
       <h5 class="html-header">HTML Output</h5>
       <div class="html">
         {{ htmlContent }}

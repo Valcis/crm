@@ -10,10 +10,12 @@ import {
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl,FormGroup, Validators, FormsModule} from "@angular/forms";
-import {AngularEditorConfig} from "@kolkov/angular-editor";
+ import 'froala-editor/js/plugins.pkgd.min.js';
 
-
-
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 interface TimeZone {name: string, offset:string} //Todo:a un model
@@ -43,14 +45,38 @@ export class InicioDesarrolladorComponent implements OnInit{
 
   protected uiSliderConf = {start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}
   protected sliderModel: number[] = [0];
-  protected editorConfig: AngularEditorConfig;
   htmlContent ='';
   protected showTable: boolean = false;
   protected tableSiz = {x:8, y:8};
 
 
-  protected newDate!: NgbDate ;
+  protected newDate!: NgbDate;
+  public options: Object = {
+    placeholderText: 'Edit Your Content Here!',
+    charCounterCount: false,
+    immediateAngularModelUpdate:false,
+    pluginsEnabled: ['image', 'link','table','lineHeight','paragraphFormat','lists', 'codeView','fontFamily','fontSize', 'inlineClass', 'lineHeight','quote','help'],
+    toolbarButtons: {
+      moreText:{
+        buttons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
+      }
+      ,
+      moreParagraph: {
 
+        buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
+
+      },
+      moreRich: {
+
+        buttons: ['insertLink', 'insertImage','insertTable',]
+
+      },
+      moreMisc: {
+        buttons: ['undo', 'redo', 'spellChecker', 'selectAll', 'html', 'help'],
+        align: 'right',
+      }
+    }
+  };
 
   form: FormGroup = new FormGroup({
     html: new FormControl("", Validators.required)
@@ -60,145 +86,9 @@ export class InicioDesarrolladorComponent implements OnInit{
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
-    protected _translate: TranslateService){
-
-    this.editorConfig = {
-      editable: true,
-      spellcheck: true,
-      height: '500',
-      width: 'auto',
-      enableToolbar: true,
-      showToolbar: true,
-      sanitize: false,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: 'Arial',
-      defaultFontSize: '2',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'Courier New', name: 'Courier New'},
-        {class: 'Helvetica', name: 'Helvetica'}
-      ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-      {
-        name: 'code',
-        class: '<!--',
-        tag: 'pre class="code"'
-      },
-      {
-      name: 'table 2x2',
-      class: '<!--',
-      tag: 'table class="table table-bordered">' +
-        '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-        '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-        '</table> <!--'
-      },
-      {
-        name: 'table 4x4',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-      {
-        name: 'table 8x8',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-      {
-        name: 'table 4x8',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-      {
-        name: 'table 2x4',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-      {
-        name: 'table 4x2',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-      {
-        name: 'table 8x4',
-        class: '<!--',
-        tag: 'table class="table table-bordered">' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' +
-          '</table> <!--'
-      },
-    ],
-    uploadUrl: 'v1/image',
-    uploadWithCredentials: false,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['underline', 'strikeThrough','subscript','superscript'],
-      ['textColor'],
-      ['insertImage','insertVideo','insertHorizontalRule']
-    ]
-    }
-/*
-      //,focus: true
-      //,airMode: true
-      ,fontNames: ['Arial', 'Courier New','Helvetica'],
-      addDefaultFonts: false
-      ,toolbar: [
-        ['edit',['undo','redo']],
-        ['headline', ['style']],
-        ['style', ['bold', 'italic', /!* 'underline','superscript', 'subscript', 'strikethrough', *!/'clear']],
-        ['fontface', ['fontname']],
-        ['textsize', ['fontsize']],
-        ['fontclr', ['color']],
-        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link']],
-        ['view', ['codeview']],
-        ['help', ['help',"codeBlock"]]
-      ]
-    };*/
+    protected _translate: TranslateService) {
   }
+
 
   ngOnInit(): void {
     this.time();
@@ -242,26 +132,4 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.currentTimeZone = $event
   }
 
-  createTable(){
-    let body = document.getElementsByClassName('angular-editor-textarea')[0];
-    let tbl = document.createElement('table');
-    tbl.classList.add("table");
-    tbl.classList.add("table-bordered");
-    tbl.style.width = '100%';
-    tbl.setAttribute('border', '1');
-    let tbdy = document.createElement('tbody');
-    for (let i = 0; i < this.tableSiz.y ; i++) {
-      let tr = document.createElement('tr');
-      for (let j = 0; j < this.tableSiz.x ; j++) {
-        let td = document.createElement('td');
-        td.style.height='20px'
-        td.appendChild(document.createTextNode('\u0020'));
-        i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
-        tr.appendChild(td)
-      }
-      tbdy.appendChild(tr);
-    }
-    tbl.appendChild(tbdy);
-    body.appendChild(tbl)
-  }
 }

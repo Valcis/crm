@@ -7,6 +7,10 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
+import {RouterModule, Routes} from "@angular/router";
+import {AppRouterOutletDirective} from "./shared/directives/app-router-outlet.directive";
+import {LoginModule} from "./login/login.module";
+import {MainModule} from "./main/main.module";
 
 
 @NgModule({
@@ -30,6 +34,8 @@ import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.co
       isolate: false,
       extend: true
     }),
+    LoginModule,
+    MainModule,
   ],
   exports: [
     CrmLoaderComponent,

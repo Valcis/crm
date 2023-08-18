@@ -66,6 +66,6 @@ export class SideNavComponent implements OnInit {
     if (this._user) {
       this._cookie.deleteSessionId();
     }
-    this._router.navigate(['index.html/login'])
+    this._router.navigate(['index.html#/login'])
   }
 }

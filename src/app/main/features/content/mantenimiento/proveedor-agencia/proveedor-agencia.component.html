@@ -19,7 +19,7 @@
           </div>
           <div class="col-sm-7"></div>
           <div class="col-sm-2">
-            <button class="btn btn-primary float-right" type="submit"><i class="fa fa-search"></i> {{'SEARCH' | translate}}</button>
+            <button class="btn btn-search float-right" type="submit"><i class="fa fa-search"></i> {{'SEARCH' | translate}}</button>
           </div>
         </div>
       </form>
@@ -40,7 +40,7 @@
           </div>
           <div class="col-sm-7"></div>
           <div class="col-sm-2">
-            <button class="btn btn-primary float-right" type="submit"><i class="fa fa-plus"></i> {{'CREATE' | translate}}</button>
+            <button class="btn btn-search float-right" type="submit"><i class="fa fa-plus"></i> {{'CREATE' | translate}}</button>
           </div>
         </div>
       </form>
@@ -53,7 +53,7 @@
       </div>
       <div class="m-3">
         <h5  class="float-left col-10">{{counter}}{{' '}}{{'RESULTS' | translate}}</h5>
-        <button class="btn btn-primary col-20 float-right" style="margin-top: -7px"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
+        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
       </div>
     <div class="card-body border-top">
       <!--card3 body-->
@@ -79,15 +79,15 @@
         <tr class="tab-content" *ngFor="let element of itemList">
           <td class="left">
             <div ngbDropdown>
-              <button class="btn btn-sm btn-primary mx-3 remove-caret" id="cogBtn" ngbDropdownToggle><i class="fa fa-cog "></i></button>
+              <button class="btn btn-sm btn-search mx-3 remove-caret" id="cogBtn" ngbDropdownToggle><i class="fa fa-cog "></i></button>
               <div ngbDropdownMenu aria-labelledby="cogBtn">
                 <button ngbDropdownItem (click)="[(editName=element),open(newLink)]"><i class="fa fa-arrow-circle-right" ></i>{{'MODIFY' | translate}}</button>
-                <button ngbDropdownItem><i class="fa fa-remove"></i>{{'delete' | translate}}</button>
+                <button ngbDropdownItem (click)="[(editName=element),deleteProvider()]"><i class="fa fa-remove" ></i>{{'delete' | translate}}</button>
               </div>
             </div>
           </td>
           <td class="right ms-2">
-            <span class="mx-2">{{element}}</span>
+            <span class="mx-2">{{element[0]}}</span>
           </td>
         </tr>
       </table>
@@ -114,20 +114,22 @@
         <span class="cross pointer" aria-hidden="true">×</span>
         <span class="sr-only ">Close</span></button>
     </div>
+
       <div class="modal-body">
         <div>
           {{'NAME' |translate}}
         </div>
-        <input type="text" class="form-control" [(ngModel)]="editName">
+        <form class="form-group" id="changeForm" (submit)="modifyProvider()" [formGroup]="changeItemForm">
+          <input type="text" class="form-control" [(ngModel)]="editName[0]" formControlName="nombre">
+        </form>
       </div>
       <div class="modal-footer">
         <div class="float-right">
-          <button class=" btn-primary" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
+          <button class=" btn btn-search m-1" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
             {{'CANCEL' | translate}}
           </button>
-          <button class="btn-primary">{{'SAVE' | translate}}</button>
+          <button form="changeForm" class="btn btn-save m-1" type="submit">{{'SAVE' | translate}}</button>
         </div>
       </div>
   </ng-template>
-
 </div>

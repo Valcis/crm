@@ -44,3 +44,50 @@ button.close {
   top: 2%;
   right: 1.5%;
 }
+.btn-search:hover{
+  border-color: #d2d2d2;
+}
+.btn-search{
+  border-color: #e7eaec;
+  color: #676a6c !important
+
+}
+.btn{
+  border-radius: 3px;
+}
+.btn:active{
+  color: #676a6c !important
+}
+
+.btn-search:focus{
+  border-color: #d2d2d2;
+}
+.btn-search:active{
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
+  background-image: none;
+  outline: 0;
+  border-color: #d2d2d2;
+}
+
+.btn-save:hover{
+  border-color: #1ab394;
+  background-color: #1ab394;
+}
+.btn-save{
+  color: white !important;
+  border-color: #1ab394;
+  background-color: #1ab394;
+}
+.btn-save:focus{
+  border-color: #1ab394;
+  background-color: #1ab394;
+}
+.btn-save:active{
+  color: white !important;
+  background-color: #1ab394;
+  box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%) !important;
+  background-image: none;
+  outline: 0;
+  border-color: #1ab394;
+}
+

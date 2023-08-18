@@ -3,19 +3,21 @@ import {GenericRequest} from "../../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {CookiesService} from "../../cookies/cookies.service";
+const { DateTime } = require("luxon");
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorAgenciaService extends CrmService {
-  private readonly linkBodyRq: GenericRequest;
+  private readonly providerAgencyBodyRq: GenericRequest;
 
   constructor(
     private _http: HttpClient,
     private _cookie: CookiesService,
   ) {
     super(_http);
-    this.linkBodyRq = {
+    this.providerAgencyBodyRq = {
       Servicio: "proveedoresTrabajaAgencia",
       Metodo: "",
       Tipo: "",
@@ -27,31 +29,45 @@ export class ProveedorAgenciaService extends CrmService {
 
 
   public getProveedores = (linkForm: any) => {
-    const modifiedLinkBodyRq = {
-      ...this.linkBodyRq,
+    const modifiedproviderAgencyBodyRq = {
+      ...this.providerAgencyBodyRq,
       Metodo:"GetProveedoresTrabajaAgencia",
       Entrada: linkForm};
-    return this.sendPost(modifiedLinkBodyRq);
+    return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 
   public newProveedor = (data:any) =>{
-    const modifiedLinkBodyRq = {
-      ...this.linkBodyRq,
+    const modifiedproviderAgencyBodyRq = {
+      ...this.providerAgencyBodyRq,
       Metodo: "NewProveedorTrabajaAgencia",
       Entrada: {datos_peticion:data}
     };
-    console.log(modifiedLinkBodyRq)
-    return this.sendPost(modifiedLinkBodyRq);
+    console.log(modifiedproviderAgencyBodyRq)
+    return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 
-  public eliminateLink = (item:any) => {
-    const modifiedLinkBodyRq = {
-      ...this.linkBodyRq,
-      Metodo: "DeleteLink",
-      Servicio: "links",
-      Entrada:{neo_id:item.metadata.neo_id},
-      setHistorial_cambios:item.data,
+  public changeProveedor = (data:any,historial: string) =>{
+    let date = DateTime.now().setZone('utc');
+
+    const modifiedproviderAgencyBodyRq = {
+      ...this.providerAgencyBodyRq,
+      Metodo: "SetProveedorTrabajaAgencia",
+      Entrada: {datos_peticion:data},
+      setHistorial_cambios:{
+        nombre:"historial",
+        modificacion_ts:date.toMillis()
+      }
     };
-    return this.sendPost(modifiedLinkBodyRq);
+    console.log(modifiedproviderAgencyBodyRq);
+    return this.sendPost(modifiedproviderAgencyBodyRq);
+  };
+
+  public deleteProveedor = (data:any) => {
+    const modifiedproviderAgencyBodyRq = {
+      ...this.providerAgencyBodyRq,
+      Metodo: "DeleteProveedorTrabajaAgencia",
+      Entrada:{datos_peticion:data}
+    };
+    return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 }

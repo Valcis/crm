@@ -14,13 +14,16 @@ export class ProveedorAgenciaComponent {
 
   public fecthForm!: FormGroup;
   public newItemForm!: FormGroup;
+  public changeItemForm!: FormGroup;
+  public DeleteItemForm!: FormGroup;
+  private historial:string = "";
   protected counter:number = 3;
   protected providerCreator:boolean=false;
   protected itemList:any[]=[];
   protected asc:boolean = true;
   private exportFiltro = {nombre: ""};
   private modalRef :any;
-  protected editName:string = "";
+  protected editName:any[] = [];
 
 
   constructor(private _fetch: ProveedorAgenciaService,
@@ -40,6 +43,13 @@ export class ProveedorAgenciaComponent {
     });
     this.newItemForm = new FormGroup({
       nombre:new FormControl<string>("")
+    });
+    this.changeItemForm = new FormGroup({
+      nombre:new FormControl<string>(""),
+      neo_id:new FormControl<number>(0)
+    });
+    this.DeleteItemForm = new FormGroup({
+      neo_id:new FormControl<number>(0)
     });
   }
 
@@ -74,8 +84,7 @@ export class ProveedorAgenciaComponent {
       this.itemList = [];
 
       fetchResult.forEach((value:any) => {
-        let provider = value.nombre;
-        this.itemList.push(provider);
+        this.itemList.push([value.nombre, value.neo_id]);
       });
       //this._loader.setLoading(false);
       this.exportFiltro.nombre = this.fecthForm.value.nombre;
@@ -84,21 +93,34 @@ export class ProveedorAgenciaComponent {
 
   protected newProvider(){
     this._fetch.newProveedor(this.newItemForm.value).subscribe(response =>{
-      console.log(response)
     this.getProveedores('1');
     })
   }
+  protected modifyProvider(){
+    this._fetch.changeProveedor(this.changeItemForm.value,this.historial).subscribe(response =>{
+      //TODO:condicion
+      this.modalRef.dismiss('close');
+      this.getProveedores('1');
+    })
+  }
+  protected deleteProvider(){
+    this.DeleteItemForm.patchValue({ neo_id: this.editName[1]});
+    //todo swal
+    this._fetch.deleteProveedor(this.DeleteItemForm.value);
+//    this.getProveedores('1');
+
+  }
 
   open(content : any) {
+    this.historial = this.editName[0];
+    this.changeItemForm.patchValue({ neo_id: this.editName[1]});
     this.modalRef = this._modal.open(content, {
       windowClass: 'modal-element',
       size: "sm",
       modalDialogClass:"rounded-0" });
   }
 
-  protected modifyProbider(){
 
-  }
 
 
   protected patchOrder(value:string){
@@ -110,4 +132,5 @@ export class ProveedorAgenciaComponent {
     let fetchInfo:any = value;
       return fetchInfo === this.fecthForm.get('datos_paginacion.tipo_orden')?.value;
   }
+
 }

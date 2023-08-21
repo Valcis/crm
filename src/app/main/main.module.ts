@@ -20,11 +20,14 @@ import { ActividadesComponent } from './features/content/actividades/actividades
 import { NotificacionesComponent } from './features/content/notificaciones/notificaciones.component';
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
+import {HistorialComponent} from "./features/content/mantenimiento/proveedor-agencia/historial/historial.component";
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 
 @NgModule({
   declarations: [
+    HistorialComponent,
     ProveedorAgenciaComponent,
     MainComponent,
     AppRouterOutletDirective,
@@ -40,6 +43,7 @@ import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/provee
     LinksComponent,
     ],
   imports: [
+    NgSelectModule,
     NgbPaginationModule,
     CommonModule,
     MainRoutingModule,

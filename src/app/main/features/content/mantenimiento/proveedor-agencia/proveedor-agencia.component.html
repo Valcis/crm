@@ -3,7 +3,7 @@
 </div>
 <div class="body-right m-3">
   <div>
-<!--button-->
+    <app_historial></app_historial>
   </div>
   <div class="card rounded-0">
     <div class="card-title border-bottom">
@@ -53,7 +53,7 @@
       </div>
       <div class="m-3">
         <h5  class="float-left col-10">{{counter}}{{' '}}{{'RESULTS' | translate}}</h5>
-        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
+        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="download()"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
       </div>
     <div class="card-body border-top">
       <!--card3 body-->

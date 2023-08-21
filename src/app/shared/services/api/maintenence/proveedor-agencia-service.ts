@@ -66,8 +66,9 @@ export class ProveedorAgenciaService extends CrmService {
     const modifiedproviderAgencyBodyRq = {
       ...this.providerAgencyBodyRq,
       Metodo: "DeleteProveedorTrabajaAgencia",
-      Entrada:{datos_peticion:data}
+      Entrada:{datos_peticion:{neo_id:data.neo_id.toString()}}
     };
+    console.log(modifiedproviderAgencyBodyRq)
     return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 }

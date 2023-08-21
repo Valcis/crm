@@ -1,0 +1,52 @@
+<div>
+
+  <div class="float-right"><button (click)="historyButton = !historyButton">{{"HISTORY.BUTTON" | translate}}</button></div>
+  <div class="heigt-35"></div>
+  <div *ngIf="historyButton" class="card">
+    <div class="card-title">
+      <i class="fa fa-refresh"></i> {{"HISTORY-TITLE" | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <span>{{"HISTORIAL.EXCHANGE" | translate}}</span>
+
+          <ng-select [items]="tiposRelacion"
+                     bindLabel="v"
+                     bindValue="k"
+                     [multiple]="true"
+                     placeholder="Select cities"
+                     [(ngModel)]="action">
+          </ng-select>
+
+        </div>
+        <div class="col-3">
+          <span>{{"HISTORIAL.FROM" |translate}}</span>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-search" (click)="getHistory();"><i class="fa fa-search"></i> {{"HISTORIAL:SEARCH"|translate}}</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col m-3">
+          {{"SHOW" | translate }} <select class="form-select" [(ngModel)]="nItems"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries
+        </div>
+        <div class="col"></div>
+        <div class="col">Search: <input class="form-control" [(ngModel)]="userSearch" type="text"></div>
+      </div>
+      <div class="row">
+        <table>
+          <tr>
+          <th *ngFor="let field of fields">{{field |translate}}</th>
+          </tr>
+          <tr>
+            <td *ngFor="let field of fields"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="historyButton" class="m-4">
+
+  </div>
+</div>

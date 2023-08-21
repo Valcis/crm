@@ -120,6 +120,8 @@ export class ProveedorAgenciaComponent {
       modalDialogClass:"rounded-0" });
   }
 
+  download(){
+  }
 
 
 

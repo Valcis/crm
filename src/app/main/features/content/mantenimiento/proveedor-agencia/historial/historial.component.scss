@@ -95,3 +95,16 @@ button.close {
 .heigt-35{
   height:35px;
 }
+.btn-history:hover,.btn-history:focus,.btn-history:active{
+  color: #333!important;
+  border: 0px;
+
+}
+.btn-history:active{
+box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
+}
+.btn-history{
+  border: 0px;
+  color:#6b6e70 !important;
+  background-color: #efefef;
+}

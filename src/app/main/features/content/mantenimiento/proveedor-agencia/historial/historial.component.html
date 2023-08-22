@@ -1,6 +1,10 @@
 <div>
-
-  <div class="float-right"><button (click)="historyButton = !historyButton">{{"HISTORY.BUTTON" | translate}}</button></div>
+  <div class="float-right" ><button class="btn btn-history" (click)="historyButton = !historyButton">
+    <i *ngIf="historyButton" class="fa fa-eye"></i>
+    <i *ngIf="!historyButton" class="fa fa-eye-slash"></i>
+    <span *ngIf="!historyButton">{{" "}}{{"HISTORY.BUTTONOPEN" | translate}}</span>
+    <span *ngIf="historyButton">{{" "}}{{"HISTORY.BUTTONHIDE" | translate}}</span>
+  </button></div>
   <div class="heigt-35"></div>
   <div *ngIf="historyButton" class="card">
     <div class="card-title">
@@ -27,15 +31,13 @@
           <button class="btn btn-search" (click)="getHistory();"><i class="fa fa-search"></i> {{"HISTORIAL:SEARCH"|translate}}</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col m-3">
-          {{"SHOW" | translate }} <select class="form-select" [(ngModel)]="nItems"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries
-        </div>
-        <div class="col"></div>
-        <div class="col">Search: <input class="form-control" [(ngModel)]="userSearch" type="text"></div>
+      <div class="row m-3">
+        <div class="col-sm-6 ">
+          <label>{{"SHOW" | translate }} <select class="form-select" [(ngModel)]="nItems"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries</label></div>
+        <div class="col-sm-6"><label>Search: <input class="form-control input-sm" [(ngModel)]="userSearch" type="text"></label></div>
       </div>
       <div class="row">
-        <table>
+        <table class="m-3 table-striped table-bordered table-hover ">
           <tr>
           <th *ngFor="let field of fields">{{field |translate}}</th>
           </tr>

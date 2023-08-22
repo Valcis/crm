@@ -106,9 +106,11 @@ export class ProveedorAgenciaComponent {
   protected deleteProvider(){
     this.DeleteItemForm.patchValue({ neo_id: this.editName[1]});
     //todo swal
-    this._fetch.deleteProveedor(this.DeleteItemForm.value);
-//    this.getProveedores('1');
-
+    this._fetch.deleteProveedor(this.DeleteItemForm.value).subscribe(response => {
+      //todo:swal
+      console.log("succes deletion")
+      this.getProveedores('1');
+    });
   }
 
   open(content : any) {

@@ -1,8 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialService} from "../../../../../../shared/services/api/Historial/historial.service";
 import { Router } from '@angular/router';
+import {DateTime} from "luxon";
+import {locale} from "moment";
 
 
 @Component({
@@ -10,15 +12,22 @@ import { Router } from '@angular/router';
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.scss',],
 })
-export class HistorialComponent {
+export class HistorialComponent implements OnInit{
 
   @Input() action = ["_CREA","_MODIFICA","_BORRA","_CLONA"];
-  @Input() fields = ['USER','ACTION','DATE', 'DATA', 'NODE'];
+  @Input() fields:Array<string> = ['USER','ACTION','DATE', 'DATA', 'NODE'];
 
+
+
+  protected currentPage=1;
   protected historyButton:boolean = false;
-  protected nItems: string="10";
+  protected pageSize: number=10;
   public fecthForm!: FormGroup;
   protected userSearch:string = "";
+  protected counter:number= 0;
+  //Todo cambiar per model
+  protected itemList:Array<any>=[];
+
 //TODO:pass to a model
   protected tiposRelacion = [
     {k:"_CREA",v:"HISTORIAL_CREA"},
@@ -26,6 +35,12 @@ export class HistorialComponent {
     {k:"_BORRA",v:"HISTORIAL_BORRA"},
     {k:"_CLONA",v:"HISTORIAL_CLONA"}
   ];
+  private translateType:{ [key: string]: string; }={
+    "_CREA":"HISTORIAL_CREA",
+    "_MODIFICA":"HISTORIAL_MODIFICA",
+    "_BORRA":"HISTORIAL_BORRA",
+    "_CLONA":"HISTORIAL_CLONA",
+  };
 
   constructor(private _fetch: HistorialService,
               private _modal: NgbModal,
@@ -50,13 +65,66 @@ export class HistorialComponent {
 
 
   public getHistory(){
-    this.fecthForm.patchValue({relaciones: this.action, });
+    this.currentPage=1;
+    this.fecthForm.patchValue({relaciones:this.action});
+    this._fetch.getHistorial(this.fecthForm.value,this._router.url).subscribe(response => {
+      let localData:any = response;
+      let fetchResult=[];
+      fetchResult = localData.Salida.lineas;
+      this.itemList = [];
+      console.log(response)
+      fetchResult.forEach((value:any) => {
+        //TODO:pass to model
+        if(value.relacion_data.nombre[0] === ''){
+          value.relacion_data.nombre[0] = '∅'
+        }else{
+          value.relacion_data.nombre[0]= '\"' + value.relacion_data.nombre[0] + '\"'
+        }
+        if(value.relacion_data.nombre[1] === ''){
+          value.relacion_data.nombre[1]='∅'
+        }else{
+          value.relacion_data.nombre[1]= '\"' + value.relacion_data.nombre[1] + '\"'
+        }
 
-    this._fetch.getHistorial(this.fecthForm.value,this._router.url);
-  }
+        if (value.relacion_type === "_CREA"){
+          let log ={
+            user: value.empl_nomb + value.empl_ape1 + value.empl_ape2 +"(" + value.user_name + ")",
+            action: this.translateType[value.relacion_type],
+            date: DateTime.fromMillis(value.relacion_data.creacion_ts).toUTC(),
+            data: {
+              from: value.relacion_data.nombre[0],
+              to: value.relacion_data.nombre[1],
+            },
+            node: {
+              id: value.node_origen_text.neo_id,
+              nombre: value.node_origen_text.nombre
+            }
+          };
+          this.itemList.push(log);
 
+        }else{
+          let log ={
+            user: value.empl_nomb + value.empl_ape1 + value.empl_ape2 +"(" + value.user_name + ")",
+            action: this.translateType[value.relacion_type],
+            date: DateTime.fromMillis(value.relacion_data.modificacion_ts).toFormat("DATETIME_SHORT_WITH_SECONDS"),
+            data: {
+              from: value.relacion_data.nombre[0],
+              to: value.relacion_data.nombre[1],
+            },
+            node: {
+              id: value.node_origen_text.neo_id,
+              nombre: value.node_origen_text.nombre
+            }
+          };
+          this.itemList.push(log);
 
+        }
 
+        this.counter ++;
+      });
+      console.log(this.itemList);
 
-
+      //this._loader.setLoading(false);
+      });
+    }
 }

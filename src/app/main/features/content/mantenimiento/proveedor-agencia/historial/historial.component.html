@@ -33,18 +33,58 @@
       </div>
       <div class="row m-3">
         <div class="col-sm-6 ">
-          <label>{{"SHOW" | translate }} <select class="form-select" [(ngModel)]="nItems"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries</label></div>
+          <label>{{"SHOW" | translate }} <select class="form-select" [(ngModel)]="pageSize"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries</label></div>
         <div class="col-sm-6"><label>Search: <input class="form-control input-sm" [(ngModel)]="userSearch" type="text"></label></div>
       </div>
       <div class="row">
-        <table class="m-3 table-striped table-bordered table-hover ">
-          <tr>
-          <th *ngFor="let field of fields">{{field |translate}}</th>
+        <table class="p-3 table table-striped table-bordered table-hover ">
+          <thead>
+            <tr>
+              <th *ngIf="fields.includes('USER')" >{{'USER' | translate}}</th>
+              <th *ngIf="fields.includes('ACTION')" >{{'ACTION' | translate}}</th>
+              <th *ngIf="fields.includes('DATE')" >{{'DATE' | translate}}</th>
+              <th *ngIf="fields.includes('DATA')" >{{'DATA' | translate}}</th>
+              <th *ngIf="fields.includes('NODE')" >{{'NODE' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let log of itemList | slice: (currentPage-1) * pageSize : currentPage * pageSize">
+            <td *ngIf="fields.includes('USER')" >{{log.user | translate}}</td>
+            <td *ngIf="fields.includes('ACTION')" >{{log.action | translate}}</td>
+            <td *ngIf="fields.includes('DATE')" >{{log.date | translate}}</td>
+            <td *ngIf="fields.includes('DATA')" >
+              <table class="dataTable table table-borderless ">
+                <tbody class="dataTable">
+                <tr>
+                  <td> nombre:</td>
+                  <td>{{log.data.from}}</td>
+                  <td><i class="fa fa-long-arrow-right"></i></td>
+                  <td> {{log.data.to}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+            <td *ngIf="fields.includes('NODE')">
+              <table class="nodeTable innerTD">
+                <tbody class="innerTD">
+                <tr class="innerTr">
+                  <td ><strong>neo_id</strong></td>
+                  <td >{{log.node.id}}</td>
+                </tr>
+                <tr class="innerTr">
+                  <td class="innerTD"><strong>nombre</strong></td>
+                  <td class="innerTD">{{log.node.nombre}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
           </tr>
-          <tr>
-            <td *ngFor="let field of fields"></td>
-          </tr>
+          </tbody>
         </table>
+        <ngb-pagination *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
+          <ng-template ngbPaginationPrevious><</ng-template>
+          <ng-template ngbPaginationNext>></ng-template>
+        </ngb-pagination>
       </div>
     </div>
   </div>

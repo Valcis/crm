@@ -27,6 +27,7 @@ export class HistorialComponent implements OnInit{
   protected counter:number= 0;
   //Todo cambiar per model
   protected itemList:Array<any>=[];
+  protected allResult:Array<any>=[];
 
 //TODO:pass to a model
   protected tiposRelacion = [
@@ -104,7 +105,7 @@ export class HistorialComponent implements OnInit{
 
         }else{
           let log ={
-            user: value.empl_nomb + value.empl_ape1 + value.empl_ape2 +"(" + value.user_name + ")",
+            user: ' ' + value.empl_nomb + ' ' + value.empl_ape1 + ' ' + value.empl_ape2 + " (" + value.user_name + ")",
             action: this.translateType[value.relacion_type],
             date: DateTime.fromMillis(value.relacion_data.modificacion_ts).toFormat("DATETIME_SHORT_WITH_SECONDS"),
             data: {
@@ -119,12 +120,18 @@ export class HistorialComponent implements OnInit{
           this.itemList.push(log);
 
         }
-
+        this.allResult = this.itemList;
         this.counter ++;
       });
       console.log(this.itemList);
 
       //this._loader.setLoading(false);
       });
+    }
+    protected searchName(eve:any){
+      this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(this.userSearch.toLowerCase()));
+      this.counter = this.itemList.length;
+      this.currentPage=1;
+      console.log(eve)
     }
 }

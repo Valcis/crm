@@ -34,7 +34,7 @@
       <div class="row m-3">
         <div class="col-sm-6 ">
           <label>{{"SHOW" | translate }} <select class="form-select" [(ngModel)]="pageSize"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries</label></div>
-        <div class="col-sm-6"><label>Search: <input class="form-control input-sm" [(ngModel)]="userSearch" type="text"></label></div>
+        <div class="col-sm-6"><label>Search: <input class="form-control input-sm" (change)="searchName($event)" [(ngModel)]="userSearch" type="text"></label></div>
       </div>
       <div class="row">
         <table class="p-3 table table-striped table-bordered table-hover ">
@@ -56,10 +56,13 @@
               <table class="dataTable table table-borderless ">
                 <tbody class="dataTable">
                 <tr>
-                  <td> nombre:</td>
-                  <td>{{log.data.from}}</td>
+                  <td><strong>nombre:</strong></td>
+                  <td *ngIf="log.data.from !== '∅';else noDat"><span class="green"> {{log.data.from}}</span></td>
                   <td><i class="fa fa-long-arrow-right"></i></td>
-                  <td> {{log.data.to}}</td>
+                  <td *ngIf="log.data.to !== '∅';else noDat"><span class="green">{{log.data.to}}</span></td>
+                  <ng-template #noDat>
+                    <td> ∅</td>
+                  </ng-template>
                 </tr>
                 </tbody>
               </table>

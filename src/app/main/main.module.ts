@@ -58,9 +58,7 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
     CommonModule,
     ReactiveFormsModule,
   ],
-  providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
-  ]
+  providers: []
 })
 export class MainModule {
 }

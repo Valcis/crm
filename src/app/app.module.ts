@@ -7,10 +7,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
-import {RouterModule, Routes} from "@angular/router";
-import {AppRouterOutletDirective} from "./shared/directives/app-router-outlet.directive";
-import {LoginModule} from "./login/login.module";
-import {MainModule} from "./main/main.module";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 
 @NgModule({
@@ -34,13 +31,15 @@ import {MainModule} from "./main/main.module";
       isolate: false,
       extend: true
     }),
-    LoginModule,
-    MainModule,
   ],
   exports: [
     CrmLoaderComponent,
   ],
-  providers: [TranslateModule, Title],
+  providers: [
+    TranslateModule,
+    Title,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

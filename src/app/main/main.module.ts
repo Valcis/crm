@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {MainComponent} from "./main.component";
 import {AppRouterOutletDirective} from "../shared/directives/app-router-outlet.directive";
-import {CommonModule} from "@angular/common";
+import {CommonModule, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {MainRoutingModule} from "./main-routing.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
@@ -58,7 +58,9 @@ import {LinksComponent} from "./features/content/documentacion/links/links.compo
     CommonModule,
     ReactiveFormsModule,
   ],
-  providers: []
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ]
 })
 export class MainModule {
 }

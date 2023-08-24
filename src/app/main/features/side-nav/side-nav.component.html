@@ -36,7 +36,7 @@
         <div *ngIf="item.subMenu.length <= 0">
           <li class="sidenav-list-item collapsed">
             <div [id]="'accordion-' + i" >
-<!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
+<!--           <div [id]="'accordion-' + i" (click)="itemAction(item.descripcion + ' - id padre -> ' + i)">-->
 
               <span type="button" [routerLink]="item.link_pag">
                 <i [class]="item.icono"></i>

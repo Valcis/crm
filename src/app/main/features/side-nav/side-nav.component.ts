@@ -47,7 +47,6 @@ export class SideNavComponent implements OnInit {
       //console.log('userData', this.userData);
       this.userData.menu.menuList.forEach((item: any) => { //TODO: Cambiar por modelo
         item.icono = 'fa ' + item.icono;
-        item.link_pag = 'index.html' + item.link_pag;
         this.menuList.push(item);
         return item;
       });
@@ -66,6 +65,6 @@ export class SideNavComponent implements OnInit {
     if (this._user) {
       this._cookie.deleteSessionId();
     }
-    this._router.navigate(['index.html#/login'])
+    this._router.navigate(['login'])
   }
 }

@@ -36,9 +36,6 @@ export class FilesComponent {
   protected utc = this.ts.offset;
   protected test = DateTime;
 
-
-
-
   constructor(
     private _datepipe:DatePipe,
     private _dragDrop: DragDropService,
@@ -56,7 +53,6 @@ export class FilesComponent {
   ngOnInit() {
     this.initForms();
     this.getFiles();
-
   }
 
   private initForms(){
@@ -107,12 +103,11 @@ export class FilesComponent {
         this._loader.setLoading(false);
         this.counter = fechResult.length;
       }
-
     });
-
-
   };
 
+
+  // TODO: Revisar tratamiento de fechas
   private calculateDate(timestamp: number){
     let time = this.test.fromMillis(timestamp).toUTC();
     if(time.month>=8 || time.month <=3){
@@ -177,6 +172,7 @@ export class FilesComponent {
     this.filesAdded = true;
   }
 
+  //TODO: podría extapolarse?
   private send() {
 
     this.forme = new FormGroup({

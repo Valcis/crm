@@ -36,9 +36,7 @@ export class SideNavComponent implements OnInit {
   constructor(private _cookie: CookiesService,
               private _user: UserService,
               private _router: Router)
-  {
-
-  }
+  { }
 
   async ngOnInit () {
     await this.getList();
@@ -84,7 +82,6 @@ export class SideNavComponent implements OnInit {
   protected changeLink(i:any){
     this.currLink=i;
   }
-
 
   protected onAnimationEventStart(event:any){
     if(event.toState === "sm"){

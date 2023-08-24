@@ -4,7 +4,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialService} from "../../../../../../shared/services/api/Historial/historial.service";
 import { Router } from '@angular/router';
 import {DateTime} from "luxon";
-import {locale} from "moment";
 
 
 @Component({
@@ -25,22 +24,24 @@ export class HistorialComponent implements OnInit{
   public fecthForm!: FormGroup;
   protected userSearch:string = "";
   protected counter:number= 0;
+  protected sortCol:string = "user";
+  protected sortDir:string = "asc";
   //Todo cambiar per model
   protected itemList:Array<any>=[];
   protected allResult:Array<any>=[];
 
 //TODO:pass to a model
   protected tiposRelacion = [
-    {k:"_CREA",v:"HISTORIAL_CREA"},
-    {k:"_MODIFICA",v:"HISTORIAL_MODIFICA"},
-    {k:"_BORRA",v:"HISTORIAL_BORRA"},
-    {k:"_CLONA",v:"HISTORIAL_CLONA"}
+    {k:"_CREA",v:"HISTORY.CREATE"},
+    {k:"_MODIFICA",v:"HISTORY.MODIFY"},
+    {k:"_BORRA",v:"HISTORY.DELETE"},
+    {k:"_CLONA",v:"HISTORY.CLONE"}
   ];
   private translateType:{ [key: string]: string; }={
-    "_CREA":"HISTORIAL_CREA",
-    "_MODIFICA":"HISTORIAL_MODIFICA",
-    "_BORRA":"HISTORIAL_BORRA",
-    "_CLONA":"HISTORIAL_CLONA",
+    "_CREA":"HISTORY.CREATE",
+    "_MODIFICA":"HISTORY.MODIFY",
+    "_BORRA":"HISTORY.DELETE",
+    "_CLONA":"HISTORY.CLONE",
   };
 
   constructor(private _fetch: HistorialService,
@@ -89,7 +90,7 @@ export class HistorialComponent implements OnInit{
 
         if (value.relacion_type === "_CREA"){
           let log ={
-            user: value.empl_nomb + value.empl_ape1 + value.empl_ape2 +"(" + value.user_name + ")",
+            user: ' '.concat(value.empl_nomb,' ',value.empl_ape1,' ',value.empl_ape2," (",value.user_name,")"),
             action: this.translateType[value.relacion_type],
             date: DateTime.fromMillis(value.relacion_data.creacion_ts).toUTC(),
             data: {
@@ -105,7 +106,7 @@ export class HistorialComponent implements OnInit{
 
         }else{
           let log ={
-            user: ' ' + value.empl_nomb + ' ' + value.empl_ape1 + ' ' + value.empl_ape2 + " (" + value.user_name + ")",
+            user: ' '.concat(value.empl_nomb,' ',value.empl_ape1,' ',value.empl_ape2," (",value.user_name,")"),
             action: this.translateType[value.relacion_type],
             date: DateTime.fromMillis(value.relacion_data.modificacion_ts).toFormat("DATETIME_SHORT_WITH_SECONDS"),
             data: {
@@ -128,10 +129,30 @@ export class HistorialComponent implements OnInit{
       //this._loader.setLoading(false);
       });
     }
-    protected searchName(eve:any){
+    protected searchName(){
       this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(this.userSearch.toLowerCase()));
       this.counter = this.itemList.length;
       this.currentPage=1;
-      console.log(eve)
+    }
+    //Todo: assar a pipe
+    protected changeSort( sortElement:string) {
+
+      if (this.sortCol === sortElement) {
+        this.sortDir = (this.sortDir === "asc" ? this.sortDir = "desc" : this.sortDir = "asc")
+      } else {
+        this.sortCol = sortElement;
+        this.sortDir = "asc";
+      }
+      let numberList = [];
+      let stringList = [];
+      numberList = this.allResult.filter(item => typeof item[this.sortCol] === "number").sort((a, b) =>a[this.sortCol] - b[this.sortCol]);
+      stringList= this.allResult.filter(item => typeof item[this.sortCol] === "string").sort((a, b) => {
+        if (a[this.sortCol] < b[this.sortCol]) return -1;
+        else if (a[this.sortCol] > b[this.sortCol]) return 1;
+        else return 0;
+      });
+      this.allResult = numberList.concat(stringList);
+      this.allResult = this.sortDir === 'asc' ? this.allResult : this.allResult.reverse();
+      this.searchName()
     }
 }

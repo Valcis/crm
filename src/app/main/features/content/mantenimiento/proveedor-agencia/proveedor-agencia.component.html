@@ -6,20 +6,20 @@
     <app_historial></app_historial>
   </div>
   <div class="card rounded-0">
-    <div class="card-title border-bottom">
+    <div class="card-title" (click)="providerFilter = !providerFilter">
       <!--card1 title-->
-      <h5 class="m-3"><i class="fa fa-filter"></i> {{'PROVIDERFLITER' | translate}}</h5>
+      <h5 class="m-3"><i class="fa fa-filter"></i> {{'PROVIDER.FLITER' | translate}}</h5>
     </div>
-    <div class="card-body">
+    <div class="card-body border-top" *ngIf="providerFilter">
       <!--card1 body-->
       <form class="form-group" [formGroup]="fecthForm" (submit)="submitSearch(fecthForm)">
         <div class="row">
           <div class="col-sm-3">
-            <input class="form-control col-sm-3" type="text" formControlName="nombre" placeholder="{{'PROVIDER' | translate}}">
+            <input class="form-control col-sm-3" type="text" formControlName="nombre" placeholder="{{'PROVIDER.NAME' | translate}}">
           </div>
           <div class="col-sm-7"></div>
           <div class="col-sm-2">
-            <button class="btn btn-search float-right" type="submit"><i class="fa fa-search"></i> {{'SEARCH' | translate}}</button>
+            <button class="btn btn-search float-right" type="submit"><i class="fa fa-search"></i> {{'COMMON.SEARCH' | translate}}</button>
           </div>
         </div>
       </form>
@@ -36,11 +36,11 @@
       <form class="form-group" [formGroup]="newItemForm" (submit)="newProvider()">
         <div class="row ">
           <div class="col-sm-3">
-            <input class="form-control" type="text" formControlName="nombre" placeholder="{{'PROVIDER' | translate}}">
+            <input class="form-control" type="text" formControlName="nombre" placeholder="{{'PROVIDER.CREATE' | translate}}">
           </div>
           <div class="col-sm-7"></div>
           <div class="col-sm-2">
-            <button class="btn btn-search float-right" type="submit"><i class="fa fa-plus"></i> {{'CREATE' | translate}}</button>
+            <button class="btn btn-search float-right" type="submit"><i class="fa fa-plus"></i> {{'COMMON.CREATE' | translate}}</button>
           </div>
         </div>
       </form>
@@ -52,8 +52,8 @@
       <!--card3 title-->
       </div>
       <div class="m-3">
-        <h5  class="float-left col-10">{{counter}}{{' '}}{{'RESULTS' | translate}}</h5>
-        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="download()"><i class="fa fa-download"></i>{{'EXPORT' | translate}}</button>
+        <h5  class="float-left col-10">{{counter}}{{' '}}{{'COMMON.RESULTS' | translate}}</h5>
+        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="saveDataInCSV('agency',itemList)"><i class="fa fa-download"></i>{{'COMMON.EXPORT' | translate}}</button>
       </div>
     <div class="card-body border-top">
       <!--card3 body-->
@@ -61,7 +61,7 @@
         <tr class="table-title background-title">
           <th class="left" style="width: 50px"></th>
           <th class="right">
-            <span class="ms-2 background-title"> {{'NAME' | translate}} </span>
+            <span class="ms-2 background-title"> {{'COMMON.NAME' | translate}} </span>
             <i
               class="pointer fa fa-sort-alpha-asc"
               *ngIf="testOrder('ASC') "
@@ -81,8 +81,8 @@
             <div ngbDropdown>
               <button class="btn btn-sm btn-search mx-3 remove-caret" id="cogBtn" ngbDropdownToggle><i class="fa fa-cog "></i></button>
               <div ngbDropdownMenu aria-labelledby="cogBtn">
-                <button ngbDropdownItem (click)="[(editName=element),open(newLink)]"><i class="fa fa-arrow-circle-right" ></i>{{'MODIFY' | translate}}</button>
-                <button ngbDropdownItem (click)="[(editName=element),deleteProvider()]"><i class="fa fa-remove" ></i>{{'delete' | translate}}</button>
+                <button ngbDropdownItem (click)="[(editName=element),open(newLink)]"><i class="fa fa-arrow-circle-right" ></i>{{" "}}{{'COMMON.MODIFY' | translate}}</button>
+                <button ngbDropdownItem (click)="[(editName=element),deleteProvider()]"><i class="fa fa-remove" ></i>{{" "}}{{'COMMON.DELETE' | translate}}</button>
               </div>
             </div>
           </td>
@@ -93,23 +93,33 @@
       </table>
     </div>
     <div class="card-footer ">
-      <form class="form-group" [formGroup]="fecthForm" (change)="submitSearch(fecthForm)">
-        <div formGroupName="datos_paginacion">
-          <select class="form-select" formControlName="num_resultados" type="submit">
-            <option value="5" selected> 5 {{' '}} {{'PERPAGE'}}</option>
-            <option value="10"> 10 {{' '}} {{'PERPAGE'}}</option>
-            <option value="20"> 20 {{' '}} {{'PERPAGE'}}</option>
-          </select>
+      <div class="row">
+        <div class="col">
+          <form class="form-group" [formGroup]="fecthForm" (change)="submitSearch(fecthForm)">
+            <div formGroupName="datos_paginacion">
+              <select class="form-select" formControlName="num_resultados" type="submit">
+                <option value="5" selected> 5 {{' '}} {{'PAGINATOR.PERPAGE' | translate}}</option>
+                <option value="10"> 10 {{' '}} {{'PAGINATOR.PERPAGE' | translate}}</option>
+                <option value="20"> 20 {{' '}} {{'PAGINATOR.PERPAGE' | translate}}</option>
+              </select>
+            </div>
+          </form>
         </div>
-      </form>
+        <div class="col"></div>
+        <div class="col">
+          <ngb-pagination (pageChange)="changeOfPage()" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
+            <ng-template ngbPaginationPrevious><</ng-template>
+            <ng-template ngbPaginationNext>></ng-template>
+          </ngb-pagination>
+        </div>
+      </div>
     </div>
   </div>
 
 
-
   <ng-template #newLink let-modal  class=" modal-sm">
     <div class="modal-header parent-center rounded-1">
-      <h4 class="modal-title centred" >{{'PROVIDER' | translate }}</h4>
+      <h4 class="modal-title centred" >{{'PROVIDER.PROVIDER' | translate }}</h4>
       <button type="button" class="close row btn" data-bs-dismiss="modal" style="color: black" (click)="modal.dismiss('close')">
         <span class="cross pointer" aria-hidden="true">×</span>
         <span class="sr-only ">Close</span></button>
@@ -117,7 +127,7 @@
 
       <div class="modal-body">
         <div>
-          {{'NAME' |translate}}
+          {{'PROVIDER.NAME' |translate}}
         </div>
         <form class="form-group" id="changeForm" (submit)="modifyProvider()" [formGroup]="changeItemForm">
           <input type="text" class="form-control" [(ngModel)]="editName[0]" formControlName="nombre">
@@ -126,9 +136,9 @@
       <div class="modal-footer">
         <div class="float-right">
           <button class=" btn btn-search m-1" data-bs-dismiss="modal" (click)="modal.dismiss('close')">
-            {{'CANCEL' | translate}}
+            {{'COMMON.CANCEL' | translate}}
           </button>
-          <button form="changeForm" class="btn btn-save m-1" type="submit">{{'SAVE' | translate}}</button>
+          <button form="changeForm" class="btn btn-save m-1" type="submit">{{'COMMON.SAVE' | translate}}</button>
         </div>
       </div>
   </ng-template>

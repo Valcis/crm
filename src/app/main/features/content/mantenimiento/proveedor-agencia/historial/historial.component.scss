@@ -49,6 +49,7 @@ button.close {
   border-color: #d2d2d2;
 }
 .btn-search{
+  width: -webkit-fill-available;
   border-color: #e7eaec;
   color: #676a6c !important
 
@@ -123,6 +124,7 @@ box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
   background: inherit;
   border: 0px !important;
   margin: 0 auto;
+  max-width: 100%;
   tr{
     td{
       padding: 8px;
@@ -138,6 +140,11 @@ box-shadow: inset 0 3px 5px rgb(0 0 0 / 13%);
 
 .green{
   color: #0f8007;
+  padding-left: 25px;
+}
+.blue{
+  color: #0000FF;
+  padding-left: 25px;
 }
 
 table{
@@ -167,4 +174,14 @@ table{
   border-color: #DDDDDD;
   color: inherit;
   box-shadow:unset;
+}
+.parent{
+  background-color: #fff;
+
+  display:  flex;
+  justify-content: left;
+  align-items: center;
+  overflow-x: hidden;}
+.child{
+
 }

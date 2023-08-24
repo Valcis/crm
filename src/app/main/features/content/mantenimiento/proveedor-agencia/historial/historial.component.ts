@@ -4,6 +4,12 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialService} from "../../../../../../shared/services/api/Historial/historial.service";
 import { Router } from '@angular/router';
 import {DateTime} from "luxon";
+import {
+  LogData,
+  logDataArray,
+  TiposRelacion,
+  TranslateType
+} from "../../../../../../shared/models/historial/type.historial";
 
 
 @Component({
@@ -30,19 +36,8 @@ export class HistorialComponent implements OnInit{
   protected itemList:Array<any>=[];
   protected allResult:Array<any>=[];
 
-//TODO:pass to a model
-  protected tiposRelacion = [
-    {k:"_CREA",v:"HISTORY.CREATE"},
-    {k:"_MODIFICA",v:"HISTORY.MODIFY"},
-    {k:"_BORRA",v:"HISTORY.DELETE"},
-    {k:"_CLONA",v:"HISTORY.CLONE"}
-  ];
-  private translateType:{ [key: string]: string; }={
-    "_CREA":"HISTORY.CREATE",
-    "_MODIFICA":"HISTORY.MODIFY",
-    "_BORRA":"HISTORY.DELETE",
-    "_CLONA":"HISTORY.CLONE",
-  };
+  protected tiposRelacion = TiposRelacion
+  private translateType=TranslateType;
 
   constructor(private _fetch: HistorialService,
               private _modal: NgbModal,
@@ -73,10 +68,10 @@ export class HistorialComponent implements OnInit{
       let localData:any = response;
       let fetchResult=[];
       fetchResult = localData.Salida.lineas;
-      this.itemList = [];
+      this.itemList;
       console.log(response)
       fetchResult.forEach((value:any) => {
-        //TODO:pass to model
+
         if(value.relacion_data.nombre[0] === ''){
           value.relacion_data.nombre[0] = '∅'
         }else{

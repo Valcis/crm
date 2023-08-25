@@ -4,6 +4,7 @@ import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {Router} from "@angular/router";
 import {UserService} from "../shared/services/api/user/user.service";
 import {BodySize, SideNavSize} from "./main.animations";
+import {sharedDataService} from "../shared/services/shared-data/shared-data.service";
 
 @Component({
   selector: 'app-main',
@@ -16,7 +17,6 @@ export class MainComponent implements OnInit {
   public detectResize(event:any): void {
     this.width = window.innerWidth;
   }
-
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() menu: EventEmitter<any> = new EventEmitter<any>();
 
@@ -30,7 +30,8 @@ export class MainComponent implements OnInit {
     private translate: TranslateService,
     private cookie: CookiesService,
     private _user: UserService,
-    private router: Router
+    private router: Router,
+    private _shared: sharedDataService
   ) {
     this.currentLang = this.cookie.getLanguage();
     this.translate.setDefaultLang(this.currentLang);
@@ -43,7 +44,7 @@ export class MainComponent implements OnInit {
     this._user.getActivitiesAlert();
     this._user.getNotifications();
     this.userData = this._user.userData.hasOwnProperty("details" && "menu") ? this._user.userData : this.router.navigate(['/login']);
-
+    this._shared.userData = this.userData;
     /* TODO : implementar ->
     this._user.getUsuarioCrmByEmplCode(); ??????????????????
     this._user.getBajaTemporalUsuario();  ?????????????????? */

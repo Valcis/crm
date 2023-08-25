@@ -8,15 +8,16 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CrmLoaderComponent,
-
   ],
   imports: [
+    BreadcrumbModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -36,6 +37,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   ],
   exports: [
     CrmLoaderComponent,
+
   ],
   providers: [TranslateModule, Title],
   bootstrap: [AppComponent]

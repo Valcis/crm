@@ -11,6 +11,8 @@ import {
 import {TranslateService} from "@ngx-translate/core";
 import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
 import {FormControl,FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
+import {sharedDataService} from "../../../../shared/services/shared-data/shared-data.service";
 
 
 
@@ -60,7 +62,9 @@ export class InicioDesarrolladorComponent implements OnInit{
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
-    protected _translate: TranslateService){
+    protected _translate: TranslateService,
+    private  _route: ActivatedRoute,
+    protected _shared: sharedDataService){
 
     this.summerConfig = {
       height: 500
@@ -89,9 +93,14 @@ export class InicioDesarrolladorComponent implements OnInit{
     };
   }
 
+  private sub:Array<any>=[];
   ngOnInit(): void {
     this.time();
     this.sliderModel = [5];
+
+
+    this._route.data.forEach(e => {this.sub.push(e)});
+    console.log("route",this.sub);
   }
 
   generatePDF() {

@@ -22,16 +22,16 @@ const routes: Routes = [
       key: 'crm/app/index/main'
     },
     children: [
-      {path: '#/crm_graficos', component: GraficosComponent},
-      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent},
-      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent}, //TODO: cambiar a lista
-      {path: '#/crm_calendario', component: CalendarioComponent},
-      {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
-      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
-      {path: '#/index/crm_lista_links', component: LinksComponent},
+      {path: '#/crm_graficos', component: GraficosComponent, data:{breadcrumb:{alias:"graf"}}},
+      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent, data:{breadcrumb:{alias:"initDev"}}},
+      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent, data:{breadcrumb:{alias:"providers"}}}, //TODO: cambiar a lista
+      {path: '#/crm_calendario', component: CalendarioComponent, data:{breadcrumb:{alias:"calendar"}}},
+      {path: '#/index/crm_lista_actividades', component: ActividadesComponent, data:{breadcrumb:{alias:"activitiesList"}}},
+      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent, data:{breadcrumb:{alias:"notificationList"}}},
+      {path: '#/index/crm_lista_links', component: LinksComponent, data:{breadcrumb:{alias:"links"}}},
 
-      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
-      {path: '#/index/crm_lista_ficheros', component: FilesComponent}
+      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent, data:{breadcrumb:{alias:"channelManager"}}},
+      {path: '#/index/crm_lista_ficheros', component: FilesComponent, data:{breadcrumb:{alias:"files"}}}
     ]
   }
 ];
@@ -41,4 +41,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class MainRoutingModule {
+  public patat = "string"
 }

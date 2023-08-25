@@ -1,18 +1,5 @@
 <div class="container-flex w-100 p-0 mx-4 fadeInRight" >
-  <div>
-    <div class="row wrapper border-bottom white-bg page-heading">
-      <div class="col-lg-9">
-        <h2>{{'title'|translate|uppercase}}</h2>
-        <ol class="breadcrumb">
-          <li><a href="index.html">{{'SUBGROUP'|translate}}</a>
-          </li>
-          <li class="active">
-            {{'  /  ' }}<strong>{{ 'PAGE'|translate}}</strong>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
+  <app-title [titulo]="_shared.userData.menu.menuList[1].descripcion"></app-title>
   <div class=" col mt-3no" >
     <!--TRANSLATE TEST-->
     <div class="row">

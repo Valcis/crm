@@ -29,10 +29,13 @@ import { NouisliderModule } from 'ng2-nouislider';
 import {NgxSummernoteModule} from "ngx-summernote";
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
+import {TitleComponent} from "../shared/components/title/title.component";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 
 @NgModule({
   declarations: [
+    TitleComponent,
     DragDropComponent,
     FilesComponent,
     DatosEconomicosComponent,
@@ -54,6 +57,7 @@ import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/
     ChannelManagerComponent
     ],
   imports: [
+    BreadcrumbModule,
     NgbTimepickerModule,
     NgxSummernoteModule,
     NouisliderModule,

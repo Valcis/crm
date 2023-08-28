@@ -99,5 +99,41 @@
   "PRODUCTION.VALUE": "Production value",
   "COMMISIONS.TYPE": "Description",
   "COMMISIONS.DESCRIPTION": "Official",
-  "COMMISIONS.LINK": "Final"
+  "COMMISIONS.LINK": "Final",
+
+  "PROVIDER.FLITER": "Provider's filter",
+  "PROVIDER.NAME": "Provider's name",
+  "PROVIDER.CREATE": "Create a provider",
+  "PROVIDER.PROVIDER": "Provider",
+
+  "COMMON.SEARCH": "Search",
+  "COMMON.CREATE": "Create",
+  "COMMON.SAVE": "Save",
+  "COMMON.CANCEL": "Cancel",
+  "COMMON.EXPORT": "Export",
+  "COMMON.NAME": "Name",
+  "COMMON.DELETE": "Delete",
+  "COMMON.MODIFY": "Modify",
+  "COMMON.RESULTS": "Result/s",
+
+  "PAGINATOR.PERPAGE": "elements per page",
+
+  "HISTORY.APEAR":"View History",
+  "HISTORY.HIDE":"Hide History",
+  "HISTORY.TITLE":"History of changes",
+  "HISTORY.RATE":"Exchange rate",
+  "HISTORY.FROM":"From",
+  "HISTORY.SHOW":"Show",
+  "HISTORY.ENTRIES":"entries",
+  "HISTORY.USER":"User",
+  "HISTORY.ACTION":"Action",
+  "HISTORY.DATA":"Data",
+  "HISTORY.DATE":"Date",
+  "HISTORY.NODE":"Node",
+  "HISTORY.CREATE":"CREATE",
+  "HISTORY.MODIFY":"MODIFY",
+  "HISTORY.DELETE":"DELETE",
+  "HISTORY.CLONE":"CLONE",
+  "HISTORY.SHOWING":"Showing",
+  "HISTORY.TO":"to"
 }

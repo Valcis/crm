@@ -11,7 +11,7 @@ import {NotificacionesComponent} from "./features/content/notificaciones/notific
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import {ChannelManagerComponent} from "./features/content/documentacion/channel_manager/channel_manager.component";
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
-
+import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
 
 const routes: Routes = [
   {
@@ -29,6 +29,7 @@ const routes: Routes = [
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
       {path: '#/index/crm_lista_links', component: LinksComponent},
+      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent},
 
       {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
       {path: '#/index/crm_lista_ficheros', component: FilesComponent}

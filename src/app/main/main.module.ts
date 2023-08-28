@@ -3,7 +3,7 @@ import {MainComponent} from "./main.component";
 import {AppRouterOutletDirective} from "../shared/directives/app-router-outlet.directive";
 import {CommonModule} from "@angular/common";
 import {MainRoutingModule} from "./main-routing.module";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {TranslateLoaderService} from "../shared/services/translate/translate-loader.service";
 import {TopNavComponent} from './features/top-nav/top-nav.component';
@@ -23,12 +23,27 @@ import {ChannelManagerComponent} from "./features/content/documentacion/channel_
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
-
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
-import {NgxSummernoteModule} from "ngx-summernote";
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
+import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
+import {HistorialComponent} from "./features/content/mantenimiento/proveedor-agencia/historial/historial.component";
+import {NgSelectModule} from '@ng-select/ng-select';
+import { Pipe, PipeTransform } from '@angular/core';
+import {stringPair} from "../shared/models/historial/type.historial"
+
+@Pipe({name: 'selectOptionsTranslate', pure:false})
+export class SelectOptionsTranslatePipe implements PipeTransform {
+  constructor(public translateService: TranslateService){}
+
+  transform(items: Array<stringPair>) : Array<stringPair> {
+    for(let item of items) {
+      item.v = this.translateService.instant(item.v);
+    }
+    return items;
+  }
+}
 
 
 @NgModule({
@@ -37,7 +52,9 @@ import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/
     FilesComponent,
     DatosEconomicosComponent,
     DatepickerComponent,
-
+    SelectOptionsTranslatePipe,
+    HistorialComponent,
+    ProveedorAgenciaComponent,
     MainComponent,
     AppRouterOutletDirective,
     TopNavComponent,
@@ -50,13 +67,12 @@ import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
-
     ChannelManagerComponent
     ],
   imports: [
     NgbTimepickerModule,
-    NgxSummernoteModule,
     NouisliderModule,
+    NgSelectModule,
     NgbPaginationModule,
     NgxDropzoneModule,
     CommonModule,

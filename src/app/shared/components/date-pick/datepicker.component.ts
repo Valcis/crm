@@ -82,7 +82,7 @@ export class DatepickerComponent implements OnInit{
       if(this.offset !== undefined && this.offset!== ""){
         currentTime =  DateTime.now().setZone(this.offset).toLocaleString(DateTime.TIME_24_SIMPLE);
       }else{
-        currentTime = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
+        currentTime =  DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE);
       }
       let testParse3 = currentTime.split(':', 2);
       this.time2 = {

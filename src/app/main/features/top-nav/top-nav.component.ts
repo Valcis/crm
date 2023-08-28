@@ -17,8 +17,8 @@ export class TopNavComponent implements OnInit{
   private user: any;
 
   langList = [
-    {code: 'en', lang: 'English', flag: "../../../../assets/images/flags/16/United-States.png"},
-    {code: 'es', lang: 'Español', flag: "../../../../assets/images/flags/16/Spain.png"},
+    {code: 'en', lang: 'English', flag: "assets/images/flags/16/United-States.png"},
+    {code: 'es', lang: 'Español', flag: "assets/images/flags/16/Spain.png"},
   ];
 
 

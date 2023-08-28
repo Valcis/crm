@@ -48,7 +48,7 @@ export class SideNavComponent implements OnInit {
         item.icono = 'fa ' + item.icono;
         this.menuList.push(item);
         return item;
-      })
+      });
     }
   };
 
@@ -60,7 +60,7 @@ export class SideNavComponent implements OnInit {
     if (this._user) {
       this._cookie.deleteSessionId();
     }
-    this._router.navigate(['/login'])
+    this._router.navigate(['login'])
   }
 
   private toggleOpen(item: any){

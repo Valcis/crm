@@ -48,7 +48,7 @@ export class TopNavComponent implements OnInit{
     if (this.user) {
       this._cookie.deleteSessionId();
     }
-    this._router.navigate(['/login'])
+    this._router.navigate(['index.html#/login'])
   }
 
 }

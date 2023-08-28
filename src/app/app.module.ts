@@ -7,7 +7,11 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
+// <<<<<<< HEAD
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+// =======
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+// >>>>>>> develop
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   exports: [
     CrmLoaderComponent,
   ],
-  providers: [TranslateModule, Title],
+  providers: [
+    TranslateModule,
+    Title,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

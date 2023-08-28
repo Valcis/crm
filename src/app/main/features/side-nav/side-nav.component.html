@@ -1,6 +1,4 @@
 <!--<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100" appSideClosed>-->
-
-
 <div >
   <div id="myGroup" *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100"  [@bigSmall]="(isExpandedFlag) ? animationCall() : 'sm'"
        (@bigSmall.done)="onAnimationEventEnd($event)"
@@ -69,14 +67,14 @@
                     [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
                 >
                   <div [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
-              <span class="sidenav-item">
-                <i [class]="item.icono" class="fa"></i>
-                <span *ngIf="isBig" >
-                  {{ formatName(item.descripcion) | translate }}
-                </span>
-                <i *ngIf="isBig" [ngClass]="isOpen === i ? 'fa-angle-down' : 'fa-angle-left'" class="fa right" ></i>
-                <!--                <span class="submenu-arrow"></span>-->
-              </span>
+                    <span class="sidenav-item">
+                      <i [class]="item.icono" class="fa"></i>
+                      <span *ngIf="isBig" >
+                        {{ formatName(item.descripcion) | translate }}
+                      </span>
+                      <i *ngIf="isBig" [ngClass]="isOpen === i ? 'fa-angle-down' : 'fa-angle-left'" class="fa right" ></i>
+                      <!--                <span class="submenu-arrow"></span>-->
+                    </span>
                     <div [ngClass]="!(isBig || showSm === i) ? 'hide':''">
                       <div [id]="'accordion-' + i + '-collapse'" data-bs-parent="#myGroup" class="collapse"
                            [attr.aria-labelledby]="'accordion-' + i + '-header'"

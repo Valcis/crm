@@ -10,19 +10,19 @@ import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 export class TopNavLoginComponent {
   public lang: string = '';
   public langList = [
-    {code: 'en', lang: 'English', flag: "../../../assets/images/flags/16/United-States.png"},
-    {code: 'es', lang: 'Español', flag: "../../../assets/images/flags/16/Spain.png"},
+    {code: 'en', lang: 'English', flag: "assets/images/flags/16/United-States.png"},
+    {code: 'es', lang: 'Español', flag: "assets/images/flags/16/Spain.png"},
   ];
   public backgroundImage: Array<string> = [
-    "../../../assets/images/login/barcelona.jpg",
-    "../../../assets/images/login/madrid.jpg",
-    "../../../assets/images/login/berlin.jpg",
-    "../../../assets/images/login/bruselas.jpg",
-    "../../../assets/images/login/budapest.jpg",
-    "../../../assets/images/login/lisboa.jpg",
-    "../../../assets/images/login/munich.jpg",
-    "../../../assets/images/login/nueva-york.jpg",
-    "../../../assets/images/login/praga.jpg"
+    "assets/images/login/barcelona.jpg",
+    "assets/images/login/madrid.jpg",
+    "assets/images/login/berlin.jpg",
+    "assets/images/login/bruselas.jpg",
+    "assets/images/login/budapest.jpg",
+    "assets/images/login/lisboa.jpg",
+    "assets/images/login/munich.jpg",
+    "assets/images/login/nueva-york.jpg",
+    "assets/images/login/praga.jpg"
   ];
 
   @Output() backImgEvent = new EventEmitter<string>();

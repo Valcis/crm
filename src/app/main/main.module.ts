@@ -23,13 +23,11 @@ import {ChannelManagerComponent} from "./features/content/documentacion/channel_
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
 import {NgxDropzoneModule} from "ngx-dropzone";
 import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
-
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
 import {FroalaEditorModule, FroalaViewModule} from "angular-froala-wysiwyg";
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import {TimeZoneComponent} from "./features/content/inicio-desarrollador/time-zone/time-zone.component";
 
 
@@ -56,7 +54,6 @@ import {TimeZoneComponent} from "./features/content/inicio-desarrollador/time-zo
     ChannelManagerComponent
     ],
   imports: [
-    AngularEditorModule,
     FroalaEditorModule,
     FroalaViewModule,
     NgbTimepickerModule,

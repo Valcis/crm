@@ -91,8 +91,7 @@ export class DatepickerComponent implements OnInit{
         hour: +testParse3[0],
         minute: +testParse3[1]
       }
-      console.log(this.offset);
-      console.log(currentTime);
+
     }else{
       this.time2 = {
         hour: this.initTime.hour,

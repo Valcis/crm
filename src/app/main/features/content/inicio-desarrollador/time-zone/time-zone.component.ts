@@ -50,7 +50,6 @@ export class TimeZoneComponent implements OnInit{
         this.continentList.push(continentZone);
       }
     }
-    console.log(this.continentList);
   }
 
   onChange(){

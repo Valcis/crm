@@ -104,7 +104,6 @@ export class InicioDesarrolladorComponent implements OnInit{
   }
 
   async getActualTitle() {
-    console.log(this.htmlContent)
     this.aTitle = this._title.getTitle().valueOf();
     return this.aTitle;
   }

@@ -107,7 +107,7 @@
         </div>
         <div class="col"></div>
         <div class="col">
-          <ngb-pagination (pageChange)="changeOfPage()" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true"  [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
+          <ngb-pagination (pageChange)="changeOfPage($event)" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true"  [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
             <ng-template ngbPaginationPrevious><</ng-template>
             <ng-template ngbPaginationNext>></ng-template>
           </ngb-pagination>

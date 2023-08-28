@@ -152,7 +152,10 @@ export class ProveedorAgenciaComponent {
       return value === this.fecthForm.get('datos_paginacion.tipo_orden')?.value;
   }
 
-  protected changeOfPage(){
+  protected changeOfPage(event:any){
+    let num: number = +event;
+    this.currentPage = num;
+    this.fecthForm.get('datos_paginacion')?.get('pagina')?.setValue(event);
     this.getProveedores(this.currentPage);
 
   }

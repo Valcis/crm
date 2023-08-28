@@ -15,7 +15,7 @@
         <div class="col-6">
           <span>{{"HISTORY.RATE" | translate}}</span>
 
-          <ng-select [items]="tiposRelacion"
+          <ng-select [items]="tiposRelacion | selectOptionsTranslate"
                      bindLabel="v"
                      bindValue="k"
                      [multiple]="true"
@@ -28,7 +28,7 @@
           <span>{{"HISTORY.FROM" |translate}}</span>
         </div>
         <div class="col-3">
-          <button class="btn btn-search" (click)="getHistory();"><i class="fa fa-search"></i> {{"COMMON.SEARCH"|translate}}</button>
+          <button class="btn btn-search allWidth" (click)="getHistory();"><i class="fa fa-search"></i> {{"COMMON.SEARCH"|translate}}</button>
         </div>
       </div>
       <div class="row m-3">
@@ -39,25 +39,32 @@
       </div>
       <div class="row">
         <table class="p-3 table table-striped table-bordered table-hover ">
-          <thead>
+          <thead class="allWidth">
             <tr>
-              <th *ngIf="fields.includes('USER')" (click)="changeSort('user')">
+              <th *ngIf="fields.includes('USER')" (click)="changeSort('user','string')">
                 <ng-container *ngIf="this.sortCol === 'user'; then selectedCarr" ></ng-container>
-                {{'HISTORY.USER' | translate}}
+                  {{'HISTORY.USER' | translate}}
                 <ng-container *ngIf="this.sortCol === 'user'; then selectedList;else orderNotSelect" ></ng-container>
               </th>
-              <th *ngIf="fields.includes('ACTION')" (click)="changeSort('action')">
-                <ng-container *ngIf="this.sortCol === 'action'; then selectedCarr" ></ng-container>
-                {{'HISTORY.ACTION' | translate}}
+              <th *ngIf="fields.includes('ACTION')" class="action" (click)="changeSort('action','string')">
+                <span><ng-container *ngIf="this.sortCol === 'action'; then selectedCarr" ></ng-container></span>
+                  {{'HISTORY.ACTION' | translate}}
                 <ng-container *ngIf="this.sortCol === 'action'; then selectedList;else orderNotSelect" ></ng-container>
               </th>
-              <th *ngIf="fields.includes('DATE')" (click)="changeSort('date')">
+              <th *ngIf="fields.includes('DATE')" (click)="changeSort('date','date')">
                 <ng-container *ngIf="this.sortCol === 'date'; then selectedCarr" ></ng-container>
-                {{'HISTORY.DATA' | translate}}
+                  {{'HISTORY.DATE' | translate}}
                 <ng-container *ngIf="this.sortCol === 'date'; then selectedList;else orderNotSelect" ></ng-container>
               </th>
-              <th *ngIf="fields.includes('DATA')"> {{'HISTORY.DATE' | translate}}</th>
-              <th *ngIf="fields.includes('NODE')"> {{'HISTORY.NODE' | translate}}</th>
+              <th *ngIf="fields.includes('DATA')" (click)="changeSort('data','data')">
+                <ng-container *ngIf="this.sortCol === 'data'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.DATA' | translate}}
+                <ng-container *ngIf="this.sortCol === 'data'; then selectedList;else orderNotSelect" ></ng-container></th>
+              <th *ngIf="fields.includes('NODE')" (click)="changeSort('node','node')">
+                <ng-container *ngIf="this.sortCol === 'node'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.NODE' | translate}}
+                <ng-container *ngIf="this.sortCol === 'node'; then selectedList;else orderNotSelect" ></ng-container>
+              </th>
               <ng-template #selectedCarr>
                 <ng-container *ngIf="this.sortDir === 'asc'; then orderUpCarr; else orderDownCarr" ></ng-container>
               </ng-template>
@@ -77,7 +84,7 @@
                 <i class="fa fa-sort-amount-desc float-right"></i>
               </ng-template>
               <ng-template #orderNotSelect>
-                <i class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i>
+                <i class="fa fa-arrows-v float-right" aria-hidden="true"></i>
               </ng-template>
             </tr>
           </thead>
@@ -91,11 +98,11 @@
                 <tbody class="dataTable">
                 <tr>
                   <td><strong>nombre:</strong></td>
-                  <td *ngIf="log.data.from !== '∅';else noDat"><span class="green"> {{log.data.from}}</span></td>
+                  <td *ngIf="log.data.from !== '∅';else noDat"><span class="green dataItem" > {{log.data.from}}</span></td>
                   <td><i class="fa fa-long-arrow-right"></i></td>
-                  <td *ngIf="log.data.to !== '∅';else noDat"><span class="green">{{log.data.to}}</span></td>
+                  <td *ngIf="log.data.to !== '∅';else noDat"><span class="green dataItem">{{log.data.to}}</span></td>
                   <ng-template #noDat>
-                    <td> ∅</td>
+                    <td><span class="dataItem">∅</span></td>
                   </ng-template>
                 </tr>
                 </tbody>

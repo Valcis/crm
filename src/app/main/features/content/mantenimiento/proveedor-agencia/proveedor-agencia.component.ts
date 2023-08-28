@@ -1,11 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProveedorAgenciaService} from "../../../../../shared/services/api/maintenence/proveedor-agencia-service";
 import {translateType} from "../../../../../shared/models/documentation/type.model";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {CsvService} from "../../../../../shared/services/csv/csv.Service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {TranslateService} from "@ngx-translate/core";
+import {DateTime} from "luxon";
+import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
 
 
 @Component({
@@ -20,14 +22,13 @@ export class ProveedorAgenciaComponent {
   public changeItemForm!: FormGroup;
   public DeleteItemForm!: FormGroup;
   private historial:string = "";
-  protected counter:number = 3;
+  protected counter:number = 0;
   protected providerCreator:boolean=false;
   protected providerFilter:boolean=true;
-  protected itemList:any[]=[];
-  protected asc:boolean = true;
+  protected itemList:(string | number)[][]=[];
   private exportFiltro = {nombre: ""};
-  private modalRef :any;
-  protected editName:any[] = [];
+  private modalRef! :NgbModalRef;
+  protected editName:Array<string|number>= [];
 
   protected pageSize:number=5;
   protected currentPage:number=1;
@@ -58,12 +59,12 @@ export class ProveedorAgenciaComponent {
       neo_id:new FormControl<number>(0)
     });
     this.DeleteItemForm = new FormGroup({
-      neo_id:new FormControl<number>(0)
+      neo_id:new FormControl<string>("")
     });
   }
 
 
-  protected submitSearch(form:any) {
+  protected submitSearch(form:FormGroup) {
     this.pageSize = this.fecthForm.get("datos_paginacion")?.get("num_resultados")?.value;
     if (form.status === 'VALID') {
       this.getProveedores(1);
@@ -93,10 +94,11 @@ export class ProveedorAgenciaComponent {
       this.counter = localData.Salida.datos.num_elementos;
       this.itemList = [];
 
-      fetchResult.forEach((value:any) => {
+      fetchResult.forEach((value:{nombre:string, neo_id:number}) => {
         this.itemList.push([value.nombre, value.neo_id]);
       });
       //this._loader.setLoading(false);
+      console.log(this.itemList)
       this.exportFiltro.nombre = this.fecthForm.value.nombre;
     });
   };
@@ -107,13 +109,18 @@ export class ProveedorAgenciaComponent {
     })
   }
   protected modifyProvider(){
-    this._fetch.changeProveedor(this.changeItemForm.value,this.historial).subscribe(response =>{
+    let date = DateTime.now().setZone('utc');
+    let logHistorial:LogHistorial = {
+      nombre: this.historial,
+      modificacion_ts: date.toMillis()
+    };
+    this._fetch.changeProveedor(this.changeItemForm.value,logHistorial).subscribe(response =>{
       this.modalRef.dismiss('close');
       this.getProveedores(1);
     })
   }
   protected deleteProvider(){
-    this.DeleteItemForm.patchValue({ neo_id: this.editName[1]});
+    this.DeleteItemForm.patchValue({ neo_id: this.editName[1].toString()});
     this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant(" "), " ").then(
       (res:any)=>{
         if (res.isConfirmed) {
@@ -125,8 +132,8 @@ export class ProveedorAgenciaComponent {
     });
   };
 
-  open(content : any) {
-    this.historial = this.editName[0];
+  open(content : TemplateRef<any>) {
+    this.historial = this.editName[0].toString();
     this.changeItemForm.patchValue({ neo_id: this.editName[1]});
     this.modalRef = this._modal.open(content, {
       windowClass: 'modal-element',
@@ -142,8 +149,7 @@ export class ProveedorAgenciaComponent {
   }
 
   protected testOrder(value:string){
-    let fetchInfo:any = value;
-      return fetchInfo === this.fecthForm.get('datos_paginacion.tipo_orden')?.value;
+      return value === this.fecthForm.get('datos_paginacion.tipo_orden')?.value;
   }
 
   protected changeOfPage(){

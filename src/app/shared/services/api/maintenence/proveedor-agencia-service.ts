@@ -3,6 +3,7 @@ import {GenericRequest} from "../../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {CookiesService} from "../../cookies/cookies.service";
+import {LogHistorial} from "../../../models/manteninence/proveedor-agencia.model";
 const { DateTime } = require("luxon");
 
 
@@ -42,23 +43,16 @@ export class ProveedorAgenciaService extends CrmService {
       Metodo: "NewProveedorTrabajaAgencia",
       Entrada: {datos_peticion:data}
     };
-    console.log(modifiedproviderAgencyBodyRq)
     return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 
-  public changeProveedor = (data:any,historial: string) =>{
-    let date = DateTime.now().setZone('utc');
-
+  public changeProveedor = (data: any, historial: LogHistorial) =>{
     const modifiedproviderAgencyBodyRq = {
       ...this.providerAgencyBodyRq,
       Metodo: "SetProveedorTrabajaAgencia",
       Entrada: {datos_peticion:data},
-      setHistorial_cambios:{
-        nombre:"historial",
-        modificacion_ts:date.toMillis()
-      }
+      setHistorial_cambios:historial
     };
-    console.log(modifiedproviderAgencyBodyRq);
     return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 
@@ -66,9 +60,8 @@ export class ProveedorAgenciaService extends CrmService {
     const modifiedproviderAgencyBodyRq = {
       ...this.providerAgencyBodyRq,
       Metodo: "DeleteProveedorTrabajaAgencia",
-      Entrada:{datos_peticion:{neo_id:data.neo_id.toString()}}
+      Entrada:{datos_peticion:data}
     };
-    console.log(modifiedproviderAgencyBodyRq)
     return this.sendPost(modifiedproviderAgencyBodyRq);
   };
 }

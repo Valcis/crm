@@ -13,12 +13,13 @@ export const TranslateType:{ [key: string]: string; }={
 };
 
 
-export const TiposRelacion = [
+export const TiposRelacion:Array<stringPair> = [
   {k:"_CREA",v:"HISTORY.CREATE"},
   {k:"_MODIFICA",v:"HISTORY.MODIFY"},
   {k:"_BORRA",v:"HISTORY.DELETE"},
   {k:"_CLONA",v:"HISTORY.CLONE"}
 ];
+export interface stringPair { k:string, v:string }
 
 export interface LogData {
   user: string,

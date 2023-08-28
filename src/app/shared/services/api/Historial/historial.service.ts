@@ -34,7 +34,6 @@ export class HistorialService extends CrmService {
       Metodo:"GetHistorialCambiosListado",
       Entrada: entrada,
     URL:link};
-    console.log(ModifiedHistorialBodyRq)
     return this.sendPost(ModifiedHistorialBodyRq);
   }
 

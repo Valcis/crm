@@ -3,7 +3,7 @@ import {MainComponent} from "./main.component";
 import {AppRouterOutletDirective} from "../shared/directives/app-router-outlet.directive";
 import {CommonModule} from "@angular/common";
 import {MainRoutingModule} from "./main-routing.module";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
 import {TranslateLoaderService} from "../shared/services/translate/translate-loader.service";
 import {TopNavComponent} from './features/top-nav/top-nav.component';
@@ -23,10 +23,25 @@ import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/provee
 import {HistorialComponent} from "./features/content/mantenimiento/proveedor-agencia/historial/historial.component";
 import {NgSelectModule} from '@ng-select/ng-select';
 
+import { Pipe, PipeTransform } from '@angular/core';
+import {stringPair} from "../shared/models/historial/type.historial"
+
+@Pipe({name: 'selectOptionsTranslate', pure:false})
+export class SelectOptionsTranslatePipe implements PipeTransform {
+  constructor(public translateService: TranslateService){}
+
+  transform(items: Array<stringPair>) : Array<stringPair> {
+    for(let item of items) {
+      item.v = this.translateService.instant(item.v);
+    }
+    return items;
+  }
+}
 
 
 @NgModule({
   declarations: [
+    SelectOptionsTranslatePipe,
     HistorialComponent,
     ProveedorAgenciaComponent,
     MainComponent,

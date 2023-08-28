@@ -29,7 +29,7 @@
   <div class="card rounded-0" >
     <div class="card-title pointer " (click)="providerCreator = !providerCreator">
       <!--card2 title-->
-      <h5 class="m-3"><i class="fa fa-plus"></i>{{'PROVIDERCREATOS' | translate}} </h5>
+      <h5 class="m-3"><i class="fa fa-plus"></i>{{'PROVIDER.CREATE' | translate}} </h5>
     </div>
     <div class="card-body border-top" *ngIf="providerCreator">
       <!--card2 body-->
@@ -107,7 +107,7 @@
         </div>
         <div class="col"></div>
         <div class="col">
-          <ngb-pagination (pageChange)="changeOfPage()" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
+          <ngb-pagination (pageChange)="changeOfPage()" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true"  [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
             <ng-template ngbPaginationPrevious><</ng-template>
             <ng-template ngbPaginationNext>></ng-template>
           </ngb-pagination>

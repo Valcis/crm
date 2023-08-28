@@ -25,10 +25,10 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
-import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
-import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
+import {DatepickerComponent} from "../shared/components/date-pick/datepicker.component";
+import {DatosEconomicosComponent} from "../shared/components/datos-economicos/datos-economicos.component";
 import {FroalaEditorModule, FroalaViewModule} from "angular-froala-wysiwyg";
-import {TimeZoneComponent} from "./features/content/inicio-desarrollador/time-zone/time-zone.component";
+import {TimeZoneComponent} from "../shared/components/time-zone/time-zone.component";
 
 
 @NgModule({

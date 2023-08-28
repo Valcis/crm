@@ -1,8 +1,8 @@
 
 import {Component, Input, OnInit, EventEmitter, Output, SimpleChanges} from "@angular/core";
 import {NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
-import {CustomDateParserFormatter, DateAdapterService} from "../../../../../shared/services/datepicker/date-adapter.service";
-import {timepick} from "../../../../../shared/models/inicio-desarrollador.model";
+import {CustomDateParserFormatter, DateAdapterService} from "../../services/datepicker/date-adapter.service";
+import {timepick} from "../../models/inicio-desarrollador.model";
 import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {FormGroup,FormControl} from "@angular/forms";
@@ -28,10 +28,9 @@ export class DatepickerComponent implements OnInit{
   @Output() newDay = new EventEmitter<NgbDate>();
   @Output() newTime = new EventEmitter<timepick>();
 
-  protected tz: any;
-  protected ts: any;
-  protected utc: any;
-  protected formatedTime: any;
+  protected ts!: DateTime;
+  protected utc!: DateTime;
+  protected formatedTime!: string;
   protected model2?: NgbDate = undefined;
   protected initialTime!: NgbDate;
   protected time2!: timepick;
@@ -54,7 +53,6 @@ export class DatepickerComponent implements OnInit{
   // TODO: Recoger el timezone y cambiarlo dependiendo del perfil
 
   async time() {
-    this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);

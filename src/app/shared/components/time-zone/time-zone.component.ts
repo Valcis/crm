@@ -2,11 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl,FormGroup, Validators} from "@angular/forms";
 import {DateTime} from "luxon";
-import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {ContinentZone,TimeZone} from "../../models/time-zone/time-zone.module"
 
-interface TimeZone {name: string, offset:string} //Todo:a un model
-interface ContinentZone {name: string, zones:Array<TimeZone>} //Todo:a un model
-//interface TimeZone {name: string, offset:string}; //Todo:a un model
 
 @Component({
   selector: 'app-time-zone',

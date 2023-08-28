@@ -9,7 +9,7 @@ import {
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
-import {FormControl,FormGroup, Validators, FormsModule} from "@angular/forms";
+import {FormControl,FormGroup, Validators} from "@angular/forms";
  import 'froala-editor/js/plugins.pkgd.min.js';
 
 import 'froala-editor/js/third_party/font_awesome.min';

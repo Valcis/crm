@@ -1,3 +1,6 @@
+@import "~nouislider/dist/nouislider.css";
+@import "~summernote/dist/summernote-bs5.min.css";
+
 .btn,
 .btn:hover,
 .btn:focus,
@@ -15,3 +18,41 @@
   background-color: #e6e6e6 !important;
   border-radius: 1px;
 }
+
+.dayBar{
+  height: 40px;
+  margin-top: 37px;
+}
+.noiuslider{
+
+  width: 310px;
+
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.white-bg{
+  background-color: #FFFFFF;
+}
+.page-heading {
+  border-top: 0;
+  padding: 0 10px 20px 10px;
+}
+h2{
+  font-size: 24px;
+  font-weight: 100;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  line-height: 1.1;
+  color: inherit;
+}
+.breadcrumb > li a {
+  color: inherit;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+.summernote{width: 97%}

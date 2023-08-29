@@ -97,6 +97,6 @@ export class DatepickerComponent implements OnInit{
     this.newTime.emit(this.time2);
   }
   actualizeDay(){
-    this.newDay.emit(this.model2);
+    this.newDay.emit(this.model2 ===null ? undefined :this.model2);
   }
 }

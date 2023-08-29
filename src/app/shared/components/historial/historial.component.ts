@@ -25,7 +25,7 @@ export class HistorialComponent implements OnInit{
   protected pageSize: number=10;
   public fecthForm!: FormGroup;
   protected userSearch:string = "";
-  protected dataSearch:DateTime | string = "";
+  protected dataSearch:DateTime | undefined;
   protected counter:number= 0;
   protected sortCol:string = "user";
   protected sortDir:string = "asc";
@@ -218,8 +218,8 @@ export class HistorialComponent implements OnInit{
   }
 
   protected getData(event:any){
-    if(event === ""){
-      this.dataSearch = "";
+    if(event === undefined){
+      this.dataSearch = undefined;
     }else{
       this.dataSearch = DateTime.fromFormat(event, "d-M-yyyy");
     }
@@ -231,10 +231,10 @@ export class HistorialComponent implements OnInit{
   }
 
   private searchDate(){
-    if( this.dataSearch !== ""){
+    if( this.dataSearch !== undefined){
       this.itemList = this.itemList.filter(e => {
         let eachDate = DateTime.fromFormat(e.date.split(" ")[0], "d/M/yyyy" );
-        return eachDate >= this.dataSearch;
+        return eachDate >= this.dataSearch!;
       });
     }
   }

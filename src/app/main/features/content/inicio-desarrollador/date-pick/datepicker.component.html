@@ -10,7 +10,7 @@
              name="d2"
              class="form-control"
              placeholder="dd/mm/yyyy"
-             (ngModelChange)="actualizeTime()"
+             (ngModelChange)="actualizeDay()"
              [startDate]="initialTime"
       />
 
@@ -24,7 +24,7 @@
   <!--    TIMEPICKER -->
   <div class="col-sm-4 clock">
     <div *ngIf="showTime" class="text-left " >
-      <ngb-timepicker [(ngModel)]="time2" (ngModelChange)="actualizeDay()"></ngb-timepicker>
+      <ngb-timepicker [(ngModel)]="time2" (ngModelChange)="actualizeTime()"></ngb-timepicker>
     </div>
   </div>
 

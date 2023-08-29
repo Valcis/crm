@@ -44,7 +44,7 @@ export class SwalService {
       scrollbarPadding: false,
       heightAuto: false,
       title:title,
-      text: text+':' + variable,
+      text: text + variable,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#DD6B55",

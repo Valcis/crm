@@ -99,5 +99,4 @@ export class DatepickerComponent implements OnInit{
   actualizeDay(){
     this.newDay.emit(this.model2);
   }
-
 }

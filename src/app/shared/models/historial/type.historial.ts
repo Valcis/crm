@@ -22,20 +22,19 @@ export const TiposRelacion:Array<stringPair> = [
 export interface stringPair { k:string, v:string }
 
 export interface LogData {
+  [key: string]:string| dataLog| nodeLog | number | null,
   user: string,
   action: string,
-  date:string | any,
-  data: {
-    from: string,
-    to: string,
-  },
-  node: {
-    id: string,
-    nombre: string
-  }
+  date: string |null,
+  data: dataLog,
+  node: nodeLog
 }
 
-export interface logDataArray {
-  [index: number | string]: LogData
-
+interface dataLog {
+  from: string,
+  to: string,
+}
+interface nodeLog {
+  id: string,
+  nombre: string
 }

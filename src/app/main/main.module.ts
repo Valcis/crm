@@ -28,7 +28,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
 import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
 import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
-import {HistorialComponent} from "./features/content/mantenimiento/proveedor-agencia/historial/historial.component";
+import {HistorialComponent} from "../shared/components/historial/historial.component";
 import {NgSelectModule} from '@ng-select/ng-select';
 import { Pipe, PipeTransform } from '@angular/core';
 import {stringPair} from "../shared/models/historial/type.historial"

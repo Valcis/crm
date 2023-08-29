@@ -7,8 +7,8 @@
   </button></div>
   <div class="heigt-35"></div>
   <div *ngIf="historyButton" class="card">
-    <div class="card-title">
-      <i class="fa fa-refresh"></i> {{"HISTORY.TITLE" | translate}}
+    <div class="card-title border-bottom">
+      <h5 class = "m-3"><i class="fa fa-refresh"></i> {{"HISTORY.TITLE" | translate}}</h5>
     </div>
     <div class="card-body">
       <div class="row">
@@ -26,8 +26,10 @@
         </div>
         <div class="col-3">
           <span>{{"HISTORY.FROM" |translate}}</span>
+          <app-datepicker (newDay)="getData($event)" ></app-datepicker>
         </div>
         <div class="col-3">
+          <hr class="searchSeparator">
           <button class="btn btn-search allWidth" (click)="getHistory();"><i class="fa fa-search"></i> {{"COMMON.SEARCH"|translate}}</button>
         </div>
       </div>
@@ -35,7 +37,7 @@
         <div class="col-sm-3 parent">
           <label class="child m-2">{{"HISTORY.SHOW" | translate }}</label> <select class="me-2 child form-select" [(ngModel)]="pageSize"><option>10</option><option>25</option><option>50</option><option>100</option></select> <label class="child ms-2">{{"entries"}}</label></div>
         <div class="col-3"></div>
-        <div class="col-sm-5 parent"><label class="child">Search: </label> <input class="child form-control input-sm" (change)="searchName()" [(ngModel)]="userSearch" type="text"></div>
+        <div class="col-sm-5 parent"><label class="child">Search: </label> <input class="child form-control input-sm" (change)="searchAll()" [(ngModel)]="userSearch" type="text"></div>
       </div>
       <div class="row">
         <table class="p-3 table table-striped table-bordered table-hover ">
@@ -88,7 +90,12 @@
               </ng-template>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="noResults">
+          <th class="well">
+            {{"GENERAL.NORESULTS" | translate}}
+          </th>
+          </tbody>
+          <tbody *ngIf="!noResults">
           <tr *ngFor="let log of itemList | slice: (currentPage-1) * pageSize : currentPage * pageSize">
             <td *ngIf="fields.includes('USER')" >{{log.user | translate}}</td>
             <td *ngIf="fields.includes('ACTION')" >{{log.action | translate}}</td>
@@ -113,11 +120,11 @@
                 <tbody class="innerTD">
                 <tr class="innerTr">
                   <td ><strong>neo_id</strong></td>
-                  <td class="blue">{{log.node.id}}</td>
+                  <td class="dataItem blue">{{log.node.id}}</td>
                 </tr>
                 <tr class="innerTr">
-                  <td class="innerTD "><strong>nombre</strong></td>
-                  <td class="innerTD green">{{log.node.nombre}}</td>
+                  <td><strong>nombre</strong></td>
+                  <td class="dataItem green">{{log.node.nombre}}</td>
                 </tr>
                 </tbody>
               </table>

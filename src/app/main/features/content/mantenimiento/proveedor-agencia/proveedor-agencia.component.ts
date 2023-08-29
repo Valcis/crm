@@ -1,13 +1,13 @@
 import {Component, TemplateRef} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProveedorAgenciaService} from "../../../../../shared/services/api/maintenence/proveedor-agencia-service";
-import {translateType} from "../../../../../shared/models/documentation/type.model";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {CsvService} from "../../../../../shared/services/csv/csv.Service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
+import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 
 
 @Component({
@@ -37,7 +37,10 @@ export class ProveedorAgenciaComponent {
               private _modal: NgbModal,
               private  _csvService: CsvService,
               private _swal: SwalService,
-              private _translate:TranslateService) {
+              private _translate:TranslateService,
+              private _loader: CrmLoaderService,
+
+  ) {
     this.loadForms();
     this.getProveedores(1);
   }
@@ -86,7 +89,7 @@ export class ProveedorAgenciaComponent {
     if (pagina !== undefined) {
       this.fecthForm.patchValue({ datos_paginacion: {pagina:this.currentPage}});
     }
-
+    this._loader.setLoading(true);
     this._fetch.getProveedores(this.fecthForm.value).subscribe(response => {
       let localData:any = response;
       let fetchResult=[];
@@ -97,8 +100,7 @@ export class ProveedorAgenciaComponent {
       fetchResult.forEach((value:{nombre:string, neo_id:number}) => {
         this.itemList.push([value.nombre, value.neo_id]);
       });
-      //this._loader.setLoading(false);
-      console.log(this.itemList)
+      this._loader.setLoading(false);
       this.exportFiltro.nombre = this.fecthForm.value.nombre;
     });
   };
@@ -114,9 +116,12 @@ export class ProveedorAgenciaComponent {
       nombre: this.historial,
       modificacion_ts: date.toMillis()
     };
+    this._loader.setLoading(true);
     this._fetch.changeProveedor(this.changeItemForm.value,logHistorial).subscribe(response =>{
       this.modalRef.dismiss('close');
       this.getProveedores(1);
+      this._loader.setLoading(false);
+
     })
   }
   protected deleteProvider(){
@@ -124,9 +129,12 @@ export class ProveedorAgenciaComponent {
     this._swal.swalConfirmationRequest(this._translate.instant('LINKS.ALERT_TITLE_DELETE'),this._translate.instant(" "), " ").then(
       (res:any)=>{
         if (res.isConfirmed) {
+          this._loader.setLoading(true);
           this._fetch.deleteProveedor(this.DeleteItemForm.value).subscribe(response => {
             this._swal.swalSucces(this._translate.instant('LINKS.ALERT_RESPONSE1'),this._translate.instant(' '));
             this.getProveedores(1);
+            this._loader.setLoading(false);
+
           });
         }
     });
@@ -153,12 +161,14 @@ export class ProveedorAgenciaComponent {
   }
 
   protected changeOfPage(event:any){
+    this._loader.setLoading(true);
     let num: number = +event;
     this.currentPage = num;
     this.fecthForm.get('datos_paginacion')?.get('pagina')?.setValue(event);
     this.getProveedores(this.currentPage);
-
+    this._loader.setLoading(false);
   }
+
   public saveDataInCSV(name: string, data: Array<any>): void {
     let csvContent = this._csvService.saveDataInCSV(data);
 

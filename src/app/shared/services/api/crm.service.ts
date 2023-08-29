@@ -25,7 +25,7 @@ export abstract class CrmService {
   private initDefaultParameters = () => {
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'Accept-Charset':'charset=utf-8'
       })
     };

@@ -26,7 +26,6 @@ export abstract class CrmService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Accept-Charset':'charset=utf-8'
       })
     };
   };

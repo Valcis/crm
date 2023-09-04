@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {FileService} from "../../../../../shared/services/api/documentation/file.service";
-import {DragDropService} from "../../../../../shared/services/dragDrop/drag-drop.service";
+import {DragDropService} from "../../../../../shared/services/drag-drop/drag-drop.service";
 import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";

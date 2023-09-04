@@ -32,6 +32,8 @@ import {HistorialComponent} from "../shared/components/historial/historial.compo
 import {NgSelectModule} from '@ng-select/ng-select';
 import { Pipe, PipeTransform } from '@angular/core';
 import {stringPair} from "../shared/models/historial/type.historial"
+import {NgxJsonViewerModule} from "ngx-json-viewer";
+
 
 @Pipe({name: 'selectOptionsTranslate', pure:false})
 export class SelectOptionsTranslatePipe implements PipeTransform {
@@ -67,9 +69,10 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
-    ChannelManagerComponent
+    ChannelManagerComponent,
     ],
   imports: [
+
     NgbTimepickerModule,
     NouisliderModule,
     NgSelectModule,
@@ -94,6 +97,7 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxJsonViewerModule
 
   ],
   exports: [DragDropComponent],

@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {DateTime} from "luxon";
 import {possibleActions, TiposRelacion, TranslateType} from "../../models/historial/type.historial";
 import {CrmLoaderService} from "../../services/crmLoader/crm-loader.service";
+import JSONFormatter from 'json-formatter-js'
+
 
 
 @Component({
@@ -57,6 +59,7 @@ export class HistorialComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.getHistory();
   }
 
 
@@ -86,12 +89,16 @@ export class HistorialComponent implements OnInit{
       this.noResults = false;
         if(this.relaciones){
           fetchResult=fetchResult.datos_peticion.relations;
-          this.itemList = this.mapping(fetchResult);
+          this.counter=0;
+          fetchResult.forEach((value:any) => {
+            this.relatoinsLog(value);
+            this.counter++
+          });
           console.log('item list', this.itemList)
         }else{
           fetchResult = fetchResult.lineas;
           fetchResult.forEach((value:any) => {
-            this.mapping(value);
+            this.changesLog(value);
           });
         }
     }
@@ -104,90 +111,143 @@ export class HistorialComponent implements OnInit{
     this._loader.setLoading(false);
 
   }
+  private relatoinsLog(value:any){
+    //const dataCut = Object.fromEntries(Object.entries(value.data).slice(0, -1));
 
-  mapping(items:any){
-    // @ts-ignore
-    return items.map<any>(item => {
-      let historial!:{user_name:string, empl_nomb:string, empl_ape1:string, empl_ape2:string, type:string, ts: string | null, datos: any};
-      let datos!:any;
-      historial = {user_name:"",empl_nomb:"",empl_ape1:"",empl_ape2:"",type:"",ts:null,datos};
-      historial.user_name = item.node.data.user_name;
-      historial.empl_nomb = item.node.data.empl_nomb!==undefined?item.node.data.empl_nomb:"";
-      historial.empl_ape1 = item.node.data.empl_ape1!==undefined?item.node.data.empl_ape1:"";
-      historial.empl_ape2 = item.node.data.empl_ape2!==undefined?item.node.data.empl_ape2:"";
-      historial.type = "HISTORIAL" + item.metadata.type;
-      let data:string=""
-      if (historial.type === "HISTORIAL_CREA") {
-        historial.ts = this.dateProcessing(item.data.creacion_ts);
-      } else if (historial.type === "HISTORIAL_MODIFICA") {
-        historial.ts = this.dateProcessing(item.data.modificacion_ts);
-      } else if (historial.type === "HISTORIAL_BORRA") {
-        historial.ts = this.dateProcessing(item.data.borrado_ts);
-      }else if (historial.type === "HISTORIAL_CLONA") {
-        historial.ts = this.dateProcessing(item.data.creacion_ts);
-      }else if (historial.type === "HISTORIAL_ENVIA_MAIL_CREDITO" || historial.type === "HISTORIAL_ENVIA_MAIL_BAJA" || historial.type === "HISTORIAL_ENVIA_MAIL_ALTA"
-        || historial.type === "HISTORIAL_ENVIA_MAIL_CLAVES_XML" || historial.type === "HISTORIAL_ENVIA_MAIL_AGENCIA_NEO") {
-        historial.ts = this.dateProcessing(item.data.enviado_ts);
+
+    let date;
+    switch (value.metadata.type) {
+      case "_CREA":
+        date = DateTime.fromMillis(value.data.creacion_ts).toISO();
+        date = HistorialComponent.dateProcessing(date);
+        break;
+      case "_MODIFICA":
+        date = DateTime.fromMillis(value.data.modificacion_ts).toISO();
+        date = HistorialComponent.dateProcessing(date);
+        break;
+      case "_BORRA":
+        break;
+      case "_CLONA":
+        break;
+      default:
+        console.log("errorr de relacion");
+        break;
+    }
+
+    let dataCut = value.data;
+    console.log("datacut",dataCut)
+    delete dataCut.modificacion_ts;
+    delete dataCut.creacion_ts;
+
+    for( let key in dataCut){
+      if(dataCut[key][0] === ''){
+        dataCut[key][0] = '∅'
+      }else{
+        dataCut[key][0]= this.colorSelect(dataCut[key][0],key);
+        dataCut[key].push(this.counter+key+0);
+        this.formatter(dataCut[key][0], (this.counter+key+0));
       }
 
-      datos = item.data;
-      for (let key in datos) {
-        if (key === "creacion_ts" || key === "modificacion_ts" || key === "borrado_ts" || key === "enviado_ts") {
-          delete datos[key];
-          continue;
-        }
-        if (item.data[key][0] !== item.data[key][1]) {
-          datos[key] = item.data[key];
-          try {
-            datos[key][0] = JSON.parse(item.data[key][0]);
-          }catch(error){
-            datos[key][0] = item.data[key][0];
-          }
-          try {
-            datos[key][1] = JSON.parse(item.data[key][1]);
-          }catch(error){
-            datos[key][1] = item.data[key][1];
-          }
-        }
+      if(dataCut[key][1] === ''){
+        dataCut[key][1]='∅'
+      }else{
+        dataCut[key][1]= this.colorSelect(dataCut[key][1],key);
+        dataCut[key].push(this.counter+key+1);
+        this.formatter(dataCut[key][1], (this.counter+key+1));
       }
-      let persona = item.node.data;
-      let log ={
-        user: ' '.concat(persona.empl_nomb,' ',persona.empl_ape1,' ',persona.empl_ape2," (",persona.user_name,")"),
-        action: this.translateType[item.metadata.type],
-        date: historial.ts,
-        data: datos,
-        node: {
-          id: "",
-          nombre: ""
-        }
-      };
-      return log;
-    })
+    }
+    let node = value.node.data;
 
+    let log ={
+      user: ' '.concat(node.empl_nomb,' ',node.empl_ape1,' ',node.empl_ape2," (",node.user_name,")"),
+      action: this.translateType[value.metadata.type],
+      date: date,
+      data: dataCut,
+      node: {
+        id: "",
+        nombre: ""
+      }
+    };
+    this.itemList.push(log);
   }
 
+  private colorSelect(data:string, key:string){
+    if(isNaN(parseInt(data))){
+      return ('\"' + data + '\"').toString();
+    }else if (!isNaN(parseInt(data))){
+      if(key.includes("_ts")){
+        return DateTime.fromMillis(parseInt(data)).toFormat("dd/MM/yyyy hh:mm:ss");
+      }else{
+        return parseInt(data);
+      }
+    }else{
+      return data
+    }
+  }
+  formatter(data:any, id:string){
+    let formatted = new JSONFormatter(data);
+    // @ts-ignore
+    document.getElementById(id).appendChild(formatted.render());
+
+  }
 
   typeOf(value:any) {
     return typeof value;
   }
 
+  private changesLog(value:any){
+    if(value.relacion_data.nombre[0] === ''){
+      value.relacion_data.nombre[0] = '∅'
+    }else{
+      value.relacion_data.nombre[0]= '\"' + value.relacion_data.nombre[0] + '\"'
+    }
+
+    if(value.relacion_data.nombre[1] === ''){
+      value.relacion_data.nombre[1]='∅'
+    }else{
+      value.relacion_data.nombre[1]= '\"' + value.relacion_data.nombre[1] + '\"'
+    }
+    let date;
 
 
-  public dateProcessing(millis:number | undefined | string){
-    let result:null|string = null;
-    if (millis !== undefined){
-      if(typeof millis === "string"){
-      millis = +millis
+    switch (value.relacion_type) {
+      case "_CREA":
+        date = DateTime.fromMillis(value.relacion_creacion_ts).toISO();
+        date = HistorialComponent.dateProcessing(date);
+        break;
+      case "_MODIFICA":
+        date = DateTime.fromMillis(value.relacion_modificacion_ts).toISO();
+        date = HistorialComponent.dateProcessing(date);
+        break;
+      case "_BORRA":
+        break;
+      case "_CLONA":
+        break;
+      default:
+        console.log("errorr de relacion");
+        break;
+    }
+
+    let log ={
+      user: ' '.concat(value.empl_nomb,' ',value.empl_ape1,' ',value.empl_ape2," (",value.user_name,")"),
+      action: this.translateType[value.relacion_type],
+      date: date,
+      data: value.relacion_data,
+      node: {
+        id: value.node_origen_text.neo_id,
+        nombre: value.node_origen_text.nombre
       }
-      let date: string|null = DateTime.fromMillis(millis).toISO();
-      if (date !== null){
-        let noMillisOrOutput = date.split(".");
-        let dateTimeSeparation = noMillisOrOutput[0].split("T");
-        let dateReorder = dateTimeSeparation[0].split("-").reverse().join("/");
-        result = [dateReorder, dateTimeSeparation[1]].join(" ");
-      }
-    }else {
-      console.log(millis)
+    };
+    this.itemList.push(log);
+  }
+
+  protected static dateProcessing(date:string |null){
+  let result:null|string = null;
+    if (date !== null){
+      let noMillisOrOutput = date.split(".");
+      let dateTimeSeparation = noMillisOrOutput[0].split("T");
+      let dateReorder = dateTimeSeparation[0].split("-").reverse().join("/");
+      result = [dateReorder, dateTimeSeparation[1]].join(" ");
     }
     return result
   }
@@ -274,7 +334,10 @@ export class HistorialComponent implements OnInit{
 
   private searchDate(){
     if( this.dataSearch !== undefined){
-      this.itemList = this.itemList.filter(e => {let eachDate = DateTime.fromFormat(e.date.split(" ")[0], "d/M/yyyy" ); return eachDate >= this.dataSearch!;});
+      this.itemList = this.itemList.filter(e => {
+        let eachDate = DateTime.fromFormat(e.date.split(" ")[0], "d/M/yyyy" );
+        return eachDate >= this.dataSearch!;
+      });
     }
   }
 

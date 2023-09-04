@@ -64,4 +64,16 @@ export class ProveedorAgenciaService extends CrmService {
     };
     return this.sendPost(modifiedproviderAgencyBodyRq);
   };
+  public getCSV =(Entrada:any) =>{
+    const modifiedproviderAgencyBodyRq = {
+      ...this.providerAgencyBodyRq,
+      Servicio: "generales",
+      Metodo: "GetListado",
+      Tipo: "CSV",
+      Entrada
+    };
+    return this.sendPost(modifiedproviderAgencyBodyRq);
+  }
 }
+
+

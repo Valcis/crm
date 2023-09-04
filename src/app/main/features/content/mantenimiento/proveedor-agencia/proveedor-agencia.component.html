@@ -3,7 +3,7 @@
 </div>
 <div class="body-right m-3">
   <div>
-    <app_historial></app_historial>
+    <app_historial [relaciones]="true"></app_historial>
   </div>
   <div class="card rounded-0">
     <div class="card-title" (click)="providerFilter = !providerFilter">
@@ -53,7 +53,7 @@
       </div>
       <div class="m-3">
         <h5  class="float-left col-10">{{counter}}{{' '}}{{'COMMON.RESULTS' | translate}}</h5>
-        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="saveDataInCSV('agency',itemList)"><i class="fa fa-download"></i>{{'COMMON.EXPORT' | translate}}</button>
+        <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="saveDataInCSV('ProveedorTrabajaAgencia',itemList)"><i class="fa fa-download"></i>{{'COMMON.EXPORT' | translate}}</button>
       </div>
     <div class="card-body border-top">
       <!--card3 body-->

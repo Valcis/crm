@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {LinkedList} from "ngx-bootstrap/utils";
 
 
 @Component({
@@ -21,6 +22,8 @@ export class ProveedorAgenciaComponent {
   public newItemForm!: FormGroup;
   public changeItemForm!: FormGroup;
   public DeleteItemForm!: FormGroup;
+  public listForm!: FormGroup;
+
   private historial:string = "";
   protected counter:number = 0;
   protected providerCreator:boolean=false;
@@ -64,6 +67,20 @@ export class ProveedorAgenciaComponent {
     this.DeleteItemForm = new FormGroup({
       neo_id:new FormControl<string>("")
     });
+    this.listForm = new FormGroup({
+      clave:new FormControl<string>("VESP_TODAS"),
+      filtros:new FormGroup({
+        nombre: new FormControl<Array<string>>(["CONTAINS","","string"])
+      }),
+      label:new FormControl<string>("ProveedorTrabajaAgencia"),
+      datos_paginacion:new FormGroup({
+        pagina:new FormControl<string>("1"),
+        num_resultados:new FormControl<string>("10000"),
+        orden:new FormControl<string>("nombre"),
+        tipo_orden:new FormControl<string>("ASC")
+      }),
+      tiene_permiso:new FormControl<boolean>(true)
+    })
   }
 
 
@@ -170,14 +187,35 @@ export class ProveedorAgenciaComponent {
   }
 
   public saveDataInCSV(name: string, data: Array<any>): void {
-    let csvContent = this._csvService.saveDataInCSV(data);
-
-    var hiddenElement = document.createElement('a');
+    /*let names: Array<Array<string>>=[];
+    let ts = DateTime.now().toMillis();
+    names.push(["nombre"]);
+    for(let provider of data){
+      names.push([provider[0]]);
+    }
+    let csvContent = this._csvService.saveDataInCSV(names);
+    let hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
     hiddenElement.target = '_blank';
-    hiddenElement.download = name + '.csv';
-    hiddenElement.click();
+    hiddenElement.download = name + ts + '.csv';
+    hiddenElement.click();*/
+    console.log(this.fecthForm.get("nombre")?.value.toString());
+    if(this.fecthForm.get("nombre")?.value !== ""){
+      let nameFilter:Array<string> = ["CONTAINS",this.fecthForm.get("nombre")?.value.toString(),"string"]
+      this.listForm.get("filtros")?.get("nombre")?.setValue(nameFilter);
+    }
+    this._fetch.getCSV(this.listForm.value).subscribe(r =>{
+      console.log(r)
+      let result:any = r;
+      console.log(result.Salida.data)
+      let csvContent = this._csvService.saveDataInCSV(result.Salida.data);
+      let hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = result.Salida.nombre;
+      hiddenElement.click();
+    })
   }
-
 }
+
 

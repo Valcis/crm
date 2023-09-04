@@ -18,7 +18,7 @@ export class HistorialService extends CrmService {
   ) {
     super(_http);
     this.HistorialBodyRq = {
-      Servicio: "generales",
+      Servicio: "",
       Metodo: "",
       Tipo: "",
       Entrada: {},
@@ -27,18 +27,25 @@ export class HistorialService extends CrmService {
     };
   }
 
-  getHistorial(entrada:any, link:string){
-    //TODO: mirar el localhost
+  getChangesHistorial(entrada:any, link:string){
     const ModifiedHistorialBodyRq = {
       ...this.HistorialBodyRq,
+      Servicio: "generales",
       Metodo:"GetHistorialCambiosListado",
       Entrada: entrada,
-    URL:link};
+      URL:link
+    };
+    return this.sendPost(ModifiedHistorialBodyRq);
+  }
+
+  getRelationsHistorial(neoId:number,){
+    const ModifiedHistorialBodyRq = {
+      ...this.HistorialBodyRq,
+      Servicio: "utils",
+      Metodo:"GetRelacionesHistorial",
+      Entrada: {neoId: neoId}
+    };
     return this.sendPost(ModifiedHistorialBodyRq);
   }
 
 }
-//{"Servicio":"proveedoresTrabajaAgencia","Metodo":"DeleteProveedorTrabajaAgencia","Tipo":"","Entrada":{"datos_peticion":{"neo_id":638449}},"Id":"mT27sNbyBbHA0uKfkT7x1DtTv6JMtPUGsZfbku1D","URL":"","recuerdame_id":""}:
-
-//{"Servicio":"generales","Metodo":"GetHistorialCambiosListado","Tipo":"","Entrada":{"node":{"label":"ProveedorTrabajaAgencia","properties":["nombre"]},"fecha_desde":"","relaciones":["_CREA","_MODIFICA","_BORRA","_CLONA"]},"Id":"mT27sNbyBbHA0uKfkT7x1DtTv6JMtPUGsZfbku1D","URL":"http://localhost:8080/crm/app/index.html#/index/crm_mantenimiento_prove_trabaja_opage"}:
-

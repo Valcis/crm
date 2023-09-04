@@ -1,4 +1,6 @@
-import {DateTime} from "luxon";
+
+export const possibleActions = ["_CREA","_MODIFICA","_BORRA","_CLONA"];
+
 
 export interface TypeModel {
   v:string,

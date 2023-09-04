@@ -65,6 +65,7 @@
       <span>https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
       <br>
       <div>{{uiSliderConf | json}}</div>
+      <div> {{sliderModel}}</div>
       <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
       <br>
       <nouislider class="noiuslider" [config]="uiSliderConf" [(ngModel)]="sliderModel"></nouislider>

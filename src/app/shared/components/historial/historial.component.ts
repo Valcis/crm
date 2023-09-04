@@ -242,8 +242,6 @@ export class HistorialComponent implements OnInit{
         let dateReorder = dateTimeSeparation[0].split("-").reverse().join("/");
         result = [dateReorder, dateTimeSeparation[1]].join(" ");
       }
-    }else {
-      console.log(millis)
     }
     return result
   }
@@ -325,7 +323,12 @@ export class HistorialComponent implements OnInit{
   }
 
   private searchName(){
-    this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(this.userSearch.toLowerCase()));
+    if(this.userSearch.length > 2 ){
+      this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(this.userSearch.toLowerCase()));
+    }else{
+      this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(""));
+
+    }
   }
 
   private searchDate(){

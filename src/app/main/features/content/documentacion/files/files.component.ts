@@ -82,10 +82,7 @@ export class FilesComponent {
         this.rowData = [];
         fechResult.forEach((value :any) =>{
           let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1;
-          let time = this.test.fromMillis(value.data.creacion_ts).toUTC().weekday;
-          console.log(time);
           let tDiff:number=this.calculateDate(value.data.creacion_ts);
-          console.log(tDiff);
           //TODO:arreglar ts(algunos funcionan y otros no)
           let it:filesTable={
             cog: {

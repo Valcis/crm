@@ -44,7 +44,7 @@
         <div class="col-sm-3 parent">
           <label class="child m-2">{{"HISTORY.SHOW" | translate }}</label> <select class="me-2 child form-select" [(ngModel)]="pageSize"><option>10</option><option>25</option><option>50</option><option>100</option></select> <label class="child ms-2">{{"entries"}}</label></div>
         <div class="col-3"></div>
-        <div class="col-sm-5 parent"><label class="child">Search: </label> <input class="child form-control input-sm" (change)="searchAll()" [(ngModel)]="userSearch" type="text"></div>
+        <div class="col-sm-5 parent"><label class="child">Search: </label> <input class="child form-control input-sm" (input)="searchAll()" [(ngModel)]="userSearch" type="text"></div>
       </div>
       <div id="1"></div>
       <div class="row">

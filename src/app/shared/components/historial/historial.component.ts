@@ -65,7 +65,6 @@ export class HistorialComponent implements OnInit{
     this._loader.setLoading(true);
     if(this.relaciones){
       this._fetch.getRelationsHistorial(this.neoId).subscribe(response => {
-        console.log(response)
         this.gatherFetchResults(response);
       });
     }else{
@@ -86,13 +85,10 @@ export class HistorialComponent implements OnInit{
       this.noResults = false;
         if(this.relaciones){
           fetchResult=fetchResult.datos_peticion.relations;
-          this.itemList = this.mapping(fetchResult);
-          console.log('item list', this.itemList)
+          this.itemList = this.mappingRelations(fetchResult);
         }else{
           fetchResult = fetchResult.lineas;
-          fetchResult.forEach((value:any) => {
-            this.mapping(value);
-          });
+          this.itemList = this.mapping(fetchResult);
         }
     }
     this.counter = this.itemList.length ;
@@ -105,8 +101,7 @@ export class HistorialComponent implements OnInit{
 
   }
 
-  mapping(items:any){
-    // @ts-ignore
+  private mappingRelations(items:Array<any>){
     return items.map<any>(item => {
       let historial!:{user_name:string, empl_nomb:string, empl_ape1:string, empl_ape2:string, type:string, ts: string | null, datos: any};
       let datos!:any;
@@ -159,6 +154,67 @@ export class HistorialComponent implements OnInit{
         node: {
           id: "",
           nombre: ""
+        }
+      };
+      return log;
+    })
+
+  }
+
+  private mapping(items:Array<any>){
+
+    return items.map<any>(item => {
+      let historial!:{user_name:string, empl_nomb:string, empl_ape1:string, empl_ape2:string, type:string, ts: string | null, datos: any};
+      let datos!:any;
+      historial = {user_name:"",empl_nomb:"",empl_ape1:"",empl_ape2:"",type:"",ts:null,datos};
+      historial.user_name = item.user_name;
+      historial.empl_nomb = item.empl_nomb!==undefined?item.empl_nomb:"";
+      historial.empl_ape1 = item.empl_ape1!==undefined?item.empl_ape1:"";
+      historial.empl_ape2 = item.empl_ape2!==undefined?item.empl_ape2:"";
+      historial.type = "HISTORIAL" + item.relacion_type;
+
+      datos = item.relacion_data;
+      if (historial.type === "HISTORIAL_CREA") {
+        historial.ts = this.dateProcessing(datos.creacion_ts);
+      } else if (historial.type === "HISTORIAL_MODIFICA") {
+        historial.ts = this.dateProcessing(datos.modificacion_ts);
+      } else if (historial.type === "HISTORIAL_BORRA") {
+        historial.ts = this.dateProcessing(datos.borrado_ts);
+      }else if (historial.type === "HISTORIAL_CLONA") {
+        historial.ts = this.dateProcessing(datos.creacion_ts);
+      }else if (historial.type === "HISTORIAL_ENVIA_MAIL_CREDITO" || historial.type === "HISTORIAL_ENVIA_MAIL_BAJA" || historial.type === "HISTORIAL_ENVIA_MAIL_ALTA"
+        || historial.type === "HISTORIAL_ENVIA_MAIL_CLAVES_XML" || historial.type === "HISTORIAL_ENVIA_MAIL_AGENCIA_NEO") {
+        historial.ts = this.dateProcessing(datos.enviado_ts);
+      }
+
+      for (let key in datos) {
+        if (key === "creacion_ts" || key === "modificacion_ts" || key === "borrado_ts" || key === "enviado_ts") {
+          delete datos[key];
+          continue;
+        }
+        if (item.relacion_data[key][0] !== item.relacion_data[key][1]) {
+          datos[key] = item.relacion_data[key];
+          try {
+            datos[key][0] = JSON.parse(item.relacion_data[key][0]);
+          }catch(error){
+            datos[key][0] = item.relacion_data[key][0];
+          }
+          try {
+            datos[key][1] = JSON.parse(item.relacion_data[key][1]);
+          }catch(error){
+            datos[key][1] = item.relacion_data[key][1];
+          }
+        }
+      }
+
+      let log ={
+        user: ' '.concat(historial.empl_nomb,' ',historial.empl_ape1,' ',historial.empl_ape2," (",historial.user_name,")"),
+        action: this.translateType[item.relacion_type],
+        date: historial.ts,
+        data: datos,
+        node: {
+          id: item.node_origen_text.neo_id,
+          nombre: item.node_origen_text.nombre
         }
       };
       return log;

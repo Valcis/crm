@@ -55,13 +55,13 @@
                   <tr class="background-title">
                     <th>{{"LINKS.TYPE" | translate}}</th>
                     <th>{{"LINKS.DESCRIPTION" | translate}}</th>
-                    <th>{{"LINKS.LINK" | translate}}</th>
+                    <th>{{"LINKS.USER" | translate}}</th>
                     <th class="white-space"></th>
                   </tr>
                   <tr *ngFor="let element of rowData  | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
                     <td>{{element.c | translate}}</td>
-                    <td><a class="no-decoration" href="{{element.link}}" [innerHTML]="element.description"></a></td>
-                    <td><span [innerHTML]="element.name"></span></td>
+                    <td><h6><a class="no-decoration" href="{{element.link}}" [innerHTML]="element.description"></a></h6></td>
+                    <td ><h6 [innerHTML]="element.name"></h6></td>
                     <div class="btn-group dropdown">
                       <button class="btn btn-danger  btn-sm mx-2 my-2"  [value]="element.value" (click)="deleteLinks(element.value)"><i class="fa fa-trash-o"></i> {{'LINKS.DELETE' | translate}}</button>
                     </div>

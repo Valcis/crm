@@ -20,6 +20,7 @@
   "LINKS.ALERT_RESPONSE1": "Deleted!",
   "LINKS.ALERT_LINK_BORRADO": "The link has been correctly deleted",
   "LINKS.DELETE": "Delete",
+  "LINKS.USER": "User",
 
   "CHANNELS.CRITERIA" : "Criteria for searching channels",
   "CHANNELS.CODE" : "Channel’s code",

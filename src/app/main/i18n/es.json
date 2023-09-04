@@ -22,6 +22,7 @@
   "LINKS.ALERT_RESPONSE1": "Borrado!",
   "LINKS.ALERT_LINK_BORRADO": "El link ha sido borrado correctamente",
   "LINKS.DELETE": "Eliminar",
+  "LINKS.USER": "Usuario",
 
   "PROVIDER.FLITER": "Filtro de proveedores",
   "PROVIDER.NAME": "Nombre del proveedor",

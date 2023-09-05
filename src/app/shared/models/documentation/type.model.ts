@@ -1,16 +1,42 @@
+
 export interface TypeModel {
   v:string,
   k:string
 }
 
 export const translateType:{ [key: string]: string; }={
-  "Otros":"LINKS.OTHER",
   "Agencia":"LINKS.AGENCY",
   "Hotel":"LINKS.HOTEL",
+  "Otros":"LINKS.OTHER",
 };
 
 
 export const TypeArray:TypeModel[] =[
-  {v:"LINKS.OTHER", k:"Otros"},
+
   {v:"LINKS.AGENCY", k:"Agencia"},
-  {v:"LINKS.HOTEL", k:"Hotel"}];
+  {v:"LINKS.HOTEL", k:"Hotel"},
+  {v:"LINKS.OTHER", k:"Otros"}];
+
+export interface linksTable {
+  c:string,
+  link:string,
+  description:string,
+  name:string,
+  value: any
+}
+
+export interface filesTable {
+  cog: cog,
+  fileName: string,
+  des:string,
+  siz: number,
+  categor:string,
+  userName: string,
+  dateCreation:string |null
+}
+
+interface cog {
+    linked: string,
+    id: number,
+    name:string,
+}

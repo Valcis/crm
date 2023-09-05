@@ -9,6 +9,9 @@ import {CalendarioComponent} from "./features/content/calendario/calendario.comp
 import {ActividadesComponent} from "./features/content/actividades/actividades.component";
 import {NotificacionesComponent} from "./features/content/notificaciones/notificaciones.component";
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
+import {ChannelManagerComponent} from "./features/content/documentacion/channel_manager/channel_manager.component";
+import {FilesComponent} from "./features/content/documentacion/files/files.component";
+
 
 const routes: Routes = [
   {
@@ -16,17 +19,19 @@ const routes: Routes = [
     component: MainComponent,
     data: {
       shouldReuse: true,
-      key: 'main'
+      key: 'crm/app/index/main'
     },
     children: [
       {path: '#/crm_graficos', component: GraficosComponent},
       {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent},
       {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent}, //TODO: cambiar a lista
-      {path: '#/crm_calendario', component: CalendarioComponent},
+      {path: '#/index/crm_calendario', component: CalendarioComponent},
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
       {path: '#/index/crm_lista_links', component: LinksComponent},
 
+      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
+      {path: '#/index/crm_lista_ficheros', component: FilesComponent}
     ]
   }
 ];

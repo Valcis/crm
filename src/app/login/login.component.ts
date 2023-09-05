@@ -16,9 +16,6 @@ import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service"
 export class LoginComponent implements OnInit {
   currentLang: string = 'es';
   public loginForm!: FormGroup;
-  /* public submitted: boolean = false;
-   public username: string = '';
-   public password: string = '';*/
   public bImage: string = '../../assets/images/login/barcelona.jpg';
 
 
@@ -90,12 +87,3 @@ export class LoginComponent implements OnInit {
     this.bImage = backItem;
   }
 }
-
-
-
-
-
-
-
-
-

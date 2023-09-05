@@ -564,7 +564,6 @@
   "LISTA.FILTRO.LABEL.nombre.comercial.hotel": "Client’s/hotel’s name",
   "LISTA.FILTRO.LABEL.nombre.comercial.cad.hotel": "Client’s/hotel chain’s name",
   "LISTA.FILTRO.SELECT.nombre.business.accelerator": "Business accelerator's name",
-  "LISTA.FILTRO.LABEL..TIENE.GESTOR.BA#.UsuarioCrm#neo.id": "Business accelerator",
   "LISTA.FILTRO.LABEL.razon.fiscal": "Fiscal reason",
   "LISTA.FILTRO.LABEL.telefono": "Telephone",
   "LISTA.FILTRO.LABEL.email": "Email",
@@ -956,8 +955,6 @@
   "COMMON.ACTIVIDADES.COLABORO": "Activities where I collaborate",
   "COMMON.ACTIVIDADES.ALL": "Todas las actividades",
 
-  "COMMON.NOMBRE": "Name ",
-
   "PAG.OPORTUNIDAD.OPORTUNIDADES": "Opportunities",
   "PAG.OPORTUNIDAD.OPORTUNIDAD": "Opportunity",
   "PAG.OPORTUNIDAD.CLONAR.NOMBRE": "Opportunity’s name",
@@ -969,7 +966,6 @@
   "PAG.OP.HOTEL.ESTADO.WEB.PENDIENTE.PUBLICAR": "Pending publish",
   "PAG.OP.HOTEL.ESTADO.WEB.PENDIENTE.PUBLICAR.STAND.BY.HOTEL": "Pending publish / Stand by hotel",
   "PAG.OP.HOTEL.ESTADO.WEB.PUBLICADA": "Publish",
-
 
   "PERFIL.USER": "",
   "PERFIL.USER.GESTOR": "Account",
@@ -1374,8 +1370,7 @@
   "OBJETIVO.PRINCIPAL": "Main goal",
   "OBJETIVO.SECUNDARIO": "Secondary goal",
   "OBJETIVO.CONSEGUIDO": "Goal achieved",
-  "VOLVER.VISITAR": "Visit again",
+  "VOLVER.VISITAR": "Visit again"
 
-  "SWAL.ALERT_CONFIRM": "Yes, Delete!",
-  "SWAL.ALERT_CANCEL": "No, Cancel!"
+
 }

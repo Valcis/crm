@@ -963,8 +963,6 @@
   "COMMON.ACTIVIDADES.COLABORO": "Actividades colaboro",
   "COMMON.ACTIVIDADES.ALL": "Todas las actividades",
 
-  "COMMON.NOMBRE": "Nombre ",
-
   "PAG.OPORTUNIDAD.OPORTUNIDADES": "Oportunidades",
   "PAG.OPORTUNIDAD.OPORTUNIDAD": "Oportunidad",
   "PAG.OPORTUNIDAD.CLONAR.NOMBRE": "Nombre oportunidad",
@@ -1002,7 +1000,6 @@
   "PERFIL.USER.FREELANCE.AGENCIA":"Freelance",
   "PERFIL.USER.COMERCIAL.MARKETING":"Comercial marketing",
   "PERFIL.USER.OTRO":"Otro",
-
   "PERFIL.USER.ADMINISTRADOR.BBDD.AGENCIAS":"Administrador Bbdd Agencias",
   "PERFIL.USER.ADMINISTRADOR.BBDD.HOTELES":"Administrador Bbdd Hoteles",
   "PERFIL.USER.RESPONSABLE.DEPARTAMENTO.HOTELES":"Responsable Departamento Hoteles",
@@ -1022,9 +1019,7 @@
   "PERFIL.USER.TEAM.LEADER.COMERCIAL.MARKETING.ONLINE":"Team Leader Comercial Marketing Online",
   "PERFIL.USER.COMERCIAL.MARKETING.ONLINE":"Comercial Marketing Online",
   "PERFIL.USER.COMERCIAL.MARKETING.EVENTOS":"Comercial Marketing Eventos",
-  "PERFIL.USER.COMERCIAL.MARKETING.ONLINE":"Comercial Marketing Online",
   "PERFIL.USER.COMERCIAL.GDS":"Comercial Gds",
-  "PERFIL.USER.INFORMATICA": "Informática",
 
   "ACTIVIDAD.LLAMADA.FORM.motivo": "Motivo",
   "ACTIVIDAD.LLAMADA.FORM.estado": "Estado",

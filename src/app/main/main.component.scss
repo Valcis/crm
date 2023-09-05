@@ -1,3 +1,65 @@
+@import "src/styles";
+
 #sidebar-nav {
   width: 160px;
+}
+
+.min-height{
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.body-position {
+  margin-left: 250px;
+
+}
+
+.swal-text {
+  background-color: #FEFAE3;
+  padding: 17px;
+  border: 1px solid #F0E1A1;
+  display: block;
+  margin: 22px;
+  text-align: center;
+  color: #61534e;
+
+}
+.side-container {
+  float: left;
+  background-color: $background;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+
+
+.top-container {
+  float: top;
+  width: auto;
+  height: 60px;
+  top: 0;
+  vertical-align: top;
+  min-height: 60px;
+  margin-left: 220px;
+}
+
+@media (max-width: 754px) {
+  .side-container {
+    width:0;
+  }
+  .top-container {
+
+    margin-left: 0;
+  }
+}
+
+.top-bg{
+  margin-left: 220px;
+}
+
+.top-sm{
+  margin-left: 70px;
 }

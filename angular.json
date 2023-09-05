@@ -47,10 +47,14 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/summernote/dist/summernote-lite.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/summernote/dist/summernote-lite.min.js"
+
             ]
           },
           "configurations": {
@@ -133,7 +137,8 @@
             ],
             "scripts": [
               "../node_modules/bootstrap/dist/js/bootstrap.js",
-              "../node_modules/angular-fontawesome/dist/angular-fontawesome.js"
+              "../node_modules/angular-fontawesome/dist/angular-fontawesome.js",
+
             ]
           }
         }

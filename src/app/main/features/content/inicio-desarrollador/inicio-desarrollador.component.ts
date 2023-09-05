@@ -3,11 +3,18 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
 import {DateTime} from 'luxon';
-import {NgbCalendar, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCalendar, NgbDateAdapter,NgbDate, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {
   CustomDateParserFormatter,
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
+import {TranslateService} from "@ngx-translate/core";
+import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
+import {FormControl,FormGroup, Validators} from "@angular/forms";
+
+
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -29,17 +36,62 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected utc: any;
   protected formatedTime: any;
   protected model2: string = '';
-  protected time2: any;
-  protected showTime: boolean = false;
+  protected time2: timepick = {hour:10,minute:15};
+  protected showTime: boolean = true;
+
+  protected summerConfig: any;
+  protected sliderModel: number[] = [0];
+
+  protected tarifa_neta: boolean = false;
+  protected tarifa_comisionable: boolean = false;
+  protected descuento_bar:string = "";
+  protected markup:string = "";
+
+  protected produccion_minima: boolean = false;
+  protected produccion_minima_value: string = "";
+  protected newDate!: NgbDate ;
+
+
+  form: FormGroup = new FormGroup({
+    html: new FormControl("", Validators.required)
+  });
 
   constructor(
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
-    private _calendar: NgbCalendar) {
+    private _calendar: NgbCalendar,
+    protected _translate: TranslateService){
+
+    this.summerConfig = {
+      height: 500
+      //,focus: true
+      //,airMode: true
+      ,fontNames: ['Arial', 'Courier New','Helvetica'],
+      addDefaultFonts: false
+      ,toolbar: [
+        ['edit',['undo','redo']],
+        ['headline', ['style']],
+        ['style', ['bold', 'italic', /* 'underline','superscript', 'subscript', 'strikethrough', */'clear']],
+        ['fontface', ['fontname']],
+        ['textsize', ['fontsize']],
+        ['fontclr', ['color']],
+        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link'
+          //'picture','video',
+          /*'hr'*/]],
+        ['view', [
+          //'fullscreen',
+          'codeview']],
+        ['help', ['help',"codeBlock"]]
+      ]
+    };
   }
 
   ngOnInit(): void {
     this.time();
+    this.sliderModel = [5];
   }
 
   generatePDF() {
@@ -66,7 +118,9 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
+    console.log(this.utc);
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+    this.newDate = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
   }
 
   get today() {
@@ -86,4 +140,5 @@ export class InicioDesarrolladorComponent implements OnInit{
       minute: +testParse3[1]
     }
   }
+
 }

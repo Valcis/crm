@@ -29,17 +29,23 @@ export class LoginService extends CrmService {
 
 
   public sendGetLogin = (credenciales: LoginEntrada) => {
-    // console.log("sendGetLogin", credenciales )
+    console.log("API sendGetLogin ", credenciales )
     const modifiedLoginBodyRq = {
       ...this.loginBodyRq,
       Entrada: credenciales,
-      Id: credenciales.user_session_id || this.loginBodyRq.Id
+      Id: credenciales.user_session_id || ""
     };
-
+    console.log("API. sendGetLogin envio", modifiedLoginBodyRq )
     return this.sendPost(modifiedLoginBodyRq);
   };
 
+  public sendGetLoginById = (id: string) =>{
+    console.log("API. sendGetLoginById  extraemos de memcached usuario ", id)
+    return this.sendPost({...this.loginBodyRq, Id: id})
+  }
+
   public getUsuarioByEmplCode = (empl_code: number, id: string) => {
+    console.log("API. getUsuarioByEmplCode ", empl_code, id)
     const request = {
       Servicio: "usuariosCrm",
       Metodo: "GetUsuarioCrmByEmplCode",

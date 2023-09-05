@@ -16,7 +16,7 @@ export interface GenericRequest {
 }
 
 
-export interface GenericResponse {
+export interface GenericIntranetResponse {
   Id: string,
   Metodo: string,
   Salida: any, //TODO : ¿se puede definir tipo o tipos especificos?
@@ -24,4 +24,15 @@ export interface GenericResponse {
   Status?: StatusType,
   StatusMsg?: string; //en caso de Status 'KO'
   URL: string
+}
+
+
+export interface GenericNeoResponse {
+  datos_peticion: {
+    data: any,
+    metadata: {
+      neo_id: number,
+      labels?: string[]
+    }
+  }
 }

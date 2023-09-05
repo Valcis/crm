@@ -9,14 +9,13 @@ import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
 import {CookiesService} from "../../cookies/cookies.service";
 import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
+import {GenericIntranetResponse} from "../../../models/petition/petition.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends CrmService {
   public userData: any = {};
-  private localdata: any;
-  private localdata2: any;
 
   constructor(
     private cookie: CookiesService,
@@ -31,70 +30,85 @@ export class UserService extends CrmService {
     super(_http);
   }
 
-  public retrieveUser = (credenciales: LoginEntrada) => new Promise((resolve, reject) => {
-    this._login.sendGetLogin(credenciales).subscribe(response => {
-      this.localdata = response;
-
-      this.getUsuarioByEmplCode2(this.localdata.Salida.empl_code, this.localdata.Id).then(estaEnNeo => {
-
-        if (this.localdata.Status && this.localdata.Status === "OK" && estaEnNeo) {
-          this.cookie.setSessionId(this.localdata.Id);
-          this.userData.details = this.localdata.Salida;
-          resolve(this.cookie.getSessionId().length > 0);
-        } else {
-          reject('no hay usuario registrado en intranet con esas credenciales'); //TODO: cambiar por alert service
-          this._loader.setLoading(false);
-        }
-      });
-    });
-  });
-
-  public getUsuarioByEmplCode2 = (empl_code: number, id: string) => new Promise((resolve, reject) => {
-    this._login.getUsuarioByEmplCode(empl_code, id).subscribe(res => {
-      this.localdata2 = res;
-
-      if (this.localdata2.Status && this.localdata2.Status === "OK") {
-        resolve(true);
-      } else {
-        // TODO console.log('no tienes usuario en CRM ') // pasarlo a un toast
-        reject(false);
-        // TODO mandalo al login
-      }
-    });
-  });
-
-
-  public getConfig = () => {
-    if (this.cookie.getSessionId().length && this.userData.length)
-      this._userConfig.sendGetConfig({id: this.userData.details.empl_code}, this.cookie.getSessionId()).subscribe(response => {
-        /*console.log("getConfig", response);*/
-        this.localdata = response;
-        if (this.localdata.Status && this.localdata.Status === "OK") {
-          this.userData.config = this.localdata.Salida;
-          //console.log("NUEVOS DATOS USUARIO", this.userData)
-        } else {
-          // TODO : lanzar toast con mensaje like "error al cargar la configuracion del usuario"
-          console.error("credenciales erroneas")
-        }
-      })
-  };
-
-  public getMenu = () => {
-    if (this.cookie.getSessionId().length) {
-      this._userMenu.sendGetMenu(this.cookie.getSessionId()).subscribe(response => {
-        //console.log("getMenu", response);
-        this.localdata = response;
-        if (this.localdata.Salida) {
-          this.userData.menu = this.localdata.Salida;
-          //console.log("NUEVOS DATOS USUARIO", this.userData)
-        } else {
-          // TODO : lanzar toast con mensaje de "XXXX???"
-        }
-      })
+  public retrieveUser = (credenciales: LoginEntrada | string) => new Promise((resolve, reject) => {
+    console.log("USER. empezando a lanzar el retrieve user...")
+    let petition
+    if (typeof (credenciales) !== "string") {
+      //console.log("lanza SENDGETLOGIN con usuario y pass : ", credenciales)
+      petition = this._login.sendGetLogin(credenciales);
+    } else {
+      //console.log("lanza SENDGETLOGINBYID con sessionId : ", credenciales)
+      petition = this._login.sendGetLoginById(credenciales);
     }
-  };
 
-  public getActivitiesAlert = () => {
+    // @ts-ignore
+    petition.subscribe(async (res: GenericIntranetResponse) => {
+      //console.log("USER. retrieveUser petition  response ", res)
+      const {Salida: {empl_code}, Id} = res
+
+      if (res.Status === "OK") {
+        this.cookie.setSessionId(Id);
+        this.userData.detalles = res.Salida
+
+        // al saber que es valido el intento de login, conseguimos el resto de datos haciendo las llamadas
+        // pertientes con estas credenciales (validadas ya) y seteando los datos a los atributos de esta clase.
+
+        await Promise.all([
+          this.getUsuarioByEmplCode(empl_code, Id),
+          this.getConfig(empl_code, Id),
+          this.getMenu(Id),
+          //this.getActivitiesAlert(),
+          //this.getBajaTemporalUsuario() ??????
+          this.getNotifications(Id),
+        ]).then(([neoData, config, menu, notif]) => {
+          this.userData.neo = neoData;
+          this.userData.configuraciones = config;
+          this.userData.menu = menu;
+          this.userData.notificaciones = notif;
+        })
+
+        resolve(true)
+      } else {
+        this.cookie.deleteSessionId();
+        resolve(false)
+      }
+    })
+  });
+
+  public getUsuarioByEmplCode = (empl_code: number, sessionId: string) => new Promise((resolve, reject) =>
+    // @ts-ignore
+    this._login.getUsuarioByEmplCode(empl_code, sessionId).subscribe((res: GenericIntranetResponse) => {
+      //console.log("USER. getUsuarioByEmplCode response ", res)
+
+      if (res.Status && res.Status !== "OK") {
+        reject(res.StatusMsg)
+        //TODO -> testear esta situacion (forzar con malas credenciales en funct)
+      } else resolve(res.Salida.datos_peticion)
+    })
+  )
+
+  private getConfig = (empl_code: number, sessionId: string) => new Promise((resolve, reject) =>
+    this._userConfig.sendGetConfig({id: empl_code.toString()}, sessionId).subscribe(
+      // @ts-ignore
+      (response: GenericIntranetResponse) => {
+        //console.log("sendGetConfig response", response);
+        const {Status, Salida} = response
+        if (Status && Status === "OK") resolve(Salida)
+        else reject("sendGetConfig : credenciales erroneas")
+      })
+  )
+
+  private getMenu = (sessionId: string) => new Promise((resolve, reject) =>
+    this._userMenu.sendGetMenu(sessionId).subscribe(
+      // @ts-ignore
+      (response: GenericIntranetResponse) => {
+        //console.log("sendGetMenu response", response);
+        if (response.Salida) resolve(response.Salida)
+        else reject("sendGetMenu : credenciales erroneas")
+      })
+  );
+
+  private getActivitiesAlert = (sessionId: string) => new Promise((resolve, reject) => {
     // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tiposActividad": [
@@ -120,20 +134,16 @@ export class UserService extends CrmService {
       "tipo_orden": "ASC",
       "tipoActividad": "MIAS"
     };
-    if (this.cookie.getSessionId().length)
-      this._activitiesAlert.sendGetActAlert(entrada, this.cookie.getSessionId()).subscribe(response => {
-        //console.log("getActividadesAlertas", response);
-        this.localdata = response;
-        if (this.localdata.Salida) {
-          this.userData.activities = this.localdata.Salida;
-          //console.log("NUEVOS DATOS USUARIO", this.userData)
-        } else {
-          // TODO : lanzar toast con mensaje de "XXXX???"
-        }
-      })
-  };
+    // @ts-ignore
+    this._activitiesAlert.sendGetActAlert(entrada, sessionId).subscribe((response: GenericIntranetResponse) => {
+      console.log("getActividadesAlertas", response);
+      if (response.Salida) resolve(response.Salida)
+      else reject("fallo en getActivitiesAlert")
+    })
 
-  public getNotifications = () => {
+  });
+
+  private getNotifications = (sessionId: string) => new Promise((resolve, reject) => {
     // TODO :> generar dinamicamente, de momento harcoded:
     const entrada = {
       "tipo_modulo": "",
@@ -146,17 +156,12 @@ export class UserService extends CrmService {
       "orden": "fecha_creacion_ts",
       "tipo_orden": "DESC"
     };
-    if (this.cookie.getSessionId().length)
-      this._notifications.sendGetNotifications(entrada, this.cookie.getSessionId()).subscribe(response => {
-        //console.log("getNotifications", response);
-        this.localdata = response;
-        if (this.localdata.Salida) {
-          this.userData.notifications = this.localdata.Salida;
-          // console.log("NUEVOS DATOS USUARIO", this.userData)
-        } else {
-          // TODO : lanzar toast con mensaje de "XXXX???"
-        }
-      })
-  }
+    // @ts-ignore
+    this._notifications.sendGetNotifications(entrada, sessionId).subscribe((response: GenericIntranetResponse) => {
+      //console.log("getNotifications", response);
+      if (response.Salida) resolve(response.Salida)
+      else reject("falllo en getNotifications")
+    })
+  });
 
 }

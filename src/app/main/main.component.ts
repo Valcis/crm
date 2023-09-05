@@ -3,6 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {Router} from "@angular/router";
 import {UserService} from "../shared/services/api/user/user.service";
+import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
 
 @Component({
   selector: 'app-main',
@@ -13,46 +14,42 @@ export class MainComponent implements OnInit {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() menu: EventEmitter<any> = new EventEmitter<any>();
 
-  public isExpanded: boolean = true;
-  currentLang: string = '';
-  userData: any;
-
-
+  protected isExpanded: boolean = true;
+  protected currentLang: string = '';
+  protected userData: any;
 
   constructor(
     private translate: TranslateService,
-    private cookie: CookiesService,
+    private _cookie: CookiesService,
     private _user: UserService,
-    private router: Router
+    private _loader: CrmLoaderService,
+    private _router: Router
   ) {
-    this.currentLang = this.cookie.getLanguage();
+    this.currentLang = this._cookie.getLanguage();
     this.translate.setDefaultLang(this.currentLang);
     this.translate.use(this.currentLang);
   }
 
-  ngOnInit() {
-    this._user.getConfig();
-    this._user.getMenu();
-    this._user.getActivitiesAlert();
-    this._user.getNotifications();
-    this.userData = this._user.userData.hasOwnProperty("details" && "menu") ? this._user.userData : this.router.navigate(['/login']);
+  async ngOnInit() {
+    this._loader.setLoading(true);
 
-    /* TODO : implementar ->
-    this._user.getUsuarioCrmByEmplCode(); ??????????????????
-    this._user.getBajaTemporalUsuario();  ?????????????????? */
+    if (!Object.keys(this._user.userData).length) {
+      console.log("no llegan datos de user, posiblemente un F5, volver a lanzar el retrieve...")
 
-    /*console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);*/
+      const isValid = await this._user.retrieveUser(this._cookie.getSessionId())
+      if (!isValid) {
+        // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+        console.error("usuario no valido")
+        await this._router.navigate(['/login'])
+      } else this.userData = this._user.userData;
+    }
 
-
+    this.userData = this._user.userData
+    this._loader.setLoading(false);
+    console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
   }
 
   onToggle = () => this.isExpanded = !this.isExpanded;
 
-
-  //lo dejo aqui solo para poder tirar al login cuando falla persistencia de datos
-  logOut = () => this.router.navigate(['/login']);
-
-
-  back = () => this.router.navigate(['/login']);
-
+  protected readonly Object = Object;
 }

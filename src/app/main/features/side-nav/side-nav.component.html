@@ -1,5 +1,5 @@
 <!--<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100" appSideClosed>-->
-<div *ngIf="userData.hasOwnProperty('menu')" class="dark-bg-container h-100 m-h-100 m-w-100">
+<div class="dark-bg-container h-100 m-h-100 m-w-100">
   <div class="header-profile">
     <div class="header-content">
       <h5 class="border-bottom pt-4">
@@ -12,10 +12,10 @@
       >
 
       <div *ngIf="isExpandedFlag">
-        <span> {{userData.details.nombre}} {{userData.details.apellido1}}</span>
+        <span> {{userData.detalles.nombre}} {{userData.detalles.apellido1}}</span>
         <div class="dropdown nav" ngbDropdown>
           <a class="dropdown-toggle count-info dd l-grey us-dd" ngbDropdownToggle>
-            {{"PERFIL.USER." + userData.details.perfil | translate}}
+            {{"PERFIL.USER." + userData.detalles.perfil | translate}}
           </a>
           <ul class="dropdown-menu m-t-xs ddMenu" ngbDropdownMenu>
             <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>

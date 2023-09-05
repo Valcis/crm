@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {GenericRequest, GenericResponse} from "../../models/petition/petition.model";
+import {GenericRequest, GenericIntranetResponse} from "../../models/petition/petition.model";
 import {environment} from "../../../../environments/environment.local";
 
 @Injectable({
@@ -38,6 +38,6 @@ export abstract class CrmService {
 
     this.generateBody(request);
 
-    return this.http.post<GenericResponse>(url, this.bodyRequest, this.httpOptions);
+    return this.http.post<GenericIntranetResponse>(url, this.bodyRequest, this.httpOptions);
   };
 }

@@ -12,7 +12,7 @@ import {UserService} from "../../../shared/services/api/user/user.service";
 })
 export class TopNavComponent implements OnInit{
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() mydata:any;
+  @Input() userData:any;
   lang = '';
   private user: any;
 

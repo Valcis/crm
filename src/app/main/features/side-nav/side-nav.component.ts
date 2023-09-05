@@ -13,8 +13,6 @@ export class SideNavComponent implements OnInit {
   @Input() public isExpandedFlag: boolean = true;
   @Input() public userData: any;
 
-  public isCollapsed = false;
-
   //TODO: Mover a objeto externo
   public menuList: Array<any> = [
     {
@@ -32,13 +30,11 @@ export class SideNavComponent implements OnInit {
 
   constructor(private _cookie: CookiesService,
               private _user: UserService,
-              private _router: Router)
-  {
-
+              private _router: Router) {
   }
 
-  async ngOnInit () {
-    //console.log('userData', this.userData);
+  async ngOnInit() {
+    //console.log('sidenav data', this.userData);
     await this.getList();
   };
 
@@ -53,13 +49,8 @@ export class SideNavComponent implements OnInit {
     }
   };
 
-  // itemAction = (argument:string) => {
-  //   console.log(argument)
-  // };
 
-  formatName = (menuName:string) => {
-    return menuName.replaceAll('_', '.');
-  };
+  formatName = (menuName: string) => menuName.replaceAll('_', '.');
 
   logOut() {
     if (this._user) {

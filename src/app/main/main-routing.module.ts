@@ -30,7 +30,6 @@ const routes: Routes = [
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
       {path: '#/index/crm_lista_links', component: LinksComponent},
       {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent},
-
       {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
       {path: '#/index/crm_lista_ficheros', component: FilesComponent}
     ]

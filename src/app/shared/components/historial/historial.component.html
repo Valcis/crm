@@ -109,7 +109,7 @@
             <td>{{log.action | translate}}</td>
             <td>{{log.date | translate}}</td>
             <td>
-              <table class="dataTable table table-borderless ">
+              <table class="dataTable table table-borderless">
                 <tbody class="dataTable">
                   <tr *ngFor="let item of log.data | keyvalue">
                     <td><strong>{{item.key}}:</strong></td>
@@ -118,8 +118,11 @@
                         {{dateProcessing($any(item).value[1])}}
                       </div>
                       <ng-template #json1>
-                        <div class="dataItem" >
-                          <ngx-json-viewer [json]="$any(item).value[0]" [expanded]="false"></ngx-json-viewer>
+                        <div>
+<!--                          <ng-container-->
+<!--                            *ngTemplateOutlet="Object; context:{subItem: $any(item).value[0]}"-->
+<!--                          ></ng-container>-->
+                          <app-json-viewer  [json]="$any(item).value[0]"></app-json-viewer>
                         </div>
                       </ng-template>
                     </td>
@@ -129,8 +132,11 @@
                         {{dateProcessing($any(item).value[1])}}
                       </div>
                       <ng-template #json2>
-                        <div class="dataItem" >
-                          <ngx-json-viewer [json]="$any(item).value[1]" [expanded]="false"></ngx-json-viewer>
+                        <div >
+                          <app-json-viewer  [json]="$any(item).value[1]" ></app-json-viewer>
+<!--                          <ng-container-->
+<!--                            *ngTemplateOutlet="Object; context:{subItem: $any(item).value[1]}"-->
+<!--                          ></ng-container>-->
                         </div>
                       </ng-template>
                     </td>
@@ -141,6 +147,35 @@
                 </tbody>
               </table>
             </td>
+
+<!--            <ng-template #Object let-item="subItem">-->
+<!--              &lt;!&ndash; &ndash;&gt;-->
+<!--              <div [ngSwitch]="typeOf(item)">-->
+<!--                <div *ngSwitchCase="'number'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'string'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'boolean'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'object'">-->
+<!--                  <div *ngIf="isArray(item)" >-->
+<!--                    Array [{{item.length}}]-->
+<!--                    <div *ngFor="let subItem of item">-->
+<!--                      <ng-container-->
+<!--                        *ngTemplateOutlet="Object; context:{subItem: subItem}"-->
+<!--                      ></ng-container>                    </div>-->
+<!--                  </div>-->
+<!--                  <div *ngIf="isArray(item) === false">-->
+<!--                    Object-->
+<!--                    <div *ngFor="let subItem of item | keyvalue">-->
+<!--                      {{subItem.key}}-->
+<!--                      <ng-container-->
+<!--                        *ngTemplateOutlet="Object; context:{subItem: subItem.value}"-->
+<!--                      ></ng-container>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div *ngSwitchDefault>error</div>-->
+<!--              </div>-->
+<!--            </ng-template>-->
+
             <td *ngIf="!relaciones" >
               <table class="nodeTable innerTD">
                 <tbody class="innerTD">
@@ -163,11 +198,9 @@
           <ng-template ngbPaginationNext>></ng-template>
         </ngb-pagination>
         <span> Showing {{((currentPage-1)*pageSize)+1}} to {{(((currentPage-1)*pageSize)+1+pageSize > counter ? counter : ((currentPage-1)*pageSize)+pageSize)}} of {{counter}} entries</span>
-
       </div>
     </div>
   </div>
   <div  *ngIf="historyButton" class="m-4">
-
   </div>
 </div>

@@ -33,6 +33,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import { Pipe, PipeTransform } from '@angular/core';
 import {stringPair} from "../shared/models/historial/type.historial"
 import {NgxJsonViewerModule} from "ngx-json-viewer";
+import {JsonViewerComponent} from "../shared/components/json-viewer/json-viewer.component";
 
 
 @Pipe({name: 'selectOptionsTranslate', pure:false})
@@ -70,9 +71,9 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     NotificacionesComponent,
     LinksComponent,
     ChannelManagerComponent,
-    ],
+    JsonViewerComponent,
+  ],
   imports: [
-
     NgbTimepickerModule,
     NouisliderModule,
     NgSelectModule,
@@ -97,7 +98,8 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+
 
   ],
   exports: [DragDropComponent],

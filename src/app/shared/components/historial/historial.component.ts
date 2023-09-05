@@ -249,7 +249,7 @@ export class HistorialComponent implements OnInit{
   protected changeSort( sortElement:string, type:string) {
     this._loader.setLoading(true);
     if (this.sortCol === sortElement) {
-      this.sortDir = (this.sortDir === "asc" ? this.sortDir = "desc" : this.sortDir = "asc")
+      this.sortDir = (this.sortDir === "asc" ? this.sortDir = "desc" : this.sortDir = "asc");
     } else {
       this.sortCol = sortElement;
       this.sortDir = "asc";
@@ -319,7 +319,7 @@ export class HistorialComponent implements OnInit{
     }else{
       this.dataSearch = DateTime.fromFormat(event, "d-M-yyyy");
     }
-    this.searchAll()
+    this.searchAll();
   }
 
   private searchName(){
@@ -341,10 +341,13 @@ export class HistorialComponent implements OnInit{
     this._loader.setLoading(true);
     this.searchName();
     this.searchDate();
-
     this.counter = this.itemList.length;
     this.currentPage=1;
     this._loader.setLoading(false);
 
+  }
+
+  isArray(item:any){
+    return Array.isArray(item);
   }
 }

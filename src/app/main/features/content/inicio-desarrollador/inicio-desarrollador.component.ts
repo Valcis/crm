@@ -100,7 +100,6 @@ export class InicioDesarrolladorComponent implements OnInit{
 
 
     this._route.data.forEach(e => {this.sub.push(e)});
-    console.log("route",this.sub);
   }
 
   generatePDF() {
@@ -127,7 +126,6 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
-    console.log(this.utc);
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
     this.newDate = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
   }

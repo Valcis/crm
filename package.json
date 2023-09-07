@@ -41,11 +41,13 @@
     "ngx-bootstrap": "^10.2.0",
     "ngx-cookie-service": "^15.0.0",
     "ngx-dropzone": "^3.1.0",
+    "ngx-editor": "^15.3.0",
     "ngx-socket-io": "4.4.0",
     "ngx-summernote": "^1.0.0",
     "nouislider": "^15.7.1",
     "postcss-import": "^15.1.0",
     "rxjs": "~7.8.0",
+    "suneditor": "^2.45.1",
     "sweetalert2": "^11.7.18",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

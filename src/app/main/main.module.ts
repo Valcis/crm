@@ -29,6 +29,8 @@ import {DatepickerComponent} from "../shared/components/date-pick/datepicker.com
 import {DatosEconomicosComponent} from "../shared/components/datos-economicos/datos-economicos.component";
 import {FroalaEditorModule, FroalaViewModule} from "angular-froala-wysiwyg";
 import {TimeZoneComponent} from "../shared/components/time-zone/time-zone.component";
+import {NgxEditorModule} from "ngx-editor";
+import {TextEditorComponent} from "../shared/components/text-editor/text-editor.component";
 
 
 @NgModule({
@@ -50,7 +52,7 @@ import {TimeZoneComponent} from "../shared/components/time-zone/time-zone.compon
     ActividadesComponent,
     NotificacionesComponent,
     LinksComponent,
-
+    TextEditorComponent,
     ChannelManagerComponent
     ],
   imports: [
@@ -79,6 +81,7 @@ import {TimeZoneComponent} from "../shared/components/time-zone/time-zone.compon
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxEditorModule,
 
   ],
   exports: [DragDropComponent],

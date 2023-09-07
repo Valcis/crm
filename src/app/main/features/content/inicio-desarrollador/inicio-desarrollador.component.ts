@@ -9,18 +9,13 @@ import {
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
-import {FormControl,FormGroup, Validators} from "@angular/forms";
- import 'froala-editor/js/plugins.pkgd.min.js';
 
-import 'froala-editor/js/third_party/font_awesome.min';
-import 'froala-editor/js/third_party/image_tui.min';
-import 'froala-editor/js/third_party/spell_checker.min';
-import 'froala-editor/js/third_party/embedly.min';
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 interface TimeZone {name: string, offset:string} //Todo:a un model
 interface ContinentZone {name: string, zones:Array<TimeZone>} //Todo:a un model
-//interface TimeZone {name: string, offset:string}; //Todo:a un model
 
 @Component({
   selector: 'app-inicio-desarrollador',
@@ -49,38 +44,10 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected showTable: boolean = false;
   protected tableSiz = {x:8, y:8};
 
+  protected newDate!: any;
 
-  protected newDate!: NgbDate;
-  public options: Object = {
-    placeholderText: 'Edit Your Content Here!',
-    charCounterCount: false,
-    immediateAngularModelUpdate:false,
-    pluginsEnabled: ['image', 'link','table','lineHeight','paragraphFormat','lists', 'codeView','fontFamily','fontSize', 'inlineClass', 'lineHeight','quote','help'],
-    toolbarButtons: {
-      moreText:{
-        buttons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
-      }
-      ,
-      moreParagraph: {
 
-        buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
-
-      },
-      moreRich: {
-
-        buttons: ['insertLink', 'insertImage','insertTable',]
-
-      },
-      moreMisc: {
-        buttons: ['undo', 'redo', 'spellChecker', 'selectAll', 'html', 'help'],
-        align: 'right',
-      }
-    }
-  };
-
-  form: FormGroup = new FormGroup({
-    html: new FormControl("", Validators.required)
-  });
+  protected summerText:string="";
 
   constructor(
     private _title: Title,

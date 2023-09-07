@@ -75,15 +75,15 @@
       <br>
       <br>
       <h2>SUMMERNOTE</h2>
-      <div [froalaEditor]="options" [(froalaModel)]="htmlContent">Hello, Froala!</div>
-
+      <app-text-editor [(htmlContent)]="summerText"></app-text-editor>
       <h5 class="html-header">HTML Output</h5>
+      {{summerText | json}}
       <div class="html">
-        {{ htmlContent }}
       </div>
     </div>
     <br>
     <!--datos economicos-->
     <datos-economicos>  </datos-economicos>
   </div>
+
 </div>

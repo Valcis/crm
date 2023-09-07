@@ -7,20 +7,18 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateLoaderService} from "./shared/services/translate/translate-loader.service";
 import { CrmLoaderComponent } from './shared/components/crm-loader/crm-loader.component';
-// <<<<<<< HEAD
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-// =======
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-// >>>>>>> develop
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CrmLoaderComponent,
-
   ],
   imports: [
+    BreadcrumbModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -40,6 +38,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
   ],
   exports: [
     CrmLoaderComponent,
+
   ],
   providers: [
     TranslateModule,

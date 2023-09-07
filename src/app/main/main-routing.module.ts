@@ -22,16 +22,16 @@ const routes: Routes = [
       key: 'crm/app/index/main'
     },
     children: [
-      {path: '#/crm_graficos', component: GraficosComponent},
-      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent},
-      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent}, //TODO: cambiar a lista
-      {path: '#/index/crm_calendario', component: CalendarioComponent},
-      {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
-      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
-      {path: '#/index/crm_lista_links', component: LinksComponent},
-      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent},
-      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
-      {path: '#/index/crm_lista_ficheros', component: FilesComponent}
+      {path: '#/crm_graficos', component: GraficosComponent, data:{breadcrumb:{alias:"graficos"}}},
+      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent, data:{breadcrumb:{alias:"inicioDesarrollador"}}},
+      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent, data:{breadcrumb:{alias:"proveedoresProducto"}}},
+      {path: '#/crm_calendario', component: CalendarioComponent, data:{breadcrumb:{alias:"calendario"}}},
+      {path: '#/index/crm_lista_actividades', component: ActividadesComponent, data:{breadcrumb:{alias:"actividades"}}},
+      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent, data:{breadcrumb:{alias:"notificaciones"}}},
+      {path: '#/index/crm_lista_links', component: LinksComponent, data:{breadcrumb:{alias:"links"}}},
+      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent}, //TODO: añadir alias
+      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent, data:{breadcrumb:{alias:"channelManager"}}},
+      {path: '#/index/crm_lista_ficheros', component: FilesComponent, data:{breadcrumb:{alias:"ficheros"}}}
     ]
   }
 ];
@@ -41,4 +41,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class MainRoutingModule {
+
 }

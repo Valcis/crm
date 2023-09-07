@@ -34,7 +34,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {stringPair} from "../shared/models/historial/type.historial"
 import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {JsonViewerComponent} from "../shared/components/json-viewer/json-viewer.component";
-
+import {TitleComponent} from "../shared/components/title/title.component";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 @Pipe({name: 'selectOptionsTranslate', pure:false})
 export class SelectOptionsTranslatePipe implements PipeTransform {
@@ -48,9 +49,9 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
   }
 }
 
-
 @NgModule({
   declarations: [
+    TitleComponent,
     DragDropComponent,
     FilesComponent,
     DatosEconomicosComponent,
@@ -74,6 +75,7 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     JsonViewerComponent,
   ],
   imports: [
+    BreadcrumbModule,
     NgbTimepickerModule,
     NouisliderModule,
     NgSelectModule,
@@ -99,8 +101,6 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     CommonModule,
     ReactiveFormsModule,
     NgxJsonViewerModule
-
-
   ],
   exports: [DragDropComponent],
   providers: []

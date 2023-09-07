@@ -8,6 +8,7 @@ import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {linksTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
 import {NotificationsService} from "../../../../../shared/services/api/user/notifications.service";
+import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 @Component({
   selector: 'document-links',
@@ -16,17 +17,17 @@ import {NotificationsService} from "../../../../../shared/services/api/user/noti
 })
 export class LinksComponent {
 
-  public linkForm!: FormGroup;
-  public newForm!: FormGroup;
-  public types: TypeModel[]=TypeArray;
-  public counter: number = 0;
-  public fetchResult: any[]=[];
-  public currentPage = 1;
-  public pageSize =10;
-  public rowData: any[]= [];
+  protected linkForm!: FormGroup;
+  protected newForm!: FormGroup;
+  protected types: TypeModel[]=TypeArray;
+  protected counter: number = 0;
+  protected fetchResult: any[]=[];
+  protected currentPage = 1;
+  protected pageSize =10;
+  protected rowData: any[]= [];
   private modalRef :any;
-  public delObj: any;
-
+  protected delObj: any;
+  protected title: string = "";
 
   constructor(
     private _translate: TranslateService,
@@ -35,8 +36,8 @@ export class LinksComponent {
     private _cookie: CookiesService,
     private _swal: SwalService,
     private _loader: CrmLoaderService,
-    private _notifier: NotificationsService
-
+    private _notifier: NotificationsService,
+    protected _shared: sharedDataService
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this._translate.use('es');
@@ -49,6 +50,7 @@ export class LinksComponent {
   async ngOnInit(): Promise<void> {
     this.loadForms();
     this.getLinks();
+    this.title = this._shared.userData.menu.menuList[13].subMenu[1].descripcion
   }
 
   private loadForms(){

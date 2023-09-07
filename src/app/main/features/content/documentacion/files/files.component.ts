@@ -11,6 +11,7 @@ import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";
 import {DateTime} from "luxon";
 import {DatePipe} from "@angular/common";
+import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 
 @Component({
@@ -35,6 +36,7 @@ export class FilesComponent {
   protected tz:any = this.ts.zoneName;
   protected utc = this.ts.offset;
   protected test = DateTime;
+  protected title: string = "";
 
   constructor(
     private _datepipe:DatePipe,
@@ -46,6 +48,7 @@ export class FilesComponent {
     private _loader: CrmLoaderService,
     private _swal: SwalService,
     private _router: Router,
+    protected _shared: sharedDataService
   ) {
       this._translate.use(_cookie.getLanguage());
   }
@@ -53,6 +56,7 @@ export class FilesComponent {
   ngOnInit() {
     this.initForms();
     this.getFiles();
+    this.title = this._shared.userData.menu.menuList[13].subMenu[0].descripcion
   }
 
   private initForms(){

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
-import {GenericRequest} from "../../../models/petition/petition.model";
+import {GenericRequest} from "../../../models/petition.model";
 
 @Injectable({
   providedIn: 'root'

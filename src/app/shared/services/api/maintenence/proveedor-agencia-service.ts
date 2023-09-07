@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {GenericRequest} from "../../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
 import {CookiesService} from "../../cookies/cookies.service";
 import {LogHistorial} from "../../../models/manteninence/proveedor-agencia.model";
+import {GenericRequest} from "../../../models/petition.model";
 const { DateTime } = require("luxon");
 
 

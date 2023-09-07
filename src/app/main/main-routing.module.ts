@@ -40,6 +40,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class MainRoutingModule {
-  public patat = "string"
 
 }

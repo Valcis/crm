@@ -1,7 +1,4 @@
-import {Component, ElementRef, Injectable, Input, OnInit, ViewChild} from '@angular/core';
-
-import {Title} from "@angular/platform-browser";
-
+import {Component, Injectable, Input} from '@angular/core';
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "xng-breadcrumb";
 import {sharedDataService} from "../../services/shared-data/shared-data.service";

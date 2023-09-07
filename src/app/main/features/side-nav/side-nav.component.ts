@@ -1,20 +1,9 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 import {UserService} from "../../../shared/services/api/user/user.service";
-import {Route, Router, Routes} from "@angular/router";
+import {Router} from "@angular/router";
 import {menuItem, menuListBase, pageItemBase} from "../../../shared/models/side-nav.model";
 import {ActivePage, Items, Opaque, Sizer} from "./side-nav.animation";
-import {Observable, of} from "rxjs";
-import {MainComponent} from "../../main.component";
-import {GraficosComponent} from "../content/graficos/graficos.component";
-import {InicioDesarrolladorComponent} from "../content/inicio-desarrollador/inicio-desarrollador.component";
-import {ProveedoresProductoComponent} from "../content/proveedores-producto/proveedores-producto.component";
-import {CalendarioComponent} from "../content/calendario/calendario.component";
-import {ActividadesComponent} from "../content/actividades/actividades.component";
-import {NotificacionesComponent} from "../content/notificaciones/notificaciones.component";
-import {LinksComponent} from "../content/documentacion/links/links.component";
-import {ChannelManagerComponent} from "../content/documentacion/channel_manager/channel_manager.component";
-import {FilesComponent} from "../content/documentacion/files/files.component";
 
 
 @Component({

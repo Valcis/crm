@@ -96,7 +96,7 @@
     </div>
     <div class="card-footer ">
       <div class="row">
-        <div class="col">
+        <div class="col max-width250">
           <form class="form-group" [formGroup]="fecthForm" (change)="submitSearch(fecthForm)">
             <div formGroupName="datos_paginacion">
               <select class="form-select" formControlName="num_resultados" type="submit">
@@ -107,7 +107,7 @@
             </div>
           </form>
         </div>
-        <div class="col"></div>
+
         <div class="col">
           <ngb-pagination (pageChange)="changeOfPage($event)" *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [maxSize]="5" [rotate]="true"  [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
             <ng-template ngbPaginationPrevious><</ng-template>

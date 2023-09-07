@@ -8,7 +8,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {LinkedList} from "ngx-bootstrap/utils";
 
 
 @Component({

@@ -98,7 +98,7 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule,
+    NgxJsonViewerModule
 
 
   ],

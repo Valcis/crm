@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
@@ -9,16 +9,15 @@ import {
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
-import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
-import {FormControl,FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {sharedDataService} from "../../../../shared/services/shared-data/shared-data.service";
 
 
 
 
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+interface TimeZone {name: string, offset:string} //Todo:a un model
+interface ContinentZone {name: string, zones:Array<TimeZone>} //Todo:a un model
 
 @Component({
   selector: 'app-inicio-desarrollador',
@@ -39,62 +38,30 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected utc: any;
   protected formatedTime: any;
   protected model2: string = '';
-  protected time2: timepick = {hour:10,minute:15};
   protected showTime: boolean = true;
+  protected currentTimeZone: string ="";
 
-  protected summerConfig: any;
+  protected uiSliderConf = {start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}
   protected sliderModel: number[] = [0];
+  htmlContent ='';
+  protected showTable: boolean = false;
+  protected tableSiz = {x:8, y:8};
 
-  protected tarifa_neta: boolean = false;
-  protected tarifa_comisionable: boolean = false;
-  protected descuento_bar:string = "";
-  protected markup:string = "";
-
-  protected produccion_minima: boolean = false;
-  protected produccion_minima_value: string = "";
-  protected newDate!: NgbDate ;
+  protected newDate!: any;
 
 
-  form: FormGroup = new FormGroup({
-    html: new FormControl("", Validators.required)
-  });
+  protected summerText:string="";
 
   constructor(
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
-    protected _translate: TranslateService,
     private  _route: ActivatedRoute,
-    protected _shared: sharedDataService){
-
-    this.summerConfig = {
-      height: 500
-      //,focus: true
-      //,airMode: true
-      ,fontNames: ['Arial', 'Courier New','Helvetica'],
-      addDefaultFonts: false
-      ,toolbar: [
-        ['edit',['undo','redo']],
-        ['headline', ['style']],
-        ['style', ['bold', 'italic', /* 'underline','superscript', 'subscript', 'strikethrough', */'clear']],
-        ['fontface', ['fontname']],
-        ['textsize', ['fontsize']],
-        ['fontclr', ['color']],
-        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link'
-          //'picture','video',
-          /*'hr'*/]],
-        ['view', [
-          //'fullscreen',
-          'codeview']],
-        ['help', ['help',"codeBlock"]]
-      ]
-    };
+    protected _shared: sharedDataService,
+    protected _translate: TranslateService) {
   }
-
   private sub:Array<any>=[];
+
   ngOnInit(): void {
     this.time();
     this.sliderModel = [5];
@@ -135,18 +102,8 @@ export class InicioDesarrolladorComponent implements OnInit{
     return this._dAdapt.toModel(this._calendar.getToday())!;
   }
 
-  erase() {
-    this.model2 = '';
-  }
-
-  openTime() {
-    this.showTime = !this.showTime;
-    let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-    let testParse3 = test.split(':', 2);
-    this.time2 = {
-      hour: +testParse3[0],
-      minute: +testParse3[1]
-    }
+  getTimeZone($event:string){
+    this.currentTimeZone = $event
   }
 
 }

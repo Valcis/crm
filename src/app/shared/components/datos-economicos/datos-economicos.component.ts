@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DateTime} from 'luxon';
 import {TranslateService} from "@ngx-translate/core";
-import {SwalService} from "../../../../../shared/services/swal/swal.service";
+import {SwalService} from "../../services/swal/swal.service";
 
 
 @Component({

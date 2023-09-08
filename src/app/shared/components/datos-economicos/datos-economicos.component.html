@@ -5,7 +5,7 @@
       <div class="row justify-content-end">
         <div class="col-sm-12 text-right group-box" >
           <div class="btn-group d-inline-block group-items" ngbDropdown #myDrop="ngbDropdown">
-            <button type="button" class="btn btn-default btn-sm ">
+            <button *ngIf="divisaFinal !==''"type="button" class="btn btn-default btn-sm ">
               <span *ngIf="divisaFinal ==='EUR'"><i class="fa fa-eur"></i> Euro</span>
               <span *ngIf="divisaFinal ==='USD'"><i class="fa fa-usd"></i> Dólar</span>
               <span *ngIf="divisaFinal ==='GBP'"><i class="fa fa-usd"></i> Libra esterlina </span>

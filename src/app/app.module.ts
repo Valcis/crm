@@ -12,6 +12,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {BreadcrumbModule} from "xng-breadcrumb";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

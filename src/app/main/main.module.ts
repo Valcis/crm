@@ -25,8 +25,6 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {DragDropComponent} from "../shared/components/drag-drop/drag-drop.component"
 import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
-import {DatepickerComponent} from "./features/content/inicio-desarrollador/date-pick/datepicker.component";
-import {DatosEconomicosComponent} from "./features/content/inicio-desarrollador/datos-economicos/datos-economicos.component";
 import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
 import {HistorialComponent} from "../shared/components/historial/historial.component";
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -36,6 +34,11 @@ import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {JsonViewerComponent} from "../shared/components/json-viewer/json-viewer.component";
 import {TitleComponent} from "../shared/components/title/title.component";
 import {BreadcrumbModule} from "xng-breadcrumb";
+import {DatepickerComponent} from "../shared/components/date-pick/datepicker.component";
+import {DatosEconomicosComponent} from "../shared/components/datos-economicos/datos-economicos.component";
+import {TimeZoneComponent} from "../shared/components/time-zone/time-zone.component";
+import {NgxEditorModule} from "ngx-editor";
+import {TextEditorComponent} from "../shared/components/text-editor/text-editor.component";
 
 @Pipe({name: 'selectOptionsTranslate', pure:false})
 export class SelectOptionsTranslatePipe implements PipeTransform {
@@ -52,6 +55,7 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
 @NgModule({
   declarations: [
     TitleComponent,
+    TimeZoneComponent,
     DragDropComponent,
     FilesComponent,
     DatosEconomicosComponent,
@@ -73,6 +77,8 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     LinksComponent,
     ChannelManagerComponent,
     JsonViewerComponent,
+    TextEditorComponent,
+    ChannelManagerComponent
   ],
   imports: [
     BreadcrumbModule,
@@ -100,7 +106,8 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    NgxEditorModule,
   ],
   exports: [DragDropComponent],
   providers: []

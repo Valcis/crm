@@ -41,8 +41,8 @@
 
         <!-- DATE PICKER -->
         <!--falta la zona horaria a partir de los datos de usuario-->
-        <app-datepicker [clock]="true" [initDate]="newDate" ></app-datepicker>
-
+        <app-datepicker [clock]="true" [initDate]="newDate" [offset]="currentTimeZone"></app-datepicker>
+        <app-time-zone (TimeZone)="getTimeZone($event)"></app-time-zone>
       </div>
     </div>
     <!--NOUISLIDER-->
@@ -51,20 +51,26 @@
 
       <span>https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
       <br>
-      <span>[config]:{{"{"}}start:5,connect:'lower',step:1,range:{{"{"}}min:0,max:10},behaviour:'snap',pips:{{"{"}}mode:'steps',density:10}}</span>
+      <div>{{uiSliderConf | json}}</div>
+      <div> {{sliderModel}}</div>
       <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
       <br>
-      <nouislider class="noiuslider" [config]="{start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}" [(ngModel)]="sliderModel"></nouislider>
-
+      <nouislider class="noiuslider" [config]="uiSliderConf" [(ngModel)]="sliderModel"></nouislider>
     </div>
     <!--summernote-->
     <div>
       <br>
       <br>
       <h2>SUMMERNOTE</h2>
+      <app-text-editor [(htmlContent)]="summerText"></app-text-editor>
+      <h5 class="html-header">HTML Output</h5>
+      {{summerText | json}}
+      <div class="html">
+      </div>
     </div>
     <br>
     <!--datos economicos-->
     <datos-economicos>  </datos-economicos>
   </div>
+
 </div>

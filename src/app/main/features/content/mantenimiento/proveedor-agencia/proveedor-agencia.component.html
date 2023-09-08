@@ -1,8 +1,9 @@
-<div>
-  <h1>Proveedor Agencia</h1>
-</div>
+
 <div class="body-right m-3">
+  <app-title [titulo]="title"></app-title>
   <div>
+<!--    Todo: eliminar el primer historial-->
+<!--    hay dos historisles, uno para cada tipo. el primero no va aquí pero lo dejo para la revision-->
     <app_historial [relaciones]="true"></app_historial>
     <app_historial [relaciones]="false"></app_historial>
 

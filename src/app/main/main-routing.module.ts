@@ -29,7 +29,7 @@ const routes: Routes = [
       {path: '#/index/crm_lista_actividades', component: ActividadesComponent, data:{breadcrumb:{alias:"actividades"}}},
       {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent, data:{breadcrumb:{alias:"notificaciones"}}},
       {path: '#/index/crm_lista_links', component: LinksComponent, data:{breadcrumb:{alias:"links"}}},
-      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent}, //TODO: añadir alias
+      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent, data:{breadcrumb:{alias:"proveedorAgencia"}}}, //TODO: añadir alias
       {path: '#/index/crm_channelmanager', component: ChannelManagerComponent, data:{breadcrumb:{alias:"channelManager"}}},
       {path: '#/index/crm_lista_ficheros', component: FilesComponent, data:{breadcrumb:{alias:"ficheros"}}}
     ]

@@ -32,6 +32,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class InicioDesarrolladorComponent implements OnInit{
 
+  protected title:string="";
   protected aTitle:string = '';
   protected tz: any;
   protected ts: any;
@@ -97,7 +98,7 @@ export class InicioDesarrolladorComponent implements OnInit{
   ngOnInit(): void {
     this.time();
     this.sliderModel = [5];
-
+    this.title = this._shared.userData.menu.menuList[1].descripcion;
 
     this._route.data.forEach(e => {this.sub.push(e)});
   }

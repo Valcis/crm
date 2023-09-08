@@ -45,5 +45,6 @@ export class TitleComponent {
     this.breadcrumbService.set('@links', this._translate.instant(menu[13].subMenu[1].descripcion));
     this.breadcrumbService.set('@channelManager', this._translate.instant(menu[13].subMenu[2].descripcion));
     this.breadcrumbService.set('@ficheros', this._translate.instant(menu[13].subMenu[0].descripcion));
+    this.breadcrumbService.set('@proveedorAgencia', this._translate.instant(menu[14].subMenu[2].descripcion));
   }
 }

@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 
 @Component({
@@ -16,6 +17,7 @@ import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loa
   styleUrls: ['./proveedor-agencia.component.scss',],
 })
 export class ProveedorAgenciaComponent {
+  protected title= "";
 
   public fecthForm!: FormGroup;
   public newItemForm!: FormGroup;
@@ -41,10 +43,11 @@ export class ProveedorAgenciaComponent {
               private _swal: SwalService,
               private _translate:TranslateService,
               private _loader: CrmLoaderService,
-
+              protected _shared: sharedDataService
   ) {
     this.loadForms();
     this.getProveedores(1);
+    this.title = this._shared.userData.menu.menuList[14].subMenu[2].descripcion
   }
   private loadForms(){
     this.fecthForm = new FormGroup({

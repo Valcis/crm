@@ -25,10 +25,7 @@ export class SideClosedDirective {
   }
 
   private openClose(size:string) {
-
     this.el.nativeElement.style.width = size;
   }
-
-  // this.el.nativeElement.style.width = "10%"
 
 }

@@ -22,7 +22,7 @@ export class DatosEconomicosComponent implements OnInit{
 
   constructor(
     protected _translate: TranslateService,
-    protected  _swal: SwalService){
+    protected _swal: SwalService){
   }
 
   ngOnInit(): void {

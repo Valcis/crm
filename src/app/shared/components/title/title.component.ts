@@ -3,8 +3,6 @@ import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "xng-breadcrumb";
 import {sharedDataService} from "../../services/shared-data/shared-data.service";
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,22 +10,18 @@ import {sharedDataService} from "../../services/shared-data/shared-data.service"
   selector: 'app-title',
   templateUrl: './title.component.html',
   styleUrls: ['./title.component.scss'],
-
-
 })
 export class TitleComponent {
   @Input() titulo: string= "";
-
 
   constructor(
     protected _translate: TranslateService,
     private breadcrumbService: BreadcrumbService,
     private _shared: sharedDataService
-) {
-  }
+  ) {  }
+
   ngOnInit(){
     this.setBread();
-
     this._translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.setBread();
     });

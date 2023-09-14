@@ -1,23 +1,22 @@
 <div class="container-flex w-100 p-0 mx-4 fadeInRight" >
   <app-title [titulo]="title"></app-title>
-  <div class=" col mt-3no" >
+  <div class="col mt-3no" >
     <!--TRANSLATE TEST-->
     <div class="row">
-      <div class="col-sm pl-0 ">
-        <p class="pl-0"> TRANSALTE TEST1: {{_translate.currentLang}} </p>
-        <p class="pl-0"> TRANSALTE COMMON.TEXT.YES: {{'COMMON.TEXT.YES'| translate}} </p>
-        <p class="pl-0"> TRANSALTE COMMON.TEXT.NO: {{'COMMON.TEXT.NO'| translate}}</p>
-      </div>
+      <p> TRANSALTE TEST1: {{_translate.currentLang}} </p>
+      <p> TRANSALTE COMMON.TEXT.YES: {{'COMMON.TEXT.YES'| translate}} </p>
+      <p> TRANSALTE COMMON.TEXT.NO: {{'COMMON.TEXT.NO'| translate}}</p>
     </div>
     <!--BUTTONS CODE-->
     <div class="row">
-      <div class="col-sm p-0">
+      <div class="col-sm">
         <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
         <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
       </div>
     </div>
     <!--TIME ZONE CODE-->
-    <div class="row p-0">
+<!--    TODO: Pasar a shared components-->
+    <div class="row">
       <div class="col-sm">
         <div class="mb-2">
           <strong class="pl-0">Fecha:
@@ -26,41 +25,33 @@
           </strong>
         </div>
       </div>
-      <div class="pl-0">
-        <span class="pl-0"><strong>DateTime: </strong> {{ts}} </span>
-        <br>
-        <span class="pl-0"><strong>ts-Original: </strong> {{utc}} </span>
-        <br>
-        <span class="pl-0"><strong>ts-(UTC)): </strong> {{formatedTime}} </span>
-        <br>
-        <span class="pl-0"><strong>timezone: </strong> {{tz}} </span>
+      <div class="mb-1">
+        <p class="mb-1"><strong>DateTime: </strong> {{ts}} </p>
+        <p class="mb-1"><strong>ts-Original: </strong> {{utc}} </p>
+        <p class="mb-1"><strong>ts-(UTC)): </strong> {{formatedTime}} </p>
+        <p class="mb-1"><strong>timezone: </strong> {{tz}} </p>
       </div>
     </div>
-    <div class="row-sm p-0">
+    <div class="row-sm">
       <div class="col-sm-7 mt-5">
-
         <!-- DATE PICKER -->
-        <!--falta la zona horaria a partir de los datos de usuario-->
+        <!-- TODO: falta la zona horaria a partir de los datos de usuario-->
         <app-datepicker [clock]="true" [initDate]="newDate" [offset]="currentTimeZone"></app-datepicker>
         <app-time-zone (TimeZone)="getTimeZone($event)"></app-time-zone>
       </div>
     </div>
     <!--NOUISLIDER-->
-    <div >
+    <div class="row mb-5">
       <h2>NOUISLIDER</h2>
-
-      <span>https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
-      <br>
       <div>{{uiSliderConf | json}}</div>
       <div> {{sliderModel}}</div>
-      <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
-      <br>
-      <nouislider class="noiuslider" [config]="uiSliderConf" [(ngModel)]="sliderModel"></nouislider>
+      <input class="m-1 col-1" type="button" value="poner a 10" (click)="sliderModel=[10]">
+      <div class="row">
+        <nouislider class="noiuslider" [config]="uiSliderConf" [(ngModel)]="sliderModel"></nouislider>
+      </div>
     </div>
     <!--summernote-->
-    <div>
-      <br>
-      <br>
+    <div class="row">
       <h2>SUMMERNOTE</h2>
       <app-text-editor [(htmlContent)]="summerText"></app-text-editor>
       <h5 class="html-header">HTML Output</h5>
@@ -70,7 +61,7 @@
     </div>
     <br>
     <!--datos economicos-->
-    <datos-economicos>  </datos-economicos>
+    <datos-economicos></datos-economicos>
   </div>
 
 </div>

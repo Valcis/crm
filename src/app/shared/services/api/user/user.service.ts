@@ -11,7 +11,6 @@ import {CookiesService} from "../../cookies/cookies.service";
 import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
 import {GenericIntranetResponse} from "../../../models/petition/petition.model";
 import {DateTime} from "luxon";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
   providedIn: 'root'
@@ -39,44 +38,44 @@ export class UserService extends CrmService {
     else petition = this._login.sendGetLoginById(credenciales);
 
     // @ts-ignore
-    petition.subscribe(async (res: GenericIntranetResponse) => {
-      //console.log("USER. retrieveUser petition  response ", res)
-      const {Salida: {empl_code}, Id} = res;
+    petition.subscribe(async (response: GenericIntranetResponse) => {
+        //console.log("USER. retrieveUser petition  response ", response)
+        const {Salida: {empl_code}, Id} = response;
 
-      if (res.Status === "OK") {
-        this.cookie.setSessionId(Id);
-        this.userData.intranetDetails = res.Salida;
+        if (response.Status === "OK") {
+          this.cookie.setSessionId(Id);
+          this.userData.intranetDetails = response.Salida;
 
-        //lanzamos peticion de datos de neo del usuario para lanzar la peti de baja
-        try {
-          this.userData.crmDetails = await this.getUsuarioByEmplCode(empl_code, Id);
-          const isDischarged = await this.isDischarged(this.userData.crmDetails.metadata.neo_id, empl_code, Id)
-          if (!isDischarged) resolve("OK")
-          else resolve("Usuario temporalmente dado de baja")
-        } catch (error) {
-          reject(error)
+          //lanzamos peticion de datos de neo del usuario para lanzar la peti de baja
+          try {
+            this.userData.crmDetails = await this.getUserByEmplCode(empl_code, Id);
+            const isDischarged = await this.isDischarged(this.userData.crmDetails.metadata.neo_id, empl_code, Id);
+            if (!isDischarged) resolve("OK");
+            else resolve("Usuario temporalmente dado de baja");
+          } catch (error) {
+            reject(error);
+          }
+        } else {
+          this.cookie.deleteSessionId();
+          resolve("Usuario no encontrado con esas credenciales");
         }
-
-      } else {
-        this.cookie.deleteSessionId();
-        resolve("Credenciales no válidas")
-      }
-    }, error => {
-      reject("Fallo en peticion sendGetLogin")
-    })
+      },
+      error => reject("sendGetLogin : intento de conexion fallido"));
   });
 
-  private getUsuarioByEmplCode = (empl_code: number, sessionId: string) => new Promise((resolve, reject) =>
-    // @ts-ignore
-    this._login.getUsuarioByEmplCode(empl_code, sessionId).subscribe((res: GenericIntranetResponse) => {
-      //console.log("USER. getUsuarioByEmplCode response ", res)
-      if (res.Status && res.Status !== "OK") reject(res.StatusMsg);
-      else resolve(res.Salida.datos_peticion);
-    })
-  );
+  private getUserByEmplCode = (empl_code: number, sessionId: string) => new Promise((resolve, reject) => {
+    this._login.getUsuarioByEmplCode(empl_code, sessionId).subscribe(
+      // @ts-ignore
+      (response: GenericIntranetResponse) => {
+        //console.log("USER. getUsuarioByEmplCode response ", response)
+        const {Status, StatusMsg, Salida} = response;
+        if (Status && Status == "OK") resolve(Salida.datos_peticion);
+        else reject("getUsuarioByEmplCode : peticion con datos erroneos");
+      },
+      error => reject("Fallo al intentar peticion getUsuarioByEmplCode"));
+  });
 
   private isDischarged = (neoId: number, emplCode: number, sessionId: string) => new Promise((resolve, reject) => {
-
     this._login.sendGetBajaTemporalUsuario(neoId, sessionId).subscribe(
       // @ts-ignore
       async (response: GenericIntranetResponse) => {
@@ -98,39 +97,35 @@ export class UserService extends CrmService {
               this.userData.activities = activities;
               this.userData.notifications = notif;
               resolve(false);
-            }).catch(reject) // === catch(err => reject(err))
+            }).catch(reject); // === catch(err => reject(err))
           }
-        } else reject("sendGetBajaTemporalUsuario : " + response.StatusMsg)
+        } else reject("sendGetBajaTemporalUsuario : " + response.StatusMsg);
       },
-      error => {
-        reject("Fallo al intentar peticion sendGetBajaTemporalUsuario")
-      })
+      error => reject("Fallo al intentar peticion sendGetBajaTemporalUsuario"));
   });
 
-  private getConfig = (empl_code: number, sessionId: string) => new Promise((resolve, reject) =>
-    this._userConfig.sendGetConfig(empl_code, sessionId + "fake").subscribe(
+  private getConfig = (empl_code: number, sessionId: string) => new Promise((resolve, reject) => {
+    this._userConfig.sendGetConfig(empl_code, sessionId).subscribe(
       // @ts-ignore
       (response: GenericIntranetResponse) => {
         //console.log("sendGetConfig response", response);
-        const {Status, Salida} = response
-        if (Status && Status === "OK" && Salida) resolve(Salida)
-        else reject("sendGetConfig : credenciales erroneas")
-      }, error => {
-        reject("Fallo al intentar peticion sendGetConfig")
-      })
-  );
+        const {Status, Salida} = response;
+        if (Status && Status === "OK" && Salida) resolve(Salida);
+        else reject("sendGetConfig : credenciales erroneas");
+      },
+      error => reject("Fallo al intentar peticion sendGetConfig"));
+  });
 
-  private getMenu = (sessionId: string) => new Promise((resolve, reject) =>
+  private getMenu = (sessionId: string) => new Promise((resolve, reject) => {
     this._userMenu.sendGetMenu(sessionId).subscribe(
       // @ts-ignore
       (response: GenericIntranetResponse) => {
         //console.log("sendGetMenu response", response);
         if (!response.Status) resolve(response.Salida);
         else reject("sendGetMenu : " + response.Salida.mensaje);
-      }, error => {
-        reject("Fallo al intentar peticion sendGetMenu");
-      })
-  );
+      },
+      error => reject("Fallo al intentar peticion sendGetMenu"));
+  });
 
   private getActivitiesAlert = (neoId: number, emplCode: number, sessionId: string) => new Promise((resolve, reject) => {
     const entrada = {
@@ -153,15 +148,14 @@ export class UserService extends CrmService {
       tipoActividad: "MIAS"
     };
 
-    // @ts-ignore
-    this._activitiesAlert.sendGetActAlert(entrada, sessionId).subscribe((response: GenericIntranetResponse) => {
-      //console.log("getActividadesAlertas", response);
-      if (response && response.Status == "OK") resolve(response.Salida)
-      else reject("sendGetActAlert : peticion con datos erroneos")
-    }, error => {
-      reject("Fallo al intentar peticion sendGetActAlert")
-    })
-
+    this._activitiesAlert.sendGetActAlert(entrada, sessionId).subscribe(
+      // @ts-ignore
+      (response: GenericIntranetResponse) => {
+        //console.log("getActividadesAlertas", response);
+        if (response && response.Status == "OK") resolve(response.Salida);
+        else reject("sendGetActAlert : peticion con datos erroneos");
+      },
+      error => reject("Fallo al intentar peticion sendGetActAlert"));
   });
 
   private getNotifications = (neoId: number, sessionId: string) => new Promise((resolve, reject) => {
@@ -176,14 +170,15 @@ export class UserService extends CrmService {
       "orden": "fecha_creacion_ts",
       "tipo_orden": "DESC"
     };
-    // @ts-ignore
-    this._notifications.sendGetNotifications(entrada, sessionId).subscribe((response: GenericIntranetResponse) => {
-      //console.log("getNotifications", response);
-      if (response && response.Status == "OK") resolve(response.Salida)
-      else reject("sendGetNotifications : peticion con datos erroneos")
-    }, error => {
-      reject("Fallo al intentar peticion sendGetNotifications")
-    })
+
+    this._notifications.sendGetNotifications(entrada, sessionId).subscribe(
+      // @ts-ignore
+      (response: GenericIntranetResponse) => {
+        //console.log("getNotifications", response);
+        if (response && response.Status == "OK") resolve(response.Salida);
+        else reject("sendGetNotifications : peticion con datos erroneos");
+      },
+      error => reject("Fallo al intentar peticion sendGetNotifications"));
   });
 
 }

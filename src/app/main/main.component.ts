@@ -8,13 +8,13 @@ import {BodySize, SideNavSize} from "./main.animations";
 
 @Component({
   selector: 'app-main',
-  animations: [BodySize,SideNavSize],
+  animations: [BodySize, SideNavSize],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
-  public detectResize(event:any): void {
+  public detectResize(event: any): void {
     this.width = window.innerWidth;
   }
 
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
   protected isExpanded: boolean = true;
   protected currentLang: string = '';
   protected userData: any;
-  private width:number=window.innerWidth;
+  private width: number = window.innerWidth;
 
 
   constructor(
@@ -43,16 +43,14 @@ export class MainComponent implements OnInit {
     this._loader.setLoading(true);
 
     if (!Object.keys(this._user.userData).length) {
-      console.log("no llegan datos de user, posiblemente un F5, volver a lanzar el retrieve...")
-
-      const isValid = await this._user.retrieveUser(this._cookie.getSessionId())
-      if (!isValid) {
+      //console.log("no llegan datos de user, posiblemente un F5, volver a lanzar el retrieve...")
+      const hasValidIdMessage = await this._user.retrieveUser(this._cookie.getSessionId());
+      if (hasValidIdMessage !== "OK") {
         // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
         console.error("usuario no valido")
         await this._router.navigate(['/login'])
-      } else this.userData = this._user.userData;
+      }
     }
-
     this.userData = this._user.userData
     this._loader.setLoading(false);
     console.log("INFO CARGADA HASTA AQUI EN USER_SERVICE", this._user.userData);
@@ -60,12 +58,13 @@ export class MainComponent implements OnInit {
 
   onToggle = () => this.isExpanded = !this.isExpanded;
 
-  protected animationCall(){
-    if(this.width >=754){
+  protected animationCall() {
+    if (this.width >= 754) {
       return "bg"
-    }else{
+    } else {
       return "hidden"
     }
   }
+
   protected readonly Object = Object;
 }

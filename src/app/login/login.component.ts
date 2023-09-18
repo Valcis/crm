@@ -24,12 +24,11 @@ export class LoginComponent implements OnInit {
     private translate: TranslateService,
     private _router: Router,
     private _cookie: CookiesService,
-    private http: HttpClient,
     private _user: UserService,
     private _loader: CrmLoaderService,
-    private formBuilder: FormBuilder
+    private _formBuilder: FormBuilder
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.loginForm = this._formBuilder.group({
       username: new FormControl<string>('', Validators.required),
       password: new FormControl('', Validators.required),
     });
@@ -47,46 +46,31 @@ export class LoginComponent implements OnInit {
     this.autoLogin();
   }
 
+  protected login = () => this.signIn(this.loginForm.value);
 
-  public async login() {
-    //console.log("LOGIN. inicio -> boton pressed", this.loginForm.value)
-    await this._loader.setLoading(true);
+  private autoLogin = async () => {
+    console.log("login")
+    // console.log("AUTOLOGIN. inicio ")
+    const sessionId = this._cookie.getSessionId();
+    if (sessionId) await this.signIn(sessionId);
+    // console.assert(sessionId, "NO HAY cookie crm2_session_id") //borrar
+  }
+
+  private signIn = async (credentials: string) => {
     try {
-      const hasValidId = await this._user.retrieveUser(this.loginForm.value)
-      console.log("3333333333333333", hasValidId)
-      if (hasValidId == "OK") await this._router.navigate(['/main'])
+      this._loader.setLoading(true);
+      const hasValidIdMessage = await this._user.retrieveUser(credentials);
+      if (hasValidIdMessage == "OK") await this._router.navigate(['/main']);
       else // TODO : lanzar toast con mensaje de "error"
-        console.log("fallo: ", hasValidId)
+        console.error("Intento fallido :  ", hasValidIdMessage);
     } catch (error) {
       this._cookie.deleteSessionId();
-      console.error("error catched #> ", error)
+      console.error("error catched #> ", error);
+    } finally {
+      this._loader.setLoading(false);
     }
-
-    this._loader.setLoading(false);
   }
 
-  public async autoLogin() {
-    // console.log("AUTOLOGIN. inicio ")
-    this._loader.setLoading(true); // Set the loader to true at the start
-    const sessionId = this._cookie.getSessionId();
+  test = (backItem: string) => this.bImage = backItem;
 
-    if (sessionId) {
-      try {
-        // console.log("hay sessionID : ", sessionId, " . Iniciando loggin...")
-        const hasValidId = await this._user.retrieveUser(sessionId);
-
-        if (hasValidId) await this._router.navigate(['/main']);
-        else console.warn("expired/invalid sessionId deleted")
-      } catch (error) {
-        console.error("error catched #>", error);
-      }
-    }
-    // console.assert(sessionId, "NO HAY cookie crm2_session_id") //borrar
-    this._loader.setLoading(false); // Set the loader to true at the start
-    // console.log("AUTOLOGIN. fin ")
-  }
-
-  test(backItem: string) {
-    this.bImage = backItem;
-  }
 }

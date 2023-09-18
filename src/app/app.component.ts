@@ -12,8 +12,9 @@ export class AppComponent implements OnInit {
   title = 'crm2';
   currentLang: string = '';
 
-  constructor(private translate: TranslateService,
-              private cookie: CookiesService) {
+  constructor(
+    private translate: TranslateService,
+    private cookie: CookiesService) {
     this.currentLang = cookie.getLanguage();
   }
 

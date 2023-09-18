@@ -7,7 +7,7 @@ import {CookiesService} from "../../../../../shared/services/cookies/cookies.ser
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {linksTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
-import {NotificationsService} from "../../../../../shared/services/api/user/notifications.service";
+import {NotificationsService} from "../../../../../shared/services/api/user/endpoints/notifications.service";
 
 @Component({
   selector: 'document-links',

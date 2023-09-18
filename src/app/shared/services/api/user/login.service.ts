@@ -3,7 +3,6 @@ import {LoginEntrada} from "../../../models/user/login.model";
 import {GenericRequest} from "../../../models/petition/petition.model";
 import {CrmService} from "../crm.service";
 import {HttpClient} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +52,20 @@ export class LoginService extends CrmService {
       Tipo: "",
       Entrada: {"empl_code": empl_code},
       Id: id,
+      URL: "",
+      recuerdame_id: ""
+    };
+    return this.sendPost(request);
+  }
+
+  public sendGetBajaTemporalUsuario = (neo_id: number, sessionId: string) => {
+    console.log("API. sendGetBajaTemporalUsuario ", neo_id, sessionId)
+    const request = {
+      Servicio: "usuariosCrm",
+      Metodo: "GetBajaTemporalUsuario",
+      Tipo: "",
+      Entrada: {"neo_id":neo_id},
+      Id: sessionId,
       URL: "",
       recuerdame_id: ""
     };

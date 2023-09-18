@@ -23,14 +23,11 @@ export class SideNavComponent implements OnInit {
   protected isOpen:any = null;
   protected isBig:boolean = true;
   protected isOpaque:boolean = true;
-
   protected itemsSize:boolean = true;
-  protected isCollapsed = false;
   private canRun:boolean=true;
   protected showSm:any=null;
   protected currLink:any;
   private width:number = window.innerWidth;
-
   protected menuList:Array<menuListBase> = [menuItem];
 
   constructor(private _cookie: CookiesService,
@@ -105,7 +102,7 @@ export class SideNavComponent implements OnInit {
 
   protected animationCall(){
 
-    if(this.width >=754){
+    if(this.width >=754) {
       return "bg"
     }else{
       this.isBig = false;

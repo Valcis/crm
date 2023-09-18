@@ -18,10 +18,10 @@
           >
 
           <div *ngIf="isBig">
-            <span> {{userData.detalles.nombre}} {{userData.detalles.apellido1}}</span>
+            <span> {{userData.intranetDetails.nombre}} {{userData.intranetDetails.apellido1}}</span>
             <div class="dropdown nav" ngbDropdown>
               <a class="dropdown-toggle count-info dd l-grey us-dd perfil" ngbDropdownToggle>
-                {{"PERFIL.USER." + userData.detalles.perfil | translate}}
+                {{"PERFIL.USER." + userData.intranetDetails.perfil | translate}}
               </a>
               <ul class="dropdown-menu m-t-xs ddMenu fadeInRight" ngbDropdownMenu>
                 <li role="menuitem"><a class="dropdown-item"> Perfil </a></li>

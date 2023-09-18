@@ -48,13 +48,19 @@ export class LoginComponent implements OnInit {
 
 
   public async login() {
+    await this._loader.setLoading(true);
     console.log("LOGIN. inicio -> boton pressed", this.loginForm.value)
-    //this.loadForm()
-    this._loader.setLoading(true);
     const hasValidId = await this._user.retrieveUser(this.loginForm.value)
 
     if (hasValidId) {
-      await this._router.navigate(['/main'])
+      console.warn(this._user.userData)
+      const {crmDetails: {metadata: {neo_id}}, intranetDetails: {empl_code}} = this._user.userData;
+      const isDischarged = await this._user.isDischarged(neo_id, empl_code, this._cookie.getSessionId())
+      if(!isDischarged) await this._router.navigate(['/main'])
+      else {
+        //TODO : montar en un toast
+        console.log("USUARIO dado de baja")
+      }
     } else {
       console.error("usuario no valido")
       // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"

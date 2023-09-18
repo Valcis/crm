@@ -29,23 +29,23 @@ export class LoginService extends CrmService {
 
 
   public sendGetLogin = (credenciales: LoginEntrada) => {
-    console.log("API sendGetLogin ", credenciales )
+    //console.log("API sendGetLogin ", credenciales )
     const modifiedLoginBodyRq = {
       ...this.loginBodyRq,
       Entrada: credenciales,
       Id: credenciales.user_session_id || ""
     };
-    console.log("API. sendGetLogin envio", modifiedLoginBodyRq )
+    //console.log("API. sendGetLogin envio", modifiedLoginBodyRq )
     return this.sendPost(modifiedLoginBodyRq);
   };
 
-  public sendGetLoginById = (id: string) =>{
-    console.log("API. sendGetLoginById  extraemos de memcached usuario ", id)
+  public sendGetLoginById = (id: string) => {
+    //console.log("API. sendGetLoginById  extraemos de memcached usuario ", id)
     return this.sendPost({...this.loginBodyRq, Id: id})
   }
 
   public getUsuarioByEmplCode = (empl_code: number, id: string) => {
-    console.log("API. getUsuarioByEmplCode ", empl_code, id)
+    //console.log("API. getUsuarioByEmplCode ", empl_code, id)
     const request = {
       Servicio: "usuariosCrm",
       Metodo: "GetUsuarioCrmByEmplCode",
@@ -59,12 +59,12 @@ export class LoginService extends CrmService {
   }
 
   public sendGetBajaTemporalUsuario = (neo_id: number, sessionId: string) => {
-    console.log("API. sendGetBajaTemporalUsuario ", neo_id, sessionId)
+    //console.log("API. sendGetBajaTemporalUsuario ", neo_id, sessionId)
     const request = {
       Servicio: "usuariosCrm",
       Metodo: "GetBajaTemporalUsuario",
       Tipo: "",
-      Entrada: {"neo_id":neo_id},
+      Entrada: {"neo_id": neo_id},
       Id: sessionId,
       URL: "",
       recuerdame_id: ""

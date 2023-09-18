@@ -26,8 +26,8 @@ export class UserConfigService extends CrmService {
     };
   }
 
-  public sendGetConfig = (user: UserConfigEntrada, id: string) =>
-    this.sendPost({...this.userConfigBodyRq, Entrada: user, Id: id})
+  public sendGetConfig = (empl_code: number, id: string) =>
+    this.sendPost({...this.userConfigBodyRq, Entrada: {id: empl_code}, Id: id})
 
 
 }

@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
 import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
+import {equals} from "@ngx-translate/core/lib/util";
 
 
 @Component({
@@ -48,22 +49,17 @@ export class LoginComponent implements OnInit {
 
 
   public async login() {
+    //console.log("LOGIN. inicio -> boton pressed", this.loginForm.value)
     await this._loader.setLoading(true);
-    console.log("LOGIN. inicio -> boton pressed", this.loginForm.value)
-    const hasValidId = await this._user.retrieveUser(this.loginForm.value)
-
-    if (hasValidId) {
-      console.warn(this._user.userData)
-      const {crmDetails: {metadata: {neo_id}}, intranetDetails: {empl_code}} = this._user.userData;
-      const isDischarged = await this._user.isDischarged(neo_id, empl_code, this._cookie.getSessionId())
-      if(!isDischarged) await this._router.navigate(['/main'])
-      else {
-        //TODO : montar en un toast
-        console.log("USUARIO dado de baja")
-      }
-    } else {
-      console.error("usuario no valido")
-      // TODO : lanzar toast con mensaje de "Datos de usuario incorrectos"
+    try {
+      const hasValidId = await this._user.retrieveUser(this.loginForm.value)
+      console.log("3333333333333333", hasValidId)
+      if (hasValidId == "OK") await this._router.navigate(['/main'])
+      else // TODO : lanzar toast con mensaje de "error"
+        console.log("fallo: ", hasValidId)
+    } catch (error) {
+      this._cookie.deleteSessionId();
+      console.error("error catched #> ", error)
     }
 
     this._loader.setLoading(false);
@@ -78,10 +74,11 @@ export class LoginComponent implements OnInit {
       try {
         // console.log("hay sessionID : ", sessionId, " . Iniciando loggin...")
         const hasValidId = await this._user.retrieveUser(sessionId);
+
         if (hasValidId) await this._router.navigate(['/main']);
         else console.warn("expired/invalid sessionId deleted")
-      } catch (e) {
-        console.error("error catched ->", e);
+      } catch (error) {
+        console.error("error catched #>", error);
       }
     }
     // console.assert(sessionId, "NO HAY cookie crm2_session_id") //borrar

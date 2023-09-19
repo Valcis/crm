@@ -72,5 +72,3 @@ export class LoginService extends CrmService {
     return this.sendPost(request);
   }
 }
-
-

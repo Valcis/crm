@@ -2,11 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
-import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
 import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
-import {equals} from "@ngx-translate/core/lib/util";
 
 
 @Component({
@@ -42,21 +40,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit ()  {
     this.autoLogin();
   }
 
   protected login = () => this.signIn(this.loginForm.value);
 
   private autoLogin = async () => {
-    console.log("login")
-    // console.log("AUTOLOGIN. inicio ")
+    // console.log("AUTOLOGIN. inicio ", this._cookie.getSessionId())
     const sessionId = this._cookie.getSessionId();
     if (sessionId) await this.signIn(sessionId);
+    this._loader.setLoading(false);
     // console.assert(sessionId, "NO HAY cookie crm2_session_id") //borrar
   }
 
   private signIn = async (credentials: string) => {
+    // console.log("Sign-In...")
     try {
       this._loader.setLoading(true);
       const hasValidIdMessage = await this._user.retrieveUser(credentials);
@@ -72,5 +71,4 @@ export class LoginComponent implements OnInit {
   }
 
   test = (backItem: string) => this.bImage = backItem;
-
 }

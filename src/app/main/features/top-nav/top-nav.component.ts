@@ -10,11 +10,10 @@ import {UserService} from "../../../shared/services/api/user/user.service";
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss']
 })
-export class TopNavComponent implements OnInit{
+export class TopNavComponent implements OnInit {
   @Output() expander: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() userData:any;
+  @Input() userData: any;
   lang = '';
-  private user: any;
 
   langList = [
     {code: 'en', lang: 'English', flag: "assets/images/flags/16/United-States.png"},
@@ -29,26 +28,22 @@ export class TopNavComponent implements OnInit{
     private _router: Router
   ) {
     this.lang = _cookie.getLanguage();
-    this.user = this._user.userData;
   }
 
   ngOnInit(): void {
-    // console.log("--- TOP NAV COMPONENT DATA---", this.mydata);
+    // console.log("--- TOP NAV COMPONENT DATA---", this.userData);
   }
 
   onExpander = () => this.expander.emit();
 
-  changeLang(localeCode: string) {
+  changeLang = (localeCode: string) => {
     this.lang = localeCode;
     this.translate.use(localeCode);
-    this._cookie.setLanguage(localeCode)
+    this._cookie.setLanguage(localeCode);
   }
 
-  logOut() {
-    if (this.user) {
-      this._cookie.deleteSessionId();
-    }
-    this._router.navigate(['index.html#/login'])
+  logOut = () => {
+    if (Object.keys(this.userData).length) this._cookie.deleteSessionId();
+    this._router.navigate(['index.html#/login']);
   }
-
 }

@@ -10,13 +10,13 @@ import {SwalService} from "../../services/swal/swal.service";
   styleUrls: ['./datos-economicos.component.scss'],
 })
 export class DatosEconomicosComponent{
-  protected tarifa_neta: boolean = false;
-  protected tarifa_comisionable: boolean = false;
-  protected descuento_bar:string = "";
+  protected clean_rate: boolean = false;
+  protected commissionable_rate: boolean = false;
+  protected discount_bar:string = "";
   protected markup:string = "";
   protected tz = DateTime.now().zoneName;
-  protected produccion_minima: boolean = false;
-  protected produccion_minima_value: string = "";
+  protected minimum_production: boolean = false;
+  protected minimum_production_value: string = "";
 
   protected divisaFinal:string = "";
 

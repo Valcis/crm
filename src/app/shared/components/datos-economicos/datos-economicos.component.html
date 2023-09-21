@@ -136,27 +136,27 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label> <input type="checkbox" [(ngModel)]="tarifa_neta"> {{'RATE.CLEAN'|translate}}</label>
+                  <label> <input type="checkbox" [(ngModel)]="clean_rate"> {{'RATE.CLEAN'|translate}}</label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label> <input type="checkbox" [(ngModel)]="tarifa_comisionable" > {{'RATE.COMMISION'|translate}}</label>
+                  <label> <input type="checkbox" [(ngModel)]="commissionable_rate" > {{'RATE.COMMISION'|translate}}</label>
                 </div>
               </div>
             </div>
-            <div class="row " *ngIf="tarifa_neta">
-              <div class="col-sm-6">
-                <br>
+            <div class="row " *ngIf="clean_rate">
+              <div class="col-sm-6 p-3">
                 <label >{{'RATE.BAR'|translate}}</label>
-                <br>
                 <div class="input-group m-b">
-                  <input type="text" class="form-control" minlength="1" maxlength="50" [(ngModel)]="descuento_bar" >
+                  <input type="text" class="form-control" minlength="1" maxlength="50" [(ngModel)]="discount_bar" >
                   <span class="input-group-addon">%</span>
                 </div>
               </div>
-              <div class="col-sm-6 mb-2">
+              <div class="col-sm-6 p-3">
+
                 <label>{{'RATE.MARK'|translate}}</label>
+
                 <div class="input-group m-b">
                   <input type="text" class="form-control" minlength="1" maxlength="50" [(ngModel)]="markup">
                   <span class="input-group-addon">%</span>
@@ -164,11 +164,8 @@
               </div>
             </div>
           </div>
-          <div class=" card-footer border-top-0 mt-2"  *ngIf="!tarifa_neta">
-            <br>
-            <br>
-            <br>
-            <br>
+          <div class="card-footer border-top-0 mt-2 gray-space"  *ngIf="!clean_rate">
+
           </div>
         </div>
       </div>
@@ -182,25 +179,21 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <label >
-                    <input type="checkbox"  [(ngModel)]="produccion_minima"  > {{'PRODUCTION.MINIMUM'|translate}}</label>
+                    <input type="checkbox"  [(ngModel)]="minimum_production"  > {{'PRODUCTION.MINIMUM'|translate}}</label>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12 " *ngIf="produccion_minima">
+              <div class="col-sm-12 " *ngIf="minimum_production">
                 <br>
                 <div class="form-group">
                   <label >{{'PRODUCTION.VALUE'|translate}}</label>
-                  <input type="text" class="form-control" [(ngModel)]="produccion_minima_value" >
+                  <input type="text" class="form-control" [(ngModel)]="minimum_production_value" >
                 </div>
               </div>
             </div>
           </div>
-          <div class=" card-footer border-top-0 mt-2"  *ngIf="!produccion_minima">
-            <br>
-            <br>
-            <br>
-            <br>
+          <div class=" card-footer border-top-0 mt-2 gray-space"  *ngIf="!minimum_production">
           </div>
         </div>
       </div>

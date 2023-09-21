@@ -41,7 +41,7 @@
 
             <!--DIVS para menus SIN submenu-->
             <!--      Todo: cambiar el nom de la classe-->
-            <ul [ngClass]="[isBig === false ? 'dark-bg-container-sm ' : 'dark-bg-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">
+            <ul [ngClass]="[isBig === false ? 'dark-container-sm ' : 'dark-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">
               <div *ngIf="item.subMenu.length <= 0">
                 <li   class="collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"
                       [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"

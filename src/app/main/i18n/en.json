@@ -101,6 +101,7 @@
   "COMMISIONS.TYPE": "Description",
   "COMMISIONS.DESCRIPTION": "Official",
   "COMMISIONS.LINK": "Final",
+  "COMMISIONS.TITLE": "Commissions",
 
   "PROVIDER.FLITER": "Provider's filter",
   "PROVIDER.NAME": "Provider's name",

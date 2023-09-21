@@ -2,8 +2,8 @@
   <div>
     <div >
     <div class="fadeInRight">
-      <div class="ms-4">
-        <app-title [titulo]=title></app-title>
+      <app-title [titulo]=title></app-title>
+      <div class="grey ms-4">
       </div>
       <div class="card rounded-0 mx-4 my-4 body-right">
         <div class="card-content">
@@ -61,9 +61,9 @@
                     <th class="white-space"></th>
                   </tr>
                   <tr *ngFor="let element of rowData  | slice: (currentPage-1) * pageSize : currentPage * pageSize" >
-                    <td>{{element.c | translate}}</td>
+                    <td class="grey">{{element.c | translate}}</td>
                     <td><h6><a class="no-decoration" href="{{element.link}}" [innerHTML]="element.description"></a></h6></td>
-                    <td ><h6 [innerHTML]="element.name"></h6></td>
+                    <td ><h6 class="grey" [innerHTML]="element.name"></h6></td>
                     <div class="btn-group dropdown">
                       <button class="btn btn-danger  btn-sm mx-2 my-2"  [value]="element.value" (click)="deleteLinks(element.value)"><i class="fa fa-trash-o"></i> {{'LINKS.DELETE' | translate}}</button>
                     </div>

@@ -94,6 +94,7 @@
   "COMMISIONS.TYPE": "Descripción",
   "COMMISIONS.DESCRIPTION": "Oficial",
   "COMMISIONS.LINK": "Final",
+  "COMMISIONS.TITLE": "Comisiones",
 
   "CHANNELS.CRITERIA" : "Criterios para buscar channels\n",
   "CHANNELS.CODE" : "Código channel",

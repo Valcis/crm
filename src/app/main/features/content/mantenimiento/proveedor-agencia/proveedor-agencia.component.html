@@ -11,7 +11,7 @@
   <div class="card rounded-0">
     <div class="card-title" (click)="providerFilter = !providerFilter">
       <!--card1 title-->
-      <h5 class="m-3"><i class="fa fa-filter"></i> {{'PROVIDER.FLITER' | translate}}</h5>
+      <h5 class="m-3 grey"><i class="fa fa-filter"></i> {{'PROVIDER.FLITER' | translate}}</h5>
     </div>
     <div class="card-body border-top" *ngIf="providerFilter">
       <!--card1 body-->
@@ -32,7 +32,7 @@
   <div class="card rounded-0" >
     <div class="card-title pointer " (click)="providerCreator = !providerCreator">
       <!--card2 title-->
-      <h5 class="m-3"><i class="fa fa-plus"></i>{{'PROVIDER.CREATE' | translate}} </h5>
+      <h5 class="m-3 grey"><i class="fa fa-plus"></i>{{'PROVIDER.CREATE' | translate}} </h5>
     </div>
     <div class="card-body border-top" *ngIf="providerCreator">
       <!--card2 body-->
@@ -54,7 +54,7 @@
     <div class="card-title ">
       <!--card3 title-->
       </div>
-      <div class="m-3">
+      <div class="grey m-3">
         <h5  class="float-left col-10">{{counter}}{{' '}}{{'COMMON.RESULTS' | translate}}</h5>
         <button class="btn btn-search col-20 float-right" style="margin-top: -7px"(click)="saveDataInCSV('ProveedorTrabajaAgencia',itemList)"><i class="fa fa-download"></i>{{'COMMON.EXPORT' | translate}}</button>
       </div>
@@ -63,10 +63,10 @@
       <table class="mx-2 table">
         <tr class="table-title background-title">
           <th class="left" style="width: 50px"></th>
-          <th class="right">
-            <span class="ms-2 background-title"> {{'COMMON.NAME' | translate}} </span>
+          <th class="grey right px-3">
+            {{'COMMON.NAME' | translate}}
             <i
-              class="pointer fa fa-sort-alpha-asc"
+              class="grey pointer fa fa-sort-alpha-asc"
               *ngIf="testOrder('ASC') "
               (click)="patchOrder('DESC')"
               style="background-color: inherit"

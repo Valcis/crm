@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Input, Output} from "@angular/core";
-import {JSONpageModel} from "../../models/JSON.model"
+import {JSONpageModel} from "../../models/json.model"
 
 
 @Injectable({

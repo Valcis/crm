@@ -8,7 +8,7 @@ import {LoginEntrada} from "../../../models/user/login.model";
 import {ActivitiesAlertsService} from "./activities-alerts.service";
 import {NotificationsService} from "./notifications.service";
 import {CookiesService} from "../../cookies/cookies.service";
-import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../crm-loader/crm-loader.service";
 
 @Injectable({
   providedIn: 'root'

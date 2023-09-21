@@ -5,7 +5,7 @@ import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
-import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../shared/services/crm-loader/crm-loader.service";
 
 
 @Component({

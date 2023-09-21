@@ -30,7 +30,6 @@ import {HistorialComponent} from "../shared/components/historial/historial.compo
 import {NgSelectModule} from '@ng-select/ng-select';
 import { Pipe, PipeTransform } from '@angular/core';
 import {stringPair} from "../shared/models/historial/type.historial"
-import {NgxJsonViewerModule} from "ngx-json-viewer";
 import {JsonViewerComponent} from "../shared/components/json-viewer/json-viewer.component";
 import {TitleComponent} from "../shared/components/title/title.component";
 import {BreadcrumbModule} from "xng-breadcrumb";
@@ -106,7 +105,6 @@ export class SelectOptionsTranslatePipe implements PipeTransform {
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
-    NgxJsonViewerModule,
     NgxEditorModule,
   ],
   exports: [DragDropComponent],

@@ -16,7 +16,7 @@ export class TitleComponent {
 
   constructor(
     protected _translate: TranslateService,
-    private breadcrumbService: BreadcrumbService,
+    private _breadcrumbService: BreadcrumbService,
     private _shared: sharedDataService
   ) {  }
 
@@ -29,16 +29,16 @@ export class TitleComponent {
 
   private setBread(){
     let menu = this._shared.userData.menu.menuList;
-
-    this.breadcrumbService.set('@graficos',this._translate.instant(menu[0].descripcion));
-    this.breadcrumbService.set('@inicioDesarrollador', this._translate.instant(menu[1].descripcion));
-    this.breadcrumbService.set('@proveedoresProducto', this._translate.instant(menu[6].descripcion));
-    this.breadcrumbService.set('@calendario', this._translate.instant(menu[8].descripcion));
-    this.breadcrumbService.set('@actividades', this._translate.instant(menu[9].descripcion));
-    this.breadcrumbService.set('@notificaciones', this._translate.instant(menu[10].descripcion));
-    this.breadcrumbService.set('@links', this._translate.instant(menu[13].subMenu[1].descripcion));
-    this.breadcrumbService.set('@channelManager', this._translate.instant(menu[13].subMenu[2].descripcion));
-    this.breadcrumbService.set('@ficheros', this._translate.instant(menu[13].subMenu[0].descripcion));
-    this.breadcrumbService.set('@proveedorAgencia', this._translate.instant(menu[14].subMenu[2].descripcion));
+    this._breadcrumbService.set('@home',this._translate.instant("Home"));
+    this._breadcrumbService.set('@graficos',this._translate.instant(menu[0].descripcion));
+    this._breadcrumbService.set('@inicioDesarrollador', this._translate.instant(menu[1].descripcion));
+    this._breadcrumbService.set('@proveedoresProducto', this._translate.instant(menu[6].descripcion));
+    this._breadcrumbService.set('@calendario', this._translate.instant(menu[8].descripcion));
+    this._breadcrumbService.set('@actividades', this._translate.instant(menu[9].descripcion));
+    this._breadcrumbService.set('@notificaciones', this._translate.instant(menu[10].descripcion));
+    this._breadcrumbService.set('@links', this._translate.instant(menu[13].subMenu[1].descripcion));
+    this._breadcrumbService.set('@channelManager', this._translate.instant(menu[13].subMenu[2].descripcion));
+    this._breadcrumbService.set('@ficheros', this._translate.instant(menu[13].subMenu[0].descripcion));
+    this._breadcrumbService.set('@proveedorAgencia', this._translate.instant(menu[14].subMenu[2].descripcion));
   }
 }

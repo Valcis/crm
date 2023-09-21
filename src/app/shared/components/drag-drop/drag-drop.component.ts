@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Injectable, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Injectable, Input,  Output} from '@angular/core';
 
 @Injectable({
     providedIn: 'root'

@@ -1,13 +1,9 @@
 import {Injectable} from "@angular/core";
-import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import {TranslateService} from "@ngx-translate/core";
 import Swal from 'sweetalert2'
 import {CookiesService} from "../cookies/cookies.service";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {waitForAsync} from "@angular/core/testing";
-import {firstValueFrom, isObservable} from "rxjs";
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +18,7 @@ export class SwalService {
               private _cookie: CookiesService,
   )
   {
-
-    // if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
-    //   this._translate.use('es');
-    //   this._cookie.setLanguage(this._translate.currentLang);
-    // } else {
-       this._translate.use(_cookie.getLanguage());
-    // }
+    this._translate.use(_cookie.getLanguage());
   }
 
   private async translationsConfDeny(){
@@ -54,7 +44,6 @@ export class SwalService {
       reverseButtons: true,
     })
   }
-
 
   private getTranslation(text: string, language: string): Observable<string> {
     return this._translate.getTranslation(language).pipe(

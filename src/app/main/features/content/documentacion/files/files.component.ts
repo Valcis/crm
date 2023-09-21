@@ -5,7 +5,7 @@ import {CookiesService} from "../../../../../shared/services/cookies/cookies.ser
 import {FileService} from "../../../../../shared/services/api/documentation/file.service";
 import {DragDropService} from "../../../../../shared/services/drag-drop/drag-drop.service";
 import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
-import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../../../../shared/services/crm-loader/crm-loader.service";
 import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";

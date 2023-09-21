@@ -12,12 +12,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
 import {sharedDataService} from "../../../../shared/services/shared-data/shared-data.service";
 
-
-
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 interface TimeZone {name: string, offset:string} //Todo:a un model
-interface ContinentZone {name: string, zones:Array<TimeZone>} //Todo:a un model
 
 @Component({
   selector: 'app-inicio-desarrollador',
@@ -27,10 +23,8 @@ interface ContinentZone {name: string, zones:Array<TimeZone>} //Todo:a un model
     { provide: NgbDateAdapter, useClass: DateAdapterService },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
-
 })
 export class InicioDesarrolladorComponent implements OnInit{
-
   protected title:string="";
   protected aTitle:string = '';
   protected tz: any;
@@ -40,16 +34,12 @@ export class InicioDesarrolladorComponent implements OnInit{
   protected model2: string = '';
   protected showTime: boolean = true;
   protected currentTimeZone: string ="";
-
   protected uiSliderConf = {start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}
   protected sliderModel: number[] = [0];
-  htmlContent ='';
+  protected htmlContent ='';
   protected showTable: boolean = false;
   protected tableSiz = {x:8, y:8};
-
   protected newDate!: any;
-
-
   protected summerText:string="";
 
   constructor(
@@ -60,14 +50,12 @@ export class InicioDesarrolladorComponent implements OnInit{
     protected _shared: sharedDataService,
     protected _translate: TranslateService) {
   }
-  private sub:Array<any>=[];
 
   ngOnInit(): void {
     this.time();
     this.sliderModel = [5];
     this.title = this._shared.userData.menu.menuList[1].descripcion;
 
-    this._route.data.forEach(e => {this.sub.push(e)});
   }
 
   generatePDF() {

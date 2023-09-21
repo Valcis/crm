@@ -19,7 +19,8 @@ const routes: Routes = [
     component: MainComponent,
     data: {
       shouldReuse: true,
-      key: 'crm/app/index/main'
+      key: 'crm/app/index/main',
+      breadcrumb:{alias:"home"}
     },
     children: [
       {path: '#/crm_graficos', component: GraficosComponent, data:{breadcrumb:{alias:"graficos"}}},

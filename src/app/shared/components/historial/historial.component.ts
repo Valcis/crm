@@ -5,7 +5,7 @@ import {HistorialService} from "../../services/api/historial/historial.service";
 import {Router} from '@angular/router';
 import {DateTime} from "luxon";
 import {possibleActions, TiposRelacion, TranslateType} from "../../models/historial/type.historial";
-import {CrmLoaderService} from "../../services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../services/crm-loader/crm-loader.service";
 
 
 @Component({

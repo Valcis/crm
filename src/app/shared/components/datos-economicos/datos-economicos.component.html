@@ -1,163 +1,116 @@
 <div >
   <h5>DATOSECONÓMICOS</h5>
   <div class="col-sm-12">
-    <div>
-      <div class="row justify-content-end">
-        <div class="col-sm-12 text-right group-box" >
-          <div class="btn-group d-inline-block group-items" ngbDropdown #myDrop="ngbDropdown">
-            <button *ngIf="divisaFinal !==''"type="button" class="btn btn-default btn-sm ">
-              <span *ngIf="divisaFinal ==='EUR'"><i class="fa fa-eur"></i> Euro</span>
-              <span *ngIf="divisaFinal ==='USD'"><i class="fa fa-usd"></i> Dólar</span>
-              <span *ngIf="divisaFinal ==='GBP'"><i class="fa fa-usd"></i> Libra esterlina </span>
-            </button>
-            <button type="button" class="btn btn-sm btn-default" id="dropdownMoneda" ngbDropdownAnchor (focus)="myDrop.open()">
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMoneda">
-              <a ngbDropdownItem (click)="conversionMoneda('EUR')" class="pointer"><i class="fa fa-eur"></i> {{'ECONOMIC.EUR' | translate}}</a>
-              <a ngbDropdownItem (click)="conversionMoneda('USD')" class="pointer"><i class="fa fa-usd"></i> {{'ECONOMIC.USD' | translate}}</a>
-              <a ngbDropdownItem (click)="conversionMoneda('GBP')" class="pointer"><i class="fa fa-gbp"></i> {{'ECONOMIC.GBP' | translate}}</a>
-            </div>
-            <button type="button" class="btn btn-default btn-sm" (click)="recalcularDatosEconomicos()">
-              <i class="fa fa-refresh"></i> <span> {{' '}}{{'ECONOMIC.RECALCULATE' | translate}}</span>
-            </button>
+    <div class="row justify-content-end">
+      <div class="col-sm-12 text-right group-box" >
+        <div class="btn-group d-inline-block group-items" ngbDropdown #myDrop="ngbDropdown">
+          <button *ngIf="divisaFinal !==''"type="button" class="btn btn-default btn-sm ">
+            <span *ngIf="divisaFinal ==='EUR'"><i class="fa fa-eur"></i> Euro</span>
+            <span *ngIf="divisaFinal ==='USD'"><i class="fa fa-usd"></i> Dólar</span>
+            <span *ngIf="divisaFinal ==='GBP'"><i class="fa fa-usd"></i> Libra esterlina </span>
+          </button>
+          <button type="button" class="btn btn-sm btn-default" id="dropdownMoneda" ngbDropdownAnchor (focus)="myDrop.open()">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownMoneda">
+            <a ngbDropdownItem (click)="conversionMoneda('EUR')" class="pointer"><i class="fa fa-eur"></i> {{'ECONOMIC.EUR' | translate}}</a>
+            <a ngbDropdownItem (click)="conversionMoneda('USD')" class="pointer"><i class="fa fa-usd"></i> {{'ECONOMIC.USD' | translate}}</a>
+            <a ngbDropdownItem (click)="conversionMoneda('GBP')" class="pointer"><i class="fa fa-gbp"></i> {{'ECONOMIC.GBP' | translate}}</a>
           </div>
+          <button type="button" class="btn btn-default btn-sm" (click)="recalcularDatosEconomicos()">
+            <i class="fa fa-refresh"></i> <span> {{' '}}{{'ECONOMIC.RECALCULATE' | translate}}</span>
+          </button>
         </div>
       </div>
     </div>
+
     <div class="row card well  ml-3">
-      <div class="col-sm-12 mt-2">
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.CITY' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                Paprov:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.COUNTRY' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.CITY' | translate}}:
+            <strong></strong>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.CATEGORY' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.ROOMNUM' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.AFFILIATION' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.BRAND' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-                {{'ECONOMIC.YEAR' | translate}}:
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="row">
-              <div class="col-sm-5">
-
-              </div>
-              <div class="col-sm-7">
-                <strong></strong>
-              </div>
-            </div>
+        <div class="col-sm-4">
+          <div class="row">
+            Paprov:
+            <strong></strong>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <p>- {{'ECONOMIC.EXPLANATION' | translate}}</p>
-            <p>- {{'ECONOMIC.CONVERSION' | translate}}: 1<i class="fa fa-eur"></i> = 1.35 <i class="fa fa-dollar"></i> = 0.85 <i class="fa fa-gbp"></i></p>
-            <p>- {{'ECONOMIC.SPECIAL' | translate}}: 350<i class="fa fa-eur"></i></p>
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.COUNTRY' | translate}}:
+            <strong></strong>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.CATEGORY' | translate}}:
+            <strong></strong>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.ROOMNUM' | translate}}:
+            <strong></strong>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.AFFILIATION' | translate}}:
+            <strong></strong>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.BRAND' | translate}}:
+            <strong></strong>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            {{'ECONOMIC.YEAR' | translate}}:
+            <strong></strong>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <strong></strong>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <p>- {{'ECONOMIC.EXPLANATION' | translate}}</p>
+          <p>- {{'ECONOMIC.CONVERSION' | translate}}: 1<i class="fa fa-eur"></i> = 1.35 <i class="fa fa-dollar"></i> = 0.85 <i class="fa fa-gbp"></i></p>
+          <p>- {{'ECONOMIC.SPECIAL' | translate}}: 350<i class="fa fa-eur"></i></p>
         </div>
       </div>
     </div>
     <div class="row" >
       <!-- FECHA INICIO CONTRATO -->
       <div class="col-sm-3">
-        <div >
-          <div><label>{{'ECONOMIC.START' | translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
-        </div>
+        <label>{{'ECONOMIC.START' | translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
         <div class="row">
           <app-datepicker></app-datepicker>
         </div>
       </div>
       <!-- FECHA FIN CONTRATO -->
       <div class="col-sm-3">
-        <div >
-          <div><label>{{'ECONOMIC.END' | translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
-        </div>
+        <label>{{'ECONOMIC.END' | translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
         <div class="row">
           <app-datepicker></app-datepicker>
         </div>
       </div>
       <!-- FECHA PRIMER PAGO CUOTA -->
       <div class="col-sm-3">
-        <div>
-          <div><label>{{'ECONOMIC.FIRST'| translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i></div>
-        </div>
+          <label>{{'ECONOMIC.FIRST'| translate}}</label> {{'  '}} <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
         <div class="row">
           <app-datepicker></app-datepicker>
         </div>
@@ -165,7 +118,7 @@
       <!-- CARENCIA -->
       <div class="col-sm-3">
         <div>
-          <div><label>{{'ECONOMIC.LACK' | translate}}</label> {{'  '}} <i class="fa fa-question-circle" [ngbTooltip]="'ECONOMIC.TIPLACK' | translate"></i></div>
+          <label>{{'ECONOMIC.LACK' | translate}}</label> {{'  '}} <i class="fa fa-question-circle" [ngbTooltip]="'ECONOMIC.TIPLACK' | translate"></i>
         </div>
         <div class="input-group flex-row" >
           <input type="number" class="form-control col-sm-8" name="carencia"  >
@@ -173,13 +126,12 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-sm-6 ">
         <!--TARIFA-->
         <div class="card border-left-right checkbox-box economy-box" >
           <div class="card-title m-3"><h5>{{'RATE.TITLE'|translate}}</h5></div>
           <div class="border-bottom"></div>
-
           <div class="card-content m-3">
             <div class="row">
               <div class="col-sm-6">
@@ -189,13 +141,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-
                   <label> <input type="checkbox" [(ngModel)]="tarifa_comisionable" > {{'RATE.COMMISION'|translate}}</label>
                 </div>
               </div>
             </div>
             <div class="row " *ngIf="tarifa_neta">
-
               <div class="col-sm-6">
                 <br>
                 <label >{{'RATE.BAR'|translate}}</label>
@@ -205,8 +155,7 @@
                   <span class="input-group-addon">%</span>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <br>
+              <div class="col-sm-6 mb-2">
                 <label>{{'RATE.MARK'|translate}}</label>
                 <div class="input-group m-b">
                   <input type="text" class="form-control" minlength="1" maxlength="50" [(ngModel)]="markup">
@@ -256,12 +205,10 @@
         </div>
       </div>
     </div>
-    <br>
     <div class="card mb-3">
       <div class="card-title">
-        <h5 class="m-3">Commissions</h5>
+        <h5 class="m-3">{{"COMMISIONS.TITLE" | translate}}</h5>
         <div class="border-bottom"></div>
-
       </div>
       <div class="card-body">
         <div>

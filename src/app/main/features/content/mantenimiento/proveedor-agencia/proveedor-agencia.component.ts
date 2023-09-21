@@ -1,13 +1,13 @@
 import {Component, TemplateRef} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {ProveedorAgenciaService} from "../../../../../shared/services/api/maintenence/proveedor-agencia-service";
+import {ProveedorAgenciaService} from "../../../../../shared/services/api/maintenence/proveedor-agencia.service";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {CsvService} from "../../../../../shared/services/csv/csv.Service";
+import {CsvService} from "../../../../../shared/services/csv/csv.service";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {LogHistorial} from "../../../../../shared/models/manteninence/proveedor-agencia.model";
-import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../../../../shared/services/crm-loader/crm-loader.service";
 import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 

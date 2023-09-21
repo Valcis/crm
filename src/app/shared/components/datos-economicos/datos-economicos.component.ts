@@ -9,7 +9,7 @@ import {SwalService} from "../../services/swal/swal.service";
   templateUrl:'./datos-economicos.component.html',
   styleUrls: ['./datos-economicos.component.scss'],
 })
-export class DatosEconomicosComponent implements OnInit{
+export class DatosEconomicosComponent{
   protected tarifa_neta: boolean = false;
   protected tarifa_comisionable: boolean = false;
   protected descuento_bar:string = "";
@@ -25,9 +25,6 @@ export class DatosEconomicosComponent implements OnInit{
     protected _swal: SwalService){
   }
 
-  ngOnInit(): void {
-
-  }
   conversionMoneda(value:string){
     this.divisaFinal = value;
   }

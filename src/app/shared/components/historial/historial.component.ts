@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {HistorialService} from "../../services/api/historial/historial.service";
@@ -9,13 +9,14 @@ import {CrmLoaderService} from "../../services/crm-loader/crm-loader.service";
 
 
 @Component({
-  selector: 'app_historial',
+  selector: 'app-historial',
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.scss',],
 })
-export class HistorialComponent implements OnInit{
+export class HistorialComponent {
 
   @Input() relaciones:boolean = true;
+  // TODO: Esto está hardcodeado
   @Input() neoId: number = 29662;
 
   protected action = possibleActions;
@@ -43,6 +44,7 @@ export class HistorialComponent implements OnInit{
   ) {
     this.loadForms();
   }
+  //TODO: Debería separarse lo que son las acciones del código que es estrictamente necesario.
   private loadForms(){
 
     this.fetchForm = new FormGroup({
@@ -56,10 +58,6 @@ export class HistorialComponent implements OnInit{
 
   }
 
-  ngOnInit(){
-  }
-
-
   public getHistory(){
     this.currentPage=1;
     this._loader.setLoading(true);
@@ -72,8 +70,8 @@ export class HistorialComponent implements OnInit{
         this.gatherFetchResults(response);
       });
     }
-
   }
+
   private gatherFetchResults(response:any){
     let localData:any = response;
     let fetchResult=[];
@@ -98,7 +96,6 @@ export class HistorialComponent implements OnInit{
     this.changeSort('date', "date");
 
     this._loader.setLoading(false);
-
   }
 
   private mappingRelations(items:Array<any>){
@@ -111,7 +108,7 @@ export class HistorialComponent implements OnInit{
       historial.empl_ape1 = item.node.data.empl_ape1!==undefined?item.node.data.empl_ape1:"";
       historial.empl_ape2 = item.node.data.empl_ape2!==undefined?item.node.data.empl_ape2:"";
       historial.type = "HISTORIAL" + item.metadata.type;
-      let data:string=""
+
       if (historial.type === "HISTORIAL_CREA") {
         historial.ts = this.dateProcessing(item.data.creacion_ts);
       } else if (historial.type === "HISTORIAL_MODIFICA") {
@@ -126,6 +123,7 @@ export class HistorialComponent implements OnInit{
       }
 
       datos = item.data;
+
       for (let key in datos) {
         if (key === "creacion_ts" || key === "modificacion_ts" || key === "borrado_ts" || key === "enviado_ts") {
           delete datos[key];
@@ -162,7 +160,6 @@ export class HistorialComponent implements OnInit{
   }
 
   private mapping(items:Array<any>){
-
     return items.map<any>(item => {
       let historial!:{user_name:string, empl_nomb:string, empl_ape1:string, empl_ape2:string, type:string, ts: string | null, datos: any};
       let datos!:any;
@@ -221,13 +218,6 @@ export class HistorialComponent implements OnInit{
     })
 
   }
-
-
-  typeOf(value:any) {
-    return typeof value;
-  }
-
-
 
   public dateProcessing(millis:number | undefined | string){
     let result:null|string = null;
@@ -327,7 +317,6 @@ export class HistorialComponent implements OnInit{
       this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(this.userSearch.toLowerCase()));
     }else{
       this.itemList = this.allResult.filter(e => e.user.toLowerCase().includes(""));
-
     }
   }
 
@@ -344,7 +333,6 @@ export class HistorialComponent implements OnInit{
     this.counter = this.itemList.length;
     this.currentPage=1;
     this._loader.setLoading(false);
-
   }
 
   isArray(item:any){

@@ -1,8 +1,8 @@
 
-import {Component, Input, OnInit,EventEmitter, Output} from "@angular/core";
+import {Component, Input, OnInit, EventEmitter, Output, SimpleChanges} from "@angular/core";
 import {NgbCalendar, NgbDate, NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
-import {CustomDateParserFormatter, DateAdapterService} from "../../../../../shared/services/datepicker/date-adapter.service";
-import {timepick} from "../../../../../shared/models/inicio-desarrollador.model";
+import {CustomDateParserFormatter, DateAdapterService} from "../../services/datepicker/date-adapter.service";
+import {timepick} from "../../models/inicio-desarrollador.model";
 import {TranslateService} from "@ngx-translate/core";
 import {DateTime} from "luxon";
 import {FormGroup,FormControl} from "@angular/forms";
@@ -24,13 +24,13 @@ export class DatepickerComponent implements OnInit{
   @Input() initDate?: NgbDate = undefined;
   @Input() clock:boolean = false;
   @Input() initTime?: timepick = undefined;
+  @Input() offset?: string = undefined;
   @Output() newDay = new EventEmitter<NgbDate>();
   @Output() newTime = new EventEmitter<timepick>();
 
-  protected tz: any;
-  protected ts: any;
-  protected utc: any;
-  protected formatedTime: any;
+  protected ts!: DateTime;
+  protected utc!: DateTime;
+  protected formatedTime!: string;
   protected model2?: NgbDate = undefined;
   protected initialTime!: NgbDate;
   protected time2!: timepick;
@@ -53,7 +53,6 @@ export class DatepickerComponent implements OnInit{
   // TODO: Recoger el timezone y cambiarlo dependiendo del perfil
 
   async time() {
-    this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
@@ -79,25 +78,33 @@ export class DatepickerComponent implements OnInit{
 
   private setTime(){
     if(this.initTime === undefined){
-      let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-      let testParse3 = test.split(':', 2);
+      let currentTime:string ;
+      if(this.offset !== undefined && this.offset!== ""){
+        currentTime =  DateTime.now().setZone(this.offset).toLocaleString(DateTime.TIME_24_SIMPLE);
+      }else{
+        currentTime =  DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE);
+      }
+      let testParse3 = currentTime.split(':', 2);
       this.time2 = {
         hour: +testParse3[0],
         minute: +testParse3[1]
       }
+
     }else{
       this.time2 = {
         hour: this.initTime.hour,
         minute: this.initTime.minute,
       }
     }
-
   }
+
   actualizeTime(){
     this.newTime.emit(this.time2);
   }
   actualizeDay(){
-    this.newDay.emit(this.model2);
+    this.newDay.emit(this.model2 ===null ? undefined :this.model2);
   }
-
+  ngOnChanges(){
+    this.setTime();
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {Title} from "@angular/platform-browser";
@@ -9,14 +9,11 @@ import {
   DateAdapterService
 } from "../../../../shared/services/datepicker/date-adapter.service";
 import {TranslateService} from "@ngx-translate/core";
-import {timepick} from "../../../../shared/models/inicio-desarrollador.model";
-import {FormControl,FormGroup, Validators} from "@angular/forms";
-
-
-
-
+import {ActivatedRoute} from "@angular/router";
+import {sharedDataService} from "../../../../shared/services/shared-data/shared-data.service";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+interface TimeZone {name: string, offset:string} //Todo:a un model
 
 @Component({
   selector: 'app-inicio-desarrollador',
@@ -26,72 +23,39 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
     { provide: NgbDateAdapter, useClass: DateAdapterService },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
   ]
-
 })
 export class InicioDesarrolladorComponent implements OnInit{
-
+  protected title:string="";
   protected aTitle:string = '';
   protected tz: any;
   protected ts: any;
   protected utc: any;
   protected formatedTime: any;
   protected model2: string = '';
-  protected time2: timepick = {hour:10,minute:15};
   protected showTime: boolean = true;
-
-  protected summerConfig: any;
+  protected currentTimeZone: string ="";
+  protected uiSliderConf = {start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}
   protected sliderModel: number[] = [0];
-
-  protected tarifa_neta: boolean = false;
-  protected tarifa_comisionable: boolean = false;
-  protected descuento_bar:string = "";
-  protected markup:string = "";
-
-  protected produccion_minima: boolean = false;
-  protected produccion_minima_value: string = "";
-  protected newDate!: NgbDate ;
-
-
-  form: FormGroup = new FormGroup({
-    html: new FormControl("", Validators.required)
-  });
+  protected htmlContent ='';
+  protected showTable: boolean = false;
+  protected tableSiz = {x:8, y:8};
+  protected newDate!: any;
+  protected summerText:string="";
 
   constructor(
     private _title: Title,
     private _dAdapt: NgbDateAdapter<string>,
     private _calendar: NgbCalendar,
-    protected _translate: TranslateService){
-
-    this.summerConfig = {
-      height: 500
-      //,focus: true
-      //,airMode: true
-      ,fontNames: ['Arial', 'Courier New','Helvetica'],
-      addDefaultFonts: false
-      ,toolbar: [
-        ['edit',['undo','redo']],
-        ['headline', ['style']],
-        ['style', ['bold', 'italic', /* 'underline','superscript', 'subscript', 'strikethrough', */'clear']],
-        ['fontface', ['fontname']],
-        ['textsize', ['fontsize']],
-        ['fontclr', ['color']],
-        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
-        ['height', ['height']],
-        ['table', ['table']],
-        ['insert', ['link'
-          //'picture','video',
-          /*'hr'*/]],
-        ['view', [
-          //'fullscreen',
-          'codeview']],
-        ['help', ['help',"codeBlock"]]
-      ]
-    };
+    private  _route: ActivatedRoute,
+    protected _shared: sharedDataService,
+    protected _translate: TranslateService) {
   }
 
   ngOnInit(): void {
     this.time();
     this.sliderModel = [5];
+    this.title = this._shared.userData.menu.menuList[1].descripcion;
+
   }
 
   generatePDF() {
@@ -118,7 +82,6 @@ export class InicioDesarrolladorComponent implements OnInit{
     this.tz = DateTime.now().zoneName;
     this.ts = DateTime.now();
     this.utc = this.ts.toUTC();
-    console.log(this.utc);
     this.formatedTime = this.utc.toLocaleString(DateTime.DATE_SHORT) + ' ' + this.utc.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
     this.newDate = new NgbDate(this.utc.year,this.utc.month,this.utc.day);
   }
@@ -127,18 +90,8 @@ export class InicioDesarrolladorComponent implements OnInit{
     return this._dAdapt.toModel(this._calendar.getToday())!;
   }
 
-  erase() {
-    this.model2 = '';
-  }
-
-  openTime() {
-    this.showTime = !this.showTime;
-    let test = this.utc.toLocaleString(DateTime.TIME_24_SIMPLE);
-    let testParse3 = test.split(':', 2);
-    this.time2 = {
-      hour: +testParse3[0],
-      minute: +testParse3[1]
-    }
+  getTimeZone($event:string){
+    this.currentTimeZone = $event
   }
 
 }

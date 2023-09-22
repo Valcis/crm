@@ -2,13 +2,17 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
 @import "~nouislider/dist/nouislider.css";
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 html, body {
   height: 100vh;
   font-size: 13px;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #676a6c;
+  color: #676a6c !important;
+}
+table,
+tr, th, td {
+  border: 1px solid #e7e7e7;
 }
 
 // Basic Colors
@@ -111,17 +115,17 @@ $max-width: 100%;
   margin-left: 220px;
 }
 
-.dark-bg-container-bg {
+.dark-container-bg {
 
   background-color: $background;
   color: white;
-  padding: 0%;
-  margin: 0%;
+  padding: 0;
+  margin: 0;
 }
-.dark-bg-container-sm{
-  padding: 0%;
+.dark-container-sm{
+  padding: 0;
   list-style: none;
-  margin: 0%;
+  margin: 0;
   height: 40px;
 
 }
@@ -374,4 +378,13 @@ hr.divider {
     opacity: 1;
 
   }
+}
+.background-title{
+  background-color: #f4f4f5 !important;
+}
+.float-right{
+  float: right;
+}
+.float-left{
+  float: left;
 }

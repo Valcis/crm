@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DateTime} from 'luxon';
 import {TranslateService} from "@ngx-translate/core";
-import {SwalService} from "../../../../../shared/services/swal/swal.service";
+import {SwalService} from "../../services/swal/swal.service";
 
 
 @Component({
@@ -9,25 +9,22 @@ import {SwalService} from "../../../../../shared/services/swal/swal.service";
   templateUrl:'./datos-economicos.component.html',
   styleUrls: ['./datos-economicos.component.scss'],
 })
-export class DatosEconomicosComponent implements OnInit{
-  protected tarifa_neta: boolean = false;
-  protected tarifa_comisionable: boolean = false;
-  protected descuento_bar:string = "";
+export class DatosEconomicosComponent{
+  protected clean_rate: boolean = false;
+  protected commissionable_rate: boolean = false;
+  protected discount_bar:string = "";
   protected markup:string = "";
   protected tz = DateTime.now().zoneName;
-  protected produccion_minima: boolean = false;
-  protected produccion_minima_value: string = "";
+  protected minimum_production: boolean = false;
+  protected minimum_production_value: string = "";
 
   protected divisaFinal:string = "";
 
   constructor(
     protected _translate: TranslateService,
-    protected  _swal: SwalService){
+    protected _swal: SwalService){
   }
 
-  ngOnInit(): void {
-
-  }
   conversionMoneda(value:string){
     this.divisaFinal = value;
   }

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {GenericRequest} from "../../models/petition/petition.model";
+import {GenericRequest} from "../../models/petition.model";
 import {CrmService} from "../api/crm.service";
 import {HttpClient} from "@angular/common/http";
 import {CookiesService} from "../cookies/cookies.service";

@@ -1,0 +1,206 @@
+<div>
+  <div class="float-right" ><button class="btn btn-history" (click)="[historyButton = !historyButton, getHistory()]">
+    <i *ngIf="historyButton" class="fa fa-eye"></i>
+    <i *ngIf="!historyButton" class="fa fa-eye-slash"></i>
+    <span *ngIf="!historyButton">{{" "}}{{"HISTORY.APEAR" | translate}}</span>
+    <span *ngIf="historyButton">{{" "}}{{"HISTORY.HIDE" | translate}}</span>
+  </button></div>
+  <div class="heigt-35"></div>
+  <div *ngIf="historyButton" class="card">
+    <div class="card-title row ">
+      <div class="col-md-6 my-3">
+        <h5 class = "mx-3"><i *ngIf="!relaciones" class="fa fa-refresh"></i> {{"HISTORY.TITLE" | translate}}</h5>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="col-md-5 my-3">
+        <button *ngIf="relaciones" class="mx-3 float-right btn btn-search btn-sm" (click)="getHistory();" ><i class="fa fa-undo"></i></button>
+      </div>
+    </div>
+    <div class="card-body border-top">
+      <div *ngIf="!relaciones" class="row">
+        <div class="col-6">
+          <span>{{"HISTORY.RATE" | translate}}</span>
+
+          <ng-select [items]="tiposRelacion | selectOptionsTranslate"
+                     bindLabel="v"
+                     bindValue="k"
+                     [multiple]="true"
+                     placeholder="Select cities"
+                     [(ngModel)]="action"
+          >
+          </ng-select>
+
+        </div>
+        <div class="col-3">
+          <span >{{"HISTORY.FROM" |translate}}</span>
+          <app-datepicker (newDay)="getData($event)" ></app-datepicker>
+        </div>
+        <div class="col-3">
+          <hr class="searchSeparator">
+          <button class="btn btn-search allWidth" (click)="getHistory();"><i class="fa fa-search"></i> {{"COMMON.SEARCH"|translate}}</button>
+        </div>
+      </div>
+      <div class="row m-3">
+        <div class="col-sm-3 parent">
+          <label class="child m-2">{{"HISTORY.SHOW" | translate }}</label> <select class="me-2 child form-select" [(ngModel)]="pageSize"><option>10</option><option>25</option><option>50</option><option>100</option></select> <label class="child ms-2">{{"entries"}}</label></div>
+        <div class="col-3"></div>
+        <div class="col-sm-5 parent"><label class="child">Search: </label> <input class="child form-control input-sm" (input)="searchAll()" [(ngModel)]="userSearch" type="text"></div>
+      </div>
+      <div id="1"></div>
+      <div class="row">
+        <table class="p-3 table table-striped table-bordered table-hover ">
+          <thead class="allWidth">
+            <tr>
+              <th (click)="changeSort('user','string')">
+                <ng-container *ngIf="this.sortCol === 'user'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.USER' | translate}}
+                <ng-container *ngIf="this.sortCol === 'user'; then selectedList;else orderNotSelect" ></ng-container>
+              </th>
+              <th  class="action" (click)="changeSort('action','string')">
+                <span><ng-container *ngIf="this.sortCol === 'action'; then selectedCarr" ></ng-container></span>
+                  {{'HISTORY.ACTION' | translate}}
+                <ng-container *ngIf="this.sortCol === 'action'; then selectedList;else orderNotSelect" ></ng-container>
+              </th>
+              <th (click)="changeSort('date','date')">
+                <ng-container *ngIf="this.sortCol === 'date'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.DATE' | translate}}
+                <ng-container *ngIf="this.sortCol === 'date'; then selectedList;else orderNotSelect" ></ng-container>
+              </th>
+              <th (click)="changeSort('data','data')">
+                <ng-container *ngIf="this.sortCol === 'data'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.DATA' | translate}}
+                <ng-container *ngIf="this.sortCol === 'data'; then selectedList;else orderNotSelect" ></ng-container></th>
+              <th *ngIf="!relaciones" (click)="changeSort('node','node')">
+                <ng-container *ngIf="this.sortCol === 'node'; then selectedCarr" ></ng-container>
+                  {{'HISTORY.NODE' | translate}}
+                <ng-container *ngIf="this.sortCol === 'node'; then selectedList;else orderNotSelect" ></ng-container>
+              </th>
+              <ng-template #selectedCarr>
+                <ng-container *ngIf="this.sortDir === 'asc'; then orderUpCarr; else orderDownCarr" ></ng-container>
+              </ng-template>
+              <ng-template #selectedList>
+                <ng-container *ngIf="this.sortDir === 'asc'; then orderUpList; else orderDownList" ></ng-container>
+              </ng-template>
+              <ng-template #orderUpCarr>
+                <i class="fa fa-solid fa-caret-up"></i>
+              </ng-template>
+              <ng-template #orderDownCarr>
+                <i class="fa fa-caret-down"></i>
+              </ng-template>
+              <ng-template #orderUpList>
+                <i class="fa fa-sort-amount-asc float-right"></i>
+              </ng-template>
+              <ng-template #orderDownList>
+                <i class="fa fa-sort-amount-desc float-right"></i>
+              </ng-template>
+              <ng-template #orderNotSelect>
+                <i class="fa fa-arrows-v float-right" aria-hidden="true"></i>
+              </ng-template>
+            </tr>
+          </thead>
+          <tbody *ngIf="noResults">
+          <th class="well">
+            {{"GENERAL.NORESULTS" | translate}}
+          </th>
+          </tbody>
+          <tbody *ngIf="!noResults">
+          <tr *ngFor="let log of itemList | slice: (currentPage-1) * pageSize : currentPage * pageSize">
+            <td>{{log.user | translate}}</td>
+            <td>{{log.action | translate}}</td>
+            <td>{{log.date | translate}}</td>
+            <td>
+              <table class="dataTable table table-borderless">
+                <tbody class="dataTable">
+                  <tr *ngFor="let item of log.data | keyvalue">
+                    <td><strong>{{item.key}}:</strong></td>
+                    <td *ngIf="$any(item).value[0] !== '';else noDat">
+                      <div *ngIf="$any(item).key.includes('_ts') || $any(item).key==='date' ||$any(item).key === 'fecha_hora_inicio' ||$any(item).key === 'fecha_hora_fin'||$any(item).key ==='fecha_hora_vencimiento'; else json1">
+                        {{dateProcessing($any(item).value[1])}}
+                      </div>
+                      <ng-template #json1>
+                        <div>
+<!--                          <ng-container-->
+<!--                            *ngTemplateOutlet="Object; context:{subItem: $any(item).value[0]}"-->
+<!--                          ></ng-container>-->
+                          <app-json-viewer  [json]="$any(item).value[0]"></app-json-viewer>
+                        </div>
+                      </ng-template>
+                    </td>
+                    <td><i class="fa fa-long-arrow-right"></i></td>
+                    <td *ngIf="$any(item).value[1] !== '∅';else noDat">
+                      <div *ngIf="$any(item).key.includes('_ts') || $any(item).key==='date' ||$any(item).key === 'fecha_hora_inicio' ||$any(item).key === 'fecha_hora_fin'||$any(item).key ==='fecha_hora_vencimiento'; else json2">
+                        {{dateProcessing($any(item).value[1])}}
+                      </div>
+                      <ng-template #json2>
+                        <div >
+                          <app-json-viewer  [json]="$any(item).value[1]" ></app-json-viewer>
+<!--                          <ng-container-->
+<!--                            *ngTemplateOutlet="Object; context:{subItem: $any(item).value[1]}"-->
+<!--                          ></ng-container>-->
+                        </div>
+                      </ng-template>
+                    </td>
+                    <ng-template #noDat>
+                      <td><span class="dataItem">∅</span></td>
+                    </ng-template>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+<!--            <ng-template #Object let-item="subItem">-->
+<!--              &lt;!&ndash; &ndash;&gt;-->
+<!--              <div [ngSwitch]="typeOf(item)">-->
+<!--                <div *ngSwitchCase="'number'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'string'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'boolean'">{{item}}</div>-->
+<!--                <div *ngSwitchCase="'object'">-->
+<!--                  <div *ngIf="isArray(item)" >-->
+<!--                    Array [{{item.length}}]-->
+<!--                    <div *ngFor="let subItem of item">-->
+<!--                      <ng-container-->
+<!--                        *ngTemplateOutlet="Object; context:{subItem: subItem}"-->
+<!--                      ></ng-container>                    </div>-->
+<!--                  </div>-->
+<!--                  <div *ngIf="isArray(item) === false">-->
+<!--                    Object-->
+<!--                    <div *ngFor="let subItem of item | keyvalue">-->
+<!--                      {{subItem.key}}-->
+<!--                      <ng-container-->
+<!--                        *ngTemplateOutlet="Object; context:{subItem: subItem.value}"-->
+<!--                      ></ng-container>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div *ngSwitchDefault>error</div>-->
+<!--              </div>-->
+<!--            </ng-template>-->
+
+            <td *ngIf="!relaciones" >
+              <table class="nodeTable innerTD">
+                <tbody class="innerTD">
+                <tr class="innerTr">
+                  <td ><strong>neo_id</strong></td>
+                  <td class="dataItem blue">{{log.node.id}}</td>
+                </tr>
+                <tr class="innerTr">
+                  <td><strong>nombre</strong></td>
+                  <td class="dataItem green">{{log.node.nombre}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <ngb-pagination *ngIf="!(counter<=pageSize)" class="d-flex justify-content-end" [collectionSize]="counter" [pageSize]="pageSize" [(page)]="currentPage" size="sm" >
+          <ng-template ngbPaginationPrevious><</ng-template>
+          <ng-template ngbPaginationNext>></ng-template>
+        </ngb-pagination>
+        <span> Showing {{((currentPage-1)*pageSize)+1}} to {{(((currentPage-1)*pageSize)+1+pageSize > counter ? counter : ((currentPage-1)*pageSize)+pageSize)}} of {{counter}} entries</span>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="historyButton" class="m-4">
+  </div>
+</div>

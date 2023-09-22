@@ -2,7 +2,6 @@
 <div *ngIf="userData && Object.keys(userData).length" class="gray-bg min-height">
   <div class="side-container" [@bigSmallSide]="isExpanded ? animationCall():'sm'">
     <side-nav id="sideNav" [isExpandedFlag]="isExpanded" [userData]="userData"></side-nav>
-
   </div>
 
   <div class="top-container row p-0" [@bigSmall]="isExpanded ? animationCall() : 'sm'" >
@@ -10,7 +9,7 @@
   </div>
 
   <div class="body-position " [@bigSmall]="isExpanded ? animationCall() : 'sm'" >
-    <hr class="divider">
+    <hr class="divider no-right">
     <app-router-outlet class="fadeInRight mx-3" ></app-router-outlet>
   </div>
 </div>

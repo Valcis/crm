@@ -2,11 +2,12 @@ import {Component, HostListener} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
-import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../../../../shared/services/crm-loader/crm-loader.service";
 
 import {channelState, table} from "../../../../../shared/models/documentation/channel.model";
 import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 import {ChannelManagerService} from "../../../../../shared/services/api/documentation/channel-manager.service";
+import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 @Component({
   selector: 'document-channel',
@@ -26,13 +27,14 @@ export class ChannelManagerComponent {
   protected maxPaginator:number = 10;
   protected width = window.innerWidth;
   protected breaking_width:number = 1100;
+  protected title: string = "";
 
   constructor(
     private _translate: TranslateService,
     private _channel: ChannelManagerService,
     private _cookie: CookiesService,
     private _loader: CrmLoaderService,
-
+    protected _shared: sharedDataService
   ) {
     if (_cookie.getLanguage() === '' || !_cookie.getLanguage()) {
       this._translate.use('es');
@@ -48,6 +50,7 @@ export class ChannelManagerComponent {
     this.loadForms();
     this.getResults();
     this._loader.setLoading(false);
+    this.title = this._shared.userData.menu.menuList[13].subMenu[0].descripcion
   }
   private loadLoacalStorage(){
     if(localStorage.getItem("channelPages")){

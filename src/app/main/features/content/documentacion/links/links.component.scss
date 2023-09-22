@@ -3,8 +3,9 @@
 
 table,
 tr, th, td {
-  border: 1px solid #333;
-  border-color: #e7e7e7;
+  border: 1px solid #e7e7e7;
+  color: $text-color !important;
+
 }
 th,td{
   padding-left: 5px;
@@ -13,9 +14,18 @@ th,td{
 label{
   font-weight: bold;
   font-size: 13px;
+  color: $text-color !important;
 }
-.table-title{
+.table-title {
+
+}
+ble-title{
   display: flex;
+}
+
+.body-position{
+  margin-left: 230px;
+
 }
 
 .dark-plus{
@@ -24,9 +34,7 @@ label{
 .margin-auto{
   margin: auto
 }
-.background-title{
-  background-color: #f4f4f5
-}
+
 .white-space{
   width:100px;
 }

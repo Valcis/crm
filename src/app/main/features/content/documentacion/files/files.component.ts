@@ -3,14 +3,15 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {CookiesService} from "../../../../../shared/services/cookies/cookies.service";
 import {FileService} from "../../../../../shared/services/api/documentation/file.service";
-import {DragDropService} from "../../../../../shared/services/dragDrop/drag-drop.service";
+import {DragDropService} from "../../../../../shared/services/drag-drop/drag-drop.service";
 import {DragDropComponent} from "../../../../../shared/components/drag-drop/drag-drop.component";
-import {CrmLoaderService} from "../../../../../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../../../../../shared/services/crm-loader/crm-loader.service";
 import {filesTable, translateType, TypeArray, TypeModel} from "../../../../../shared/models/documentation/type.model";
 import {SwalService} from "../../../../../shared/services/swal/swal.service";
 import {Router} from "@angular/router";
 import {DateTime} from "luxon";
 import {DatePipe} from "@angular/common";
+import {sharedDataService} from "../../../../../shared/services/shared-data/shared-data.service";
 
 
 @Component({
@@ -35,6 +36,7 @@ export class FilesComponent {
   protected tz:any = this.ts.zoneName;
   protected utc = this.ts.offset;
   protected test = DateTime;
+  protected title: string = "";
 
   constructor(
     private _datepipe:DatePipe,
@@ -46,6 +48,7 @@ export class FilesComponent {
     private _loader: CrmLoaderService,
     private _swal: SwalService,
     private _router: Router,
+    protected _shared: sharedDataService
   ) {
       this._translate.use(_cookie.getLanguage());
   }
@@ -53,6 +56,7 @@ export class FilesComponent {
   ngOnInit() {
     this.initForms();
     this.getFiles();
+    this.title = this._shared.userData.menu.menuList[13].subMenu[0].descripcion
   }
 
   private initForms(){
@@ -82,7 +86,6 @@ export class FilesComponent {
         this.rowData = [];
         fechResult.forEach((value :any) =>{
           let completeName = value.relations[0].node.data.empl_nomb +" " + value.relations[0].node.data.empl_ape1;
-          let time = this.test.fromMillis(value.data.creacion_ts).toUTC().weekday;
           let tDiff:number=this.calculateDate(value.data.creacion_ts);
           //TODO:arreglar ts(algunos funcionan y otros no)
           let it:filesTable={

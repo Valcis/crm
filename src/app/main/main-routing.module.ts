@@ -11,7 +11,7 @@ import {NotificacionesComponent} from "./features/content/notificaciones/notific
 import {LinksComponent} from "./features/content/documentacion/links/links.component";
 import {ChannelManagerComponent} from "./features/content/documentacion/channel_manager/channel_manager.component";
 import {FilesComponent} from "./features/content/documentacion/files/files.component";
-
+import {ProveedorAgenciaComponent} from "./features/content/mantenimiento/proveedor-agencia/proveedor-agencia.component";
 
 const routes: Routes = [
   {
@@ -19,19 +19,20 @@ const routes: Routes = [
     component: MainComponent,
     data: {
       shouldReuse: true,
-      key: 'crm/app/index/main'
+      key: 'crm/app/index/main',
+      breadcrumb:{alias:"home"}
     },
     children: [
-      {path: '#/crm_graficos', component: GraficosComponent},
-      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent},
-      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent}, //TODO: cambiar a lista
-      {path: '#/index/crm_calendario', component: CalendarioComponent},
-      {path: '#/index/crm_lista_actividades', component: ActividadesComponent},
-      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent},
-      {path: '#/index/crm_lista_links', component: LinksComponent},
-
-      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent},
-      {path: '#/index/crm_lista_ficheros', component: FilesComponent}
+      {path: '#/crm_graficos', component: GraficosComponent, data:{breadcrumb:{alias:"graficos"}}},
+      {path: '#/crm_inicio_desarrollador', component: InicioDesarrolladorComponent, data:{breadcrumb:{alias:"inicioDesarrollador"}}},
+      {path: '#/index/crm_lista_proveedores_producto', component: ProveedoresProductoComponent, data:{breadcrumb:{alias:"proveedoresProducto"}}},
+      {path: '#/crm_calendario', component: CalendarioComponent, data:{breadcrumb:{alias:"calendario"}}},
+      {path: '#/index/crm_lista_actividades', component: ActividadesComponent, data:{breadcrumb:{alias:"actividades"}}},
+      {path: '#/index/crm_lista_notificaciones', component: NotificacionesComponent, data:{breadcrumb:{alias:"notificaciones"}}},
+      {path: '#/index/crm_lista_links', component: LinksComponent, data:{breadcrumb:{alias:"links"}}},
+      {path: '#/index/crm_mantenimiento_prove_trabaja_opage', component: ProveedorAgenciaComponent, data:{breadcrumb:{alias:"proveedorAgencia"}}}, //TODO: añadir alias
+      {path: '#/index/crm_channelmanager', component: ChannelManagerComponent, data:{breadcrumb:{alias:"channelManager"}}},
+      {path: '#/index/crm_lista_ficheros', component: FilesComponent, data:{breadcrumb:{alias:"ficheros"}}}
     ]
   }
 ];
@@ -41,4 +42,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class MainRoutingModule {
+
 }

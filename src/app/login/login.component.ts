@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {CookiesService} from "../shared/services/cookies/cookies.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../shared/services/api/user/user.service";
-import {CrmLoaderService} from "../shared/services/crmLoader/crm-loader.service";
+import {CrmLoaderService} from "../shared/services/crm-loader/crm-loader.service";
 
 
 @Component({

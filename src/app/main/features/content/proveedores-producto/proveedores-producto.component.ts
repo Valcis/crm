@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {sharedDataService} from "../../../../shared/services/shared-data/shared-data.service";
 
 @Component({
   selector: 'app-proveedores-producto',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./proveedores-producto.component.scss']
 })
 export class ProveedoresProductoComponent {
-
+  constructor(protected _shared: sharedDataService) {
+  }
 }

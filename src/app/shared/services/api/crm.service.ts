@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {GenericRequest, GenericIntranetResponse} from "../../models/petition/petition.model";
+import {GenericRequest, GenericIntranetResponse} from "../../models/petition.model";
 import {environment} from "../../../../environments/environment.local";
 
 @Injectable({

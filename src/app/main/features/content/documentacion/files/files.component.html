@@ -1,11 +1,9 @@
 <div>
   <div class="fadeInRight">
-
-    <div class="fonte" >
-      <h5>{{ 'FILES.FORM-TITLE' | translate}}</h5>
+    <app-title [titulo]=title></app-title>
+    <div class="ms-4">
     </div>
-    <div >
-      <div class="card m-4 rounded-0 body-right ">
+    <div class="card m-4 rounded-0 body-right ">
         <div class="card-content">
           <ul ngbNav #nav="ngbNav" class="nav-tabs mx-4 mt-3">
             <li ngbNavItem>
@@ -141,7 +139,6 @@
           </ul>
           <div [ngbNavOutlet]="nav"></div>
         </div>
-      </div>
     </div>
   </div>
 </div>

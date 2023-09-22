@@ -1,88 +1,69 @@
-<div class="container-flex w-100 p-0 mx-4 fadeInRight" >
-  <div>
-    <div class="row wrapper border-bottom white-bg page-heading">
-      <div class="col-lg-9">
-        <h2>{{'title'|translate|uppercase}}</h2>
-        <ol class="breadcrumb">
-          <li><a href="index.html">{{'SUBGROUP'|translate}}</a>
-          </li>
-          <li class="active">
-            {{'  /  ' }}<strong>{{ 'PAGE'|translate}}</strong>
-          </li>
-        </ol>
+<div class="fadeInRight">
+  <app-title [titulo]="title"></app-title>
+  <div class="container-flex mx-4" >
+
+    <div class="col mt-3no" >
+      <!--TRANSLATE TEST-->
+      <div class="row">
+        <p> TRANSALTE TEST1: {{_translate.currentLang}} </p>
+        <p> TRANSALTE COMMON.TEXT.YES: {{'COMMON.TEXT.YES'| translate}} </p>
+        <p> TRANSALTE COMMON.TEXT.NO: {{'COMMON.TEXT.NO'| translate}}</p>
       </div>
-    </div>
-  </div>
-  <div class=" col mt-3no" >
-    <!--TRANSLATE TEST-->
-    <div class="row">
-      <div class="col-sm pl-0 ">
-        <p class="pl-0"> TRANSALTE TEST1: {{_translate.currentLang}} </p>
-        <p class="pl-0"> TRANSALTE COMMON.TEXT.YES: {{'COMMON.TEXT.YES'| translate}} </p>
-        <p class="pl-0"> TRANSALTE COMMON.TEXT.NO: {{'COMMON.TEXT.NO'| translate}}</p>
-      </div>
-    </div>
-    <!--BUTTONS CODE-->
-    <div class="row">
-      <div class="col-sm p-0">
-        <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
-        <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
-      </div>
-    </div>
-    <!--TIME ZONE CODE-->
-    <div class="row p-0">
-      <div class="col-sm">
-        <div class="mb-2">
-          <strong class="pl-0">Fecha:
-            <!-- para poner el tooltip en la posición que se quiera se debe hacer con un placement="top/bottom/left/right"-->
-            <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
-          </strong>
+      <!--BUTTONS CODE-->
+      <div class="row">
+        <div class="col-sm">
+          <input class="m-1" type="button" value="Generar pdf" (click)="generatePDF()">
+          <input class="m-1" type="button" value="Cambiar título" (click)="cambiarTitulo()">
         </div>
       </div>
-      <div class="pl-0">
-        <span class="pl-0"><strong>DateTime: </strong> {{ts}} </span>
-        <br>
-        <span class="pl-0"><strong>ts-Original: </strong> {{utc}} </span>
-        <br>
-        <span class="pl-0"><strong>ts-(UTC)): </strong> {{formatedTime}} </span>
-        <br>
-        <span class="pl-0"><strong>timezone: </strong> {{tz}} </span>
-      </div>
-    </div>
-    <div class="row-sm p-0">
-      <div class="col-sm-7 mt-5">
-
-        <!-- DATE PICKER -->
-        <!--falta la zona horaria a partir de los datos de usuario-->
-        <app-datepicker [clock]="true" [initDate]="newDate" ></app-datepicker>
-
-      </div>
-    </div>
-    <!--NOUISLIDER-->
-    <div >
-      <h2>NOUISLIDER</h2>
-
-      <span>https://www.npmjs.com/package/ng2-nouislider?activeTab=readme </span>
-      <br>
-      <span>[config]:{{"{"}}start:5,connect:'lower',step:1,range:{{"{"}}min:0,max:10},behaviour:'snap',pips:{{"{"}}mode:'steps',density:10}}</span>
-      <input class="m-1 row" type="button" value="poner a 10" (click)="sliderModel=[10]">
-      <br>
-      <nouislider class="noiuslider" [config]="{start:5,connect:'lower',step:1,range:{min:0,max:10},behaviour:'snap',pips:{mode:'steps',density:10}}" [(ngModel)]="sliderModel"></nouislider>
-
-    </div>
-    <!--summernote-->
-    <div>
-      <br>
-      <br>
-      <h2>SUMMERNOTE</h2>
-        <div class="summernote">
-          <!--Los estilos són diferentes i el marco de código se llama desde un boton a parte y no "styles" -->
-          <div [ngxSummernote]="summerConfig" >
+      <!--TIME ZONE CODE-->
+      <!--    TODO: Pasar a shared components-->
+      <div class="row">
+        <div class="col-sm">
+          <div class="mb-2">
+            <strong class="pl-0">Fecha:
+              <!-- para poner el tooltip en la posición que se quiera se debe hacer con un placement="top/bottom/left/right"-->
+              <i class="fa fa-clock-o" [ngbTooltip]="this.tz"></i>
+            </strong>
+          </div>
+        </div>
+        <div class="mb-1">
+          <p class="mb-1"><strong>DateTime: </strong> {{ts}} </p>
+          <p class="mb-1"><strong>ts-Original: </strong> {{utc}} </p>
+          <p class="mb-1"><strong>ts-(UTC)): </strong> {{formatedTime}} </p>
+          <p class="mb-1"><strong>timezone: </strong> {{tz}} </p>
         </div>
       </div>
+      <div class="row-sm">
+        <div class="col-sm-7 mt-5">
+          <!-- DATE PICKER -->
+          <!-- TODO: falta la zona horaria a partir de los datos de usuario-->
+          <app-datepicker [clock]="true" [initDate]="newDate" [offset]="currentTimeZone"></app-datepicker>
+          <app-time-zone (TimeZone)="getTimeZone($event)"></app-time-zone>
+        </div>
+      </div>
+      <!--NOUISLIDER-->
+      <div class="row mb-5">
+        <h2>NOUISLIDER</h2>
+        <div>{{uiSliderConf | json}}</div>
+        <div> {{sliderModel}}</div>
+        <input class="m-1 col-1 width-70" type="button" value="poner a 10" (click)="sliderModel=[10]">
+        <div class="row">
+          <nouislider class="noiuslider" [config]="uiSliderConf" [(ngModel)]="sliderModel"></nouislider>
+        </div>
+      </div>
+      <!--summernote-->
+      <div class="row mb-2">
+        <h2>SUMMERNOTE</h2>
+        <app-text-editor [(htmlContent)]="summerText"></app-text-editor>
+        <h5 class="html-header">HTML Output</h5>
+        {{summerText | json}}
+        <div class="html">
+        </div>
+      </div>
+      <!--datos economicos-->
+      <datos-economicos></datos-economicos>
     </div>
-    <br>
-    <!--datos economicos-->
-    <datos-economicos>  </datos-economicos>
+
   </div>
 </div>

@@ -2,7 +2,7 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {CookiesService} from "../../../shared/services/cookies/cookies.service";
 import {UserService} from "../../../shared/services/api/user/user.service";
 import {Router} from "@angular/router";
-import {menuItem, menuListBase} from "../../../shared/models/side-nav/side-nav.model";
+import {menuItem, menuListBase, pageItemBase} from "../../../shared/models/side-nav.model";
 import {ActivePage, Items, Opaque, Sizer} from "./side-nav.animation";
 
 
@@ -41,8 +41,7 @@ export class SideNavComponent implements OnInit {
 
   public async getList() {
     if (this.userData.menu) {
-      //console.log('userData', this.userData);
-      this.userData.menu.menuList.forEach((item: any) => { //TODO: Cambiar por modelo
+      this.userData.menu.menuList.forEach((item: pageItemBase) => { //TODO: mirar aviso
         item.icono = 'fa ' + item.icono;
         this.menuList.push(item);
         return item;

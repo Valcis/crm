@@ -12,7 +12,7 @@ export interface GenericRequest {
   Id: string,
   URL?: string,
   recuerdame_id?: string,
-  setHistorial_cambios?: string
+  setHistorial_cambios?: {nombre:string, modificacion_ts:number}
 }
 
 

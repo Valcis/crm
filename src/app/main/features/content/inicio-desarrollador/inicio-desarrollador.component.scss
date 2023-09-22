@@ -1,5 +1,4 @@
 @import "~nouislider/dist/nouislider.css";
-@import "~summernote/dist/summernote-bs5.min.css";
 
 .btn,
 .btn:hover,
@@ -49,10 +48,7 @@ h2{
   line-height: 1.1;
   color: inherit;
 }
-.breadcrumb > li a {
-  color: inherit;
-  text-decoration: none !important;
-  outline: none !important;
-}
 
-.summernote{width: 97%}
+.width-70{
+  width: 110px;
+}

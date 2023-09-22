@@ -39,19 +39,29 @@
     <ng-container>
       <div class="pages" [@items]="!itemsSize ? 'pages-sm' : 'pages-big'">
         <div *ngFor="let item of menuList; let i = index" class="test sidenav-content">
-
           <!--DIVS para menus SIN submenu-->
-          <!--      Todo: cambiar el nom de la classe-->
-          <ul
-            [ngClass]="[isBig === false ? 'dark-bg-container-sm ' : 'dark-bg-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">
-            <div *ngIf="item.subMenu.length <= 0">
-              <li class="collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"
-                  [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
-                  [routerLink]="item.link_pag" (click)="changeLink(item.link_pag)"
-              >
-                <div [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i">
-                  <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
-                  <span type="button">
+<!--          &lt;!&ndash;      Todo: cambiar el nom de la classe&ndash;&gt;-->
+<!--          <ul-->
+<!--            [ngClass]="[isBig === false ? 'dark-bg-container-sm ' : 'dark-bg-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">-->
+<!--            <div *ngIf="item.subMenu.length <= 0">-->
+<!--              <li class="collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"-->
+<!--                  [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"-->
+<!--                  [routerLink]="item.link_pag" (click)="changeLink(item.link_pag)"-->
+<!--              >-->
+<!--                <div [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i">-->
+<!--                  &lt;!&ndash;                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"&ndash;&gt;-->
+<!--                  <span type="button">-->
+            <!--DIVS para menus SIN submenu-->
+            <!--      Todo: cambiar el nom de la classe-->
+            <ul [ngClass]="[isBig === false ? 'dark-container-sm ' : 'dark-container-bg', (currLink=== item.link_pag) ? 'active' : 'inactive']">
+              <div *ngIf="item.subMenu.length <= 0">
+                <li   class="collapsed" [ngClass]="!isBig ? 'sm-sidenav-list-item' : 'sidenav-list-item'"
+                      [@column]="(currLink=== item.link_pag) ? 'activeCol':'inactiveCol'"
+                      [routerLink]="item.link_pag" (click)="changeLink(item.link_pag)"
+                >
+                  <div  [ngClass]="!isBig ? 'center' : ''" [id]="'accordion-' + i" >
+                    <!--                 (click)="itemAction(item.descripcion + ' - id padre -> ' + i)"-->
+                    <span  type="button">
                 <i [class]="item.icono"></i>
                 <span *ngIf="isBig">
                   {{ formatName(item.descripcion) | translate }}

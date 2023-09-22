@@ -8,8 +8,8 @@ import {LoginEntrada} from "../../../models/user/login.model";
 import {ActivitiesAlertsService} from "./endpoints/activities-alerts.service";
 import {NotificationsService} from "./endpoints/notifications.service";
 import {CookiesService} from "../../cookies/cookies.service";
-import {CrmLoaderService} from "../../crmLoader/crm-loader.service";
-import {GenericIntranetResponse} from "../../../models/petition/petition.model";
+import {CrmLoaderService} from "../../crm-loader/crm-loader.service";
+import {GenericIntranetResponse} from "../../../models/petition.model";
 import {DateTime} from "luxon";
 
 @Injectable({

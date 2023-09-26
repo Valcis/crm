@@ -47,8 +47,8 @@ export class MainComponent implements OnInit {
   //   this._user.getMenu();
   //   this._user.getActivitiesAlert();
   //   this._user.getNotifications();
-  //   this.userData = this._user.userData.hasOwnProperty("details" && "menu") ? this._user.userData : this.router.navigate(['/login']);
-  //   this._shared.userData = this.userData;
+     this.userData = this._user.userData.hasOwnProperty("details" && "menu") ? this._user.userData : this._router.navigate(['/login']);
+     this._shared.userData = this.userData;
   //   /* TODO : implementar ->
   //   this._user.getUsuarioCrmByEmplCode(); ??????????????????
   //   this._user.getBajaTemporalUsuario();  ?????????????????? */
